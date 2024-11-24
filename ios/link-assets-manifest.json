@@ -1,0 +1,21 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/KantumruyPro-Bold.ttf",
+      "sha1": "5146e42617443770ec18e06a7bacade609cf7787"
+    },
+    {
+      "path": "src/assets/fonts/KantumruyPro-Light.ttf",
+      "sha1": "8aa189eae2c3eaab9b07c46d3b06c7d7630a95c8"
+    },
+    {
+      "path": "src/assets/fonts/KantumruyPro-Medium.ttf",
+      "sha1": "9261c1af5225d9f099f0664742973c5603788571"
+    },
+    {
+      "path": "src/assets/fonts/KantumruyPro-Regular.ttf",
+      "sha1": "1bdd51fa70b790b0eaf79842cca334fb453e1310"
+    }
+  ]
+}

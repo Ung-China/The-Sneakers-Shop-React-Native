@@ -1,0 +1,33 @@
+diff --git a/node_modules/@georstat/react-native-image-cache/src/CachedImage.tsx b/node_modules/@georstat/react-native-image-cache/src/CachedImage.tsx
+index 9549160..5fb37e5 100644
+--- a/node_modules/@georstat/react-native-image-cache/src/CachedImage.tsx
++++ b/node_modules/@georstat/react-native-image-cache/src/CachedImage.tsx
+@@ -26,9 +26,9 @@ import { isAndroid, isImageWithRequire, isRemoteImage } from './helpers';
+ const AnimatedImage = Animated.Image;
+ const AnimatedView = Animated.View;
+ 
+-const defaultProps = {
+-  onError: () => {},
+-};
++interface CachedImagePropsWithError extends IProps{
++  onError?:()=>void;
++}
+ 
+ function useIsComponentMounted() {
+   const isMounted = useRef(false);
+@@ -58,7 +58,7 @@ function useStateIfMounted<S>(
+   return [state, newSetState];
+ }
+ 
+-const CachedImage = (props: IProps & typeof defaultProps) => {
++const CachedImage = (props: CachedImagePropsWithError) => {
+   const [error, setError] = useStateIfMounted<boolean>(false);
+   const [uri, setUri] = useStateIfMounted<string | undefined>(undefined);
+   const { source: propsSource, options: propsOptions } = props;
+@@ -291,6 +291,5 @@ const styles = StyleSheet.create({
+   },
+ });
+ 
+-CachedImage.defaultProps = defaultProps;
+ 
+ export default CachedImage;
