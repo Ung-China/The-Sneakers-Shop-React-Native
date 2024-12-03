@@ -18,6 +18,13 @@ import NotificationItem from './NotificationItem';
 import FlexibleTab from './FlexibleTab';
 import FlexibleTabItem from './FlexibleTabItem';
 import CartItem from './CartItem';
+import OrderItem from './OrderItem';
+import FlexibleLabel from './FlexibleLabel';
+import CheckoutItem from './CheckoutItem';
+import FlexibleStepIndicator from './FlexibleStepIndicator';
+import DotSeperator from './DotSeperator';
+import FavoriteItem from './FavoriteItem';
+import VariantItem from './VariantItem';
 
 export {
   HeaderComponent,
@@ -40,4 +47,11 @@ export {
   FlexibleTab,
   FlexibleTabItem,
   CartItem,
+  OrderItem,
+  FlexibleLabel,
+  CheckoutItem,
+  FlexibleStepIndicator,
+  DotSeperator,
+  FavoriteItem,
+  VariantItem,
 };

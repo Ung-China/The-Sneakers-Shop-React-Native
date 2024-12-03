@@ -2,7 +2,7 @@ import NotificationScreen from './Notification';
 import LanguageScreen from './Language';
 import HomeScreen from './Home';
 import CartScreen from './Cart';
-import OrderHistoryScreen from './OrderHistory';
+import OrderScreen from './Order';
 import SearchScreen from './Search';
 import ProfileScreen from './Profile';
 import AboutUsScreen from './AboutUs';
@@ -11,13 +11,15 @@ import CurrentLocation from './CurrentLocation';
 import NotificationDetailScreen from './NotificationDetail';
 import StartUpScreen from './StartUp';
 import BrandScreen from './Brand';
+import OrderDetailScreen from './OrderDetail';
+import ProductDetailScreen from './Product';
 
 export {
   NotificationScreen,
   LanguageScreen,
   HomeScreen,
   CartScreen,
-  OrderHistoryScreen,
+  OrderScreen,
   SearchScreen,
   ProfileScreen,
   AboutUsScreen,
@@ -26,4 +28,6 @@ export {
   NotificationDetailScreen,
   StartUpScreen,
   BrandScreen,
+  OrderDetailScreen,
+  ProductDetailScreen,
 };

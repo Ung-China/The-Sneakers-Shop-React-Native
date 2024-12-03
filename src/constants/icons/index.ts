@@ -24,6 +24,17 @@ import Add from '../../assets/icons/add.svg';
 import Star from '../../assets/icons/star.svg';
 import DiscountTag from '../../assets/icons/discount_tag.svg';
 import Brand from '../../assets/icons/brand.svg';
+import Close from '../../assets/icons/close.svg';
+import Plus from '../../assets/icons/plus.svg';
+import Minus from '../../assets/icons/minus.svg';
+import RightArrow from '../../assets/icons/right_arrow.svg';
+import Pending from '../../assets/icons/pending.svg';
+import Preparing from '../../assets/icons/preparing.svg';
+import Completed from '../../assets/icons/completed.svg';
+import Delivery from '../../assets/icons/delivery.svg';
+import Confirmed from '../../assets/icons/confirmed.svg';
+import Logo from '../../assets/icons/applogo.svg';
+import ArrowLeft from '../../assets/icons/arrowLeft.svg';
 
 const Icons = {
   HOME: Home,
@@ -52,6 +63,17 @@ const Icons = {
   STAR: Star,
   DISCOUNTTAG: DiscountTag,
   BRAND: Brand,
+  CLOSE: Close,
+  MINUS: Minus,
+  PLUS: Plus,
+  RIGHTARROW: RightArrow,
+  COMPLETED: Completed,
+  PREPARING: Preparing,
+  PENDING: Pending,
+  DELIVERY: Delivery,
+  CONFIRMED: Confirmed,
+  LOGO: Logo,
+  ARROWLEFT: ArrowLeft,
 };
 
 export default Icons;

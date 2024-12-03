@@ -11,6 +11,7 @@ const DarkTheme: Themes = {
   white: '#FFFFFF',
   black: '#000000',
   lightGrey: '#F4F4F4',
+  grey: 'grey',
 };
 
 export default DarkTheme;

@@ -4,7 +4,7 @@ import {
   BrandScreen,
   CartScreen,
   HomeScreen,
-  OrderHistoryScreen,
+  OrderScreen,
   ProfileScreen,
 } from '../../screens';
 import {useTheme} from '../../hooks';
@@ -24,6 +24,7 @@ export const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
+        headerShown: false,
         tabBarStyle: {
           backgroundColor: colors.primary,
         },
@@ -44,7 +45,6 @@ export const BottomTabNavigator = () => {
         name="Home"
         component={HomeScreen}
         options={{
-          headerShown: false,
           tabBarIcon: ({color, size, focused}) => (
             <Icons.HOME
               color={focused ? colors.icon : 'grey'}
@@ -58,7 +58,6 @@ export const BottomTabNavigator = () => {
         name="Brand"
         component={BrandScreen}
         options={{
-          headerShown: false,
           tabBarIcon: ({color, size, focused}) => (
             <Icons.BRAND
               color={focused ? colors.icon : 'grey'}
@@ -79,11 +78,20 @@ export const BottomTabNavigator = () => {
             />
           ),
           tabBarLabel: t('cart'),
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTitle: t('cart'),
+          headerTitleStyle: {
+            fontFamily: Fonts.REGULAR,
+            color: colors.text,
+          },
         }}
       />
       <Tab.Screen
         name="OrderHistory"
-        component={OrderHistoryScreen}
+        component={OrderScreen}
         options={{
           tabBarIcon: ({color, size, focused}) => (
             <Icons.HISTORY
@@ -92,6 +100,15 @@ export const BottomTabNavigator = () => {
             />
           ),
           tabBarLabel: t('orderHistory'),
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTitle: t('orderHistory'),
+          headerTitleStyle: {
+            fontFamily: Fonts.REGULAR,
+            color: colors.text,
+          },
         }}
       />
       <Tab.Screen
@@ -105,7 +122,6 @@ export const BottomTabNavigator = () => {
             />
           ),
           tabBarLabel: t('profile'),
-          headerShown: false,
         }}
       />
     </Tab.Navigator>

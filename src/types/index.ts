@@ -22,6 +22,12 @@ import {NotificationProps} from './Notification';
 import {FlexibleTabProps} from './FlexibleTab';
 import {FlexibleTabItemProps} from './FlexibleTabItem';
 import {CartItemProps} from './CartItem';
+import {OrderItemProps} from './OrderItem';
+import {FlexibleLabelProps} from './FlexibleLabel';
+import {TrackingStepProps} from './TrackingStep';
+import {FlexibleStepItem} from './FlexibleStepItem';
+import {DotSeperatorProps} from './DotSeperator';
+import {VariantProps} from './Variant';
 
 export type {
   BottomTabParamList,
@@ -48,4 +54,10 @@ export type {
   FlexibleTabProps,
   FlexibleTabItemProps,
   CartItemProps,
+  OrderItemProps,
+  FlexibleLabelProps,
+  TrackingStepProps,
+  FlexibleStepItem,
+  DotSeperatorProps,
+  VariantProps,
 };

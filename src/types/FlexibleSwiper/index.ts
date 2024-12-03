@@ -1,3 +1,4 @@
+import {ImageResizeMode} from 'react-native';
 import {StyleProp, ViewStyle, ImageStyle} from 'react-native';
 
 export interface FlexibleSwiperProps {
@@ -12,4 +13,5 @@ export interface FlexibleSwiperProps {
   iconSize?: number;
   loadingImageStyle?: StyleProp<ImageStyle>;
   imageStyle?: StyleProp<ImageStyle>;
+  resizeMode?: ImageResizeMode;
 }

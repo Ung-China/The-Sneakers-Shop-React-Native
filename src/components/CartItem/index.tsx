@@ -7,18 +7,28 @@ import {useTheme} from '../../hooks';
 import {Icons, Radius} from '../../constants';
 import LoadingImage from '../LoadingImage';
 import {Swipeable} from 'react-native-gesture-handler';
-import style from './style';
+import currencyFormat from '../../helpers/CurrencyFormat';
+import {useTranslation} from 'react-i18next';
+import IconButton from '../IconButton';
 
 const CartItem: React.FC<CartItemProps> = ({item, onPress}) => {
   const {colors} = useTheme();
+  const {t} = useTranslation();
 
   const handleOnPressDelete = () => {
     return Alert.alert('Delete this product from cart');
   };
+
+  const handleOnPressIncreaseQTY = () => {
+    return Alert.alert('Increase quantity');
+  };
+  const handleOnPressDecreaseQTY = () => {
+    return Alert.alert('Decrease quantity');
+  };
   const rightAction = () => {
     return (
       <Touchable onPress={handleOnPressDelete}>
-        <View style={style.rightActionContainer}>
+        <View style={styles.rightActionContainer}>
           <Icons.TRASH color="white" width={30} height={25} />
         </View>
       </Touchable>
@@ -29,7 +39,7 @@ const CartItem: React.FC<CartItemProps> = ({item, onPress}) => {
     <Touchable onPress={onPress}>
       <Swipeable
         renderRightActions={rightAction}
-        containerStyle={style.swipeableContainer}>
+        containerStyle={styles.swipeableContainer}>
         <View style={[styles.container, {backgroundColor: colors.secondary}]}>
           <CachedImage
             source={item.imageUrl}
@@ -42,10 +52,38 @@ const CartItem: React.FC<CartItemProps> = ({item, onPress}) => {
               />
             )}
           />
+          <View style={styles.hero}>
+            <View style={styles.heroHeader}>
+              <Text style={[styles.name, {color: colors.text}]}>
+                {item.name}
+              </Text>
+              <IconButton
+                onPress={handleOnPressDelete}
+                icon={<Icons.CLOSE />}
+              />
+            </View>
 
-          <Text>{item.name}</Text>
-          <Text>{item.variant?.size}</Text>
-          <Text>{item.price}</Text>
+            <Text style={[styles.size, {color: colors.text}]}>
+              {t('size')} {item.variant?.size}
+            </Text>
+
+            <View style={styles.footerContainer}>
+              <Text style={[styles.price, {color: colors.text}]}>
+                ${currencyFormat(item.price)}
+              </Text>
+              <View style={styles.quantityContainer}>
+                <IconButton
+                  onPress={handleOnPressDecreaseQTY}
+                  icon={<Icons.MINUS />}
+                />
+                <Text style={[styles.quantity, {color: colors.text}]}>10</Text>
+                <IconButton
+                  onPress={handleOnPressIncreaseQTY}
+                  icon={<Icons.PLUS />}
+                />
+              </View>
+            </View>
+          </View>
         </View>
       </Swipeable>
     </Touchable>

@@ -52,7 +52,7 @@ const HomeScreen: React.FC = () => {
   };
 
   const handlePressOnProduct = () => {
-    return Alert.alert('Go to product detail');
+    navigation.navigate('ProductDetail');
   };
 
   const handlePressOnBrand = () => {

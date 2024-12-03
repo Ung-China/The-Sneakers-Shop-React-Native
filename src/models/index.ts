@@ -5,4 +5,14 @@ import Brand from './Brand';
 import Notification from './Notification';
 import Variant from './Variant';
 import CartItem from './CartItem';
-export {ProfileMenu, Language, Product, Brand, Notification, Variant, CartItem};
+import TrackingStep from './TrackingStep';
+export {
+  ProfileMenu,
+  Language,
+  Product,
+  Brand,
+  Notification,
+  Variant,
+  CartItem,
+  TrackingStep,
+};

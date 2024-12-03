@@ -29,4 +29,8 @@ export default StyleSheet.create({
   footerContainer: {
     gap: Gap.SMALL,
   },
+  headerTitleStyle: {
+    fontFamily: Fonts.MEDIUM,
+    fontSize: FontSizes.extraLarge,
+  },
 });

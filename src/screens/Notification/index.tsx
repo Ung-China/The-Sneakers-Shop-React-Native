@@ -33,7 +33,7 @@ const NotificationScreen: React.FC = () => {
         renderItem={productItem}
         showsVerticalScrollIndicator={false}
         ItemSeparatorComponent={ItemSeparatorHeight}
-        contentContainerStyle={[styles.notificationContentContainer]}
+        contentContainerStyle={styles.notificationContentContainer}
         keyExtractor={item => item.id.toString()}
       />
     </View>

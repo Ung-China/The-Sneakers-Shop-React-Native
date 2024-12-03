@@ -1,3 +1,5 @@
-<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M13.2628 7.92676L2.69459 7.92676" stroke="black" stroke-width="1.32103" stroke-linecap="round"/>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="11.9055" cy="12" rx="11.7795" ry="12" fill="white"/>
+<rect width="15.8523" height="15.8523" transform="translate(4.05255 4.00098)" fill="white"/>
+<path d="M17.2628 11.9272L6.69459 11.9272" stroke="black" stroke-width="1.32103" stroke-linecap="round"/>
 </svg>

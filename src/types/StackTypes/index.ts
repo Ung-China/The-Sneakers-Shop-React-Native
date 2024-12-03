@@ -2,6 +2,8 @@ import {NotificationProps} from '../Notification';
 
 export type StackParamList = {
   Root: undefined;
+  CartStack: undefined;
+  OrderHistoryStack: undefined;
   HomeTabs: undefined;
   Search: undefined;
   Cart: undefined;
@@ -15,4 +17,6 @@ export type StackParamList = {
   CurrentLocation: undefined;
   NotificationDetail: {item: NotificationProps['item']};
   Brand: undefined;
+  OrderHistoryDetail: undefined;
+  ProductDetail: undefined;
 };

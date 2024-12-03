@@ -1,12 +1,13 @@
 import {StyleSheet} from 'react-native';
 import {colors} from '../../constants/colors/colorTypes';
-import {Padding, Radius} from '../../constants';
+import {Fonts, FontSizes, Gap, Padding, Radius} from '../../constants';
 
 export default StyleSheet.create({
   container: {
     flexDirection: 'row',
     padding: Padding.SMALL,
     borderRadius: Radius.DEFAULT,
+    gap: Gap.SMALL,
   },
   imageStyle: {
     width: 80,
@@ -28,5 +29,38 @@ export default StyleSheet.create({
     padding: Padding.DEFAULT,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  name: {
+    fontFamily: Fonts.REGULAR,
+    fontSize: FontSizes.large,
+  },
+  size: {
+    fontFamily: Fonts.REGULAR,
+    fontSize: FontSizes.large,
+  },
+  price: {
+    fontFamily: Fonts.REGULAR,
+    fontSize: FontSizes.large,
+  },
+  hero: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  heroHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  quantity: {
+    fontFamily: Fonts.REGULAR,
+    fontSize: FontSizes.large,
+  },
+  quantityContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Gap.SMALL,
+  },
+  footerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });

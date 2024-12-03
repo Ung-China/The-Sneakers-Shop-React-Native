@@ -8,7 +8,9 @@ import {
   LanguageScreen,
   NotificationDetailScreen,
   NotificationScreen,
-  OrderHistoryScreen,
+  OrderDetailScreen,
+  OrderScreen,
+  ProductDetailScreen,
   SearchScreen,
 } from '../../screens';
 import {BottomTabNavigator} from '../BottomTabNavigator';
@@ -52,7 +54,7 @@ export const StackNavigator = () => {
       />
       <Stack.Screen
         name="OrderHistory"
-        component={OrderHistoryScreen}
+        component={OrderScreen}
         options={{title: 'Order History'}}
       />
       <Stack.Screen
@@ -87,6 +89,20 @@ export const StackNavigator = () => {
           headerShadowVisible: false,
           presentation: 'modal',
           title: t('notificationDetail'),
+        }}
+      />
+      <Stack.Screen
+        name="OrderHistoryDetail"
+        component={OrderDetailScreen}
+        options={{
+          title: t('yourOrder'),
+        }}
+      />
+      <Stack.Screen
+        name="ProductDetail"
+        component={ProductDetailScreen}
+        options={{
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

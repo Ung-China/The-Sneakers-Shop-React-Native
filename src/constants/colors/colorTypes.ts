@@ -13,6 +13,7 @@ export type Themes = {
   white: string;
   black: string;
   lightGrey: string;
+  grey: string;
 };
 
 const isDark = Appearance.getColorScheme() === 'dark';

@@ -1,3 +1,4 @@
 import formatCurrency from './CurrencyFormat';
 import checkDiscount from './CheckDiscount';
-export {formatCurrency, checkDiscount};
+import dateFormat from './DateFormat';
+export {formatCurrency, checkDiscount, dateFormat};

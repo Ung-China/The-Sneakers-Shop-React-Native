@@ -18,6 +18,7 @@ const FlexibleSwiper: React.FC<FlexibleSwiperProps> = ({
   iconSize,
   loadingImageStyle,
   imageStyle,
+  resizeMode = 'cover',
 }) => {
   return (
     <View style={[styles.container, containerStyle]}>
@@ -33,8 +34,8 @@ const FlexibleSwiper: React.FC<FlexibleSwiperProps> = ({
           <CachedImage
             key={index}
             source={url}
-            style={[imageStyle]}
-            resizeMode="cover"
+            style={imageStyle}
+            resizeMode={resizeMode}
             imageStyle={{borderRadius: Radius.DEFAULT}}
             loadingImageComponent={() => (
               <LoadingImage

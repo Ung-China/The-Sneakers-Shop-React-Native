@@ -9,7 +9,7 @@ export interface ProductItemProps {
     price: number;
     imageUrl: string;
     isFavorite: boolean;
-    galleries: string | [];
+    galleries: string[];
     variants: string | [];
     promotion: number;
   };
