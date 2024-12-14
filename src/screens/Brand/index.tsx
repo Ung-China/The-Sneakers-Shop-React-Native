@@ -1,12 +1,11 @@
-import {Alert, FlatList, SafeAreaView, Text, View} from 'react-native';
+import {Alert, FlatList, SafeAreaView} from 'react-native';
 import styles from './style';
 import {useTheme} from '../../hooks';
 import {
-  FlatInput,
+  FlexibleInput,
   FlexibleTab,
   ItemSeparatorHeight,
   ProductItem,
-  Touchable,
 } from '../../components';
 import {brands} from '../../models/Brand';
 import {products} from '../../models/Product';
@@ -50,14 +49,15 @@ const BrandScreen: React.FC = () => {
   return (
     <SafeAreaView
       style={[styles.safeContainer, {backgroundColor: colors.primary}]}>
-      <Touchable onPress={handlePressToSearch}>
-        <FlatInput
-          placeholder={t('searchProduct')}
-          suffixIcon={<Icons.SEARCH color={colors.icon} />}
-          containerStyle={styles.inputContainer}
-          onActionButtonPress={handlePressToSearch}
-        />
-      </Touchable>
+      <FlexibleInput
+        placeholder={t('searchProduct')}
+        suffixIcon={<Icons.SEARCH color={colors.icon} />}
+        contentContainerStyle={[
+          styles.inputContainer,
+          {backgroundColor: colors.secondary},
+        ]}
+        onPress={handlePressToSearch}
+      />
       <FlexibleTab
         data={brands}
         onTabChange={item => console.log('On Tab Brand:', item.name)}>

@@ -3,7 +3,6 @@ import {VariantProps} from '../../types';
 import Touchable from '../Touchable';
 import currencyFormat from '../../helpers/CurrencyFormat';
 import styles from './style';
-import {useTheme} from '../../hooks';
 
 const VariantItem: React.FC<VariantProps> = ({
   item,
@@ -11,7 +10,6 @@ const VariantItem: React.FC<VariantProps> = ({
   isActive,
   containerStyle,
 }) => {
-  const {colors} = useTheme();
   return (
     <Touchable onPress={onPress}>
       <View

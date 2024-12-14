@@ -6,7 +6,8 @@ import useSwiper from './useSlider';
 import useOrder from './useOrder';
 import useOrderDetail from './useOrderDetail';
 import useProduct from './useProduct';
-
+import useEditProfile from './useEditProfile';
+import useDelivery from './useDelivery';
 export {
   useLanguage,
   useProfile,
@@ -16,4 +17,6 @@ export {
   useOrder,
   useOrderDetail,
   useProduct,
+  useEditProfile,
+  useDelivery,
 };

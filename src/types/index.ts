@@ -11,7 +11,7 @@ import {ProfileMenuItemProps} from './ProfileMenu';
 import {SectionProps} from './Section';
 import {TouchableProps} from './Touchable';
 import {FlatButtonProps} from './FlatButton';
-import {FlatInputProps} from './FlatInput';
+import {FlexibleInputProps} from './FlexibleInput';
 import {FlexibleSwiperProps} from './FlexibleSwiper';
 import {FlexibleTouchableProps} from './FlexibleTouchable';
 import {LanguageItemProps} from './LanguageItem';
@@ -28,6 +28,16 @@ import {TrackingStepProps} from './TrackingStep';
 import {FlexibleStepItem} from './FlexibleStepItem';
 import {DotSeperatorProps} from './DotSeperator';
 import {VariantProps} from './Variant';
+import {ProfileHeaderProps} from './ProfileHeader';
+import {OptionItemProps} from './OptionItem';
+import {BottomSheetProps} from './BottomSheet';
+import {LogisticProps} from './Logistic';
+import {LogisticModalProps} from './LogisticModal';
+import {DeliveryModalProps} from './DeliveryModal';
+import {DeliveryProps} from './Delivery';
+import {AddressLabelItemProps} from './AddressLabelItem';
+import {CityItemProps} from './CityItem';
+import {CityModalProps} from './City';
 
 export type {
   BottomTabParamList,
@@ -43,7 +53,7 @@ export type {
   SectionProps,
   TouchableProps,
   FlatButtonProps,
-  FlatInputProps,
+  FlexibleInputProps,
   FlexibleSwiperProps,
   FlexibleTouchableProps,
   LanguageItemProps,
@@ -60,4 +70,14 @@ export type {
   FlexibleStepItem,
   DotSeperatorProps,
   VariantProps,
+  ProfileHeaderProps,
+  OptionItemProps,
+  BottomSheetProps,
+  LogisticProps,
+  LogisticModalProps,
+  DeliveryModalProps,
+  DeliveryProps,
+  AddressLabelItemProps,
+  CityItemProps,
+  CityModalProps,
 };

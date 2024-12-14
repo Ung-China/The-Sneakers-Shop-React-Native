@@ -26,16 +26,25 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     margin: Spacing.DEFAULT,
-    gap: Gap.DEFAULT,
   },
   inputContainer: {
     flex: 1,
-    borderRadius: Radius.DEFAULT,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    paddingHorizontal: Spacing.DEFAULT,
     gap: Gap.DEFAULT,
+    borderRadius: Radius.DEFAULT,
+  },
+  noLabelContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Gap.SMALL,
   },
   label: {
     fontFamily: Fonts.REGULAR,
     fontSize: FontSizes.large,
+    textAlign: 'center',
+    paddingHorizontal: 10,
   },
 });

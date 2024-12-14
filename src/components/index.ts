@@ -5,7 +5,7 @@ import LoadingImage from './LoadingImage';
 import ProfileHeader from './ProfileHeader';
 import Touchable from './Touchable';
 import HomeHeader from './HomeHeader';
-import FlatInput from './FlatInput';
+import FlexibleInput from './FlexibleInput';
 import FlexibleSwiper from './FlexibleSwiper';
 import Section from './Section';
 import FlatButton from './FlatButton';
@@ -25,6 +25,12 @@ import FlexibleStepIndicator from './FlexibleStepIndicator';
 import DotSeperator from './DotSeperator';
 import FavoriteItem from './FavoriteItem';
 import VariantItem from './VariantItem';
+import OptionItem from './OptionItem';
+import BottomSheet from './BottomSheet';
+import LogisticItem from './LogisticItem';
+import AddressItem from './AddressItem';
+import AddressLabelItem from './AddressLabelItem';
+import CityItem from './CityItem';
 
 export {
   HeaderComponent,
@@ -34,7 +40,7 @@ export {
   ProfileHeader,
   Touchable,
   HomeHeader,
-  FlatInput,
+  FlexibleInput,
   FlexibleSwiper,
   Section,
   FlatButton,
@@ -54,4 +60,10 @@ export {
   DotSeperator,
   FavoriteItem,
   VariantItem,
+  OptionItem,
+  BottomSheet,
+  LogisticItem,
+  AddressItem,
+  AddressLabelItem,
+  CityItem,
 };

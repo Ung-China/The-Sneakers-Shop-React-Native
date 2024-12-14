@@ -1,9 +1,14 @@
 import {ProfileMenu} from '../../models';
 import {Icons} from '../../constants';
 import {useTranslation} from 'react-i18next';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {StackParamList} from '../../types';
+import {useCallback} from 'react';
 
 const useProfile = () => {
   const {t} = useTranslation();
+  const navigation = useNavigation<StackNavigationProp<StackParamList>>();
   const menuItems = [
     new ProfileMenu(9, 'Cart', Icons.CART, t('cart'), Icons.ARROWRIGHT, false),
     new ProfileMenu(
@@ -73,7 +78,11 @@ const useProfile = () => {
     ),
   ];
 
-  return {menuItems};
+  const handleNavigateToEditProfile = useCallback(() => {
+    navigation.navigate('EditProfile');
+  }, []);
+
+  return {menuItems, handleNavigateToEditProfile};
 };
 
 export default useProfile;

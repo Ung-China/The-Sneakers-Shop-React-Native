@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {Gap, Padding} from '../../constants';
+import {Gap, Padding, Spacing} from '../../constants';
 
 export default StyleSheet.create({
   container: {
@@ -8,6 +8,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingRight: Padding.DEFAULT,
     paddingVertical: Padding.EXTRA_SMALL,
+    marginTop: Spacing.DEFAULT,
   },
   leadingContainer: {
     width: '65%',

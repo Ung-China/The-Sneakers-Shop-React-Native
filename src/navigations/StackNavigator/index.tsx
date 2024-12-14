@@ -3,7 +3,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {
   AboutUsScreen,
   CartScreen,
+  CheckoutScreen,
   CurrentLocation,
+  DeliveryScreen,
+  EditProfileScreen,
   FavoriteScreen,
   LanguageScreen,
   NotificationDetailScreen,
@@ -18,6 +21,7 @@ import {useTheme} from '../../hooks';
 import {useTranslation} from 'react-i18next';
 import {Fonts, FontSizes} from '../../constants';
 import {StackParamList} from '../../types';
+import AddressScreen from '../../screens/Address';
 
 const Stack = createStackNavigator<StackParamList>();
 
@@ -103,6 +107,34 @@ export const StackNavigator = () => {
         component={ProductDetailScreen}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfileScreen}
+        options={{
+          title: t('editProfile'),
+        }}
+      />
+      <Stack.Screen
+        name="Checkout"
+        component={CheckoutScreen}
+        options={{
+          title: t('checkout'),
+        }}
+      />
+      <Stack.Screen
+        name="Delivery"
+        component={DeliveryScreen}
+        options={{
+          title: t('delivery'),
+        }}
+      />
+      <Stack.Screen
+        name="Address"
+        component={AddressScreen}
+        options={{
+          title: t('addAddress'),
         }}
       />
     </Stack.Navigator>

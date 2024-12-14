@@ -19,4 +19,8 @@ export type StackParamList = {
   Brand: undefined;
   OrderHistoryDetail: undefined;
   ProductDetail: undefined;
+  EditProfile: undefined;
+  Checkout: undefined;
+  Delivery: undefined;
+  Address: undefined;
 };

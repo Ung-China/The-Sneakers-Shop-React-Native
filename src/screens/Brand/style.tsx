@@ -14,9 +14,12 @@ export default StyleSheet.create({
     paddingBottom: Padding.DEFAULT,
   },
   inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
     borderRadius: Radius.DEFAULT,
-    marginHorizontal: Spacing.DEFAULT,
     marginTop: Spacing.DEFAULT,
+    marginHorizontal: Spacing.DEFAULT,
+    paddingHorizontal: Padding.DEFAULT,
   },
 });

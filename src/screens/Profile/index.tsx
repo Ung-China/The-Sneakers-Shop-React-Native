@@ -7,9 +7,11 @@ import styles from './style';
 
 const ProfileScreen: React.FC = () => {
   const {colors} = useTheme();
-  const {menuItems} = useProfile();
+  const {menuItems, handleNavigateToEditProfile} = useProfile();
 
-  const renderHeader = () => <ProfileHeader />;
+  const renderHeader = () => (
+    <ProfileHeader onPress={handleNavigateToEditProfile} />
+  );
   const renderProfileItem = ({item}: {item: ProfileMenu}) => (
     <ProfileMenuItem item={item} />
   );

@@ -35,6 +35,9 @@ import Delivery from '../../assets/icons/delivery.svg';
 import Confirmed from '../../assets/icons/confirmed.svg';
 import Logo from '../../assets/icons/applogo.svg';
 import ArrowLeft from '../../assets/icons/arrowLeft.svg';
+import Album from '../../assets/icons/album.svg';
+import Pen from '../../assets/icons/pen.svg';
+import ArrowDown from '../../assets/icons/arrowDown.svg';
 
 const Icons = {
   HOME: Home,
@@ -74,6 +77,9 @@ const Icons = {
   CONFIRMED: Confirmed,
   LOGO: Logo,
   ARROWLEFT: ArrowLeft,
+  ALBUM: Album,
+  PEN: Pen,
+  ARROWDOWN: ArrowDown,
 };
 
 export default Icons;

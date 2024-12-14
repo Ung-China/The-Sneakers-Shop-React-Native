@@ -16,9 +16,12 @@ export default StyleSheet.create({
     flex: 1,
   },
   inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
     borderRadius: Radius.DEFAULT,
     margin: Spacing.DEFAULT,
+    paddingHorizontal: Padding.DEFAULT,
   },
   swiperImageStyle: {
     height: 200,

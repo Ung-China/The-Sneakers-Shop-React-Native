@@ -1,20 +1,18 @@
 import {KeyboardTypeOptions, StyleProp, ViewStyle} from 'react-native';
 
-export interface FlatInputProps {
-  onActionButtonPress?: () => void;
-  editable?: boolean;
-  value?: string;
-  placeholder?: string;
+export interface FlexibleInputProps {
+  onPress?: () => void;
   onChangeText?: (text: string) => void;
+  editable?: boolean;
+  multiline?: boolean;
+  value?: string;
+  label?: string;
+  error?: string;
+  placeholder?: string;
   keyboardType?: KeyboardTypeOptions;
   textInputStyle?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
+  contentContainerStyle?: StyleProp<ViewStyle>;
   prefixIcon?: React.ReactNode;
   suffixIcon?: React.ReactNode;
-  prefixIconColor?: string;
-  suffixIconColor?: string;
-  prefixIconWidth?: string;
-  prefixIconHeight?: string;
-  suffixIconWidth?: string;
-  suffixIconHeight?: string;
 }

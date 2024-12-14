@@ -3,7 +3,7 @@ import {useTheme} from '../../hooks';
 import styles from './style';
 import {products} from '../../models/Product';
 import {
-  FlatInput,
+  FlexibleInput,
   HeaderComponent,
   ItemSeparatorHeight,
   ProductItem,
@@ -58,10 +58,14 @@ const SearchScreen: React.FC = () => {
     <View style={[styles.safeContainer, {backgroundColor: colors.primary}]}>
       <HeaderComponent containerStyle={styles.headeStyle}>
         <View style={styles.headerContainer}>
-          <FlatInput
+          <FlexibleInput
             placeholder={t('searchProduct')}
             prefixIcon={<Icons.SEARCH color={colors.icon} />}
-            containerStyle={styles.inputContainer}
+            containerStyle={[
+              styles.inputContainer,
+              {backgroundColor: colors.secondary},
+            ]}
+            contentContainerStyle={styles.noLabelContainer}
             editable={true}
             value={searchValue}
             onChangeText={setSearchValue}
@@ -72,7 +76,7 @@ const SearchScreen: React.FC = () => {
                 styles.label,
                 {color: searchValue ? 'red' : colors.text},
               ]}>
-              {searchValue ? t('Clear') : t('Cancel')}
+              {searchValue ? t('clear') : t('cancel')}
             </Text>
           </Touchable>
         </View>

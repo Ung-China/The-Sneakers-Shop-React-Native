@@ -104,7 +104,10 @@ const OrderDetailScreen: React.FC = () => {
           containerStyle={styles.priceContainerStyle}
         />
 
-        <Text numberOfLines={1} ellipsizeMode="clip">
+        <Text
+          numberOfLines={1}
+          ellipsizeMode="clip"
+          style={{color: colors.grey}}>
           ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         </Text>
 

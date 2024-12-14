@@ -200,13 +200,11 @@ const ProductDetailScreen: React.FC = () => {
         </Section>
       </ScrollView>
       <Footer
-        contentContainerStyle={[
-          styles.footerContainer,
-          {
-            backgroundColor: colors.primary,
-            borderColor: colors.grey,
-          },
-        ]}>
+        safeAreaStyle={[
+          styles.safeAreaStyle,
+          {backgroundColor: colors.primary},
+        ]}
+        contentContainerStyle={[styles.footerContainer]}>
         <Touchable
           onPress={addToCart}
           style={[styles.buttonAddToCart, {backgroundColor: colors.secondary}]}>

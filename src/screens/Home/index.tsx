@@ -11,7 +11,7 @@ import styles from './style';
 import {
   BrandItem,
   FlatButton,
-  FlatInput,
+  FlexibleInput,
   FlexibleSwiper,
   HomeHeader,
   ItemSeparatorWidth,
@@ -63,14 +63,16 @@ const HomeScreen: React.FC = () => {
     <SafeAreaView style={[styles.container, {backgroundColor: colors.primary}]}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <HomeHeader item={location} />
-        <Touchable onPress={handlePressToSearch}>
-          <FlatInput
-            placeholder={t('searchProduct')}
-            suffixIcon={<Icons.SEARCH color={colors.icon} />}
-            containerStyle={styles.inputContainer}
-            onActionButtonPress={handlePressToSearch}
-          />
-        </Touchable>
+
+        <FlexibleInput
+          placeholder={t('searchProduct')}
+          suffixIcon={<Icons.SEARCH color={colors.icon} />}
+          contentContainerStyle={[
+            styles.inputContainer,
+            {backgroundColor: colors.secondary},
+          ]}
+          onPress={handlePressToSearch}
+        />
 
         <FlexibleSwiper
           imageUrlList={imageList}

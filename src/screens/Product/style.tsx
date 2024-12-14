@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {
   Fonts,
   FontSizes,
@@ -25,12 +25,12 @@ export default StyleSheet.create({
   },
   backContainer: {
     position: 'absolute',
-    top: 60,
+    top: Platform.OS === 'ios' ? 60 : 20,
     left: 15,
   },
   cartContainer: {
     position: 'absolute',
-    top: 60,
+    top: Platform.OS === 'ios' ? 60 : 20,
     right: +15,
   },
   body: {
@@ -120,10 +120,20 @@ export default StyleSheet.create({
     fontSize: FontSizes.large,
     paddingVertical: Padding.DEFAULT,
   },
+  safeAreaStyle: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+
+    elevation: 2,
+  },
   footerContainer: {
     flexDirection: 'row',
     gap: Gap.DEFAULT,
-    borderTopWidth: 0.5,
   },
   buttonAddToCart: {
     width: Screen_Dimensions.WIDTH / 2 - 22.5,

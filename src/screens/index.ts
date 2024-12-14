@@ -13,6 +13,9 @@ import StartUpScreen from './StartUp';
 import BrandScreen from './Brand';
 import OrderDetailScreen from './OrderDetail';
 import ProductDetailScreen from './Product';
+import EditProfileScreen from './EditProfile';
+import CheckoutScreen from './Checkout';
+import DeliveryScreen from './Delivery';
 
 export {
   NotificationScreen,
@@ -30,4 +33,7 @@ export {
   BrandScreen,
   OrderDetailScreen,
   ProductDetailScreen,
+  EditProfileScreen,
+  CheckoutScreen,
+  DeliveryScreen,
 };

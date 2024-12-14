@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {StackNavigator} from '../StackNavigator';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
