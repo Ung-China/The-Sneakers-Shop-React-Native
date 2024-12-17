@@ -60,7 +60,7 @@ const HomeScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={[styles.container, {backgroundColor: colors.primary}]}>
+    <View style={[styles.container, {backgroundColor: colors.primary}]}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <HomeHeader item={location} />
 
@@ -217,7 +217,7 @@ const HomeScreen: React.FC = () => {
           />
         </Section>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

@@ -4,10 +4,12 @@ import {
   AboutUsScreen,
   CartScreen,
   CheckoutScreen,
+  CreateAccountScreen,
   CurrentLocation,
   DeliveryScreen,
   EditProfileScreen,
   FavoriteScreen,
+  ForgotPasswordScreen,
   LanguageScreen,
   NotificationDetailScreen,
   NotificationScreen,
@@ -135,6 +137,24 @@ export const StackNavigator = () => {
         component={AddressScreen}
         options={{
           title: t('addAddress'),
+        }}
+      />
+      <Stack.Screen
+        name="CreateAccount"
+        component={CreateAccountScreen}
+        options={{
+          headerShadowVisible: false,
+          presentation: 'modal',
+          title: t('createAccount'),
+        }}
+      />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPasswordScreen}
+        options={{
+          headerShadowVisible: false,
+          presentation: 'modal',
+          title: t('resetPassword'),
         }}
       />
     </Stack.Navigator>

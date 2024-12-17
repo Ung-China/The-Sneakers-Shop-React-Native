@@ -14,6 +14,7 @@ import {Icons, Spacing} from '../../constants';
 import {useTranslation} from 'react-i18next';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
+import {View} from 'react-native';
 
 const BrandScreen: React.FC = () => {
   const {colors} = useTheme();
@@ -47,8 +48,7 @@ const BrandScreen: React.FC = () => {
     navigation.navigate('Search');
   };
   return (
-    <SafeAreaView
-      style={[styles.safeContainer, {backgroundColor: colors.primary}]}>
+    <View style={[styles.safeContainer, {backgroundColor: colors.primary}]}>
       <FlexibleInput
         placeholder={t('searchProduct')}
         suffixIcon={<Icons.SEARCH color={colors.icon} />}
@@ -71,7 +71,7 @@ const BrandScreen: React.FC = () => {
           keyExtractor={item => item.id.toString()}
         />
       </FlexibleTab>
-    </SafeAreaView>
+    </View>
   );
 };
 

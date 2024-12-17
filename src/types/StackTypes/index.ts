@@ -23,4 +23,8 @@ export type StackParamList = {
   Checkout: undefined;
   Delivery: undefined;
   Address: undefined;
+  LoginModal: undefined;
+  Appearance: undefined;
+  CreateAccount: undefined;
+  ForgotPassword: undefined;
 };

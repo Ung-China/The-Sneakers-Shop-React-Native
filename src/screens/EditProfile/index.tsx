@@ -52,7 +52,7 @@ const EditProfileScreen: React.FC = () => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 105 : 0}
       style={[styles.container, {backgroundColor: colors.primary}]}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.editProfileContainer}>
@@ -72,7 +72,7 @@ const EditProfileScreen: React.FC = () => {
           </Touchable>
           <IconButton
             onPress={openImagePicker}
-            icon={<Icons.ALBUM color="white" width={40} height={40} />}
+            icon={<Icons.UPLOADIMAGE color="white" width={40} height={40} />}
             style={styles.editIconContaner}
           />
         </View>
@@ -145,9 +145,9 @@ const EditProfileScreen: React.FC = () => {
         </View>
       </ScrollView>
       <Footer
-        contentContainerStyle={[
+        safeAreaStyle={[
           styles.footerContainer,
-          {borderColor: colors.grey, backgroundColor: colors.primary},
+          {backgroundColor: colors.primary},
         ]}>
         <Touchable
           onPress={updateProfile}

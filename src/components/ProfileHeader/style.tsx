@@ -1,18 +1,17 @@
 import {StyleSheet} from 'react-native';
 import {FontSizes, Gap, Padding, Screen_Dimensions} from '../../constants';
-import {colors} from '../../constants/colors/colorTypes';
 
 export default StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: Gap.LARGE,
+    paddingVertical: Gap.DEFAULT,
   },
   profileInfoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: Gap.SMALL,
+    gap: Gap.DEFAULT,
   },
   imageContainer: {
     width: 80,

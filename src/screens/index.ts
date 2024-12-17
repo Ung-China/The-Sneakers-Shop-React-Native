@@ -16,6 +16,8 @@ import ProductDetailScreen from './Product';
 import EditProfileScreen from './EditProfile';
 import CheckoutScreen from './Checkout';
 import DeliveryScreen from './Delivery';
+import CreateAccountScreen from './CreateAccount';
+import ForgotPasswordScreen from './ForgotPassword';
 
 export {
   NotificationScreen,
@@ -36,4 +38,6 @@ export {
   EditProfileScreen,
   CheckoutScreen,
   DeliveryScreen,
+  CreateAccountScreen,
+  ForgotPasswordScreen,
 };

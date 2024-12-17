@@ -59,6 +59,10 @@ const useDelivery = () => {
     setActiveLogistic(id);
   };
 
+  const toggleAddress = (id: number) => {
+    setActiveAddress(id);
+  };
+
   const toggleApplyLogistic = useCallback(() => {
     const logistic = logistics.find(item => item.id === activeLogistic);
     if (logistic) {
@@ -71,13 +75,13 @@ const useDelivery = () => {
     setActiveLogistic(selectedLogistic.id);
   }, [selectedLogistic]);
 
-  const toggleAddress = (id: number) => {
-    setActiveAddress(id);
-  };
-
   const handleNavigateToScreenAddress = useCallback(() => {
     bottomSheetDeliveryModalRef.current?.close();
     return navigation.navigate('Address');
+  }, []);
+
+  const handleNavigateToScreenCheckout = useCallback(() => {
+    return navigation.navigate('Checkout');
   }, []);
 
   return {
@@ -103,6 +107,7 @@ const useDelivery = () => {
     toggleDeliverySheet,
 
     handleNavigateToScreenAddress,
+    handleNavigateToScreenCheckout,
   };
 };
 export default useDelivery;

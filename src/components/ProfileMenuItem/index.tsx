@@ -9,38 +9,14 @@ import {ProfileMenuItemProps} from '../../types';
 const ProfileMenuItem: React.FC<ProfileMenuItemProps> = ({
   item,
   labelStyle,
+  onPress,
+  toggleTheme,
+  isDarkMode,
 }) => {
-  const {theme, colors, setColorTheme} = useTheme();
-  const [isDarkMode, setIsDarkMode] = useState(theme === 'dark');
-
-  const navigation = useNavigation();
-
-  const handlePress = () => {
-    if (item.screenName === 'SignOutModal') {
-      return Alert.alert('Sign Out');
-    }
-
-    if (item.screenName === 'DeleteAccountModal') {
-      return Alert.alert('Delete Account');
-    }
-
-    if (item.screenName !== 'Appearance') {
-      navigation.navigate(item.screenName);
-    }
-  };
-
-  const toggleTheme = (value: boolean) => {
-    setIsDarkMode(value);
-    setColorTheme(value ? 'dark' : 'light');
-  };
+  const {colors} = useTheme();
 
   return (
-    <Touchable
-      onPress={
-        item.screenName === 'Appearance'
-          ? () => toggleTheme(!isDarkMode)
-          : handlePress
-      }>
+    <Touchable onPress={() => onPress(item.screenName)}>
       <View style={[styles.container, {backgroundColor: colors.secondary}]}>
         <View style={styles.leadingContainer}>
           {item.prefixIcon &&

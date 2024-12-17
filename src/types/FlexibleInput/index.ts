@@ -2,6 +2,7 @@ import {KeyboardTypeOptions, StyleProp, ViewStyle} from 'react-native';
 
 export interface FlexibleInputProps {
   onPress?: () => void;
+  onPressRightAction?: () => void;
   onChangeText?: (text: string) => void;
   editable?: boolean;
   multiline?: boolean;

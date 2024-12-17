@@ -4,6 +4,7 @@ import {Padding, Radius, Screen_Dimensions, Spacing} from '../../constants';
 export default StyleSheet.create({
   safeContainer: {
     flex: 1,
+    paddingTop: Padding.TOP,
   },
   productWrapper: {
     width:

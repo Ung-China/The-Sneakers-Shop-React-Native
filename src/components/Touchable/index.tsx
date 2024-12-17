@@ -1,6 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Platform, Pressable} from 'react-native';
-import { TouchableProps } from '../../types';
+import {TouchableProps} from '../../types';
 
 const Touchable: React.FC<TouchableProps> = ({
   children,

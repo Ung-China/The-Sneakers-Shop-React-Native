@@ -2,6 +2,7 @@ import {TextStyle} from 'react-native';
 import {SvgProps} from 'react-native-svg';
 
 export interface ProfileMenuItemProps {
+  onPress: (screenName?: string) => void;
   item: {
     screenName?: string;
     label?: string;
@@ -11,4 +12,6 @@ export interface ProfileMenuItemProps {
     isSwitch?: boolean;
   };
   labelStyle?: TextStyle;
+  toggleTheme?: (value: boolean) => void;
+  isDarkMode: boolean;
 }

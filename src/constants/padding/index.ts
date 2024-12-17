@@ -8,6 +8,7 @@ const Padding = {
   LARGE: 20,
   EXTRA_LARGE: 25,
   BOTTOM: Screen_Dimensions.HEIGHT > 812 && Platform.OS === 'ios' ? 15 : 0,
+  TOP: Screen_Dimensions.HEIGHT > 812 && Platform.OS === 'ios' ? 50 : 0,
 };
 
 export default Padding;

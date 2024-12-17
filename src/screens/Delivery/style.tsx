@@ -53,7 +53,7 @@ export default StyleSheet.create({
     gap: Gap.EXTRA_SMALL,
   },
   shippingLabel: {
-    fontFamily: Fonts.REGULAR,
+    fontFamily: Fonts.MEDIUM,
     fontSize: FontSizes.default,
   },
   shipping: {

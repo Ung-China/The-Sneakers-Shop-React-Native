@@ -35,6 +35,7 @@ const DeliveryScreen: React.FC = () => {
     toggleDeliverySheet,
 
     handleNavigateToScreenAddress,
+    handleNavigateToScreenCheckout,
   } = useDelivery();
 
   return (
@@ -131,7 +132,7 @@ const DeliveryScreen: React.FC = () => {
             {color: colors.textReversed, textAlign: 'center'})
           }
           containerStyle={{backgroundColor: colors.primaryReversed}}
-          onPress={() => {}}
+          onPress={handleNavigateToScreenCheckout}
         />
       </Footer>
 
@@ -139,6 +140,7 @@ const DeliveryScreen: React.FC = () => {
         bottomSheetModalRef={bottomSheetDeliveryModalRef}
         onSheetChanges={handleDeliverySheetChanges}
         handleLogisticSheetDismiss={() => {}}
+        enableDynamicSizing={true}
         content={
           <DeliveryModal
             onPressCancel={toggleCloseDeliverySheet}
@@ -153,6 +155,7 @@ const DeliveryScreen: React.FC = () => {
         bottomSheetModalRef={bottomSheetLogisticModalRef}
         onSheetChanges={handleLogisticSheetChanges}
         handleLogisticSheetDismiss={handleLogisticSheetDismiss}
+        enableDynamicSizing={true}
         content={
           <LogisticModal
             onPressCancel={toggleCloseLogisticSheet}

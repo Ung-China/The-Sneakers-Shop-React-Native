@@ -6,9 +6,11 @@ import IconButton from '../IconButton';
 import {useTheme} from '../../hooks';
 import {FlexibleInputProps} from '../../types';
 import Touchable from '../Touchable';
+import {KeyboardTypes} from '../../constants';
 
 const FlexibleInput: React.FC<FlexibleInputProps> = ({
   onPress,
+  onPressRightAction,
   onChangeText,
   editable = false,
   multiline = false,
@@ -16,7 +18,7 @@ const FlexibleInput: React.FC<FlexibleInputProps> = ({
   label,
   error,
   placeholder,
-  keyboardType,
+  keyboardType = KeyboardTypes.DEFAULT,
   textInputStyle,
   containerStyle,
   contentContainerStyle,
@@ -61,7 +63,9 @@ const FlexibleInput: React.FC<FlexibleInputProps> = ({
             editable={editable}
             multiline={multiline}
           />
-          {suffixIcon && <IconButton onPress={onPress} icon={suffixIcon} />}
+          {suffixIcon && (
+            <IconButton onPress={onPressRightAction} icon={suffixIcon} />
+          )}
         </View>
       )}
 

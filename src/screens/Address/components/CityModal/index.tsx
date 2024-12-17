@@ -1,9 +1,10 @@
-import {FlatList, View} from 'react-native';
+import {View} from 'react-native';
 import {cities} from '../../../../models/City';
 import {CityItem, ItemSeparatorHeight} from '../../../../components';
 import styles from './style';
 import {CityItemProps, CityModalProps} from '../../../../types';
 import React from 'react';
+import {FlatList} from 'react-native-gesture-handler';
 
 const CityModal: React.FC<CityModalProps> = ({onPress, isActive}) => {
   const cityItem = ({

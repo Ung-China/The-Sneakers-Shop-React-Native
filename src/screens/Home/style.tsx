@@ -14,6 +14,7 @@ export default StyleSheet.create({
   headerContentContainerStyle: {},
   container: {
     flex: 1,
+    paddingTop: Padding.TOP,
   },
   inputContainer: {
     flexDirection: 'row',

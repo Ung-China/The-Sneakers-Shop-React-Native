@@ -35,9 +35,19 @@ import Delivery from '../../assets/icons/delivery.svg';
 import Confirmed from '../../assets/icons/confirmed.svg';
 import Logo from '../../assets/icons/applogo.svg';
 import ArrowLeft from '../../assets/icons/arrowLeft.svg';
-import Album from '../../assets/icons/album.svg';
+import UploadImage from '../../assets/icons/uploadImage.svg';
 import Pen from '../../assets/icons/pen.svg';
 import ArrowDown from '../../assets/icons/arrowDown.svg';
+import ABABank from '../../assets/icons/abaBank.svg';
+import AcledaBank from '../../assets/icons/acledaBank.svg';
+import WingBank from '../../assets/icons/wingBank.svg';
+import CloseModal from '../../assets/icons/closeModal.svg';
+import Key from '../../assets/icons/key.svg';
+import Eye from '../../assets/icons/Eye.svg';
+import EyeOff from '../../assets/icons/eyeOff.svg';
+import Google from '../../assets/icons/google.svg';
+import Apple from '../../assets/icons/apple.svg';
+import Phone from '../../assets/icons/phone.svg';
 
 const Icons = {
   HOME: Home,
@@ -77,9 +87,19 @@ const Icons = {
   CONFIRMED: Confirmed,
   LOGO: Logo,
   ARROWLEFT: ArrowLeft,
-  ALBUM: Album,
+  UPLOADIMAGE: UploadImage,
   PEN: Pen,
   ARROWDOWN: ArrowDown,
+  ABABANK: ABABank,
+  ACLEDABANK: AcledaBank,
+  WINGBANK: WingBank,
+  CLOSEMODAL: CloseModal,
+  KEY: Key,
+  EYE: Eye,
+  EYEOFF: EyeOff,
+  GOOGLE: Google,
+  APPLE: Apple,
+  PHONE: Phone,
 };
 
 export default Icons;

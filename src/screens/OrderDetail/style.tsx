@@ -42,6 +42,7 @@ export default StyleSheet.create({
     paddingVertical: Padding.DEFAULT,
   },
   trackingContainer: {
-    paddingBottom: Padding.BOTTOM * 3,
+    marginBottom: Padding.DEFAULT * 2,
+    paddingBottom: Padding.BOTTOM,
   },
 });

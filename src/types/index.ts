@@ -38,7 +38,8 @@ import {DeliveryProps} from './Delivery';
 import {AddressLabelItemProps} from './AddressLabelItem';
 import {CityItemProps} from './CityItem';
 import {CityModalProps} from './City';
-
+import {LoginModalProps} from './Login';
+import {OTPModalProps} from './OTPModal';
 export type {
   BottomTabParamList,
   RootParamList,
@@ -80,4 +81,6 @@ export type {
   AddressLabelItemProps,
   CityItemProps,
   CityModalProps,
+  LoginModalProps,
+  OTPModalProps,
 };

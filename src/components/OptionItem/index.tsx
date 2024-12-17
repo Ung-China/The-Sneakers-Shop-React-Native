@@ -11,13 +11,14 @@ const OptionItem: React.FC<OptionItemProps> = ({
   title,
   description,
   isActive,
+  contentContainer,
 }) => {
   const {colors} = useTheme();
   return (
     <Touchable
       style={[styles.container, {backgroundColor: colors.secondary}]}
       onPress={onPress}>
-      <View>
+      <View style={contentContainer}>
         <View>{prefixIcon}</View>
         <View style={styles.body}>
           <Text style={[styles.title, {color: colors.text}]}>{title}</Text>

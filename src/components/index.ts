@@ -31,7 +31,7 @@ import LogisticItem from './LogisticItem';
 import AddressItem from './AddressItem';
 import AddressLabelItem from './AddressLabelItem';
 import CityItem from './CityItem';
-
+import OTPModal from './OTPModal';
 export {
   HeaderComponent,
   HeaderTitleComponent,
@@ -66,4 +66,5 @@ export {
   AddressItem,
   AddressLabelItem,
   CityItem,
+  OTPModal,
 };
