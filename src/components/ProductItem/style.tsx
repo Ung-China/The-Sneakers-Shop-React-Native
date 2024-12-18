@@ -59,12 +59,14 @@ export default StyleSheet.create({
   },
   value: {
     color: 'white',
-    fontSize: FontSizes.small,
+    fontSize: FontSizes.extraSmall,
     fontFamily: Fonts.REGULAR,
+    lineHeight: 11,
   },
   discountText: {
     color: 'white',
-    fontSize: FontSizes.small,
+    fontSize: FontSizes.extraSmall,
     fontFamily: Fonts.REGULAR,
+    lineHeight: 11,
   },
 });

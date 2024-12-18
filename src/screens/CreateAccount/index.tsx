@@ -1,4 +1,10 @@
-import {KeyboardAvoidingView, Platform, Text, View} from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
 import styles from './style';
 import {useCreateAccount, useTheme} from '../../hooks';
 import {useTranslation} from 'react-i18next';
@@ -13,11 +19,8 @@ const CreateAccountScreen: React.FC = () => {
     useCreateAccount();
   return (
     <>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 125 : 0}
-        style={[styles.container, {backgroundColor: colors.primary}]}>
-        <View style={[styles.container, {backgroundColor: colors.primary}]}>
+      <View style={[styles.container, {backgroundColor: colors.primary}]}>
+        <ScrollView showsVerticalScrollIndicator={false}>
           {isVerified ? (
             <View style={styles.inputContainer}>
               <FlexibleInput
@@ -83,29 +86,33 @@ const CreateAccountScreen: React.FC = () => {
               />
             </View>
           )}
-        </View>
-        <Footer
-          safeAreaStyle={[
-            styles.footerContainer,
-            {backgroundColor: colors.primary},
-          ]}>
-          <Touchable
-            onPress={isVerified ? openModal : openModal}
-            style={[
-              styles.footerButton,
-              {backgroundColor: colors.secondaryReversed},
+        </ScrollView>
+
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          <Footer
+            safeAreaStyle={[
+              styles.footerContainer,
+              {backgroundColor: colors.primary},
             ]}>
-            <Text style={[styles.footerLabel, {color: colors.textReversed}]}>
-              {isVerified ? t('done') : t('continue')}
-            </Text>
-          </Touchable>
-        </Footer>
-        <OTPModal
-          isVisible={isModalVisible}
-          onClose={closeModal}
-          onPress={verifyOTP}
-        />
-      </KeyboardAvoidingView>
+            <Touchable
+              onPress={isVerified ? openModal : openModal}
+              style={[
+                styles.footerButton,
+                {backgroundColor: colors.secondaryReversed},
+              ]}>
+              <Text style={[styles.footerLabel, {color: colors.textReversed}]}>
+                {isVerified ? t('done') : t('continue')}
+              </Text>
+            </Touchable>
+          </Footer>
+          <OTPModal
+            isVisible={isModalVisible}
+            onClose={closeModal}
+            onPress={verifyOTP}
+          />
+        </KeyboardAvoidingView>
+      </View>
     </>
   );
 };

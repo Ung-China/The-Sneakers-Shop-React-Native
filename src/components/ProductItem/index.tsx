@@ -47,7 +47,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
         />
 
         <View style={styles.promotionContainer}>
-          <Icons.DISCOUNTTAG width={50} height={50} color={'red'} />
+          <Icons.DISCOUNTTAG width={40} height={40} color={'red'} />
           <View style={styles.promotionWrapper}>
             <Text style={styles.value}>20%</Text>
             <Text style={styles.discountText}>OFF</Text>

@@ -20,15 +20,13 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: Radius.DEFAULT,
   },
-  swipeableContainer: {
-    backgroundColor: 'red',
-    borderRadius: Radius.DEFAULT,
-  },
   rightActionContainer: {
     flex: 1,
     padding: Padding.DEFAULT,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'red',
+    borderRadius: Radius.DEFAULT,
   },
   name: {
     fontFamily: Fonts.REGULAR,

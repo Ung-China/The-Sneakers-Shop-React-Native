@@ -11,7 +11,6 @@ import {colors} from '../../../../constants/colors/colorTypes';
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
     paddingBottom: Padding.BOTTOM * 2,
   },
   header: {

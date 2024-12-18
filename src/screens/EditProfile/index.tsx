@@ -12,7 +12,7 @@ import {FlexibleInput, Footer, ProfileImage, Touchable} from '../../components';
 import IconButton from '../../components/IconButton';
 import {Icons} from '../../constants';
 import ImagePicker from 'react-native-image-crop-picker';
-import {BlurView} from '@react-native-community/blur';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-controller';
 
 const EditProfileScreen: React.FC = () => {
   const {t} = useTranslation();
@@ -50,10 +50,7 @@ const EditProfileScreen: React.FC = () => {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 105 : 0}
-      style={[styles.container, {backgroundColor: colors.primary}]}>
+    <View style={[styles.container, {backgroundColor: colors.primary}]}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.editProfileContainer}>
           <Touchable onPress={openImagePicker}>
@@ -62,12 +59,6 @@ const EditProfileScreen: React.FC = () => {
               imageStyle={styles.imageStyle}
               loadingImageStyle={styles.loadingImageStyle}
               iconSize={70}
-            />
-            <BlurView
-              style={styles.blurView}
-              blurType="dark"
-              blurAmount={1}
-              reducedTransparencyFallbackColor="white"
             />
           </Touchable>
           <IconButton
@@ -144,23 +135,27 @@ const EditProfileScreen: React.FC = () => {
           />
         </View>
       </ScrollView>
-      <Footer
-        safeAreaStyle={[
-          styles.footerContainer,
-          {backgroundColor: colors.primary},
-        ]}>
-        <Touchable
-          onPress={updateProfile}
-          style={[
-            styles.saveButton,
-            {backgroundColor: colors.secondaryReversed},
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 15 : 0}>
+        <Footer
+          safeAreaStyle={[
+            styles.footerContainer,
+            {backgroundColor: colors.primary},
           ]}>
-          <Text style={[styles.save, {color: colors.textReversed}]}>
-            {t('save')}
-          </Text>
-        </Touchable>
-      </Footer>
-    </KeyboardAvoidingView>
+          <Touchable
+            onPress={updateProfile}
+            style={[
+              styles.saveButton,
+              {backgroundColor: colors.secondaryReversed},
+            ]}>
+            <Text style={[styles.save, {color: colors.textReversed}]}>
+              {t('save')}
+            </Text>
+          </Touchable>
+        </Footer>
+      </KeyboardAvoidingView>
+    </View>
   );
 };
 

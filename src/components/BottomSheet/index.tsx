@@ -7,6 +7,7 @@ import {
 import styles from './style';
 import React, {useCallback} from 'react';
 import {useTheme} from '../../hooks';
+
 const BottomSheet: React.FC<BottomSheetProps> = ({
   content,
   onSheetChanges,
@@ -14,6 +15,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
   handleLogisticSheetDismiss,
   snapPoints,
   enableDynamicSizing = true,
+  contentContainer,
 }) => {
   const {colors} = useTheme();
   const renderBackdrop = useCallback(
@@ -39,7 +41,11 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
       handleIndicatorStyle={{backgroundColor: colors.text}}
       backgroundStyle={{backgroundColor: colors.primary}}>
       <BottomSheetView
-        style={[styles.contentContainer, {backgroundColor: colors.primary}]}>
+        style={[
+          styles.container,
+          contentContainer,
+          {backgroundColor: colors.primary},
+        ]}>
         {content}
       </BottomSheetView>
     </BottomSheetModal>

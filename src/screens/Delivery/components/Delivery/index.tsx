@@ -1,4 +1,4 @@
-import {FlatList, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import styles from './style';
 import {
   AddressItem,
@@ -11,6 +11,7 @@ import {useTranslation} from 'react-i18next';
 import {DeliveryModalProps, DeliveryProps} from '../../../../types';
 import {addresss} from '../../../../models/Address';
 import {Icons} from '../../../../constants';
+import {FlatList} from 'react-native-gesture-handler';
 
 const DeliveryModal: React.FC<DeliveryModalProps> = ({
   onPressCancel,

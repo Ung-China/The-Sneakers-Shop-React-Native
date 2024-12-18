@@ -3,8 +3,7 @@ import {Padding} from '../../../../constants';
 
 export default StyleSheet.create({
   container: {
-    paddingHorizontal: Padding.DEFAULT,
-    paddingBottom: Padding.DEFAULT,
+    padding: Padding.DEFAULT,
   },
   contentContainer: {
     paddingBottom: Padding.BOTTOM * 2,

@@ -74,9 +74,7 @@ const CartItem: React.FC<CartItemProps> = ({
         </View>
       ) : (
         <Touchable onPress={onPress}>
-          <Swipeable
-            renderRightActions={rightAction}
-            containerStyle={styles.swipeableContainer}>
+          <Swipeable renderRightActions={rightAction}>
             <View
               style={[styles.container, {backgroundColor: colors.secondary}]}>
               <CachedImage

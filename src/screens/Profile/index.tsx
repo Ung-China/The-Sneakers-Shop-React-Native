@@ -46,14 +46,19 @@ const ProfileScreen: React.FC = () => {
         contentContainerStyle={styles.containerStyle}
         ItemSeparatorComponent={itemSeparator}
       />
+
       <BottomSheet
         bottomSheetModalRef={bottomSheetLogincModalRef}
         onSheetChanges={handleLoginSheetChanges}
         handleLogisticSheetDismiss={handleLoginSheetDismiss}
+        snapPoints={['90%']}
+        enableDynamicSizing={false}
+        contentContainer={{flex: 1}}
         content={
           <LoginModal
             handleNavigateToCreateAccount={handleNavigateToCreateAccount}
             handleNavigateToForgotPassword={handleNavigateToForgotPassword}
+            handleLoginSheetDismiss={handleLoginSheetDismiss}
           />
         }
       />

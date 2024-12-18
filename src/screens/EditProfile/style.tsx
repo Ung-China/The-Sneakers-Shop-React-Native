@@ -45,15 +45,14 @@ export default StyleSheet.create({
     gap: Gap.SMALL,
   },
   footerContainer: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-
-    elevation: 2,
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 1,
+    // },
+    // shadowOpacity: 0.2,
+    // shadowRadius: 1.41,
+    // elevation: 2,
   },
   saveButton: {
     paddingVertical: Padding.DEFAULT,
@@ -65,9 +64,11 @@ export default StyleSheet.create({
     fontSize: FontSizes.large,
   },
   blurView: {
-    ...StyleSheet.absoluteFillObject,
-    overflow: 'hidden',
-    borderRadius: 70,
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
   },
   contentContainerStyle: {
     flexDirection: 'row',

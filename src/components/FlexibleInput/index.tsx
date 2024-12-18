@@ -24,6 +24,7 @@ const FlexibleInput: React.FC<FlexibleInputProps> = ({
   contentContainerStyle,
   prefixIcon,
   suffixIcon,
+  autoFocus = false,
 }) => {
   const {colors} = useTheme();
   return (
@@ -53,16 +54,18 @@ const FlexibleInput: React.FC<FlexibleInputProps> = ({
             placeholder={placeholder}
             placeholderTextColor={colors.grey}
             onChangeText={onChangeText}
+            autoFocus={autoFocus}
             keyboardType={keyboardType}
             style={[
               styles.textInput,
               textInputStyle,
               {color: colors.text},
-              multiline && {height: 100},
+              multiline && {height: 100, textAlignVertical: 'top'},
             ]}
             editable={editable}
             multiline={multiline}
           />
+
           {suffixIcon && (
             <IconButton onPress={onPressRightAction} icon={suffixIcon} />
           )}

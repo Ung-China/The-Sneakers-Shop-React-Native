@@ -1,4 +1,4 @@
-import {FlatList, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import styles from './style';
 import {useTheme} from '../../../../hooks';
 import {useTranslation} from 'react-i18next';
@@ -11,6 +11,7 @@ import {
 import {logistics} from '../../../../models/Logistic';
 import {LogisticModalProps, LogisticProps} from '../../../../types';
 import {Spacing} from '../../../../constants';
+import {FlatList} from 'react-native-gesture-handler';
 
 const LogisticModal: React.FC<LogisticModalProps> = ({
   onPressApply,

@@ -1,4 +1,5 @@
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
+import {StyleProp, ViewStyle} from 'react-native';
 
 export interface BottomSheetProps {
   content: React.ReactNode;
@@ -7,4 +8,5 @@ export interface BottomSheetProps {
   handleLogisticSheetDismiss: () => void;
   snapPoints?: Array<string | number>;
   enableDynamicSizing?: boolean;
+  contentContainer?: StyleProp<ViewStyle>;
 }

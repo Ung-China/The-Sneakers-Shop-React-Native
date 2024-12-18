@@ -51,9 +51,7 @@ export default StyleSheet.create({
     fontFamily: Fonts.REGULAR,
     fontSize: FontSizes.large,
   },
-  footerContainer: {
-    borderTopWidth: 0.5,
-  },
+  footerContainer: {},
   saveButton: {
     paddingVertical: Padding.DEFAULT,
     borderRadius: Radius.DEFAULT,

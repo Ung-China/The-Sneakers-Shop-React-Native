@@ -10,9 +10,7 @@ import {
 } from '../../../../constants';
 
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: {},
   header: {
     gap: Gap.DEFAULT,
   },
