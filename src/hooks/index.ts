@@ -8,7 +8,9 @@ import useOrderDetail from './useOrderDetail';
 import useProduct from './useProduct';
 import useEditProfile from './useEditProfile';
 import useDelivery from './useDelivery';
-import useCreateAccount from './useCreateAccount';
+import useSocial from './useSocial';
+import useLoginWithPhoneNumber from './useLoginWithPhoneNumber';
+import useShopLocation from './useShopLocation';
 export {
   useLanguage,
   useProfile,
@@ -20,5 +22,7 @@ export {
   useProduct,
   useEditProfile,
   useDelivery,
-  useCreateAccount,
+  useSocial,
+  useLoginWithPhoneNumber,
+  useShopLocation,
 };

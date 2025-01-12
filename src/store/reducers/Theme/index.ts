@@ -1,5 +1,5 @@
 import {ActionTypes} from '../../../constants';
-import {SetThemeAction, ThemeState} from '../../types/themeTypes';
+import {SetThemeAction, ThemeState} from '../../types';
 
 const initialState: ThemeState = {
   theme: 'light',

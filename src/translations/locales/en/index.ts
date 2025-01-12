@@ -130,4 +130,13 @@ export const translateEN = {
   enteryourphonenumbertorecoverpassword:
     'Enter your phone number to recover password',
   confirmPassword: 'Confirm Password',
+  shopLocation: 'Shop Location',
+  otpisrequired: 'OTP is required',
+  otpmustbe6: 'OTP must be 6-digit',
+  pleaseentervalidotp: 'Please enter valid OTP',
+  Nameisrequired: 'Name is required',
+  Passwordisrequired: 'Password is required',
+  Confirmpasswordisrequired: 'Confirm password is required',
+  openMap: 'Open Map',
+  openIn: 'Open In',
 };

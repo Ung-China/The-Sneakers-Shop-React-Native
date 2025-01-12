@@ -1,7 +1,7 @@
 // =========================================================================//
 //                          The Sneakers User App                           //
 // =========================================================================//
-//                      REACT NATIVE VERSION: 0.75.                        //
+//                      REACT NATIVE VERSION: 0.75.4                        //
 //               STATE MANAGEMENT: REACT REDUX & REDUX PERSIST              //
 //                      DEVELOPER'S PROFILE: ING CHINA                      //
 //                   GitHub: https://github.com/Ing-China                   //

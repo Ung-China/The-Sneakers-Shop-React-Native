@@ -24,7 +24,7 @@ const FlexibleInput: React.FC<FlexibleInputProps> = ({
   contentContainerStyle,
   prefixIcon,
   suffixIcon,
-  autoFocus = false,
+  autoFocus = true,
 }) => {
   const {colors} = useTheme();
   return (

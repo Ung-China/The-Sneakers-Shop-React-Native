@@ -17,6 +17,7 @@ import {
   OrderScreen,
   ProductDetailScreen,
   SearchScreen,
+  ShopLocation,
 } from '../../screens';
 import {BottomTabNavigator} from '../BottomTabNavigator';
 import {useTheme} from '../../hooks';
@@ -155,6 +156,14 @@ export const StackNavigator = () => {
           headerShadowVisible: false,
           presentation: 'modal',
           title: t('resetPassword'),
+        }}
+      />
+      <Stack.Screen
+        name="ShopLocation"
+        component={ShopLocation}
+        options={{
+          headerShown: false,
+          title: t('shopLocation'),
         }}
       />
     </Stack.Navigator>

@@ -1,3 +1,10 @@
 import {changeLanguageActions} from './Language';
 import {setThemeActions} from './Theme';
-export {changeLanguageActions, setThemeActions};
+import {fetchUserSuccess, loginUserSuccess, logoutUserSuccess} from './User';
+export {
+  changeLanguageActions,
+  setThemeActions,
+  fetchUserSuccess,
+  loginUserSuccess,
+  logoutUserSuccess,
+};

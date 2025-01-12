@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 import styles from './style';
-import {useCreateAccount, useTheme} from '../../hooks';
+import {useLoginWithPhoneNumber, useTheme} from '../../hooks';
 import {useTranslation} from 'react-i18next';
 import React from 'react';
 import {FlexibleInput, Footer, OTPModal, Touchable} from '../../components';
@@ -15,8 +15,32 @@ import {Icons, KeyboardTypes} from '../../constants';
 const CreateAccountScreen: React.FC = () => {
   const {colors} = useTheme();
   const {t} = useTranslation();
-  const {isModalVisible, isVerified, closeModal, openModal, verifyOTP} =
-    useCreateAccount();
+
+  const {
+    sendOTP,
+    verifyOTP,
+    loading,
+    isModalVisible,
+    phoneNumber,
+    setPhoneNumber,
+    errorPhoneNumber,
+    isVerified,
+    closeModal,
+    setOTP,
+    OTP,
+    errorOTP,
+    name,
+    errorName,
+    setName,
+    password,
+    errorPassword,
+    setPassword,
+    confirmPassword,
+    errorConfirmPassword,
+    setConfirmPassword,
+    createAccount,
+  } = useLoginWithPhoneNumber();
+
   return (
     <>
       <View style={[styles.container, {backgroundColor: colors.primary}]}>
@@ -28,6 +52,9 @@ const CreateAccountScreen: React.FC = () => {
                 onPressRightAction={() => {}}
                 placeholder={t('name')}
                 editable={true}
+                value={name}
+                onChangeText={setName}
+                error={errorName}
                 textInputStyle={[styles.textInputStyle]}
                 contentContainerStyle={[
                   styles.contentContainerStyle,
@@ -42,6 +69,9 @@ const CreateAccountScreen: React.FC = () => {
                 onPressRightAction={() => {}}
                 placeholder={t('password')}
                 editable={true}
+                value={password}
+                onChangeText={setPassword}
+                error={errorPassword}
                 textInputStyle={[styles.textInputStyle]}
                 contentContainerStyle={[
                   styles.contentContainerStyle,
@@ -56,6 +86,9 @@ const CreateAccountScreen: React.FC = () => {
                 onPressRightAction={() => {}}
                 placeholder={t('confirmPassword')}
                 editable={true}
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
+                error={errorConfirmPassword}
                 textInputStyle={[styles.textInputStyle]}
                 contentContainerStyle={[
                   styles.contentContainerStyle,
@@ -76,6 +109,9 @@ const CreateAccountScreen: React.FC = () => {
               <FlexibleInput
                 prefixIcon={<Icons.PHONE color={colors.grey} />}
                 placeholder={t('phoneNumber')}
+                error={errorPhoneNumber}
+                value={phoneNumber}
+                onChangeText={setPhoneNumber}
                 editable={true}
                 keyboardType={KeyboardTypes.PHONE_NUMBER}
                 textInputStyle={[styles.textInputStyle]}
@@ -95,21 +131,39 @@ const CreateAccountScreen: React.FC = () => {
               styles.footerContainer,
               {backgroundColor: colors.primary},
             ]}>
-            <Touchable
-              onPress={isVerified ? openModal : openModal}
-              style={[
-                styles.footerButton,
-                {backgroundColor: colors.secondaryReversed},
-              ]}>
-              <Text style={[styles.footerLabel, {color: colors.textReversed}]}>
-                {isVerified ? t('done') : t('continue')}
-              </Text>
-            </Touchable>
+            {isVerified ? (
+              <Touchable
+                onPress={createAccount}
+                style={[
+                  styles.footerButton,
+                  {backgroundColor: colors.secondaryReversed},
+                ]}>
+                <Text
+                  style={[styles.footerLabel, {color: colors.textReversed}]}>
+                  {t('done')}
+                </Text>
+              </Touchable>
+            ) : (
+              <Touchable
+                onPress={() => sendOTP(phoneNumber)}
+                style={[
+                  styles.footerButton,
+                  {backgroundColor: colors.secondaryReversed},
+                ]}>
+                <Text
+                  style={[styles.footerLabel, {color: colors.textReversed}]}>
+                  {t('continue')}
+                </Text>
+              </Touchable>
+            )}
           </Footer>
           <OTPModal
             isVisible={isModalVisible}
             onClose={closeModal}
-            onPress={verifyOTP}
+            onPress={() => verifyOTP(phoneNumber, OTP)}
+            phoneNumber={phoneNumber}
+            setOTP={setOTP}
+            errorOTP={errorOTP}
           />
         </KeyboardAvoidingView>
       </View>

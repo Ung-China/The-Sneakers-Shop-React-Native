@@ -130,4 +130,13 @@ export const translateKH = {
   FORGOTPASSWORD: 'ភ្លេចលេខសម្ងាត់',
   enteryourphonenumbertorecoverpassword:
     'បញ្ចូលលេខទូរស័ព្ទរបស់អ្នកដើម្បីសង្គ្រោះពាក្យសម្ងាត់',
+  shopLocation: 'ទីតាំងហាង',
+  otpisrequired: 'ទាមទារលេខសម្ងាត់ 6 ខ្ទង់',
+  otpmustbe6: 'លេខសម្ងាត់ ត្រូវតែជា 6 ខ្ទង់',
+  pleaseentervalidotp: 'សូមបញ្ចូលលេខសម្ងាត់ដែលត្រឹមត្រូវ',
+  Nameisrequired: 'ទាមទារឈ្មោះ',
+  Passwordisrequired: 'ទាមទារពាក្យសម្ងាត់',
+  Confirmpasswordisrequired: 'តម្រូវឱ្យបញ្ជាក់ពាក្យសម្ងាត់',
+  openMap: 'បើកផែនទី',
+  openIn: 'បើកក្នុង',
 };

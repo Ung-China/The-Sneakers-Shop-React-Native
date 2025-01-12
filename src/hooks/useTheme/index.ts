@@ -1,7 +1,12 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {ColorSchemeName} from 'react-native';
 import {useCallback, useMemo} from 'react';
-import {DarkTheme, LightTheme} from '../../constants';
+import {
+  darkMapStyle,
+  DarkTheme,
+  lightMapStyle,
+  LightTheme,
+} from '../../constants';
 import {setThemeActions} from '../../store/actions';
 import {AppDispatch, RootState} from '../../store';
 const useTheme = () => {
@@ -20,10 +25,16 @@ const useTheme = () => {
     [theme],
   );
 
+  const mapColors = useMemo(
+    () => (theme === 'dark' ? darkMapStyle : lightMapStyle),
+    [theme],
+  );
+
   return {
     theme,
     setColorTheme,
     colors,
+    mapColors,
   };
 };
 

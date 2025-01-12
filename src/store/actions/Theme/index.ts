@@ -1,6 +1,6 @@
 import {ColorSchemeName} from 'react-native';
-import {SetThemeAction} from '../../types/themeTypes';
 import {ActionTypes} from '../../../constants';
+import {SetThemeAction} from '../../types';
 
 export const setThemeActions = (theme: ColorSchemeName): SetThemeAction => ({
   type: ActionTypes.SET_THEME,

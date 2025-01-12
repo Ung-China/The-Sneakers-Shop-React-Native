@@ -27,4 +27,5 @@ export type StackParamList = {
   Appearance: undefined;
   CreateAccount: undefined;
   ForgotPassword: undefined;
+  ShopLocation: undefined;
 };

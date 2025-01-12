@@ -8,7 +8,13 @@ const Validator = {
   },
 
   validatePhoneNumber: (phoneNumber: string) => {
-    return phoneNumber.length > 11;
+    return phoneNumber.replace(/\s+/g, '').length > 14;
+  },
+  normalizedNumber: (phoneNumber: string) => {
+    return phoneNumber.replace(/\s+/g, '').replace(/^(?:\+|855|0)+/, '');
+  },
+  numberWithCountryCode: (phoneNumber: string) => {
+    return `855${Validator.normalizedNumber(phoneNumber)}`;
   },
 };
 

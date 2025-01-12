@@ -7,6 +7,15 @@ import App from './App';
 import {name as appName} from './app.json';
 import {CacheManager} from '@georstat/react-native-image-cache';
 import {Dirs} from 'react-native-file-access';
+import {
+  configureReanimatedLogger,
+  ReanimatedLogLevel,
+} from 'react-native-reanimated';
+
+configureReanimatedLogger({
+  level: ReanimatedLogLevel.warn,
+  strict: false,
+});
 
 CacheManager.config = {
   baseDir: `${Dirs.CacheDir}/images_cache/`,

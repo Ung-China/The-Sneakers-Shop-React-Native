@@ -6,6 +6,8 @@ import Notification from './Notification';
 import Variant from './Variant';
 import CartItem from './CartItem';
 import TrackingStep from './TrackingStep';
+import User from './User';
+import Location from './Location';
 export {
   ProfileMenu,
   Language,
@@ -15,4 +17,6 @@ export {
   Variant,
   CartItem,
   TrackingStep,
+  User,
+  Location,
 };

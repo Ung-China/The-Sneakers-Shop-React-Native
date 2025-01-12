@@ -5,7 +5,6 @@ import {Icons, Spacing} from '../../constants';
 import FlexibleTouchable from '../../components/FlexibleTouchable';
 import styles from './style';
 import {LanguageItemProps} from '../../types';
-import {Footer} from '../../components';
 
 const LanguageScreen: React.FC = () => {
   const {colors} = useTheme();

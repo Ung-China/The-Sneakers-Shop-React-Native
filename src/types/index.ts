@@ -40,6 +40,9 @@ import {CityItemProps} from './CityItem';
 import {CityModalProps} from './City';
 import {LoginModalProps} from './Login';
 import {OTPModalProps} from './OTPModal';
+import {ApiRequestProps} from './ApiRequest';
+import {LoadingModalProps} from './LoadingModal';
+import {locationItemProps} from './LocationItem';
 export type {
   BottomTabParamList,
   RootParamList,
@@ -83,4 +86,7 @@ export type {
   CityModalProps,
   LoginModalProps,
   OTPModalProps,
+  ApiRequestProps,
+  LoadingModalProps,
+  locationItemProps,
 };

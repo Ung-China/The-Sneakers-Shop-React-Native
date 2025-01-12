@@ -48,6 +48,12 @@ import EyeOff from '../../assets/icons/eyeOff.svg';
 import Google from '../../assets/icons/google.svg';
 import Apple from '../../assets/icons/apple.svg';
 import Phone from '../../assets/icons/phone.svg';
+import LeftArrowAndroid from '../../assets/icons/android-arrow-left.svg';
+import MapPing from '../../assets/icons/pingMap.svg';
+import SmallMap from '../../assets/icons/smallMap.svg';
+import Time from '../../assets/icons/time.svg';
+import AppleMap from '../../assets/icons/appleMap.svg';
+import GoogleMap from '../../assets/icons/googleMap.svg';
 
 const Icons = {
   HOME: Home,
@@ -100,6 +106,12 @@ const Icons = {
   GOOGLE: Google,
   APPLE: Apple,
   PHONE: Phone,
+  LEFTARROWANDROID: LeftArrowAndroid,
+  MAPPING: MapPing,
+  SMALLMAP: SmallMap,
+  TIME: Time,
+  APPLEMAP: AppleMap,
+  GOOGLEMAP: GoogleMap,
 };
 
 export default Icons;

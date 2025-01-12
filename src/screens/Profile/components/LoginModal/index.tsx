@@ -1,4 +1,4 @@
-import {Alert, Platform, Text, View} from 'react-native';
+import {Alert, Text, View} from 'react-native';
 import styles from './style';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '../../../../hooks';
@@ -14,6 +14,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
   handleNavigateToCreateAccount,
   handleNavigateToForgotPassword,
   handleLoginSheetDismiss,
+  handleLoginWithGoogle,
 }) => {
   const {t} = useTranslation();
   const {colors} = useTheme();
@@ -75,10 +76,11 @@ const LoginModal: React.FC<LoginModalProps> = ({
             <View style={[styles.line, {backgroundColor: colors.grey}]} />
           </View>
           <View style={styles.socialContainer}>
-            <IconButton icon={<Icons.GOOGLE />} style={styles.socialButton} />
-            {Platform.OS === 'ios' && (
-              <IconButton icon={<Icons.APPLE />} style={styles.socialButton} />
-            )}
+            <IconButton
+              onPress={handleLoginWithGoogle}
+              icon={<Icons.GOOGLE />}
+              style={styles.socialButton}
+            />
           </View>
           <FlatButton
             onPress={handleNavigateToCreateAccount}

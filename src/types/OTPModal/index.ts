@@ -3,4 +3,7 @@ export interface OTPModalProps {
   onClose: () => void;
   onPress: () => void;
   animationType?: 'none' | 'slide' | 'fade';
+  phoneNumber: string;
+  errorOTP: string;
+  setOTP: (text: string) => void;
 }

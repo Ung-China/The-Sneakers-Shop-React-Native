@@ -12,6 +12,8 @@ import ActionTypes from './store';
 import Spacing from './spacing';
 import Fonts from './fonts';
 import KeyboardTypes from './keyboardTypes';
+import darkMapStyle from './colors/darkMapStyle';
+import lightMapStyle from './colors/lightMapStyle';
 export {
   Icons,
   LightTheme,
@@ -26,5 +28,7 @@ export {
   Spacing,
   Fonts,
   KeyboardTypes,
+  darkMapStyle,
+  lightMapStyle,
 };
 export type {Themes};

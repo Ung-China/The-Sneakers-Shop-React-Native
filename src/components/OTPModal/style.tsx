@@ -66,7 +66,6 @@ export default StyleSheet.create({
     height: 40,
     borderRadius: Radius.DEFAULT,
     borderWidth: 0,
-    backgroundColor: colors.lightGrey,
   },
   pinCodeText: {
     fontFamily: Fonts.REGULAR,
@@ -80,5 +79,14 @@ export default StyleSheet.create({
     fontSize: FontSizes.large,
     textAlign: 'center',
     paddingTop: Padding.DEFAULT,
+  },
+  focusStick: {
+    height: 20,
+  },
+  errorOTP: {
+    color: 'red',
+    fontFamily: Fonts.REGULAR,
+    fontSize: FontSizes.default,
+    lineHeight: Spacing.EXTRA_LARGE,
   },
 });

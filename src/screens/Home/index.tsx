@@ -47,6 +47,10 @@ const HomeScreen: React.FC = () => {
     navigation.navigate('Search');
   };
 
+  const handlePressToShopLocation = () => {
+    navigation.navigate('ShopLocation');
+  };
+
   const handlePressToSeeMore = () => {
     return Alert.alert('Go to see more');
   };
@@ -62,7 +66,10 @@ const HomeScreen: React.FC = () => {
   return (
     <View style={[styles.container, {backgroundColor: colors.primary}]}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <HomeHeader item={location} />
+        <HomeHeader
+          item={location}
+          handlePressToShopLocation={handlePressToShopLocation}
+        />
 
         <FlexibleInput
           placeholder={t('searchProduct')}

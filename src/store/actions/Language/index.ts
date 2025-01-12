@@ -1,5 +1,5 @@
 import {ActionTypes} from '../../../constants';
-import {ChangeLanguageAction} from '../../types/languageTypes';
+import {ChangeLanguageAction} from '../../types';
 
 export const changeLanguageActions = (
   languageCode: string,

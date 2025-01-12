@@ -1,10 +1,10 @@
-import {FlatList, SafeAreaView, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import ProfileHeader from '../../components/ProfileHeader';
-import {useProfile, useTheme} from '../../hooks';
+import {useProfile, useSocial, useTheme} from '../../hooks';
 import ProfileMenuItem from '../../components/ProfileMenuItem';
 import {ProfileMenu} from '../../models';
 import styles from './style';
-import {BottomSheet} from '../../components';
+import {BottomSheet, LoadingModal} from '../../components';
 import LoginModal from './components';
 
 const ProfileScreen: React.FC = () => {
@@ -21,6 +21,7 @@ const ProfileScreen: React.FC = () => {
     handleNavigateToCreateAccount,
     handleNavigateToForgotPassword,
   } = useProfile();
+  const {loading, signInWithGoogle} = useSocial();
 
   const renderHeader = () => (
     <ProfileHeader onPress={handleNavigateToEditProfile} />
@@ -45,6 +46,7 @@ const ProfileScreen: React.FC = () => {
         keyExtractor={item => item.id.toString()}
         contentContainerStyle={styles.containerStyle}
         ItemSeparatorComponent={itemSeparator}
+        showsVerticalScrollIndicator={false}
       />
 
       <BottomSheet
@@ -56,12 +58,14 @@ const ProfileScreen: React.FC = () => {
         contentContainer={{flex: 1}}
         content={
           <LoginModal
+            handleLoginWithGoogle={signInWithGoogle}
             handleNavigateToCreateAccount={handleNavigateToCreateAccount}
             handleNavigateToForgotPassword={handleNavigateToForgotPassword}
             handleLoginSheetDismiss={handleLoginSheetDismiss}
           />
         }
       />
+      <LoadingModal visible={loading} />
     </View>
   );
 };

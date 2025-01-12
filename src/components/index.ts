@@ -32,6 +32,8 @@ import AddressItem from './AddressItem';
 import AddressLabelItem from './AddressLabelItem';
 import CityItem from './CityItem';
 import OTPModal from './OTPModal';
+import LoadingModal from './LoadingModal';
+import LocationItem from './LocationItem';
 export {
   HeaderComponent,
   HeaderTitleComponent,
@@ -67,4 +69,6 @@ export {
   AddressLabelItem,
   CityItem,
   OTPModal,
+  LoadingModal,
+  LocationItem,
 };

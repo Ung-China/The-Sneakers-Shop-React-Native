@@ -1,20 +1,25 @@
 import {Modal, Text, View} from 'react-native';
 import styles from './style';
 import {OTPModalProps} from '../../types';
-import {useTheme} from '../../hooks';
+import {useLoginWithPhoneNumber, useTheme} from '../../hooks';
 import {useTranslation} from 'react-i18next';
 import Touchable from '../Touchable';
 import {OtpInput} from 'react-native-otp-entry';
 import FlatButton from '../FlatButton';
+import {Validator} from '../../helpers';
 
 const OTPModal: React.FC<OTPModalProps> = ({
   isVisible,
   onClose,
   animationType = 'fade',
   onPress,
+  phoneNumber,
+  setOTP,
+  errorOTP,
 }) => {
   const {colors} = useTheme();
   const {t} = useTranslation();
+
   return (
     <Modal
       visible={isVisible}
@@ -28,7 +33,8 @@ const OTPModal: React.FC<OTPModalProps> = ({
               {t('verifyPhoneNumber')}
             </Text>
             <Text style={[styles.description, {color: colors.text}]}>
-              {t('enter6digitcodesendto')} 069 78 66 77 {t('tocontinue')}
+              {t('enter6digitcodesendto')} 0
+              {Validator.normalizedNumber(phoneNumber)} {t('tocontinue')}
             </Text>
           </View>
 
@@ -36,21 +42,31 @@ const OTPModal: React.FC<OTPModalProps> = ({
             <OtpInput
               numberOfDigits={6}
               autoFocus={true}
-              hideStick={true}
               disabled={false}
               type="numeric"
               secureTextEntry={false}
-              onTextChange={text => console.log(text)}
-              onFilled={text => console.log(`OTP is ${text}`)}
+              onTextChange={text => {
+                console.log('INPUT_OTP', text);
+                setOTP(text);
+              }}
               textInputProps={{
                 accessibilityLabel: 'One-Time Password',
               }}
               theme={{
-                pinCodeContainerStyle: styles.pinCodeContainer,
-                pinCodeTextStyle: styles.pinCodeText,
+                pinCodeContainerStyle: {
+                  ...styles.pinCodeContainer,
+                  backgroundColor: colors.secondary,
+                },
+                pinCodeTextStyle: {...styles.pinCodeText, color: colors.text},
                 focusedPinCodeContainerStyle: styles.activePinCodeContainer,
+                focusStickStyle: {
+                  ...styles.focusStick,
+                  backgroundColor: colors.text,
+                },
               }}
             />
+
+            {errorOTP && <Text style={styles.errorOTP}>{errorOTP}</Text>}
             <FlatButton label={t('resend')} labelStyle={styles.resendLabel} />
           </View>
 

@@ -1,4 +1,4 @@
-import {Alert, FlatList, ScrollView, Text, View} from 'react-native';
+import {Alert, FlatList, Platform, ScrollView, Text, View} from 'react-native';
 import styles from './style';
 import {useTranslation} from 'react-i18next';
 import {useProduct, useTheme} from '../../hooks';
@@ -110,7 +110,17 @@ const ProductDetailScreen: React.FC = () => {
         />
         <IconButton
           onPress={navigateBack}
-          icon={<Icons.ARROWLEFT color={colors.text} width={23} height={23} />}
+          icon={
+            Platform.OS === 'ios' ? (
+              <Icons.ARROWLEFT color={colors.text} width={23} height={23} />
+            ) : (
+              <Icons.LEFTARROWANDROID
+                color={colors.text}
+                width={30}
+                height={30}
+              />
+            )
+          }
           style={[styles.backContainer]}
         />
         <IconButton

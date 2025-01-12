@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>305739579573-hv02cfv11u9mtn0ealn8fcdb8sqnv2n1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.305739579573-hv02cfv11u9mtn0ealn8fcdb8sqnv2n1</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>305739579573-42s7imhen9mr9jm7li6bj4ce2uerr387.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBMKclnFWizBt_PH0vc4nBB_ofaoC3DXio</string>
+	<key>GCM_SENDER_ID</key>
+	<string>305739579573</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.thesneakers.userapp</string>
+	<key>PROJECT_ID</key>
+	<string>the-sneakers-shop</string>
+	<key>STORAGE_BUCKET</key>
+	<string>the-sneakers-shop.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:305739579573:ios:4ff100eb545b4a29debefc</string>
+</dict>
+</plist>

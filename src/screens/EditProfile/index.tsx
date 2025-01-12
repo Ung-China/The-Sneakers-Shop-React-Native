@@ -12,7 +12,6 @@ import {FlexibleInput, Footer, ProfileImage, Touchable} from '../../components';
 import IconButton from '../../components/IconButton';
 import {Icons} from '../../constants';
 import ImagePicker from 'react-native-image-crop-picker';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-controller';
 
 const EditProfileScreen: React.FC = () => {
   const {t} = useTranslation();

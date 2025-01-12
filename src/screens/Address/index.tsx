@@ -41,10 +41,6 @@ const AddressScreen: React.FC = () => {
     toggleCity,
   } = useAddress();
 
-  const HandleOpenCity = () => {
-    return Alert.alert('City Open');
-  };
-
   const addressLabelItem = ({
     item,
     index,

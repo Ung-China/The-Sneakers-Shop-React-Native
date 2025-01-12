@@ -1,5 +1,5 @@
 import {ActionTypes} from '../../../constants';
-import {ChangeLanguageAction, LanguageState} from '../../types/languageTypes';
+import {ChangeLanguageAction, LanguageState} from '../../types';
 
 const initialState: LanguageState = {
   languageCode: 'en',
