@@ -1,37 +1,26 @@
 import {useCallback, useEffect, useMemo, useState} from 'react';
-import {generateUID, Validator} from '../../helpers';
+import {Validator} from '../../helpers';
 import {useTranslation} from 'react-i18next';
 import {generateOTP, login} from '../../services/AuthServices';
 
-const useLoginWithPhoneNumber = () => {
+const useSignInWithPhoneNumber = () => {
   const {t} = useTranslation();
 
   const [loading, setLoading] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
+
   const [responseOTP, setResponseOTP] = useState('');
   const [OTP, setOTP] = useState('');
   const [errorOTP, setErrorOTP] = useState('');
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState<string>('');
-  const [errorPhoneNumber, setErrorPhoneNumber] = useState<string>('');
-  const [isVerified, setIsVerified] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [errorPhoneNumber, setErrorPhoneNumber] = useState('');
   const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [errorName, setErrorName] = useState('');
+  const [password, setPassword] = useState('');
   const [errorPassword, setErrorPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [errorConfirmPassword, setErrorConfirmPassword] = useState('');
-  const [uid, setUid] = useState('');
-
-  useMemo(() => {
-    const fetchUID = async () => {
-      const numberWithCountryCode =
-        Validator.numberWithCountryCode(phoneNumber);
-      const generatedUid = generateUID(numberWithCountryCode);
-      setUid(generatedUid);
-    };
-
-    fetchUID();
-  }, [phoneNumber]);
 
   const closeModal = () => {
     setIsModalVisible(false);
@@ -149,37 +138,38 @@ const useLoginWithPhoneNumber = () => {
       return;
     }
 
-    try {
-      const response = await login();
-    } catch (error) {
-      console.log('ERROR WHILE CREATE ACCOUNT', error);
-    }
+    // try {
+    //   const response = await login();
+    // } catch (error) {
+    //   console.log('ERROR WHILE CREATE ACCOUNT', error);
+    // }
   };
 
   return {
+    loading,
     sendOTP,
     verifyOTP,
-    loading,
+    isVerified,
     isModalVisible,
+    closeModal,
+
     phoneNumber,
     setPhoneNumber,
     errorPhoneNumber,
-    isVerified,
-    closeModal,
-    setOTP,
     OTP,
+    setOTP,
     errorOTP,
     name,
-    errorName,
     setName,
+    errorName,
     password,
-    errorPassword,
     setPassword,
+    errorPassword,
     confirmPassword,
-    errorConfirmPassword,
     setConfirmPassword,
+    errorConfirmPassword,
     createAccount,
   };
 };
 
-export default useLoginWithPhoneNumber;
+export default useSignInWithPhoneNumber;

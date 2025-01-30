@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {Fonts, FontSizes, Gap, Padding, Radius} from '../../constants';
+import {Fonts, FontSizes, Gap, Padding, Radius, Spacing} from '../../constants';
 import {colors} from '../../constants/colors/colorTypes';
 
 export default StyleSheet.create({
@@ -14,6 +14,8 @@ export default StyleSheet.create({
   imageStyle: {
     width: 90,
     height: 90,
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: colors.white,
     borderRadius: Radius.DEFAULT,
   },
@@ -28,6 +30,7 @@ export default StyleSheet.create({
   description: {
     fontSize: FontSizes.default,
     fontFamily: Fonts.REGULAR,
+    lineHeight: Spacing.LARGE,
   },
   heroContainer: {
     flex: 1,

@@ -25,6 +25,7 @@ const FlexibleInput: React.FC<FlexibleInputProps> = ({
   prefixIcon,
   suffixIcon,
   autoFocus = true,
+  secureTextEntry,
 }) => {
   const {colors} = useTheme();
   return (
@@ -56,6 +57,7 @@ const FlexibleInput: React.FC<FlexibleInputProps> = ({
             onChangeText={onChangeText}
             autoFocus={autoFocus}
             keyboardType={keyboardType}
+            secureTextEntry={secureTextEntry}
             style={[
               styles.textInput,
               textInputStyle,

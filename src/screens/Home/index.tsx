@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   ScrollView,
   SafeAreaView,
@@ -19,10 +19,17 @@ import {
   Section,
   Touchable,
 } from '../../components';
-import {useLocation, useSwiper, useTheme} from '../../hooks';
+import {
+  useBrand,
+  useLocation,
+  useProduct,
+  useShoesSlider,
+  useSlider,
+  useTheme,
+} from '../../hooks';
 import {Icons, Padding} from '../../constants';
 import {useTranslation} from 'react-i18next';
-import {products} from '../../models/Product';
+import {producttestes} from '../../models/ProductTest';
 import {brands} from '../../models/Brand';
 import {BrandProps, ProductItemProps, StackParamList} from '../../types';
 import {useNavigation} from '@react-navigation/native';
@@ -32,7 +39,7 @@ const HomeScreen: React.FC = () => {
   const {colors} = useTheme();
   const {location} = useLocation();
   const {t} = useTranslation();
-  const {imageList, bigImageList} = useSwiper();
+
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
 
   const productItem = ({item}: {item: ProductItemProps['item']}) => {
@@ -51,8 +58,8 @@ const HomeScreen: React.FC = () => {
     navigation.navigate('ShopLocation');
   };
 
-  const handlePressToSeeMore = () => {
-    return Alert.alert('Go to see more');
+  const navigateToBrands = () => {
+    navigation.navigate('Brand');
   };
 
   const handlePressOnProduct = () => {
@@ -62,6 +69,11 @@ const HomeScreen: React.FC = () => {
   const handlePressOnBrand = () => {
     return Alert.alert('Go to product brand');
   };
+
+  const {sliders} = useSlider();
+  const {shoesSliders} = useShoesSlider();
+  const {brands, fetchMoreBrands} = useBrand();
+  const {products, fetchMoreProducts} = useProduct();
 
   return (
     <View style={[styles.container, {backgroundColor: colors.primary}]}>
@@ -82,7 +94,7 @@ const HomeScreen: React.FC = () => {
         />
 
         <FlexibleSwiper
-          imageUrlList={imageList}
+          imageUrlList={sliders}
           imageStyle={styles.swiperImageStyle}
           containerStyle={styles.swiperContainer}
           loadingImageStyle={styles.swiperLoadingImageStyle}
@@ -90,7 +102,7 @@ const HomeScreen: React.FC = () => {
           autoPlay={true}
         />
 
-        <Section
+        {/* <Section
           title={t('newArrival')}
           actionButton={
             <FlatButton
@@ -112,7 +124,7 @@ const HomeScreen: React.FC = () => {
             contentContainerStyle={styles.productContentContainer}
             keyExtractor={item => item.id.toString()}
           />
-        </Section>
+        </Section> */}
 
         <Section
           title={t('shopByBrand')}
@@ -124,7 +136,7 @@ const HomeScreen: React.FC = () => {
                 styles.sectionActionButtonLabel,
                 {color: colors.text},
               ]}
-              onPress={handlePressToSeeMore}
+              onPress={navigateToBrands}
             />
           }>
           <FlatList
@@ -135,10 +147,12 @@ const HomeScreen: React.FC = () => {
             ItemSeparatorComponent={ItemSeparatorWidth}
             contentContainerStyle={styles.productContentContainer}
             keyExtractor={item => item.id.toString()}
+            onEndReached={fetchMoreBrands}
+            onEndReachedThreshold={0.5}
           />
         </Section>
 
-        <Section
+        {/* <Section
           title={t('recommendedForYou')}
           actionButton={
             <FlatButton
@@ -160,10 +174,10 @@ const HomeScreen: React.FC = () => {
             contentContainerStyle={styles.productContentContainer}
             keyExtractor={item => item.id.toString()}
           />
-        </Section>
+        </Section> */}
 
         <FlexibleSwiper
-          imageUrlList={bigImageList}
+          imageUrlList={shoesSliders}
           imageStyle={styles.bigSwiperImageStyle}
           containerStyle={styles.bigSwiperContainer}
           loadingImageStyle={styles.bigswiperLoadingImageStyle}
@@ -171,7 +185,7 @@ const HomeScreen: React.FC = () => {
           autoPlay={true}
         />
 
-        <Section
+        {/* <Section
           title={t('mostPopularShoes')}
           actionButton={
             <FlatButton
@@ -193,7 +207,7 @@ const HomeScreen: React.FC = () => {
             contentContainerStyle={styles.productContentContainer}
             keyExtractor={item => item.id.toString()}
           />
-        </Section>
+        </Section> */}
 
         <Section
           title={t('allProduct')}
@@ -205,7 +219,7 @@ const HomeScreen: React.FC = () => {
                 styles.sectionActionButtonLabel,
                 {color: colors.text},
               ]}
-              onPress={handlePressToSeeMore}
+              onPress={navigateToBrands}
             />
           }>
           <FlatList

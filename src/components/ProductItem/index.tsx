@@ -35,7 +35,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
       ]}>
       <View style={[styles.container]}>
         <CachedImage
-          source={item.imageUrl}
+          source={item.image}
           style={[styles.imageStyle, {backgroundColor: colors.white}]}
           imageStyle={{borderRadius: Radius.DEFAULT}}
           loadingImageComponent={() => (
@@ -66,7 +66,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
           </Text>
           <PriceTag price={100} promotion={100} />
           <View style={styles.heroFooter}>
-            <RatingTag averageRating={3} totalRating={3} />
+            <RatingTag averageRating={item.rating} totalRating={item.rating} />
             <IconButton
               icon={<Icons.ADD color={colors.secondary} />}
               style={[

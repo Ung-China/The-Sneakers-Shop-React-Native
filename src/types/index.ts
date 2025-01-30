@@ -43,6 +43,7 @@ import {OTPModalProps} from './OTPModal';
 import {ApiRequestProps} from './ApiRequest';
 import {LoadingModalProps} from './LoadingModal';
 import {locationItemProps} from './LocationItem';
+import {AnimatedDotLoaderProps} from './AnimatedDotLoader';
 export type {
   BottomTabParamList,
   RootParamList,
@@ -89,4 +90,5 @@ export type {
   ApiRequestProps,
   LoadingModalProps,
   locationItemProps,
+  AnimatedDotLoaderProps,
 };

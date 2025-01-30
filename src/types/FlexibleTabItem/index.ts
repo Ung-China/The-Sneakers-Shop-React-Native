@@ -4,6 +4,6 @@ export interface FlexibleTabItemProps {
   item: {
     id: number;
     name: string;
-    imageUrl: string;
+    image: string;
   };
 }

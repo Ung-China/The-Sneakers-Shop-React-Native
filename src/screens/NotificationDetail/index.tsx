@@ -10,12 +10,14 @@ const NotificationDetailScreen: React.FC = () => {
   const route = useRoute<RouteProp<StackParamList, 'NotificationDetail'>>();
   const {item} = route.params;
 
+  console.log('ITEM:', item.id);
+
   const {colors} = useTheme();
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
       style={[styles.container, {backgroundColor: colors.primary}]}>
-      <FlexibleSwiper
+      {/* <FlexibleSwiper
         imageUrlList={item.galleries}
         imageStyle={styles.swiperImageStyle}
         containerStyle={styles.swiperContainer}
@@ -29,7 +31,7 @@ const NotificationDetailScreen: React.FC = () => {
         <Text style={(styles.description, {color: colors.text})}>
           {item.description}
         </Text>
-      </View>
+      </View> */}
     </ScrollView>
   );
 };

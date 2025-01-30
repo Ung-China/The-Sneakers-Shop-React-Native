@@ -1,7 +1,7 @@
 import {Alert, Text, View} from 'react-native';
 import styles from './style';
 import {useTranslation} from 'react-i18next';
-import {useTheme} from '../../../../hooks';
+import {useSinInWIthGmail, useTheme} from '../../../../hooks';
 import IconButton from '../../../../components/IconButton';
 import {Icons} from '../../../../constants';
 import {FlatButton, FlexibleInput} from '../../../../components';
@@ -18,7 +18,17 @@ const LoginModal: React.FC<LoginModalProps> = ({
 }) => {
   const {t} = useTranslation();
   const {colors} = useTheme();
-
+  const {
+    phoneNumber,
+    setPhoneNumber,
+    errorPhoneNumber,
+    password,
+    setPassword,
+    errorPassword,
+    loginWithPhoneNumber,
+    passwordVisible,
+    togglePasswordVisibility,
+  } = useSinInWIthGmail();
   return (
     <>
       <View style={styles.header}>
@@ -36,6 +46,9 @@ const LoginModal: React.FC<LoginModalProps> = ({
           <FlexibleInput
             prefixIcon={<Icons.PROFILE color={colors.grey} />}
             placeholder={t('phoneNumber')}
+            value={phoneNumber}
+            onChangeText={setPhoneNumber}
+            error={errorPhoneNumber}
             editable={true}
             autoFocus={true}
             textInputStyle={[styles.textInputStyle]}
@@ -47,10 +60,18 @@ const LoginModal: React.FC<LoginModalProps> = ({
           <FlexibleInput
             prefixIcon={<Icons.KEY color={colors.grey} />}
             suffixIcon={
-              <Icons.EYEOFF color={colors.grey} width={23} height={23} />
+              passwordVisible ? (
+                <Icons.EYEOFF color={colors.grey} width={23} height={23} />
+              ) : (
+                <Icons.EYE color={colors.grey} width={23} height={23} />
+              )
             }
-            onPressRightAction={() => {}}
+            secureTextEntry={passwordVisible}
+            onPressRightAction={togglePasswordVisibility}
             placeholder={t('password')}
+            value={password}
+            onChangeText={setPassword}
+            error={errorPassword}
             editable={true}
             textInputStyle={[styles.textInputStyle]}
             contentContainerStyle={[
@@ -59,7 +80,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
             ]}
           />
           <FlexibleTouchable
-            onPress={() => Alert.alert('User Press Login')}
+            onPress={loginWithPhoneNumber}
             label={t('login')}
             labelStyle={[styles.buttonStyle, {color: colors.textReversed}]}
             containerStyle={{backgroundColor: colors.secondaryReversed}}

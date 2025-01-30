@@ -34,6 +34,7 @@ import CityItem from './CityItem';
 import OTPModal from './OTPModal';
 import LoadingModal from './LoadingModal';
 import LocationItem from './LocationItem';
+import AnimatedDotLoader from './AnimatedDotLoader';
 export {
   HeaderComponent,
   HeaderTitleComponent,
@@ -71,4 +72,5 @@ export {
   OTPModal,
   LoadingModal,
   LocationItem,
+  AnimatedDotLoader,
 };

@@ -4,4 +4,5 @@ export interface FlexibleTabProps {
   children: React.ReactNode;
   data: Array<any>;
   onTabChange: (item: FlexibleTabItemProps['item']) => void;
+  onEndReached?: () => void;
 }

@@ -139,4 +139,7 @@ export const translateEN = {
   Confirmpasswordisrequired: 'Confirm password is required',
   openMap: 'Open Map',
   openIn: 'Open In',
+  passwordisrequired: 'Password is required',
+  phonenumberalreadyusedbyanotheraccount:
+    'Phone number already used by an other account',
 };

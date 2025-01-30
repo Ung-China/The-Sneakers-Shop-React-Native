@@ -9,13 +9,14 @@ import {useTheme} from '../../hooks';
 
 const BrandItem: React.FC<BrandProps> = ({item, onPress}) => {
   const {colors} = useTheme();
+
   return (
     <Touchable
       onPress={onPress}
       style={[styles.container, {backgroundColor: colors.secondary}]}>
       <View style={[styles.imageContainer, {backgroundColor: colors.white}]}>
         <CachedImage
-          source={item.imageUrl}
+          source={item.image}
           style={[styles.imageStyle]}
           imageStyle={{borderRadius: Radius.DEFAULT}}
           loadingImageComponent={() => (

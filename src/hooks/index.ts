@@ -2,27 +2,42 @@ import useLanguage from './useLanguage';
 import useProfile from './useProfile';
 import useTheme from './useTheme';
 import useLocation from './useLocation';
-import useSwiper from './useSlider';
+import useSlider from './useSlider';
+import useShoesSlider from './useShoesSlider';
 import useOrder from './useOrder';
 import useOrderDetail from './useOrderDetail';
 import useProduct from './useProduct';
 import useEditProfile from './useEditProfile';
 import useDelivery from './useDelivery';
-import useSocial from './useSocial';
-import useLoginWithPhoneNumber from './useLoginWithPhoneNumber';
+import useSinInWIthGmail from './useSinInWIthGmail';
+import useSignInWithPhoneNumber from './useSignInWithPhoneNumber';
 import useShopLocation from './useShopLocation';
+import useForgotPassword from './useForgotPassword';
+import useOTP from './useOTP';
+import usePhoneNumberExistence from './usePhoneNumberExistence';
+import useCreateAccount from './useCreateAccount';
+import useBrand from './useBrand';
+import useNotification from './useNotification';
+
 export {
   useLanguage,
   useProfile,
   useTheme,
   useLocation,
-  useSwiper,
+  useSlider,
   useOrder,
   useOrderDetail,
   useProduct,
   useEditProfile,
   useDelivery,
-  useSocial,
-  useLoginWithPhoneNumber,
+  useSinInWIthGmail,
+  useSignInWithPhoneNumber,
   useShopLocation,
+  useForgotPassword,
+  useOTP,
+  usePhoneNumberExistence,
+  useCreateAccount,
+  useShoesSlider,
+  useBrand,
+  useNotification,
 };

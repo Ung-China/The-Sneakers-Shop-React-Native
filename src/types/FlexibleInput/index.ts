@@ -17,4 +17,5 @@ export interface FlexibleInputProps {
   contentContainerStyle?: StyleProp<ViewStyle>;
   prefixIcon?: React.ReactNode;
   suffixIcon?: React.ReactNode;
+  secureTextEntry?: boolean;
 }

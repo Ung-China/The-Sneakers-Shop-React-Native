@@ -7,7 +7,8 @@ export interface ProductItemProps {
     id: number;
     name: string;
     price: number;
-    imageUrl: string;
+    rating: string;
+    image: string;
     isFavorite: boolean;
     galleries: string[];
     variants: string | [];

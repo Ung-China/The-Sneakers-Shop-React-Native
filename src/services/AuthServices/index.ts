@@ -11,7 +11,7 @@ const login = async (user: User) => {
       image: user.image,
       password: user.password,
     });
-    console.log(response);
+    console.log('CHECK RESPONSE AFTER LOGIN', response);
     return response;
   } catch (error) {
     console.error('ERROR DURING LOGIN:', error);

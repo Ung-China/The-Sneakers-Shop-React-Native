@@ -27,7 +27,7 @@ const FlexibleTabItem: React.FC<FlexibleTabItemProps> = ({
       ]}>
       <View style={[styles.imageContainer, {backgroundColor: colors.white}]}>
         <CachedImage
-          source={item.imageUrl}
+          source={item.image}
           style={[styles.imageStyle]}
           imageStyle={{borderRadius: Radius.DEFAULT}}
           loadingImageComponent={() => (
@@ -35,7 +35,9 @@ const FlexibleTabItem: React.FC<FlexibleTabItemProps> = ({
           )}
         />
       </View>
-      <Text style={[styles.name, {color: colors.text}]}>{item.name}</Text>
+      <Text numberOfLines={1} style={[styles.name, {color: colors.text}]}>
+        {item.name}
+      </Text>
     </Touchable>
   );
 };

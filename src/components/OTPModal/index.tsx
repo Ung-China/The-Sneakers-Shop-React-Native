@@ -1,7 +1,7 @@
 import {Modal, Text, View} from 'react-native';
 import styles from './style';
 import {OTPModalProps} from '../../types';
-import {useLoginWithPhoneNumber, useTheme} from '../../hooks';
+import {useTheme} from '../../hooks';
 import {useTranslation} from 'react-i18next';
 import Touchable from '../Touchable';
 import {OtpInput} from 'react-native-otp-entry';

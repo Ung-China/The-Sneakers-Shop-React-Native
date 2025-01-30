@@ -30,10 +30,10 @@ const FlexibleSwiper: React.FC<FlexibleSwiperProps> = ({
         loop={true}
         autoplay={autoPlay}
         showsPagination={isShowPagination}>
-        {imageUrlList.map((url, index) => (
+        {imageUrlList.map((image, index) => (
           <CachedImage
             key={index}
-            source={url}
+            source={image}
             style={imageStyle}
             resizeMode={resizeMode}
             imageStyle={{borderRadius: Radius.DEFAULT}}

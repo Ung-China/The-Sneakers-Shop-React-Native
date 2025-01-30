@@ -1,10 +1,14 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import {useTheme} from '../../hooks';
+import {View, RefreshControl} from 'react-native';
+import {useNotification, useTheme} from '../../hooks';
 import styles from './style';
 import {FlatList} from 'react-native-gesture-handler';
-import {notifications} from '../../models/Notification';
-import {ItemSeparatorHeight, NotificationItem} from '../../components';
+
+import {
+  ItemSeparatorHeight,
+  AnimatedDotLoader,
+  NotificationItem,
+} from '../../components';
 import {NotificationProps, StackParamList} from '../../types';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -26,17 +30,47 @@ const NotificationScreen: React.FC = () => {
     navigation.navigate('NotificationDetail', {item});
   };
 
+  const {
+    notifications,
+    isLoading,
+    fetchNotifications,
+    fetchMoreNotifications,
+    isFetchingMoreNotifications,
+  } = useNotification();
+
   return (
-    <View style={[styles.container, {backgroundColor: colors.primary}]}>
-      <FlatList
-        data={notifications}
-        renderItem={productItem}
-        showsVerticalScrollIndicator={false}
-        ItemSeparatorComponent={ItemSeparatorHeight}
-        contentContainerStyle={styles.notificationContentContainer}
-        keyExtractor={item => item.id.toString()}
-      />
-    </View>
+    <>
+      <View style={[styles.container, {backgroundColor: colors.primary}]}>
+        {isLoading ? (
+          <AnimatedDotLoader
+            isLoading={isLoading}
+            containerStyle={styles.loaderContainer}
+          />
+        ) : (
+          <FlatList
+            data={notifications}
+            renderItem={productItem}
+            showsVerticalScrollIndicator={false}
+            ItemSeparatorComponent={ItemSeparatorHeight}
+            contentContainerStyle={styles.notificationContentContainer}
+            keyExtractor={item => item.id.toString()}
+            onEndReached={fetchMoreNotifications}
+            onEndReachedThreshold={0.5}
+            refreshControl={
+              <RefreshControl
+                style={{opacity: 0}}
+                refreshing={isLoading}
+                onRefresh={fetchNotifications}
+              />
+            }
+          />
+        )}
+        <AnimatedDotLoader
+          isLoading={isFetchingMoreNotifications}
+          containerStyle={styles.fetchMoreLoaderContainer}
+        />
+      </View>
+    </>
   );
 };
 

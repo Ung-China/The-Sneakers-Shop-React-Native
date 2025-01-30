@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 import styles from './style';
-import {useCreateAccount, useTheme} from '../../hooks';
+import {useForgotPassword, useTheme} from '../../hooks';
 import {useTranslation} from 'react-i18next';
 import React from 'react';
 import {FlexibleInput, Footer, OTPModal, Touchable} from '../../components';
@@ -16,7 +16,7 @@ const ForgotPasswordScreen: React.FC = () => {
   const {colors} = useTheme();
   const {t} = useTranslation();
   const {isModalVisible, isVerified, closeModal, openModal, verifyOTP} =
-    useCreateAccount();
+    useForgotPassword();
   return (
     <>
       <View style={[styles.container, {backgroundColor: colors.primary}]}>
@@ -99,6 +99,9 @@ const ForgotPasswordScreen: React.FC = () => {
             isVisible={isModalVisible}
             onClose={closeModal}
             onPress={verifyOTP}
+            phoneNumber=""
+            errorOTP=""
+            setOTP={() => {}}
           />
         </KeyboardAvoidingView>
       </View>

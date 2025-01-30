@@ -8,6 +8,9 @@ import CartItem from './CartItem';
 import TrackingStep from './TrackingStep';
 import User from './User';
 import Location from './Location';
+import Slider from './Slider';
+import ProductTest from './ProductTest';
+import Promotion from './Promotion';
 export {
   ProfileMenu,
   Language,
@@ -19,4 +22,7 @@ export {
   TrackingStep,
   User,
   Location,
+  Slider,
+  ProductTest,
+  Promotion,
 };

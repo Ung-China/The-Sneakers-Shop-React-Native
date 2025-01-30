@@ -6,10 +6,20 @@ import {
   View,
 } from 'react-native';
 import styles from './style';
-import {useLoginWithPhoneNumber, useTheme} from '../../hooks';
+import {
+  useCreateAccount,
+  useSignInWithPhoneNumber,
+  useTheme,
+} from '../../hooks';
 import {useTranslation} from 'react-i18next';
 import React from 'react';
-import {FlexibleInput, Footer, OTPModal, Touchable} from '../../components';
+import {
+  FlexibleInput,
+  Footer,
+  LoadingModal,
+  OTPModal,
+  Touchable,
+} from '../../components';
 import {Icons, KeyboardTypes} from '../../constants';
 
 const CreateAccountScreen: React.FC = () => {
@@ -17,15 +27,15 @@ const CreateAccountScreen: React.FC = () => {
   const {t} = useTranslation();
 
   const {
-    sendOTP,
+    // sendOTP,
     verifyOTP,
     loading,
-    isModalVisible,
-    phoneNumber,
-    setPhoneNumber,
-    errorPhoneNumber,
-    isVerified,
-    closeModal,
+    // isModalVisible,
+    // phoneNumber,
+    // setPhoneNumber,
+    // errorPhoneNumber,
+    // isVerified,
+    // closeModal,
     setOTP,
     OTP,
     errorOTP,
@@ -39,7 +49,19 @@ const CreateAccountScreen: React.FC = () => {
     errorConfirmPassword,
     setConfirmPassword,
     createAccount,
-  } = useLoginWithPhoneNumber();
+  } = useSignInWithPhoneNumber();
+
+  const {
+    isLoading,
+    isModalVisible,
+    isVerified,
+    sendOTP,
+    responseOTP,
+    phoneNumber,
+    errorPhoneNumber,
+    setPhoneNumber,
+    toggleModal,
+  } = useCreateAccount();
 
   return (
     <>
@@ -47,7 +69,7 @@ const CreateAccountScreen: React.FC = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           {isVerified ? (
             <View style={styles.inputContainer}>
-              <FlexibleInput
+              {/* <FlexibleInput
                 prefixIcon={<Icons.PROFILE color={colors.grey} />}
                 onPressRightAction={() => {}}
                 placeholder={t('name')}
@@ -94,7 +116,7 @@ const CreateAccountScreen: React.FC = () => {
                   styles.contentContainerStyle,
                   {backgroundColor: colors.secondary},
                 ]}
-              />
+              /> */}
             </View>
           ) : (
             <View style={styles.inputContainer}>
@@ -133,7 +155,8 @@ const CreateAccountScreen: React.FC = () => {
             ]}>
             {isVerified ? (
               <Touchable
-                onPress={createAccount}
+                // onPress={createAccount}
+                onPress={() => {}}
                 style={[
                   styles.footerButton,
                   {backgroundColor: colors.secondaryReversed},
@@ -159,12 +182,13 @@ const CreateAccountScreen: React.FC = () => {
           </Footer>
           <OTPModal
             isVisible={isModalVisible}
-            onClose={closeModal}
+            onClose={toggleModal}
             onPress={() => verifyOTP(phoneNumber, OTP)}
             phoneNumber={phoneNumber}
             setOTP={setOTP}
             errorOTP={errorOTP}
           />
+          <LoadingModal visible={isLoading} />
         </KeyboardAvoidingView>
       </View>
     </>

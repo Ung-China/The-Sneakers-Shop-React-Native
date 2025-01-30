@@ -1,6 +1,6 @@
 import {FlatList, View} from 'react-native';
 import ProfileHeader from '../../components/ProfileHeader';
-import {useProfile, useSocial, useTheme} from '../../hooks';
+import {useProfile, useSinInWIthGmail, useTheme} from '../../hooks';
 import ProfileMenuItem from '../../components/ProfileMenuItem';
 import {ProfileMenu} from '../../models';
 import styles from './style';
@@ -21,7 +21,7 @@ const ProfileScreen: React.FC = () => {
     handleNavigateToCreateAccount,
     handleNavigateToForgotPassword,
   } = useProfile();
-  const {loading, signInWithGoogle} = useSocial();
+  const {loading, signInWithGoogle} = useSinInWIthGmail();
 
   const renderHeader = () => (
     <ProfileHeader onPress={handleNavigateToEditProfile} />

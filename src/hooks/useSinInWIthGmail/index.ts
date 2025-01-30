@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {
   GoogleSignin,
   statusCodes,
@@ -8,11 +8,50 @@ import {User} from '../../models';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../../store';
 import {loginUserSuccess} from '../../store/actions';
-import {login} from '../../services';
+import {singIn} from '../../services';
+import {useTranslation} from 'react-i18next';
+import {Validator} from '../../helpers';
 
-const useSocial = () => {
-  const [loading, setLoading] = useState(false);
+const useSinInWIthGmail = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const {t} = useTranslation();
+
+  const [loading, setLoading] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [errorPhoneNumber, setErrorPhoneNumber] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorPassword, setErrorPassword] = useState('');
+
+  const [passwordVisible, setPasswordVisible] = useState(true);
+
+  const clearSignInErrors = useCallback(() => {
+    setErrorPhoneNumber('');
+    setErrorPassword('');
+  }, []);
+
+  const validateFieldsLoginWithPhoneNumber = useCallback(() => {
+    let valid = true;
+    clearSignInErrors();
+
+    if (phoneNumber === '') {
+      valid = false;
+      setErrorPhoneNumber(t('phoneisrequired'));
+    } else if (!Validator.validatePhoneNumber(phoneNumber)) {
+      valid = false;
+      setErrorPhoneNumber(t('pleaseenteravalidphonenumber'));
+    }
+
+    if (password === '') {
+      valid = false;
+      setErrorPassword(t('passwordisrequired'));
+    }
+
+    return valid;
+  }, [phoneNumber, password]);
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
 
   const signInWithGoogle = async () => {
     GoogleSignin.configure();
@@ -40,7 +79,7 @@ const useSocial = () => {
           user.photoURL || '',
         );
 
-        const response = await login(userInfo);
+        const response = await singIn(userInfo);
         dispatch(loginUserSuccess(response));
       } else {
         console.log('ID Token is missing');
@@ -66,7 +105,23 @@ const useSocial = () => {
     }
   };
 
-  return {signInWithGoogle, loading};
+  const loginWithPhoneNumber = async () => {
+    if (!validateFieldsLoginWithPhoneNumber()) return;
+  };
+
+  return {
+    signInWithGoogle,
+    loginWithPhoneNumber,
+    loading,
+    phoneNumber,
+    setPhoneNumber,
+    errorPhoneNumber,
+    password,
+    setPassword,
+    errorPassword,
+    passwordVisible,
+    togglePasswordVisibility,
+  };
 };
 
-export default useSocial;
+export default useSinInWIthGmail;

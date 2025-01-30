@@ -18,6 +18,7 @@ export default StyleSheet.create({
   },
   loadingImagestyle: {
     backgroundColor: colors.white,
+    height: 160,
   },
   name: {
     fontSize: FontSizes.large,

@@ -4,10 +4,12 @@ import ItemSeparatorWidth from '../ItemSeparatorWidth';
 import {FlexibleTabItemProps, FlexibleTabProps} from '../../types';
 import {useFlexibleTab} from './hooks';
 import FlexibleTabItem from '../FlexibleTabItem';
+import React from 'react';
 const FlexibleTab: React.FC<FlexibleTabProps> = ({
   data,
   children,
   onTabChange,
+  onEndReached,
 }) => {
   const {flexibleTabRef, activeId, setActiveId, scrollToIndex} =
     useFlexibleTab();
@@ -44,6 +46,8 @@ const FlexibleTab: React.FC<FlexibleTabProps> = ({
           keyExtractor={item => item.id.toString()}
           ItemSeparatorComponent={ItemSeparatorWidth}
           contentContainerStyle={styles.contentContainerStyle}
+          onEndReachedThreshold={0.5}
+          onEndReached={onEndReached}
         />
       </View>
       {children}

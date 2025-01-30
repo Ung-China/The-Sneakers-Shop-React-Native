@@ -97,7 +97,8 @@ const ShopLocation: React.FC = () => {
               latitude: location.latitude,
               longitude: location.longitude,
             }}
-            onPress={() => onCardPress(index)}>
+            // onPress={() => onCardPress(index)}
+          >
             <View style={[styles.markerContainer]}>
               <View style={styles.marker}>
                 <Text style={styles.markerText}>{location.name}</Text>

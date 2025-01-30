@@ -139,4 +139,7 @@ export const translateKH = {
   Confirmpasswordisrequired: 'តម្រូវឱ្យបញ្ជាក់ពាក្យសម្ងាត់',
   openMap: 'បើកផែនទី',
   openIn: 'បើកក្នុង',
+  passwordisrequired: 'ទាមទារពាក្យសម្ងាត់',
+  phonenumberalreadyusedbyanotheraccount:
+    'លេខទូរស័ព្ទនេះត្រូវបានប្រើដោយគណនីផ្សេង។',
 };

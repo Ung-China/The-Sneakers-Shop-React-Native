@@ -14,6 +14,7 @@ import Fonts from './fonts';
 import KeyboardTypes from './keyboardTypes';
 import darkMapStyle from './colors/darkMapStyle';
 import lightMapStyle from './colors/lightMapStyle';
+import String from './strings';
 export {
   Icons,
   LightTheme,
@@ -30,5 +31,6 @@ export {
   KeyboardTypes,
   darkMapStyle,
   lightMapStyle,
+  String,
 };
 export type {Themes};

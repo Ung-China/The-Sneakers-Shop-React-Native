@@ -1,8 +1,8 @@
 import {TextStyle} from 'react-native';
 
 export interface RatingTagProps {
-  averageRating: number;
-  totalRating: number;
+  averageRating: string;
+  totalRating: string;
   averageRatingStyle?: TextStyle;
   totalRatingStyle?: TextStyle;
 }

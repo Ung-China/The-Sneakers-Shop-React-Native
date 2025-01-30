@@ -1,13 +1,12 @@
 import {Alert, FlatList, SafeAreaView} from 'react-native';
 import styles from './style';
-import {useTheme} from '../../hooks';
+import {useBrand, useTheme} from '../../hooks';
 import {
   FlexibleInput,
   FlexibleTab,
   ItemSeparatorHeight,
   ProductItem,
 } from '../../components';
-import {brands} from '../../models/Brand';
 import {products} from '../../models/Product';
 import {ProductItemProps, StackParamList} from '../../types';
 import {Icons, Spacing} from '../../constants';
@@ -47,6 +46,9 @@ const BrandScreen: React.FC = () => {
   const handlePressToSearch = () => {
     navigation.navigate('Search');
   };
+
+  const {brands, fetchMoreBrands} = useBrand();
+
   return (
     <View style={[styles.safeContainer, {backgroundColor: colors.primary}]}>
       <FlexibleInput
@@ -60,6 +62,7 @@ const BrandScreen: React.FC = () => {
       />
       <FlexibleTab
         data={brands}
+        onEndReached={fetchMoreBrands}
         onTabChange={item => console.log('On Tab Brand:', item.name)}>
         <FlatList
           data={products}
