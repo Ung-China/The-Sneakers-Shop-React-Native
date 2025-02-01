@@ -39,4 +39,9 @@ export default StyleSheet.create({
     fontFamily: Fonts.REGULAR,
     fontSize: FontSizes.large,
   },
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

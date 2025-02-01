@@ -8,6 +8,7 @@ const API_ENDPOINTS = {
   GET_BRANDS: '/get_brands',
   GET_PRODUCTS: '/get_products',
   GET_PROMOTIONS: '/get_promotions',
+  GET_PROMOTION_DETAIL: '/get_promotion_detail',
 };
 
 export default API_ENDPOINTS;

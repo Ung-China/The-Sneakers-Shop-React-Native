@@ -4,10 +4,10 @@ import {API_ENDPOINTS, GET} from '../../api';
 
 const useShoesSlider = () => {
   const [shoesSliders, setShoesSliders] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchShoesSliders = async () => {
-    setLoading(true);
+    setIsLoading(true);
 
     try {
       const response = await GET(API_ENDPOINTS.GET_SHOES_SLIDER);
@@ -25,7 +25,7 @@ const useShoesSlider = () => {
     } catch (error) {
       console.error('[DEBUG] ERROR WHILE FETCHING SHOES SLIDERS:', error);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -35,7 +35,7 @@ const useShoesSlider = () => {
 
   return {
     shoesSliders,
-    loading,
+    isLoading,
     fetchShoesSliders,
   };
 };

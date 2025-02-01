@@ -4,7 +4,6 @@ export interface NotificationProps {
     id: number;
     title: string;
     description: string;
-    imageUrl: string;
-    galleries: string[];
+    images: string[];
   };
 }

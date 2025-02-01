@@ -18,7 +18,7 @@ import usePhoneNumberExistence from './usePhoneNumberExistence';
 import useCreateAccount from './useCreateAccount';
 import useBrand from './useBrand';
 import useNotification from './useNotification';
-
+import useNotificationDetail from './useNotificationDetail';
 export {
   useLanguage,
   useProfile,
@@ -40,4 +40,5 @@ export {
   useShoesSlider,
   useBrand,
   useNotification,
+  useNotificationDetail,
 };
