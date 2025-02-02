@@ -19,6 +19,7 @@ import DeliveryScreen from './Delivery';
 import CreateAccountScreen from './CreateAccount';
 import ForgotPasswordScreen from './ForgotPassword';
 import ShopLocation from './ShopLocation';
+import SeeMoreScreen from './SeeMore';
 
 export {
   NotificationScreen,
@@ -42,4 +43,5 @@ export {
   CreateAccountScreen,
   ForgotPasswordScreen,
   ShopLocation,
+  SeeMoreScreen,
 };

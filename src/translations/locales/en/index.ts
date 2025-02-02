@@ -142,4 +142,8 @@ export const translateEN = {
   passwordisrequired: 'Password is required',
   phonenumberalreadyusedbyanotheraccount:
     'Phone number already used by an other account',
+  allProdcuts: 'All Prodcuts',
+  newArrivalProducts: 'New Arrival Products',
+  recommendedProducts: 'Recommended Products',
+  popularProducts: 'Popular Products',
 };

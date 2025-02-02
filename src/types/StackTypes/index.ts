@@ -1,4 +1,5 @@
 import {NotificationProps} from '../Notification';
+import {SeeMoreProps} from '../SeeMore';
 
 export type StackParamList = {
   Root: undefined;
@@ -28,4 +29,5 @@ export type StackParamList = {
   CreateAccount: undefined;
   ForgotPassword: undefined;
   ShopLocation: undefined;
+  SeeMoreScreen: SeeMoreProps;
 };

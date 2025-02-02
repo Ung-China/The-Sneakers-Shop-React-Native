@@ -17,6 +17,7 @@ import {
   OrderScreen,
   ProductDetailScreen,
   SearchScreen,
+  SeeMoreScreen,
   ShopLocation,
 } from '../../screens';
 import {BottomTabNavigator} from '../BottomTabNavigator';
@@ -166,6 +167,8 @@ export const StackNavigator = () => {
           title: t('shopLocation'),
         }}
       />
+
+      <Stack.Screen name="SeeMoreScreen" component={SeeMoreScreen} />
     </Stack.Navigator>
   );
 };

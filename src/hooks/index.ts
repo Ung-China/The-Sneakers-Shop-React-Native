@@ -19,6 +19,7 @@ import useCreateAccount from './useCreateAccount';
 import useBrand from './useBrand';
 import useNotification from './useNotification';
 import useNotificationDetail from './useNotificationDetail';
+import useSeeMore from './useSeeMore';
 export {
   useLanguage,
   useProfile,
@@ -41,4 +42,5 @@ export {
   useBrand,
   useNotification,
   useNotificationDetail,
+  useSeeMore,
 };

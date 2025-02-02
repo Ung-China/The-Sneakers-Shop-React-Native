@@ -142,4 +142,8 @@ export const translateKH = {
   passwordisrequired: 'ទាមទារពាក្យសម្ងាត់',
   phonenumberalreadyusedbyanotheraccount:
     'លេខទូរស័ព្ទនេះត្រូវបានប្រើដោយគណនីផ្សេង។',
+  allProdcuts: 'ផលិតផលទាំងអស់',
+  newArrivalProducts: 'ផលិតផលទើបមកដល់ថ្មី',
+  recommendedProducts: 'ផលិតផលដែលបានណែនាំ',
+  popularProducts: 'ផលិតផលពេញនិយម',
 };

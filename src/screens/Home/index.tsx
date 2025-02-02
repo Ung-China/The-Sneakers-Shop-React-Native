@@ -1,12 +1,5 @@
-import React, {useEffect} from 'react';
-import {
-  ScrollView,
-  SafeAreaView,
-  Alert,
-  View,
-  FlatList,
-  Text,
-} from 'react-native';
+import React from 'react';
+import {ScrollView, Alert, View, FlatList} from 'react-native';
 import styles from './style';
 import {
   BrandItem,
@@ -17,23 +10,22 @@ import {
   ItemSeparatorWidth,
   ProductItem,
   Section,
-  Touchable,
 } from '../../components';
 import {
   useBrand,
   useLocation,
   useProduct,
+  useSeeMore,
   useShoesSlider,
   useSlider,
   useTheme,
 } from '../../hooks';
 import {Icons, Padding} from '../../constants';
 import {useTranslation} from 'react-i18next';
-import {producttestes} from '../../models/ProductTest';
-import {brands} from '../../models/Brand';
 import {BrandProps, ProductItemProps, StackParamList} from '../../types';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {API_ENDPOINTS} from '../../api';
 
 const HomeScreen: React.FC = () => {
   const {colors} = useTheme();
@@ -73,7 +65,49 @@ const HomeScreen: React.FC = () => {
   const {sliders} = useSlider();
   const {shoesSliders} = useShoesSlider();
   const {brands, fetchMoreBrands} = useBrand();
-  const {products, fetchMoreProducts} = useProduct();
+
+  const {products: allProducts, fetchMoreProducts: fetchMoreAllProducts} =
+    useSeeMore(API_ENDPOINTS.GET_PRODUCTS);
+  const {
+    products: newArrivalProducts,
+    fetchMoreProducts: fetchMoreNewArrivalProducts,
+  } = useSeeMore(API_ENDPOINTS.GET_NEW_ARRIVAL_PRODUCTS);
+  const {
+    products: recommendedProducts,
+    fetchMoreProducts: fetchMoreRecommendedProducts,
+  } = useSeeMore(API_ENDPOINTS.GET_RECOMMENDED_PRODUCTS);
+  const {
+    products: popularProducts,
+    fetchMoreProducts: fetchMorePopularProducts,
+  } = useSeeMore(API_ENDPOINTS.GET_POPULAR_PRODUCTS);
+
+  const handlePressToAllProducts = () => {
+    navigation.navigate('SeeMoreScreen', {
+      screenName: t('allProdcuts'),
+      endPointName: API_ENDPOINTS.GET_PRODUCTS,
+    });
+  };
+
+  const handlePressToNewArrivalProducts = () => {
+    navigation.navigate('SeeMoreScreen', {
+      screenName: t('newArrivalProducts'),
+      endPointName: API_ENDPOINTS.GET_NEW_ARRIVAL_PRODUCTS,
+    });
+  };
+
+  const handlePressToRecommendedProducts = () => {
+    navigation.navigate('SeeMoreScreen', {
+      screenName: t('recommendedProducts'),
+      endPointName: API_ENDPOINTS.GET_RECOMMENDED_PRODUCTS,
+    });
+  };
+
+  const handlePressToPopularProducts = () => {
+    navigation.navigate('SeeMoreScreen', {
+      screenName: t('popularProducts'),
+      endPointName: API_ENDPOINTS.GET_POPULAR_PRODUCTS,
+    });
+  };
 
   return (
     <View style={[styles.container, {backgroundColor: colors.primary}]}>
@@ -102,7 +136,7 @@ const HomeScreen: React.FC = () => {
           autoPlay={true}
         />
 
-        {/* <Section
+        <Section
           title={t('newArrival')}
           actionButton={
             <FlatButton
@@ -112,19 +146,21 @@ const HomeScreen: React.FC = () => {
                 styles.sectionActionButtonLabel,
                 {color: colors.text},
               ]}
-              onPress={handlePressToSeeMore}
+              onPress={handlePressToNewArrivalProducts}
             />
           }>
           <FlatList
             horizontal
-            data={products}
+            data={newArrivalProducts}
             renderItem={productItem}
             showsHorizontalScrollIndicator={false}
             ItemSeparatorComponent={ItemSeparatorWidth}
             contentContainerStyle={styles.productContentContainer}
             keyExtractor={item => item.id.toString()}
+            onEndReached={fetchMoreNewArrivalProducts}
+            onEndReachedThreshold={0.5}
           />
-        </Section> */}
+        </Section>
 
         <Section
           title={t('shopByBrand')}
@@ -152,7 +188,7 @@ const HomeScreen: React.FC = () => {
           />
         </Section>
 
-        {/* <Section
+        <Section
           title={t('recommendedForYou')}
           actionButton={
             <FlatButton
@@ -162,19 +198,21 @@ const HomeScreen: React.FC = () => {
                 styles.sectionActionButtonLabel,
                 {color: colors.text},
               ]}
-              onPress={handlePressToSeeMore}
+              onPress={handlePressToRecommendedProducts}
             />
           }>
           <FlatList
             horizontal
-            data={products}
+            data={recommendedProducts}
             renderItem={productItem}
             showsHorizontalScrollIndicator={false}
             ItemSeparatorComponent={ItemSeparatorWidth}
             contentContainerStyle={styles.productContentContainer}
             keyExtractor={item => item.id.toString()}
+            onEndReached={fetchMoreRecommendedProducts}
+            onEndReachedThreshold={0.5}
           />
-        </Section> */}
+        </Section>
 
         <FlexibleSwiper
           imageUrlList={shoesSliders}
@@ -185,7 +223,7 @@ const HomeScreen: React.FC = () => {
           autoPlay={true}
         />
 
-        {/* <Section
+        <Section
           title={t('mostPopularShoes')}
           actionButton={
             <FlatButton
@@ -195,19 +233,21 @@ const HomeScreen: React.FC = () => {
                 styles.sectionActionButtonLabel,
                 {color: colors.text},
               ]}
-              onPress={handlePressToSeeMore}
+              onPress={handlePressToPopularProducts}
             />
           }>
           <FlatList
             horizontal
-            data={products}
+            data={popularProducts}
             renderItem={productItem}
             showsHorizontalScrollIndicator={false}
             ItemSeparatorComponent={ItemSeparatorWidth}
             contentContainerStyle={styles.productContentContainer}
             keyExtractor={item => item.id.toString()}
+            onEndReached={fetchMorePopularProducts}
+            onEndReachedThreshold={0.5}
           />
-        </Section> */}
+        </Section>
 
         <Section
           title={t('allProduct')}
@@ -219,22 +259,24 @@ const HomeScreen: React.FC = () => {
                 styles.sectionActionButtonLabel,
                 {color: colors.text},
               ]}
-              onPress={navigateToBrands}
+              onPress={handlePressToAllProducts}
             />
           }>
           <FlatList
             horizontal
-            data={products}
+            data={allProducts}
             renderItem={productItem}
             showsHorizontalScrollIndicator={false}
             ItemSeparatorComponent={ItemSeparatorWidth}
+            keyExtractor={item => item.id.toString()}
+            onEndReached={fetchMoreAllProducts}
+            onEndReachedThreshold={0.5}
             contentContainerStyle={[
               styles.productContentContainer,
               {
                 paddingBottom: Padding.DEFAULT,
               },
             ]}
-            keyExtractor={item => item.id.toString()}
           />
         </Section>
       </ScrollView>

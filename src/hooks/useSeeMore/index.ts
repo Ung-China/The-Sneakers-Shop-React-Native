@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react';
-import {API_ENDPOINTS, GET} from '../../api';
+import {GET} from '../../api';
 import {Product} from '../../models';
 
-const useProduct = () => {
+const useSeeMore = (endPointName: string) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,9 +16,7 @@ const useProduct = () => {
     else setIsFetchingMoreProducts(true);
 
     try {
-      const response = await GET(API_ENDPOINTS.GET_PRODUCTS, {
-        page: page,
-      });
+      const response = await GET(`${endPointName}`, {page: page});
 
       const fetchedProducts = response.data.map(
         (item: {
@@ -37,16 +35,18 @@ const useProduct = () => {
       setCurrentPage(response.current_page);
       setTotalPages(response.last_page);
     } catch (error) {
-      console.log('[DEBUG] ERROR WHILE FETCHING PRODUCTS:', error);
+      console.log('[DEBUG] ERROR WHILE FETCHING SEE MORE PRODUCTS:', error);
     } finally {
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
       setIsFetchingMoreProducts(false);
     }
   };
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [endPointName]);
 
   return {
     products,
@@ -57,4 +57,4 @@ const useProduct = () => {
   };
 };
 
-export default useProduct;
+export default useSeeMore;

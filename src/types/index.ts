@@ -44,6 +44,8 @@ import {ApiRequestProps} from './ApiRequest';
 import {LoadingModalProps} from './LoadingModal';
 import {locationItemProps} from './LocationItem';
 import {AnimatedDotLoaderProps} from './AnimatedDotLoader';
+import {SeeMoreProps} from './SeeMore';
+
 export type {
   BottomTabParamList,
   RootParamList,
@@ -91,4 +93,5 @@ export type {
   LoadingModalProps,
   locationItemProps,
   AnimatedDotLoaderProps,
+  SeeMoreProps,
 };
