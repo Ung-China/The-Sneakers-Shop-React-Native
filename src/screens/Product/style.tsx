@@ -8,7 +8,6 @@ import {
   Screen_Dimensions,
   Spacing,
 } from '../../constants';
-import {colors} from '../../constants/colors/colorTypes';
 
 export default StyleSheet.create({
   container: {
@@ -143,5 +142,10 @@ export default StyleSheet.create({
   addToCart: {
     fontFamily: Fonts.REGULAR,
     fontSize: FontSizes.large,
+  },
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

@@ -146,4 +146,5 @@ export const translateEN = {
   newArrivalProducts: 'New Arrival Products',
   recommendedProducts: 'Recommended Products',
   popularProducts: 'Popular Products',
+  Noproductsfound: 'No products found. Try searching for something else!',
 };

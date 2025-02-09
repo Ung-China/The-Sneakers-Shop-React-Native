@@ -146,4 +146,5 @@ export const translateKH = {
   newArrivalProducts: 'ផលិតផលទើបមកដល់ថ្មី',
   recommendedProducts: 'ផលិតផលដែលបានណែនាំ',
   popularProducts: 'ផលិតផលពេញនិយម',
+  Noproductsfound: 'រកមិនឃើញផលិតផលទេ។ ព្យាយាមស្វែងរកអ្វីផ្សេងទៀត!',
 };

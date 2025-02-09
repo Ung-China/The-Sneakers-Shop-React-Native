@@ -45,6 +45,7 @@ import {LoadingModalProps} from './LoadingModal';
 import {locationItemProps} from './LocationItem';
 import {AnimatedDotLoaderProps} from './AnimatedDotLoader';
 import {SeeMoreProps} from './SeeMore';
+import {NotFoundProps} from './NotFound';
 
 export type {
   BottomTabParamList,
@@ -94,4 +95,5 @@ export type {
   locationItemProps,
   AnimatedDotLoaderProps,
   SeeMoreProps,
+  NotFoundProps,
 };

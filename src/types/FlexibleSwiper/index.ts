@@ -2,7 +2,7 @@ import {ImageResizeMode} from 'react-native';
 import {StyleProp, ViewStyle, ImageStyle} from 'react-native';
 
 export interface FlexibleSwiperProps {
-  imageUrlList: string[];
+  imageUrlList?: string[];
   wrapperStyle?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
   dotColor?: string;

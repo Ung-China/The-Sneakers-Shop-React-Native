@@ -12,6 +12,8 @@ const API_ENDPOINTS = {
   GET_NEW_ARRIVAL_PRODUCTS: '/get_products_new_arrival',
   GET_RECOMMENDED_PRODUCTS: '/get_products_recommended',
   GET_POPULAR_PRODUCTS: '/get_products_popular',
+  GET_PRODUCT_DETAIL: '/get_product_detail',
+  SEARCH_PRODUCTS: '/products/search',
 };
 
 export default API_ENDPOINTS;

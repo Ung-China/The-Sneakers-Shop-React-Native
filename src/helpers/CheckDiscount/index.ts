@@ -1,4 +1,4 @@
-const checkDiscount = (price: number, promotion: number) => {
+const checkDiscount = (price: string, promotion: string) => {
   return {
     discount: price,
     hasDiscount: promotion,

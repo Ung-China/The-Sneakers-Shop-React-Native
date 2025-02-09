@@ -54,6 +54,7 @@ import SmallMap from '../../assets/icons/smallMap.svg';
 import Time from '../../assets/icons/time.svg';
 import AppleMap from '../../assets/icons/appleMap.svg';
 import GoogleMap from '../../assets/icons/googleMap.svg';
+import EmptyBox from '../../assets/icons/emptyBox.svg';
 
 const Icons = {
   HOME: Home,
@@ -112,6 +113,7 @@ const Icons = {
   TIME: Time,
   APPLEMAP: AppleMap,
   GOOGLEMAP: GoogleMap,
+  EMPTYBOX: EmptyBox,
 };
 
 export default Icons;

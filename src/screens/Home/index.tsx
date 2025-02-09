@@ -1,7 +1,8 @@
-import React from 'react';
-import {ScrollView, Alert, View, FlatList} from 'react-native';
+import React, {useState} from 'react';
+import {ScrollView, Alert, View, FlatList, RefreshControl} from 'react-native';
 import styles from './style';
 import {
+  AnimatedDotLoader,
   BrandItem,
   FlatButton,
   FlexibleInput,
@@ -14,7 +15,6 @@ import {
 import {
   useBrand,
   useLocation,
-  useProduct,
   useSeeMore,
   useShoesSlider,
   useSlider,
@@ -34,8 +34,12 @@ const HomeScreen: React.FC = () => {
 
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const productItem = ({item}: {item: ProductItemProps['item']}) => {
-    return <ProductItem item={item} onPress={handlePressOnProduct} />;
+    return (
+      <ProductItem item={item} onPress={() => handlePressOnProduct(item.id)} />
+    );
   };
 
   const brandItem = ({item}: {item: BrandProps['item']}) => {
@@ -54,31 +58,37 @@ const HomeScreen: React.FC = () => {
     navigation.navigate('Brand');
   };
 
-  const handlePressOnProduct = () => {
-    navigation.navigate('ProductDetail');
+  const handlePressOnProduct = (id: number) => {
+    navigation.navigate('ProductDetail', {id});
   };
 
   const handlePressOnBrand = () => {
     return Alert.alert('Go to product brand');
   };
 
-  const {sliders} = useSlider();
-  const {shoesSliders} = useShoesSlider();
-  const {brands, fetchMoreBrands} = useBrand();
+  const {sliders, fetchSliders} = useSlider();
+  const {shoesSliders, fetchShoesSliders} = useShoesSlider();
+  const {brands, fetchMoreBrands, fetchBrands} = useBrand();
 
-  const {products: allProducts, fetchMoreProducts: fetchMoreAllProducts} =
-    useSeeMore(API_ENDPOINTS.GET_PRODUCTS);
+  const {
+    products: allProducts,
+    fetchMoreProducts: fetchMoreAllProducts,
+    fetchProducts: fetchAllProducts,
+  } = useSeeMore(API_ENDPOINTS.GET_PRODUCTS);
   const {
     products: newArrivalProducts,
     fetchMoreProducts: fetchMoreNewArrivalProducts,
+    fetchProducts: fetchNewArrivalProducts,
   } = useSeeMore(API_ENDPOINTS.GET_NEW_ARRIVAL_PRODUCTS);
   const {
     products: recommendedProducts,
     fetchMoreProducts: fetchMoreRecommendedProducts,
+    fetchProducts: fetchNewRecommendedProducts,
   } = useSeeMore(API_ENDPOINTS.GET_RECOMMENDED_PRODUCTS);
   const {
     products: popularProducts,
     fetchMoreProducts: fetchMorePopularProducts,
+    fetchProducts: fetchPopularProducts,
   } = useSeeMore(API_ENDPOINTS.GET_POPULAR_PRODUCTS);
 
   const handlePressToAllProducts = () => {
@@ -109,9 +119,40 @@ const HomeScreen: React.FC = () => {
     });
   };
 
+  const handleRefresh = async () => {
+    setIsLoading(true);
+    try {
+      await fetchSliders();
+      await fetchShoesSliders();
+      await fetchBrands();
+      await fetchAllProducts();
+      await fetchNewArrivalProducts();
+      await fetchNewRecommendedProducts();
+      await fetchPopularProducts();
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <View style={[styles.container, {backgroundColor: colors.primary}]}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: colors.primary,
+          paddingTop: isLoading ? 0 : Padding.TOP,
+        },
+      ]}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={isLoading}
+            onRefresh={handleRefresh}
+            style={{opacity: 0}}
+          />
+        }>
+        {isLoading && <AnimatedDotLoader isLoading={isLoading} />}
         <HomeHeader
           item={location}
           handlePressToShopLocation={handlePressToShopLocation}
@@ -136,7 +177,7 @@ const HomeScreen: React.FC = () => {
           autoPlay={true}
         />
 
-        <Section
+        {/* <Section
           title={t('newArrival')}
           actionButton={
             <FlatButton
@@ -160,9 +201,9 @@ const HomeScreen: React.FC = () => {
             onEndReached={fetchMoreNewArrivalProducts}
             onEndReachedThreshold={0.5}
           />
-        </Section>
+        </Section> */}
 
-        <Section
+        {/* <Section
           title={t('shopByBrand')}
           actionButton={
             <FlatButton
@@ -186,9 +227,9 @@ const HomeScreen: React.FC = () => {
             onEndReached={fetchMoreBrands}
             onEndReachedThreshold={0.5}
           />
-        </Section>
+        </Section> */}
 
-        <Section
+        {/* <Section
           title={t('recommendedForYou')}
           actionButton={
             <FlatButton
@@ -247,7 +288,7 @@ const HomeScreen: React.FC = () => {
             onEndReached={fetchMorePopularProducts}
             onEndReachedThreshold={0.5}
           />
-        </Section>
+        </Section> */}
 
         <Section
           title={t('allProduct')}

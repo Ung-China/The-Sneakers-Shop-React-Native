@@ -1,8 +1,17 @@
-import {Alert, FlatList, Platform, ScrollView, Text, View} from 'react-native';
+import {
+  Alert,
+  FlatList,
+  Platform,
+  RefreshControl,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
 import styles from './style';
 import {useTranslation} from 'react-i18next';
-import {useProduct, useTheme} from '../../hooks';
+import {useProduct, useProductDetail, useTheme} from '../../hooks';
 import {
+  AnimatedDotLoader,
   FlexibleSwiper,
   Footer,
   ItemSeparatorHeight,
@@ -11,21 +20,34 @@ import {
   Touchable,
   VariantItem,
 } from '../../components';
-import {products} from '../../models/Product';
+// import {products} from '../../models/Product';
 import IconButton from '../../components/IconButton';
 import {Icons, Spacing} from '../../constants';
-import {useNavigation} from '@react-navigation/native';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ProductItemProps, StackParamList, VariantProps} from '../../types';
 import PriceTag from '../../components/PriceTag';
 import RatingTag from '../../components/RatingTag';
 import {variants} from '../../models/Variant';
+import React from 'react';
 const ProductDetailScreen: React.FC = () => {
+  const navigation = useNavigation<StackNavigationProp<StackParamList>>();
+  const route = useRoute<RouteProp<StackParamList, 'ProductDetail'>>();
+  const {id} = route.params;
   const {t} = useTranslation();
   const {colors} = useTheme();
-  const {activeVariant, toggleVariant} = useProduct();
 
-  const navigation = useNavigation<StackNavigationProp<StackParamList>>();
+  const {
+    isLoading,
+    productDetail,
+    fetchedProductDetail,
+    activeVariant,
+    price,
+    size,
+    setActiveVariant,
+    setSize,
+    setPrice,
+  } = useProductDetail(id);
 
   const navigateBack = () => {
     return navigation.goBack();
@@ -56,7 +78,11 @@ const ProductDetailScreen: React.FC = () => {
   }) => {
     return (
       <VariantItem
-        onPress={() => toggleVariant(index)}
+        onPress={() => {
+          setActiveVariant(index);
+          setSize(item.size);
+          setPrice(item.price);
+        }}
         item={item}
         isActive={activeVariant === index}
         containerStyle={{marginLeft: Spacing.DEFAULT}}
@@ -89,114 +115,151 @@ const ProductDetailScreen: React.FC = () => {
 
   return (
     <View style={[styles.container, {backgroundColor: colors.primary}]}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <FlexibleSwiper
-          imageUrlList={products[0].galleries}
-          imageStyle={[
-            styles.swiperImageStyle,
-            {backgroundColor: colors.primary},
-          ]}
+      {isLoading ? (
+        <AnimatedDotLoader
+          isLoading={isLoading}
           containerStyle={[
-            styles.swiperContainer,
+            styles.loaderContainer,
             {backgroundColor: colors.primary},
           ]}
-          loadingImageStyle={[
-            styles.swiperLoadingImageStyle,
-            {backgroundColor: colors.primary},
-          ]}
-          iconSize={150}
-          autoPlay={false}
-          resizeMode="contain"
         />
-        <IconButton
-          onPress={navigateBack}
-          icon={
-            Platform.OS === 'ios' ? (
-              <Icons.ARROWLEFT color={colors.text} width={23} height={23} />
-            ) : (
-              <Icons.LEFTARROWANDROID
-                color={colors.text}
-                width={30}
-                height={30}
+      ) : (
+        <>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl
+                refreshing={isLoading}
+                onRefresh={fetchedProductDetail}
+                style={{opacity: 0}}
               />
-            )
-          }
-          style={[styles.backContainer]}
-        />
-        <IconButton
-          onPress={navigateToCart}
-          icon={<Icons.CART color={colors.text} width={25} height={25} />}
-          style={[styles.cartContainer]}
-        />
-        <View style={styles.body}>
-          <View
-            style={[styles.container1, {backgroundColor: colors.secondary}]}>
+            }>
+            {isLoading && <AnimatedDotLoader isLoading={isLoading} />}
+            {productDetail && (
+              <>
+                <FlexibleSwiper
+                  imageUrlList={productDetail.images}
+                  imageStyle={[
+                    styles.swiperImageStyle,
+                    {backgroundColor: colors.primary},
+                  ]}
+                  containerStyle={[
+                    styles.swiperContainer,
+                    {backgroundColor: colors.primary},
+                  ]}
+                  loadingImageStyle={[
+                    styles.swiperLoadingImageStyle,
+                    {backgroundColor: colors.primary},
+                  ]}
+                  iconSize={150}
+                  autoPlay={false}
+                  resizeMode="contain"
+                />
+
+                <View style={styles.body}>
+                  <View
+                    style={[
+                      styles.container1,
+                      {backgroundColor: colors.secondary},
+                    ]}>
+                    <IconButton
+                      onPress={toggleFavorite}
+                      icon={<Icons.HEART color={colors.text} />}
+                      style={[
+                        styles.heartContainer,
+                        {backgroundColor: colors.primary},
+                      ]}
+                    />
+
+                    <Text style={[styles.name, {color: colors.text}]}>
+                      {productDetail.name}
+                    </Text>
+
+                    <View style={styles.priceContaner}>
+                      <PriceTag
+                        price={price}
+                        promotion={'100'}
+                        priceStyle={styles.priceStyle}
+                        defaultPriceStyle={styles.defaultPriceStyle}
+                      />
+
+                      <View
+                        style={[
+                          styles.discountContainer,
+                          {backgroundColor: colors.primary},
+                        ]}>
+                        <Text style={[styles.discount, {color: colors.text}]}>
+                          5% OFF
+                        </Text>
+                      </View>
+                    </View>
+
+                    <RatingTag
+                      averageRating={productDetail.rating}
+                      totalRating={productDetail.rating}
+                      averageRatingStyle={styles.averageRatingStyle}
+                      totalRatingStyle={styles.totalRatingStyle}
+                    />
+                  </View>
+
+                  <View
+                    style={[
+                      styles.container2,
+                      {backgroundColor: colors.secondary},
+                    ]}>
+                    <Text style={[styles.description, {color: colors.text}]}>
+                      {t('description')}
+                    </Text>
+                    <Text
+                      style={[styles.descriptionValue, {color: colors.text}]}>
+                      {productDetail.description}
+                    </Text>
+                  </View>
+
+                  <View
+                    style={[
+                      styles.container3,
+                      {backgroundColor: colors.secondary},
+                    ]}>
+                    <Text style={[styles.selectOption, {color: colors.text}]}>
+                      {t('selectOption')}
+                    </Text>
+                    <FlatList
+                      data={productDetail.variants}
+                      renderItem={variantItem}
+                      numColumns={3}
+                      scrollEnabled={false}
+                      ItemSeparatorComponent={ItemSeparatorHeight}
+                      keyExtractor={item => item.id.toString()}
+                    />
+                  </View>
+                </View>
+              </>
+            )}
+
             <IconButton
-              onPress={toggleFavorite}
-              icon={<Icons.HEART color={colors.text} />}
-              style={[styles.heartContainer, {backgroundColor: colors.primary}]}
+              onPress={navigateBack}
+              icon={
+                Platform.OS === 'ios' ? (
+                  <Icons.ARROWLEFT color={colors.text} width={23} height={23} />
+                ) : (
+                  <Icons.LEFTARROWANDROID
+                    color={colors.text}
+                    width={30}
+                    height={30}
+                  />
+                )
+              }
+              style={[styles.backContainer]}
             />
 
-            <Text style={[styles.name, {color: colors.text}]}>
-              {products[0].name}
-            </Text>
-
-            <View style={styles.priceContaner}>
-              <PriceTag
-                price={300}
-                promotion={100}
-                priceStyle={styles.priceStyle}
-                defaultPriceStyle={styles.defaultPriceStyle}
-              />
-
-              <View
-                style={[
-                  styles.discountContainer,
-                  {backgroundColor: colors.primary},
-                ]}>
-                <Text style={[styles.discount, {color: colors.text}]}>
-                  5% OFF
-                </Text>
-              </View>
-            </View>
-
-            <RatingTag
-              averageRating={2}
-              totalRating={5}
-              averageRatingStyle={styles.averageRatingStyle}
-              totalRatingStyle={styles.totalRatingStyle}
+            <IconButton
+              onPress={navigateToCart}
+              icon={<Icons.CART color={colors.text} width={25} height={25} />}
+              style={[styles.cartContainer]}
             />
-          </View>
 
-          <View
-            style={[styles.container2, {backgroundColor: colors.secondary}]}>
-            <Text style={[styles.description, {color: colors.text}]}>
-              {t('description')}
-            </Text>
-            <Text style={[styles.descriptionValue, {color: colors.text}]}>
-              Experience unmatched comfort and modern style with the Nike Air
-              Max 270. Designed with the tallest Air unit in the heel, this shoe
-              provides exceptional cushioning for all-day wear.
-            </Text>
-          </View>
-
-          <View
-            style={[styles.container3, {backgroundColor: colors.secondary}]}>
-            <Text style={[styles.selectOption, {color: colors.text}]}>
-              {t('selectOption')}
-            </Text>
-            <FlatList
-              data={variants}
-              renderItem={variantItem}
-              numColumns={3}
-              scrollEnabled={false}
-              ItemSeparatorComponent={ItemSeparatorHeight}
-              keyExtractor={item => item.id.toString()}
-            />
-          </View>
-        </View>
-
-        <Section title={t('relatedProduct')} titleStyle={styles.titleStyle}>
+            {/* <Section title={t('relatedProduct')} titleStyle={styles.titleStyle}>
           <FlatList
             data={products}
             numColumns={2}
@@ -207,32 +270,38 @@ const ProductDetailScreen: React.FC = () => {
             contentContainerStyle={styles.contentContainer}
             keyExtractor={item => item.id.toString()}
           />
-        </Section>
-      </ScrollView>
-      <Footer
-        safeAreaStyle={[
-          styles.safeAreaStyle,
-          {backgroundColor: colors.primary},
-        ]}
-        contentContainerStyle={[styles.footerContainer]}>
-        <Touchable
-          onPress={addToCart}
-          style={[styles.buttonAddToCart, {backgroundColor: colors.secondary}]}>
-          <Text style={[styles.addToCart, {color: colors.text}]}>
-            {t('addToCart')}
-          </Text>
-        </Touchable>
-        <Touchable
-          onPress={goToCheckout}
-          style={[
-            styles.buttonAddToCart,
-            {backgroundColor: colors.primaryReversed},
-          ]}>
-          <Text style={[styles.addToCart, {color: colors.textReversed}]}>
-            {t('buyNow')}
-          </Text>
-        </Touchable>
-      </Footer>
+        </Section>  */}
+          </ScrollView>
+
+          <Footer
+            safeAreaStyle={[
+              styles.safeAreaStyle,
+              {backgroundColor: colors.primary},
+            ]}
+            contentContainerStyle={[styles.footerContainer]}>
+            <Touchable
+              onPress={addToCart}
+              style={[
+                styles.buttonAddToCart,
+                {backgroundColor: colors.secondary},
+              ]}>
+              <Text style={[styles.addToCart, {color: colors.text}]}>
+                {t('addToCart')}
+              </Text>
+            </Touchable>
+            <Touchable
+              onPress={goToCheckout}
+              style={[
+                styles.buttonAddToCart,
+                {backgroundColor: colors.primaryReversed},
+              ]}>
+              <Text style={[styles.addToCart, {color: colors.textReversed}]}>
+                {t('buyNow')}
+              </Text>
+            </Touchable>
+          </Footer>
+        </>
+      )}
     </View>
   );
 };

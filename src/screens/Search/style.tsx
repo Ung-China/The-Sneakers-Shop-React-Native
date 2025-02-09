@@ -26,6 +26,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     margin: Spacing.DEFAULT,
+    paddingTop: Padding.TOP,
   },
   inputContainer: {
     flex: 1,
@@ -46,5 +47,23 @@ export default StyleSheet.create({
     fontSize: FontSizes.large,
     textAlign: 'center',
     paddingHorizontal: 10,
+  },
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  fetchMoreLoaderContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: Padding.DEFAULT,
+    paddingBottom: Padding.BOTTOM * 2,
+  },
+  noDataContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

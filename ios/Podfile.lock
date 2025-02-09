@@ -1726,7 +1726,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNSVG (15.10.1):
+  - RNSVG (15.11.1):
     - React-Core
   - RNVectorIcons (10.2.0):
     - DoubleConversion
@@ -2099,7 +2099,7 @@ SPEC CHECKSUMS:
   RNImageCropPicker: 8e39c01f205e00d739c31e682f068aac315587bf
   RNReanimated: ae857007e4f8ec2ec70385a5e90c786f21b6022f
   RNScreens: 16b782596e80e475b7f3ec769c9a97d789d9b0ed
-  RNSVG: 7ff26379b2d1871b8571e6f9bc9630de6baf9bdf
+  RNSVG: 669ed128ab9005090c612a0d627dbecb6ab5c76f
   RNVectorIcons: 7b81882e9c9369031aede0016dee0fe415cf2f43
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   TOCropViewController: 80b8985ad794298fb69d3341de183f33d1853654

@@ -1,11 +1,11 @@
-import {Alert, FlatList, SafeAreaView, Text, View} from 'react-native';
-import {useTheme} from '../../hooks';
+import {Alert, FlatList, Text, View} from 'react-native';
+import {useSearchProduct, useTheme} from '../../hooks';
 import styles from './style';
-import {products} from '../../models/Product';
 import {
+  AnimatedDotLoader,
   FlexibleInput,
-  HeaderComponent,
   ItemSeparatorHeight,
+  NotFound,
   ProductItem,
   Touchable,
 } from '../../components';
@@ -14,14 +14,22 @@ import {Icons, Spacing} from '../../constants';
 import {useTranslation} from 'react-i18next';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {useState} from 'react';
+import React from 'react';
 
 const SearchScreen: React.FC = () => {
   const {colors} = useTheme();
   const {t} = useTranslation();
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
 
-  const [searchValue, setSearchValue] = useState<string>('');
+  const {
+    products,
+    isLoading,
+    fetchProducts,
+    fetchMoreProducts,
+    isFetchingMoreProducts,
+    name,
+    setName,
+  } = useSearchProduct();
 
   const productItem = ({
     item,
@@ -43,8 +51,8 @@ const SearchScreen: React.FC = () => {
   };
 
   const handleCancelOrClearPress = () => {
-    if (searchValue) {
-      setSearchValue('');
+    if (name) {
+      setName('');
     } else {
       navigation.goBack();
     }
@@ -55,8 +63,8 @@ const SearchScreen: React.FC = () => {
   };
 
   return (
-    <View style={[styles.safeContainer, {backgroundColor: colors.primary}]}>
-      <HeaderComponent containerStyle={styles.headeStyle}>
+    <>
+      <View style={[styles.safeContainer, {backgroundColor: colors.primary}]}>
         <View style={styles.headerContainer}>
           <FlexibleInput
             placeholder={t('searchProduct')}
@@ -67,30 +75,46 @@ const SearchScreen: React.FC = () => {
             ]}
             contentContainerStyle={styles.noLabelContainer}
             editable={true}
-            value={searchValue}
-            onChangeText={setSearchValue}
+            value={name}
+            onChangeText={setName}
           />
           <Touchable onPress={handleCancelOrClearPress}>
-            <Text
-              style={[
-                styles.label,
-                {color: searchValue ? 'red' : colors.text},
-              ]}>
-              {searchValue ? t('clear') : t('cancel')}
+            <Text style={[styles.label, {color: name ? 'red' : colors.text}]}>
+              {name ? t('clear') : t('cancel')}
             </Text>
           </Touchable>
         </View>
-      </HeaderComponent>
-      <FlatList
-        data={products}
-        numColumns={2}
-        renderItem={productItem}
-        showsVerticalScrollIndicator={false}
-        ItemSeparatorComponent={ItemSeparatorHeight}
-        contentContainerStyle={styles.contentContainer}
-        keyExtractor={item => item.id.toString()}
+
+        {isLoading ? (
+          <AnimatedDotLoader
+            isLoading={isLoading}
+            containerStyle={[
+              styles.loaderContainer,
+              {backgroundColor: colors.primary},
+            ]}
+          />
+        ) : products.length === 0 ? (
+          <NotFound isVisible={true} description={t('Noproductsfound')} />
+        ) : (
+          <FlatList
+            data={products}
+            numColumns={2}
+            renderItem={productItem}
+            showsVerticalScrollIndicator={false}
+            ItemSeparatorComponent={ItemSeparatorHeight}
+            contentContainerStyle={styles.contentContainer}
+            keyExtractor={item => item.id.toString()}
+            onEndReached={fetchMoreProducts}
+            onEndReachedThreshold={0.5}
+          />
+        )}
+      </View>
+
+      <AnimatedDotLoader
+        isLoading={isFetchingMoreProducts}
+        containerStyle={styles.fetchMoreLoaderContainer}
       />
-    </View>
+    </>
   );
 };
 

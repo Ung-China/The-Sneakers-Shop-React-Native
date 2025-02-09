@@ -35,6 +35,7 @@ import OTPModal from './OTPModal';
 import LoadingModal from './LoadingModal';
 import LocationItem from './LocationItem';
 import AnimatedDotLoader from './AnimatedDotLoader';
+import NotFound from './NotFound';
 export {
   HeaderComponent,
   HeaderTitleComponent,
@@ -73,4 +74,5 @@ export {
   LoadingModal,
   LocationItem,
   AnimatedDotLoader,
+  NotFound,
 };

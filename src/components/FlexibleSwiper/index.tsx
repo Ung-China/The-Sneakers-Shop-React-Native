@@ -30,7 +30,7 @@ const FlexibleSwiper: React.FC<FlexibleSwiperProps> = ({
         loop={true}
         autoplay={autoPlay}
         showsPagination={isShowPagination}>
-        {imageUrlList.map((image, index) => (
+        {imageUrlList?.map((image, index) => (
           <CachedImage
             key={index}
             source={image}

@@ -29,7 +29,7 @@ const NotificationDetailScreen: React.FC = () => {
           showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl
-              style={{opacity: 0}}
+              style={{opacity: 0, height: 0}}
               refreshing={isLoading}
               onRefresh={fetchedNotificationDetail}
             />
