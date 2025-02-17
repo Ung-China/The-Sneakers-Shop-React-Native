@@ -1,15 +1,17 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, View, FlatList, RefreshControl, Text} from 'react-native';
 import styles from './style';
 import {
   AnimatedDotLoader,
   BrandItem,
+  BrandItemSkeleton,
   FlatButton,
   FlexibleInput,
   FlexibleSwiper,
   HomeHeader,
   ItemSeparatorWidth,
   ProductItem,
+  ProductItemSkeleton,
   Section,
   Skeleton,
 } from '../../components';
@@ -27,6 +29,8 @@ import {BrandProps, ProductItemProps, StackParamList} from '../../types';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {API_ENDPOINTS} from '../../api';
+import {dummyProducts} from '../../models/Product';
+import {dummyBrands} from '../../models/Brand';
 
 const HomeScreen: React.FC = () => {
   const {colors} = useTheme();
@@ -44,21 +48,17 @@ const HomeScreen: React.FC = () => {
   };
 
   const productItemSkeleton = () => {
-    return (
-      <Skeleton
-        containerStyle={{
-          marginHorizontal: Spacing.DEFAULT,
-          borderRadius: Radius.DEFAULT,
-          height: 200,
-        }}
-      />
-    );
+    return <ProductItemSkeleton />;
   };
 
   const brandItem = ({item}: {item: BrandProps['item']}) => {
     return (
       <BrandItem item={item} onPress={() => handlePressOnBrand(item.id)} />
     );
+  };
+
+  const brandItemSkeleton = () => {
+    return <BrandItemSkeleton />;
   };
 
   const handlePressToSearch = () => {
@@ -98,7 +98,7 @@ const HomeScreen: React.FC = () => {
     products: newArrivalProducts,
     fetchMoreProducts: fetchMoreNewArrivalProducts,
     fetchProducts: fetchNewArrivalProducts,
-    isLoading: isLoadingNewProducts,
+    isLoading: isLoadingNewArrivalProducts,
   } = useSeeMore(API_ENDPOINTS.GET_NEW_ARRIVAL_PRODUCTS);
   const {
     products: recommendedProducts,
@@ -143,15 +143,19 @@ const HomeScreen: React.FC = () => {
     setIsLoading(true);
     try {
       await fetchSliders();
+      await fetchNewArrivalProducts();
       await fetchShoesSliders();
       await fetchAllProducts();
-      await fetchNewArrivalProducts();
       await fetchNewRecommendedProducts();
       await fetchPopularProducts();
     } finally {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    handleRefresh();
+  }, []);
 
   return (
     <View
@@ -187,7 +191,7 @@ const HomeScreen: React.FC = () => {
           onPress={handlePressToSearch}
         />
 
-        {isLoadingSliders || isLoading ? (
+        {isLoading ? (
           <Skeleton
             containerStyle={{
               marginHorizontal: Spacing.DEFAULT,
@@ -206,7 +210,7 @@ const HomeScreen: React.FC = () => {
           />
         )}
 
-        {isLoadingNewProducts && isLoading ? (
+        {isLoading ? (
           <Section
             title={t('newArrival')}
             actionButton={
@@ -222,14 +226,12 @@ const HomeScreen: React.FC = () => {
             }>
             <FlatList
               horizontal
-              data={newArrivalProducts}
+              data={dummyProducts}
               renderItem={productItemSkeleton}
               showsHorizontalScrollIndicator={false}
               ItemSeparatorComponent={ItemSeparatorWidth}
               contentContainerStyle={styles.productContentContainer}
               keyExtractor={item => item.id.toString()}
-              onEndReached={fetchMoreNewArrivalProducts}
-              onEndReachedThreshold={0.5}
             />
           </Section>
         ) : (
@@ -260,59 +262,115 @@ const HomeScreen: React.FC = () => {
           </Section>
         )}
 
-        {/* <Section
-          title={t('shopByBrand')}
-          actionButton={
-            <FlatButton
-              label={t('seeMore')}
-              containerStyle={styles.sectionContainer}
-              labelStyle={[
-                styles.sectionActionButtonLabel,
-                {color: colors.text},
-              ]}
-              onPress={navigateToBrands}
+        {isLoading ? (
+          <Section
+            title={t('shopByBrand')}
+            actionButton={
+              <FlatButton
+                label={t('seeMore')}
+                containerStyle={styles.sectionContainer}
+                labelStyle={[
+                  styles.sectionActionButtonLabel,
+                  {color: colors.text},
+                ]}
+                onPress={navigateToBrands}
+              />
+            }>
+            <FlatList
+              horizontal
+              data={dummyBrands}
+              renderItem={brandItemSkeleton}
+              showsHorizontalScrollIndicator={false}
+              ItemSeparatorComponent={ItemSeparatorWidth}
+              contentContainerStyle={styles.productContentContainer}
+              keyExtractor={item => item.id.toString()}
+              onEndReached={fetchMoreBrands}
+              onEndReachedThreshold={0.5}
             />
-          }>
-          <FlatList
-            horizontal
-            data={brands}
-            renderItem={brandItem}
-            showsHorizontalScrollIndicator={false}
-            ItemSeparatorComponent={ItemSeparatorWidth}
-            contentContainerStyle={styles.productContentContainer}
-            keyExtractor={item => item.id.toString()}
-            onEndReached={fetchMoreBrands}
-            onEndReachedThreshold={0.5}
-          />
-        </Section> */}
-
-        {/* <Section
-          title={t('recommendedForYou')}
-          actionButton={
-            <FlatButton
-              label={t('seeMore')}
-              containerStyle={styles.sectionContainer}
-              labelStyle={[
-                styles.sectionActionButtonLabel,
-                {color: colors.text},
-              ]}
-              onPress={handlePressToRecommendedProducts}
+          </Section>
+        ) : (
+          <Section
+            title={t('shopByBrand')}
+            actionButton={
+              <FlatButton
+                label={t('seeMore')}
+                containerStyle={styles.sectionContainer}
+                labelStyle={[
+                  styles.sectionActionButtonLabel,
+                  {color: colors.text},
+                ]}
+                onPress={navigateToBrands}
+              />
+            }>
+            <FlatList
+              horizontal
+              data={brands}
+              renderItem={brandItem}
+              showsHorizontalScrollIndicator={false}
+              ItemSeparatorComponent={ItemSeparatorWidth}
+              contentContainerStyle={styles.productContentContainer}
+              keyExtractor={item => item.id.toString()}
+              onEndReached={fetchMoreBrands}
+              onEndReachedThreshold={0.5}
             />
-          }>
-          <FlatList
-            horizontal
-            data={recommendedProducts}
-            renderItem={productItem}
-            showsHorizontalScrollIndicator={false}
-            ItemSeparatorComponent={ItemSeparatorWidth}
-            contentContainerStyle={styles.productContentContainer}
-            keyExtractor={item => item.id.toString()}
-            onEndReached={fetchMoreRecommendedProducts}
-            onEndReachedThreshold={0.5}
-          />
-        </Section> */}
+          </Section>
+        )}
 
-        {isLoadingShoesSliders || isLoading ? (
+        {isLoading ? (
+          <Section
+            title={t('recommendedForYou')}
+            actionButton={
+              <FlatButton
+                label={t('seeMore')}
+                containerStyle={styles.sectionContainer}
+                labelStyle={[
+                  styles.sectionActionButtonLabel,
+                  {color: colors.text},
+                ]}
+                onPress={handlePressToRecommendedProducts}
+              />
+            }>
+            <FlatList
+              horizontal
+              data={dummyProducts}
+              renderItem={productItemSkeleton}
+              showsHorizontalScrollIndicator={false}
+              ItemSeparatorComponent={ItemSeparatorWidth}
+              contentContainerStyle={styles.productContentContainer}
+              keyExtractor={item => item.id.toString()}
+              onEndReached={fetchMoreRecommendedProducts}
+              onEndReachedThreshold={0.5}
+            />
+          </Section>
+        ) : (
+          <Section
+            title={t('recommendedForYou')}
+            actionButton={
+              <FlatButton
+                label={t('seeMore')}
+                containerStyle={styles.sectionContainer}
+                labelStyle={[
+                  styles.sectionActionButtonLabel,
+                  {color: colors.text},
+                ]}
+                onPress={handlePressToRecommendedProducts}
+              />
+            }>
+            <FlatList
+              horizontal
+              data={recommendedProducts}
+              renderItem={productItem}
+              showsHorizontalScrollIndicator={false}
+              ItemSeparatorComponent={ItemSeparatorWidth}
+              contentContainerStyle={styles.productContentContainer}
+              keyExtractor={item => item.id.toString()}
+              onEndReached={fetchMoreRecommendedProducts}
+              onEndReachedThreshold={0.5}
+            />
+          </Section>
+        )}
+
+        {isLoading ? (
           <Skeleton
             containerStyle={{
               marginHorizontal: Spacing.DEFAULT,
@@ -332,62 +390,123 @@ const HomeScreen: React.FC = () => {
           />
         )}
 
-        {/* <Section
-          title={t('mostPopularShoes')}
-          actionButton={
-            <FlatButton
-              label={t('seeMore')}
-              containerStyle={styles.sectionContainer}
-              labelStyle={[
-                styles.sectionActionButtonLabel,
-                {color: colors.text},
-              ]}
-              onPress={handlePressToPopularProducts}
+        {isLoading ? (
+          <Section
+            title={t('mostPopularShoes')}
+            actionButton={
+              <FlatButton
+                label={t('seeMore')}
+                containerStyle={styles.sectionContainer}
+                labelStyle={[
+                  styles.sectionActionButtonLabel,
+                  {color: colors.text},
+                ]}
+                onPress={handlePressToPopularProducts}
+              />
+            }>
+            <FlatList
+              horizontal
+              data={dummyProducts}
+              renderItem={brandItemSkeleton}
+              showsHorizontalScrollIndicator={false}
+              ItemSeparatorComponent={ItemSeparatorWidth}
+              contentContainerStyle={styles.productContentContainer}
+              keyExtractor={item => item.id.toString()}
+              onEndReached={fetchMorePopularProducts}
+              onEndReachedThreshold={0.5}
             />
-          }>
-          <FlatList
-            horizontal
-            data={popularProducts}
-            renderItem={productItem}
-            showsHorizontalScrollIndicator={false}
-            ItemSeparatorComponent={ItemSeparatorWidth}
-            contentContainerStyle={styles.productContentContainer}
-            keyExtractor={item => item.id.toString()}
-            onEndReached={fetchMorePopularProducts}
-            onEndReachedThreshold={0.5}
-          />
-        </Section> */}
+          </Section>
+        ) : (
+          <Section
+            title={t('mostPopularShoes')}
+            actionButton={
+              <FlatButton
+                label={t('seeMore')}
+                containerStyle={styles.sectionContainer}
+                labelStyle={[
+                  styles.sectionActionButtonLabel,
+                  {color: colors.text},
+                ]}
+                onPress={handlePressToPopularProducts}
+              />
+            }>
+            <FlatList
+              horizontal
+              data={popularProducts}
+              renderItem={productItem}
+              showsHorizontalScrollIndicator={false}
+              ItemSeparatorComponent={ItemSeparatorWidth}
+              contentContainerStyle={styles.productContentContainer}
+              keyExtractor={item => item.id.toString()}
+              onEndReached={fetchMorePopularProducts}
+              onEndReachedThreshold={0.5}
+            />
+          </Section>
+        )}
 
-        {/* <Section
-          title={t('allProduct')}
-          actionButton={
-            <FlatButton
-              label={t('seeMore')}
-              containerStyle={styles.sectionContainer}
-              labelStyle={[
-                styles.sectionActionButtonLabel,
-                {color: colors.text},
+        {isLoading ? (
+          <Section
+            title={t('allProduct')}
+            actionButton={
+              <FlatButton
+                label={t('seeMore')}
+                containerStyle={styles.sectionContainer}
+                labelStyle={[
+                  styles.sectionActionButtonLabel,
+                  {color: colors.text},
+                ]}
+                onPress={handlePressToAllProducts}
+              />
+            }>
+            <FlatList
+              horizontal
+              data={dummyProducts}
+              renderItem={productItemSkeleton}
+              showsHorizontalScrollIndicator={false}
+              ItemSeparatorComponent={ItemSeparatorWidth}
+              keyExtractor={item => item.id.toString()}
+              onEndReached={fetchMoreAllProducts}
+              onEndReachedThreshold={0.5}
+              contentContainerStyle={[
+                styles.productContentContainer,
+                {
+                  paddingBottom: Padding.DEFAULT,
+                },
               ]}
-              onPress={handlePressToAllProducts}
             />
-          }>
-          <FlatList
-            horizontal
-            data={allProducts}
-            renderItem={productItem}
-            showsHorizontalScrollIndicator={false}
-            ItemSeparatorComponent={ItemSeparatorWidth}
-            keyExtractor={item => item.id.toString()}
-            onEndReached={fetchMoreAllProducts}
-            onEndReachedThreshold={0.5}
-            contentContainerStyle={[
-              styles.productContentContainer,
-              {
-                paddingBottom: Padding.DEFAULT,
-              },
-            ]}
-          />
-        </Section> */}
+          </Section>
+        ) : (
+          <Section
+            title={t('allProduct')}
+            actionButton={
+              <FlatButton
+                label={t('seeMore')}
+                containerStyle={styles.sectionContainer}
+                labelStyle={[
+                  styles.sectionActionButtonLabel,
+                  {color: colors.text},
+                ]}
+                onPress={handlePressToAllProducts}
+              />
+            }>
+            <FlatList
+              horizontal
+              data={allProducts}
+              renderItem={productItem}
+              showsHorizontalScrollIndicator={false}
+              ItemSeparatorComponent={ItemSeparatorWidth}
+              keyExtractor={item => item.id.toString()}
+              onEndReached={fetchMoreAllProducts}
+              onEndReachedThreshold={0.5}
+              contentContainerStyle={[
+                styles.productContentContainer,
+                {
+                  paddingBottom: Padding.DEFAULT,
+                },
+              ]}
+            />
+          </Section>
+        )}
       </ScrollView>
     </View>
   );

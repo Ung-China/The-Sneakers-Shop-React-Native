@@ -37,6 +37,8 @@ import LocationItem from './LocationItem';
 import AnimatedDotLoader from './AnimatedDotLoader';
 import NotFound from './NotFound';
 import Skeleton from './Skeleton';
+import ProductItemSkeleton from './ProductItemSkeleton';
+import BrandItemSkeleton from './BrandItemSkeleton';
 export {
   HeaderComponent,
   HeaderTitleComponent,
@@ -77,4 +79,6 @@ export {
   AnimatedDotLoader,
   NotFound,
   Skeleton,
+  ProductItemSkeleton,
+  BrandItemSkeleton,
 };

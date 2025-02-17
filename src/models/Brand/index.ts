@@ -10,7 +10,7 @@ export default class Brand {
   }
 }
 
-export const brands: Brand[] = [
+export const dummyBrands: Brand[] = [
   new Brand(
     1,
     'Adidas',
@@ -33,31 +33,6 @@ export const brands: Brand[] = [
   ),
   new Brand(
     5,
-    'Adidas',
-    'https://upload.wikimedia.org/wikipedia/commons/2/24/Adidas_logo.png',
-  ),
-  new Brand(
-    6,
-    'Adidas',
-    'https://upload.wikimedia.org/wikipedia/commons/2/24/Adidas_logo.png',
-  ),
-  new Brand(
-    7,
-    'Adidas',
-    'https://upload.wikimedia.org/wikipedia/commons/2/24/Adidas_logo.png',
-  ),
-  new Brand(
-    8,
-    'Adidas',
-    'https://upload.wikimedia.org/wikipedia/commons/2/24/Adidas_logo.png',
-  ),
-  new Brand(
-    9,
-    'Adidas',
-    'https://upload.wikimedia.org/wikipedia/commons/2/24/Adidas_logo.png',
-  ),
-  new Brand(
-    10,
     'Adidas',
     'https://upload.wikimedia.org/wikipedia/commons/2/24/Adidas_logo.png',
   ),
