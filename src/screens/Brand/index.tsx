@@ -1,4 +1,4 @@
-import {Alert, FlatList, SafeAreaView} from 'react-native';
+import {Alert, FlatList} from 'react-native';
 import styles from './style';
 import {useBrand, useTheme} from '../../hooks';
 import {
@@ -7,18 +7,36 @@ import {
   ItemSeparatorHeight,
   ProductItem,
 } from '../../components';
-import {products} from '../../models/Product';
 import {ProductItemProps, StackParamList} from '../../types';
 import {Icons, Spacing} from '../../constants';
 import {useTranslation} from 'react-i18next';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {useNavigation} from '@react-navigation/native';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {View} from 'react-native';
+import {useEffect} from 'react';
 
 const BrandScreen: React.FC = () => {
+  const navigation = useNavigation<StackNavigationProp<StackParamList>>();
+  const route = useRoute<RouteProp<StackParamList, 'ProductDetail'>>();
+  const {id} = route.params || {};
   const {colors} = useTheme();
   const {t} = useTranslation();
-  const navigation = useNavigation<StackNavigationProp<StackParamList>>();
+
+  const {
+    brands,
+    products,
+    activeId,
+    setActiveId,
+    fetchMoreBrands,
+    fetchBrandById,
+  } = useBrand();
+
+  useEffect(() => {
+    if (id) {
+      setActiveId(id);
+      fetchBrandById(id);
+    }
+  }, [id]);
 
   const productItem = ({
     item,
@@ -39,6 +57,11 @@ const BrandScreen: React.FC = () => {
     );
   };
 
+  const handleTabChange = (item: {id: number; name: string}) => {
+    setActiveId(item.id);
+    fetchBrandById(item.id);
+  };
+
   const handlePressOnProduct = () => {
     return Alert.alert('Go to product detail');
   };
@@ -46,8 +69,6 @@ const BrandScreen: React.FC = () => {
   const handlePressToSearch = () => {
     navigation.navigate('Search');
   };
-
-  const {brands, fetchMoreBrands} = useBrand();
 
   return (
     <View style={[styles.safeContainer, {backgroundColor: colors.primary}]}>
@@ -63,7 +84,8 @@ const BrandScreen: React.FC = () => {
       <FlexibleTab
         data={brands}
         onEndReached={fetchMoreBrands}
-        onTabChange={item => console.log('On Tab Brand:', item.name)}>
+        activeId={activeId}
+        onTabChange={handleTabChange}>
         <FlatList
           data={products}
           numColumns={2}

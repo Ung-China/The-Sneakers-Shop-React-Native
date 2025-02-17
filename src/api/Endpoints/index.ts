@@ -14,6 +14,7 @@ const API_ENDPOINTS = {
   GET_POPULAR_PRODUCTS: '/get_products_popular',
   GET_PRODUCT_DETAIL: '/get_product_detail',
   SEARCH_PRODUCTS: '/products/search',
+  GET_PRODUCTS_BY_BRAND: '/get_products_by_brand',
 };
 
 export default API_ENDPOINTS;

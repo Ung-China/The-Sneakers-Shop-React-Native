@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView, Alert, View, FlatList, RefreshControl} from 'react-native';
+import {ScrollView, View, FlatList, RefreshControl, Text} from 'react-native';
 import styles from './style';
 import {
   AnimatedDotLoader,
@@ -11,6 +11,7 @@ import {
   ItemSeparatorWidth,
   ProductItem,
   Section,
+  Skeleton,
 } from '../../components';
 import {
   useBrand,
@@ -20,7 +21,7 @@ import {
   useSlider,
   useTheme,
 } from '../../hooks';
-import {Icons, Padding} from '../../constants';
+import {Icons, Padding, Radius, Spacing} from '../../constants';
 import {useTranslation} from 'react-i18next';
 import {BrandProps, ProductItemProps, StackParamList} from '../../types';
 import {useNavigation} from '@react-navigation/native';
@@ -42,8 +43,22 @@ const HomeScreen: React.FC = () => {
     );
   };
 
+  const productItemSkeleton = () => {
+    return (
+      <Skeleton
+        containerStyle={{
+          marginHorizontal: Spacing.DEFAULT,
+          borderRadius: Radius.DEFAULT,
+          height: 200,
+        }}
+      />
+    );
+  };
+
   const brandItem = ({item}: {item: BrandProps['item']}) => {
-    return <BrandItem item={item} onPress={handlePressOnBrand} />;
+    return (
+      <BrandItem item={item} onPress={() => handlePressOnBrand(item.id)} />
+    );
   };
 
   const handlePressToSearch = () => {
@@ -55,19 +70,23 @@ const HomeScreen: React.FC = () => {
   };
 
   const navigateToBrands = () => {
-    navigation.navigate('Brand');
+    navigation.navigate('Brand', {});
+  };
+
+  const handlePressOnBrand = (id: number) => {
+    navigation.navigate('Brand', {id});
   };
 
   const handlePressOnProduct = (id: number) => {
     navigation.navigate('ProductDetail', {id});
   };
 
-  const handlePressOnBrand = () => {
-    return Alert.alert('Go to product brand');
-  };
-
-  const {sliders, fetchSliders} = useSlider();
-  const {shoesSliders, fetchShoesSliders} = useShoesSlider();
+  const {sliders, fetchSliders, isLoading: isLoadingSliders} = useSlider();
+  const {
+    shoesSliders,
+    fetchShoesSliders,
+    isLoading: isLoadingShoesSliders,
+  } = useShoesSlider();
   const {brands, fetchMoreBrands, fetchBrands} = useBrand();
 
   const {
@@ -79,6 +98,7 @@ const HomeScreen: React.FC = () => {
     products: newArrivalProducts,
     fetchMoreProducts: fetchMoreNewArrivalProducts,
     fetchProducts: fetchNewArrivalProducts,
+    isLoading: isLoadingNewProducts,
   } = useSeeMore(API_ENDPOINTS.GET_NEW_ARRIVAL_PRODUCTS);
   const {
     products: recommendedProducts,
@@ -124,7 +144,6 @@ const HomeScreen: React.FC = () => {
     try {
       await fetchSliders();
       await fetchShoesSliders();
-      await fetchBrands();
       await fetchAllProducts();
       await fetchNewArrivalProducts();
       await fetchNewRecommendedProducts();
@@ -168,40 +187,78 @@ const HomeScreen: React.FC = () => {
           onPress={handlePressToSearch}
         />
 
-        <FlexibleSwiper
-          imageUrlList={sliders}
-          imageStyle={styles.swiperImageStyle}
-          containerStyle={styles.swiperContainer}
-          loadingImageStyle={styles.swiperLoadingImageStyle}
-          iconSize={150}
-          autoPlay={true}
-        />
-
-        {/* <Section
-          title={t('newArrival')}
-          actionButton={
-            <FlatButton
-              label={t('seeMore')}
-              containerStyle={styles.sectionContainer}
-              labelStyle={[
-                styles.sectionActionButtonLabel,
-                {color: colors.text},
-              ]}
-              onPress={handlePressToNewArrivalProducts}
-            />
-          }>
-          <FlatList
-            horizontal
-            data={newArrivalProducts}
-            renderItem={productItem}
-            showsHorizontalScrollIndicator={false}
-            ItemSeparatorComponent={ItemSeparatorWidth}
-            contentContainerStyle={styles.productContentContainer}
-            keyExtractor={item => item.id.toString()}
-            onEndReached={fetchMoreNewArrivalProducts}
-            onEndReachedThreshold={0.5}
+        {isLoadingSliders || isLoading ? (
+          <Skeleton
+            containerStyle={{
+              marginHorizontal: Spacing.DEFAULT,
+              borderRadius: Radius.DEFAULT,
+              height: 200,
+            }}
           />
-        </Section> */}
+        ) : (
+          <FlexibleSwiper
+            imageUrlList={sliders}
+            imageStyle={styles.swiperImageStyle}
+            containerStyle={styles.swiperContainer}
+            loadingImageStyle={styles.swiperLoadingImageStyle}
+            iconSize={150}
+            autoPlay={true}
+          />
+        )}
+
+        {isLoadingNewProducts && isLoading ? (
+          <Section
+            title={t('newArrival')}
+            actionButton={
+              <FlatButton
+                label={t('seeMore')}
+                containerStyle={styles.sectionContainer}
+                labelStyle={[
+                  styles.sectionActionButtonLabel,
+                  {color: colors.text},
+                ]}
+                onPress={handlePressToNewArrivalProducts}
+              />
+            }>
+            <FlatList
+              horizontal
+              data={newArrivalProducts}
+              renderItem={productItemSkeleton}
+              showsHorizontalScrollIndicator={false}
+              ItemSeparatorComponent={ItemSeparatorWidth}
+              contentContainerStyle={styles.productContentContainer}
+              keyExtractor={item => item.id.toString()}
+              onEndReached={fetchMoreNewArrivalProducts}
+              onEndReachedThreshold={0.5}
+            />
+          </Section>
+        ) : (
+          <Section
+            title={t('newArrival')}
+            actionButton={
+              <FlatButton
+                label={t('seeMore')}
+                containerStyle={styles.sectionContainer}
+                labelStyle={[
+                  styles.sectionActionButtonLabel,
+                  {color: colors.text},
+                ]}
+                onPress={handlePressToNewArrivalProducts}
+              />
+            }>
+            <FlatList
+              horizontal
+              data={newArrivalProducts}
+              renderItem={productItem}
+              showsHorizontalScrollIndicator={false}
+              ItemSeparatorComponent={ItemSeparatorWidth}
+              contentContainerStyle={styles.productContentContainer}
+              keyExtractor={item => item.id.toString()}
+              onEndReached={fetchMoreNewArrivalProducts}
+              onEndReachedThreshold={0.5}
+            />
+          </Section>
+        )}
 
         {/* <Section
           title={t('shopByBrand')}
@@ -253,18 +310,29 @@ const HomeScreen: React.FC = () => {
             onEndReached={fetchMoreRecommendedProducts}
             onEndReachedThreshold={0.5}
           />
-        </Section>
+        </Section> */}
 
-        <FlexibleSwiper
-          imageUrlList={shoesSliders}
-          imageStyle={styles.bigSwiperImageStyle}
-          containerStyle={styles.bigSwiperContainer}
-          loadingImageStyle={styles.bigswiperLoadingImageStyle}
-          iconSize={300}
-          autoPlay={true}
-        />
+        {isLoadingShoesSliders || isLoading ? (
+          <Skeleton
+            containerStyle={{
+              marginHorizontal: Spacing.DEFAULT,
+              marginTop: Spacing.DEFAULT,
+              borderRadius: Radius.DEFAULT,
+              height: 300,
+            }}
+          />
+        ) : (
+          <FlexibleSwiper
+            imageUrlList={shoesSliders}
+            imageStyle={styles.bigSwiperImageStyle}
+            containerStyle={styles.bigSwiperContainer}
+            loadingImageStyle={styles.bigswiperLoadingImageStyle}
+            iconSize={300}
+            autoPlay={true}
+          />
+        )}
 
-        <Section
+        {/* <Section
           title={t('mostPopularShoes')}
           actionButton={
             <FlatButton
@@ -290,7 +358,7 @@ const HomeScreen: React.FC = () => {
           />
         </Section> */}
 
-        <Section
+        {/* <Section
           title={t('allProduct')}
           actionButton={
             <FlatButton
@@ -319,7 +387,7 @@ const HomeScreen: React.FC = () => {
               },
             ]}
           />
-        </Section>
+        </Section> */}
       </ScrollView>
     </View>
   );

@@ -8,11 +8,11 @@ import React from 'react';
 const FlexibleTab: React.FC<FlexibleTabProps> = ({
   data,
   children,
+  activeId,
   onTabChange,
   onEndReached,
 }) => {
-  const {flexibleTabRef, activeId, setActiveId, scrollToIndex} =
-    useFlexibleTab();
+  const {flexibleTabRef, scrollToIndex} = useFlexibleTab();
 
   const flexibleTabItem = ({
     item,
@@ -27,7 +27,6 @@ const FlexibleTab: React.FC<FlexibleTabProps> = ({
         item={item}
         onPress={() => {
           onTabChange(item);
-          setActiveId(item.id);
           scrollToIndex(index);
         }}
       />

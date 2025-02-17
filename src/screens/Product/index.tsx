@@ -20,7 +20,6 @@ import {
   Touchable,
   VariantItem,
 } from '../../components';
-// import {products} from '../../models/Product';
 import IconButton from '../../components/IconButton';
 import {Icons, Spacing} from '../../constants';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
@@ -28,7 +27,6 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {ProductItemProps, StackParamList, VariantProps} from '../../types';
 import PriceTag from '../../components/PriceTag';
 import RatingTag from '../../components/RatingTag';
-import {variants} from '../../models/Variant';
 import React from 'react';
 const ProductDetailScreen: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();

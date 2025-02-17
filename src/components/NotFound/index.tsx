@@ -11,12 +11,14 @@ const NotFound: React.FC<NotFoundProps> = ({isVisible, description}) => {
   if (!isVisible) return null;
   return (
     <View style={[styles.container, {backgroundColor: colors.primary}]}>
-      <Icons.EMPTYBOX
+      {/* <Icons.EMPTYBOX
         width={150}
         height={150}
         color={theme === 'light' ? '#F4F4F4' : '#262626'}
-      />
-      <Text style={[styles.notFound, {color: colors.text}]}>{description}</Text>
+      /> */}
+      <Text style={[styles.notFound, {color: colors.text, opacity: 0.4}]}>
+        {description}
+      </Text>
     </View>
   );
 };

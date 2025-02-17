@@ -17,7 +17,7 @@ export type StackParamList = {
   DeleteAccountModal: undefined;
   CurrentLocation: undefined;
   NotificationDetail: {item: NotificationProps['item']};
-  Brand: undefined;
+  Brand: {id?: number};
   OrderHistoryDetail: undefined;
   ProductDetail: {id: number};
   EditProfile: undefined;

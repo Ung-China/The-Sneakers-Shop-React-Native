@@ -3,19 +3,15 @@ import {FlatList} from 'react-native';
 
 const useFlexibleTab = () => {
   const flexibleTabRef = useRef<FlatList<any>>(null);
-  const [activeId, setActiveId] = useState<number>(1);
 
-  const scrollToIndex = useCallback(
-    (index: number) => {
-      flexibleTabRef?.current?.scrollToIndex({
-        index: index,
-        animated: true,
-        viewPosition: 0.5,
-      });
-    },
-    [activeId],
-  );
+  const scrollToIndex = useCallback((index: number) => {
+    flexibleTabRef?.current?.scrollToIndex({
+      index: index,
+      animated: true,
+      viewPosition: 0.5,
+    });
+  }, []);
 
-  return {flexibleTabRef, activeId, setActiveId, scrollToIndex};
+  return {flexibleTabRef, scrollToIndex};
 };
 export default useFlexibleTab;

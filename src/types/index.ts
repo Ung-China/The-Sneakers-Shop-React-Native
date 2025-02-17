@@ -46,6 +46,7 @@ import {locationItemProps} from './LocationItem';
 import {AnimatedDotLoaderProps} from './AnimatedDotLoader';
 import {SeeMoreProps} from './SeeMore';
 import {NotFoundProps} from './NotFound';
+import {SkeletonProps} from './SkeletonProps';
 
 export type {
   BottomTabParamList,
@@ -96,4 +97,5 @@ export type {
   AnimatedDotLoaderProps,
   SeeMoreProps,
   NotFoundProps,
+  SkeletonProps,
 };

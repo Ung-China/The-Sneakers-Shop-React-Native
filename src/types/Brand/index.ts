@@ -1,5 +1,5 @@
 export interface BrandProps {
-  onPress?: () => void;
+  onPress: (id?: number) => void;
   item: {
     id: number;
     name: string;

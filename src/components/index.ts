@@ -36,6 +36,7 @@ import LoadingModal from './LoadingModal';
 import LocationItem from './LocationItem';
 import AnimatedDotLoader from './AnimatedDotLoader';
 import NotFound from './NotFound';
+import Skeleton from './Skeleton';
 export {
   HeaderComponent,
   HeaderTitleComponent,
@@ -75,4 +76,5 @@ export {
   LocationItem,
   AnimatedDotLoader,
   NotFound,
+  Skeleton,
 };
