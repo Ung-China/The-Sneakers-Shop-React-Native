@@ -29,6 +29,8 @@ const BrandScreen: React.FC = () => {
     setActiveId,
     fetchMoreBrands,
     fetchBrandById,
+    isLoading,
+    isLoadingBrands,
   } = useBrand();
 
   useEffect(() => {
@@ -85,7 +87,8 @@ const BrandScreen: React.FC = () => {
         data={brands}
         onEndReached={fetchMoreBrands}
         activeId={activeId}
-        onTabChange={handleTabChange}>
+        onTabChange={handleTabChange}
+        isLoadingBrands={isLoadingBrands}>
         <FlatList
           data={products}
           numColumns={2}

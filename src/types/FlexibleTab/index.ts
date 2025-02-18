@@ -6,4 +6,5 @@ export interface FlexibleTabProps {
   activeId: number | null;
   onTabChange: (item: FlexibleTabItemProps['item']) => void;
   onEndReached?: () => void;
+  isLoadingBrands?: boolean;
 }

@@ -5,12 +5,17 @@ import {FlexibleTabItemProps, FlexibleTabProps} from '../../types';
 import {useFlexibleTab} from './hooks';
 import FlexibleTabItem from '../FlexibleTabItem';
 import React from 'react';
+import BrandItemSkeleton from '../BrandItemSkeleton';
+import {dummyBrands} from '../../models/Brand';
+import Skeleton from '../Skeleton';
+import {Radius} from '../../constants';
 const FlexibleTab: React.FC<FlexibleTabProps> = ({
   data,
   children,
   activeId,
   onTabChange,
   onEndReached,
+  isLoadingBrands,
 }) => {
   const {flexibleTabRef, scrollToIndex} = useFlexibleTab();
 
@@ -33,22 +38,52 @@ const FlexibleTab: React.FC<FlexibleTabProps> = ({
     );
   };
 
+  const brandItemSkeleton = () => {
+    return (
+      <Skeleton
+        containerStyle={{
+          borderRadius: Radius.DEFAULT,
+          height: 90,
+          width: 80,
+        }}
+      />
+    );
+  };
+
   return (
     <>
-      <View style={styles.container}>
-        <FlatList
-          data={data}
-          horizontal
-          ref={flexibleTabRef}
-          renderItem={flexibleTabItem}
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={item => item.id.toString()}
-          ItemSeparatorComponent={ItemSeparatorWidth}
-          contentContainerStyle={styles.contentContainerStyle}
-          onEndReachedThreshold={0.5}
-          onEndReached={onEndReached}
-        />
-      </View>
+      {isLoadingBrands ? (
+        <View style={styles.container}>
+          <FlatList
+            data={dummyBrands}
+            horizontal
+            ref={flexibleTabRef}
+            renderItem={brandItemSkeleton}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={item => item.id.toString()}
+            ItemSeparatorComponent={ItemSeparatorWidth}
+            contentContainerStyle={styles.contentContainerStyle}
+            onEndReachedThreshold={0.5}
+            onEndReached={onEndReached}
+          />
+        </View>
+      ) : (
+        <View style={styles.container}>
+          <FlatList
+            data={data}
+            horizontal
+            ref={flexibleTabRef}
+            renderItem={flexibleTabItem}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={item => item.id.toString()}
+            ItemSeparatorComponent={ItemSeparatorWidth}
+            contentContainerStyle={styles.contentContainerStyle}
+            onEndReachedThreshold={0.5}
+            onEndReached={onEndReached}
+          />
+        </View>
+      )}
+
       {children}
     </>
   );

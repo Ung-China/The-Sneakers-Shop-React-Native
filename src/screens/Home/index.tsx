@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, View, FlatList, RefreshControl, Text} from 'react-native';
+import {ScrollView, View, FlatList, RefreshControl} from 'react-native';
 import styles from './style';
 import {
   AnimatedDotLoader,
@@ -40,6 +40,7 @@ const HomeScreen: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
 
   const productItem = ({item}: {item: ProductItemProps['item']}) => {
     return (
@@ -154,9 +155,21 @@ const HomeScreen: React.FC = () => {
   };
 
   useEffect(() => {
-    handleRefresh();
-  }, []);
+    const fetchData = async () => {
+      try {
+        await fetchSliders();
+        await fetchNewArrivalProducts();
+        await fetchShoesSliders();
+        await fetchAllProducts();
+        await fetchNewRecommendedProducts();
+        await fetchPopularProducts();
+      } finally {
+        setIsInitialLoading(false);
+      }
+    };
 
+    fetchData();
+  }, []);
   return (
     <View
       style={[
@@ -176,6 +189,7 @@ const HomeScreen: React.FC = () => {
           />
         }>
         {isLoading && <AnimatedDotLoader isLoading={isLoading} />}
+
         <HomeHeader
           item={location}
           handlePressToShopLocation={handlePressToShopLocation}
@@ -191,7 +205,7 @@ const HomeScreen: React.FC = () => {
           onPress={handlePressToSearch}
         />
 
-        {isLoading ? (
+        {isInitialLoading || isLoading ? (
           <Skeleton
             containerStyle={{
               marginHorizontal: Spacing.DEFAULT,
@@ -210,7 +224,7 @@ const HomeScreen: React.FC = () => {
           />
         )}
 
-        {isLoading ? (
+        {isInitialLoading || isLoading ? (
           <Section
             title={t('newArrival')}
             actionButton={
@@ -262,7 +276,7 @@ const HomeScreen: React.FC = () => {
           </Section>
         )}
 
-        {isLoading ? (
+        {isInitialLoading || isLoading ? (
           <Section
             title={t('shopByBrand')}
             actionButton={
@@ -316,7 +330,7 @@ const HomeScreen: React.FC = () => {
           </Section>
         )}
 
-        {isLoading ? (
+        {isInitialLoading || isLoading ? (
           <Section
             title={t('recommendedForYou')}
             actionButton={
@@ -370,7 +384,7 @@ const HomeScreen: React.FC = () => {
           </Section>
         )}
 
-        {isLoading ? (
+        {isInitialLoading || isLoading ? (
           <Skeleton
             containerStyle={{
               marginHorizontal: Spacing.DEFAULT,
@@ -390,7 +404,7 @@ const HomeScreen: React.FC = () => {
           />
         )}
 
-        {isLoading ? (
+        {isInitialLoading || isLoading ? (
           <Section
             title={t('mostPopularShoes')}
             actionButton={
@@ -444,7 +458,7 @@ const HomeScreen: React.FC = () => {
           </Section>
         )}
 
-        {isLoading ? (
+        {isInitialLoading || isLoading ? (
           <Section
             title={t('allProduct')}
             actionButton={

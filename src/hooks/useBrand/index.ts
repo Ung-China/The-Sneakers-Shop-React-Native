@@ -5,6 +5,7 @@ import {Brand, Product} from '../../models';
 const useBrand = () => {
   const [brands, setBrands] = useState<Brand[]>([]);
   const [products, setProducts] = useState([]);
+  const [isLoadingBrands, setIsLoadingBrand] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
   const [isFetchingMoreProducts, setIsFetchingMoreProducts] = useState(false);
@@ -15,9 +16,9 @@ const useBrand = () => {
   const [totalProductPages, setTotalProductPages] = useState(1);
 
   const fetchBrands = async (page = 1) => {
-    if (page > totalBrandPages || isLoading) return;
+    if (page > totalBrandPages || isLoadingBrands) return;
 
-    if (page === 1) setIsLoading(true);
+    if (page === 1) setIsLoadingBrand(true);
     else setIsFetchingMore(true);
 
     try {
@@ -42,7 +43,7 @@ const useBrand = () => {
     } catch (error) {
       console.error('[DEBUG] ERROR WHILE FETCHING BRANDS:', error);
     } finally {
-      setIsLoading(false);
+      setIsLoadingBrand(false);
       setIsFetchingMore(false);
     }
   };
@@ -95,6 +96,7 @@ const useBrand = () => {
   return {
     brands,
     products,
+    isLoadingBrands,
     isLoading,
     fetchBrands,
     fetchBrandById,

@@ -26,6 +26,7 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     width: 60,
     height: 60,
+    borderRadius: Radius.DEFAULT,
   },
   name: {
     fontSize: FontSizes.large,
