@@ -6,14 +6,16 @@ import {
   FlexibleTab,
   ItemSeparatorHeight,
   ProductItem,
+  Skeleton,
 } from '../../components';
 import {ProductItemProps, StackParamList} from '../../types';
-import {Icons, Spacing} from '../../constants';
+import {Icons, Radius, Spacing} from '../../constants';
 import {useTranslation} from 'react-i18next';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {View} from 'react-native';
 import {useEffect} from 'react';
+import {dummyProducts} from '../../models/Product';
 
 const BrandScreen: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
@@ -59,6 +61,22 @@ const BrandScreen: React.FC = () => {
     );
   };
 
+  const ProductItemSkeleton = ({index}: {index: number}) => {
+    return (
+      <Skeleton
+        containerStyle={[
+          styles.productWrapper,
+          {
+            marginRight: index % 2 === 0 ? Spacing.DEFAULT : 0,
+            borderRadius: Radius.DEFAULT,
+            height: 240,
+            width: 80,
+          },
+        ]}
+      />
+    );
+  };
+
   const handleTabChange = (item: {id: number; name: string}) => {
     setActiveId(item.id);
     fetchBrandById(item.id);
@@ -89,15 +107,27 @@ const BrandScreen: React.FC = () => {
         activeId={activeId}
         onTabChange={handleTabChange}
         isLoadingBrands={isLoadingBrands}>
-        <FlatList
-          data={products}
-          numColumns={2}
-          renderItem={productItem}
-          showsVerticalScrollIndicator={false}
-          ItemSeparatorComponent={ItemSeparatorHeight}
-          contentContainerStyle={styles.contentContainer}
-          keyExtractor={item => item.id.toString()}
-        />
+        {isLoading ? (
+          <FlatList
+            data={dummyProducts}
+            numColumns={2}
+            renderItem={ProductItemSkeleton}
+            showsVerticalScrollIndicator={false}
+            ItemSeparatorComponent={ItemSeparatorHeight}
+            contentContainerStyle={styles.contentContainer}
+            keyExtractor={item => item.id.toString()}
+          />
+        ) : (
+          <FlatList
+            data={products}
+            numColumns={2}
+            renderItem={productItem}
+            showsVerticalScrollIndicator={false}
+            ItemSeparatorComponent={ItemSeparatorHeight}
+            contentContainerStyle={styles.contentContainer}
+            keyExtractor={item => item.id.toString()}
+          />
+        )}
       </FlexibleTab>
     </View>
   );

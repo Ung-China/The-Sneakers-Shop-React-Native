@@ -9,7 +9,6 @@ import {useTheme} from '../../hooks';
 import PriceTag from '../PriceTag';
 import IconButton from '../IconButton';
 import RatingTag from '../RatingTag';
-import Skeleton from '../Skeleton';
 
 const ProductItem: React.FC<ProductItemProps> = ({
   item,

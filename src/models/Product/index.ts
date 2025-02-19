@@ -90,4 +90,15 @@ export const dummyProducts: Product[] = [
     [],
     101,
   ),
+  new Product(
+    6,
+    'Nike Air Max 270',
+    '149.99',
+    '4.7',
+    '',
+    'A stylish and comfortable sneaker with a modern design.',
+    [],
+    [],
+    101,
+  ),
 ];
