@@ -43,7 +43,7 @@ const FlexibleTab: React.FC<FlexibleTabProps> = ({
       <Skeleton
         containerStyle={{
           borderRadius: Radius.DEFAULT,
-          height: 90,
+          height: 100,
           width: 80,
         }}
       />

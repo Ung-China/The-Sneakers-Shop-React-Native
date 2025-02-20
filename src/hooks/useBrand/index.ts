@@ -106,6 +106,7 @@ const useBrand = () => {
     isFetchingMoreProducts,
     activeId,
     setActiveId,
+    setIsLoading,
   };
 };
 

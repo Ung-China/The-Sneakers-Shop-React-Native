@@ -5,6 +5,7 @@ import {
   FlexibleInput,
   FlexibleTab,
   ItemSeparatorHeight,
+  NotFound,
   ProductItem,
   Skeleton,
 } from '../../components';
@@ -33,9 +34,11 @@ const BrandScreen: React.FC = () => {
     fetchBrandById,
     isLoading,
     isLoadingBrands,
+    setIsLoading,
   } = useBrand();
 
   useEffect(() => {
+    setIsLoading(true);
     if (id) {
       setActiveId(id);
       fetchBrandById(id);
@@ -90,6 +93,8 @@ const BrandScreen: React.FC = () => {
     navigation.navigate('Search');
   };
 
+  // <NotFound isVisible={true} description={t('Noproductsfound')} />
+
   return (
     <View style={[styles.safeContainer, {backgroundColor: colors.primary}]}>
       <FlexibleInput
@@ -117,6 +122,8 @@ const BrandScreen: React.FC = () => {
             contentContainerStyle={styles.contentContainer}
             keyExtractor={item => item.id.toString()}
           />
+        ) : products.length === 0 ? (
+          <NotFound isVisible={true} description={t('Noproductsfound')} />
         ) : (
           <FlatList
             data={products}
