@@ -2,6 +2,7 @@ import {Alert, FlatList} from 'react-native';
 import styles from './style';
 import {useBrand, useTheme} from '../../hooks';
 import {
+  AnimatedDotLoader,
   FlexibleInput,
   FlexibleTab,
   ItemSeparatorHeight,
@@ -35,15 +36,19 @@ const BrandScreen: React.FC = () => {
     isLoading,
     isLoadingBrands,
     setIsLoading,
+    fetchMoreProducts,
+    isFetchingMoreProducts,
   } = useBrand();
 
-  useEffect(() => {
-    setIsLoading(true);
-    if (id) {
-      setActiveId(id);
-      fetchBrandById(id);
-    }
-  }, [id]);
+  console.log('CHECK IS LOADING', isLoading);
+  console.log('CHECK ACTIVE ID', activeId);
+
+  // useEffect(() => {
+  //   setIsLoading;
+  //   if (activeId) {
+  //     fetchBrandById(activeId);
+  //   }
+  // }, [activeId]);
 
   const productItem = ({
     item,
@@ -93,8 +98,6 @@ const BrandScreen: React.FC = () => {
     navigation.navigate('Search');
   };
 
-  // <NotFound isVisible={true} description={t('Noproductsfound')} />
-
   return (
     <View style={[styles.safeContainer, {backgroundColor: colors.primary}]}>
       <FlexibleInput
@@ -133,9 +136,20 @@ const BrandScreen: React.FC = () => {
             ItemSeparatorComponent={ItemSeparatorHeight}
             contentContainerStyle={styles.contentContainer}
             keyExtractor={item => item.id.toString()}
+            onEndReached={fetchMoreProducts}
+            onEndReachedThreshold={0.5} // ✅ Adjust threshold to trigger only when user scrolls down
+            onMomentumScrollBegin={() => {
+              console.log(
+                '[DEBUG] Scrolling started, enabling fetchMoreProducts',
+              );
+            }}
           />
         )}
       </FlexibleTab>
+      <AnimatedDotLoader
+        isLoading={isFetchingMoreProducts}
+        containerStyle={styles.fetchMoreLoaderContainer}
+      />
     </View>
   );
 };

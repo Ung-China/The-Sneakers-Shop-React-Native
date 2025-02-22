@@ -23,4 +23,12 @@ export default StyleSheet.create({
     marginHorizontal: Spacing.DEFAULT,
     paddingHorizontal: Padding.DEFAULT,
   },
+  fetchMoreLoaderContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: Padding.DEFAULT,
+    paddingBottom: Padding.BOTTOM * 2,
+  },
 });

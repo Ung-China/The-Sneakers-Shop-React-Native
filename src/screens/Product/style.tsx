@@ -148,4 +148,12 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  fetchMoreLoaderContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: Padding.DEFAULT,
+    paddingBottom: Padding.BOTTOM * 2,
+  },
 });

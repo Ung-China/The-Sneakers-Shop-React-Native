@@ -18,8 +18,10 @@ const useBrand = () => {
   const fetchBrands = async (page = 1) => {
     if (page > totalBrandPages || isLoadingBrands) return;
 
-    if (page === 1) setIsLoadingBrand(true);
-    else setIsFetchingMore(true);
+    if (page === 1) {
+      setIsLoadingBrand(true);
+      setIsLoading(true);
+    } else setIsFetchingMore(true);
 
     try {
       const response = await GET(API_ENDPOINTS.GET_BRANDS, {page});
@@ -38,7 +40,7 @@ const useBrand = () => {
       if (!activeId && fetchedBrands.length > 0) {
         const firstBrandId = fetchedBrands[0].id;
         setActiveId(firstBrandId);
-        fetchBrandById(firstBrandId);
+        // fetchBrandById(firstBrandId);
       }
     } catch (error) {
       console.error('[DEBUG] ERROR WHILE FETCHING BRANDS:', error);

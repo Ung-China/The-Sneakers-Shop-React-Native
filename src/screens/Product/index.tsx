@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import styles from './style';
 import {useTranslation} from 'react-i18next';
-import {useProduct, useProductDetail, useTheme} from '../../hooks';
+import {useBrand, useProduct, useProductDetail, useTheme} from '../../hooks';
 import {
   AnimatedDotLoader,
   FlexibleSwiper,
@@ -27,7 +27,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {ProductItemProps, StackParamList, VariantProps} from '../../types';
 import PriceTag from '../../components/PriceTag';
 import RatingTag from '../../components/RatingTag';
-import React from 'react';
+import React, {useEffect} from 'react';
 const ProductDetailScreen: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
   const route = useRoute<RouteProp<StackParamList, 'ProductDetail'>>();
@@ -46,6 +46,22 @@ const ProductDetailScreen: React.FC = () => {
     setSize,
     setPrice,
   } = useProductDetail(id);
+
+  const {
+    products,
+    fetchBrandById,
+    isLoading: isLoadingRelatedProducts,
+    fetchMoreProducts,
+    isFetchingMoreProducts,
+  } = useBrand();
+
+  useEffect(() => {
+    if (productDetail?.brandId) {
+      fetchBrandById(productDetail.brandId);
+    }
+  }, [productDetail?.brandId]);
+
+  // console.log('CHECK RELATED PRODUCT', products);
 
   const navigateBack = () => {
     return navigation.goBack();
@@ -135,7 +151,7 @@ const ProductDetailScreen: React.FC = () => {
             {isLoading && <AnimatedDotLoader isLoading={isLoading} />}
             {productDetail && (
               <>
-                <FlexibleSwiper
+                {/* <FlexibleSwiper
                   imageUrlList={productDetail.images}
                   imageStyle={[
                     styles.swiperImageStyle,
@@ -152,9 +168,9 @@ const ProductDetailScreen: React.FC = () => {
                   iconSize={150}
                   autoPlay={false}
                   resizeMode="contain"
-                />
+                /> */}
 
-                <View style={styles.body}>
+                {/* <View style={styles.body}>
                   <View
                     style={[
                       styles.container1,
@@ -231,7 +247,7 @@ const ProductDetailScreen: React.FC = () => {
                       keyExtractor={item => item.id.toString()}
                     />
                   </View>
-                </View>
+                </View> */}
               </>
             )}
 
@@ -257,21 +273,27 @@ const ProductDetailScreen: React.FC = () => {
               style={[styles.cartContainer]}
             />
 
-            {/* <Section title={t('relatedProduct')} titleStyle={styles.titleStyle}>
-          <FlatList
-            data={products}
-            numColumns={2}
-            renderItem={productItem}
-            scrollEnabled={false}
-            showsVerticalScrollIndicator={false}
-            ItemSeparatorComponent={ItemSeparatorHeight}
-            contentContainerStyle={styles.contentContainer}
-            keyExtractor={item => item.id.toString()}
-          />
-        </Section>  */}
+            <Section title={t('relatedProduct')} titleStyle={styles.titleStyle}>
+              <FlatList
+                data={products}
+                numColumns={2}
+                renderItem={productItem}
+                scrollEnabled={false}
+                showsVerticalScrollIndicator={false}
+                ItemSeparatorComponent={ItemSeparatorHeight}
+                contentContainerStyle={styles.contentContainer}
+                keyExtractor={item => item.id.toString()}
+                onEndReached={fetchMoreProducts}
+                onEndReachedThreshold={0.9}
+              />
+            </Section>
+            <AnimatedDotLoader
+              isLoading={isFetchingMoreProducts}
+              containerStyle={styles.fetchMoreLoaderContainer}
+            />
           </ScrollView>
 
-          <Footer
+          {/* <Footer
             safeAreaStyle={[
               styles.safeAreaStyle,
               {backgroundColor: colors.primary},
@@ -297,7 +319,7 @@ const ProductDetailScreen: React.FC = () => {
                 {t('buyNow')}
               </Text>
             </Touchable>
-          </Footer>
+          </Footer> */}
         </>
       )}
     </View>
