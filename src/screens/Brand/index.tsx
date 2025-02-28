@@ -1,4 +1,4 @@
-import {Alert, FlatList} from 'react-native';
+import {Alert, FlatList, RefreshControl} from 'react-native';
 import styles from './style';
 import {useBrand, useTheme} from '../../hooks';
 import {
@@ -29,26 +29,16 @@ const BrandScreen: React.FC = () => {
   const {
     brands,
     products,
-    activeId,
-    setActiveId,
+    brandId,
+    setBrandId,
     fetchMoreBrands,
-    fetchBrandById,
-    isLoading,
+    isLoadingProduct,
     isLoadingBrands,
-    setIsLoading,
-    fetchMoreProducts,
     isFetchingMoreProducts,
+    fetchMoreProducts,
+    setProductPage,
+    refreshProducts,
   } = useBrand();
-
-  console.log('CHECK IS LOADING', isLoading);
-  console.log('CHECK ACTIVE ID', activeId);
-
-  // useEffect(() => {
-  //   setIsLoading;
-  //   if (activeId) {
-  //     fetchBrandById(activeId);
-  //   }
-  // }, [activeId]);
 
   const productItem = ({
     item,
@@ -86,8 +76,8 @@ const BrandScreen: React.FC = () => {
   };
 
   const handleTabChange = (item: {id: number; name: string}) => {
-    setActiveId(item.id);
-    fetchBrandById(item.id);
+    setBrandId(item.id);
+    setProductPage(1);
   };
 
   const handlePressOnProduct = () => {
@@ -112,10 +102,10 @@ const BrandScreen: React.FC = () => {
       <FlexibleTab
         data={brands}
         onEndReached={fetchMoreBrands}
-        activeId={activeId}
+        activeId={brandId}
         onTabChange={handleTabChange}
         isLoadingBrands={isLoadingBrands}>
-        {isLoading ? (
+        {isLoadingProduct ? (
           <FlatList
             data={dummyProducts}
             numColumns={2}
@@ -125,7 +115,7 @@ const BrandScreen: React.FC = () => {
             contentContainerStyle={styles.contentContainer}
             keyExtractor={item => item.id.toString()}
           />
-        ) : products.length === 0 ? (
+        ) : products.length === 0 && !isLoadingBrands && !isLoadingProduct ? (
           <NotFound isVisible={true} description={t('Noproductsfound')} />
         ) : (
           <FlatList
@@ -137,12 +127,7 @@ const BrandScreen: React.FC = () => {
             contentContainerStyle={styles.contentContainer}
             keyExtractor={item => item.id.toString()}
             onEndReached={fetchMoreProducts}
-            onEndReachedThreshold={0.5} // ✅ Adjust threshold to trigger only when user scrolls down
-            onMomentumScrollBegin={() => {
-              console.log(
-                '[DEBUG] Scrolling started, enabling fetchMoreProducts',
-              );
-            }}
+            onEndReachedThreshold={0.5}
           />
         )}
       </FlexibleTab>
