@@ -49,7 +49,6 @@ const useBrand = () => {
   };
 
   const fetchBrandById = async (id?: number, page = 1) => {
-
     if (page > totalProductPages || isLoadingProduct) return;
 
     if (page === 1) {

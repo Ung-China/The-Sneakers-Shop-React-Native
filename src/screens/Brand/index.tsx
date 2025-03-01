@@ -106,6 +106,11 @@ const BrandScreen: React.FC = () => {
         onTabChange={handleTabChange}
         isLoadingBrands={isLoadingBrands}>
         {isLoadingProduct ? (
+          <>
+            <AnimatedDotLoader
+              isLoading={isLoadingProduct}
+              containerStyle={styles.dummyLoading}
+            />
             <FlatList
               data={dummyProducts}
               numColumns={2}
@@ -116,12 +121,14 @@ const BrandScreen: React.FC = () => {
               keyExtractor={item => item.id.toString()}
               refreshControl={
                 <RefreshControl
-                  // style={{opacity: 0}}
-                  refreshing={true}
+                  style={{opacity: 0, paddingTop: -30}}
+                  refreshing={false}
                   onRefresh={refreshProducts}
+                  progressViewOffset={10}
                 />
               }
             />
+          </>
         ) : products.length === 0 && !isLoadingBrands && !isLoadingProduct ? (
           <NotFound isVisible={true} description={t('Noproductsfound')} />
         ) : (
@@ -137,8 +144,8 @@ const BrandScreen: React.FC = () => {
             onEndReachedThreshold={0.5}
             refreshControl={
               <RefreshControl
-                // style={{opacity: 0}}
-                refreshing={isLoadingProduct}
+                style={{opacity: 0}}
+                refreshing={false}
                 onRefresh={refreshProducts}
               />
             }
