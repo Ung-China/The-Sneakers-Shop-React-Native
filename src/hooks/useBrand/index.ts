@@ -82,8 +82,8 @@ const useBrand = () => {
     } catch (error) {
       console.error('[DEBUG] ERROR WHILE FETCHING PRODUCTS BY BRAND:', error);
     } finally {
-      setIsLoadingProduct(false);
       setIsFetchingMoreProducts(false);
+      setIsLoadingProduct(false);
     }
   };
 

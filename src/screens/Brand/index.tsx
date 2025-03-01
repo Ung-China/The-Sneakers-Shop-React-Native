@@ -1,4 +1,4 @@
-import {Alert, FlatList, RefreshControl} from 'react-native';
+import {Alert, FlatList, RefreshControl, Text} from 'react-native';
 import styles from './style';
 import {useBrand, useTheme} from '../../hooks';
 import {
@@ -106,15 +106,22 @@ const BrandScreen: React.FC = () => {
         onTabChange={handleTabChange}
         isLoadingBrands={isLoadingBrands}>
         {isLoadingProduct ? (
-          <FlatList
-            data={dummyProducts}
-            numColumns={2}
-            renderItem={ProductItemSkeleton}
-            showsVerticalScrollIndicator={false}
-            ItemSeparatorComponent={ItemSeparatorHeight}
-            contentContainerStyle={styles.contentContainer}
-            keyExtractor={item => item.id.toString()}
-          />
+            <FlatList
+              data={dummyProducts}
+              numColumns={2}
+              renderItem={ProductItemSkeleton}
+              showsVerticalScrollIndicator={false}
+              ItemSeparatorComponent={ItemSeparatorHeight}
+              contentContainerStyle={styles.contentContainer}
+              keyExtractor={item => item.id.toString()}
+              refreshControl={
+                <RefreshControl
+                  // style={{opacity: 0}}
+                  refreshing={true}
+                  onRefresh={refreshProducts}
+                />
+              }
+            />
         ) : products.length === 0 && !isLoadingBrands && !isLoadingProduct ? (
           <NotFound isVisible={true} description={t('Noproductsfound')} />
         ) : (
@@ -128,6 +135,13 @@ const BrandScreen: React.FC = () => {
             keyExtractor={item => item.id.toString()}
             onEndReached={fetchMoreProducts}
             onEndReachedThreshold={0.5}
+            refreshControl={
+              <RefreshControl
+                // style={{opacity: 0}}
+                refreshing={isLoadingProduct}
+                onRefresh={refreshProducts}
+              />
+            }
           />
         )}
       </FlexibleTab>
