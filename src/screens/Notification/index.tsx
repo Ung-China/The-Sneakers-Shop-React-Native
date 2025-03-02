@@ -8,13 +8,17 @@ import {
   ItemSeparatorHeight,
   AnimatedDotLoader,
   NotificationItem,
+  NotFound,
 } from '../../components';
 import {NotificationProps, StackParamList} from '../../types';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {useTranslation} from 'react-i18next';
 
 const NotificationScreen: React.FC = () => {
   const {colors} = useTheme();
+  const {t} = useTranslation();
+
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
 
   const productItem = ({item}: {item: NotificationProps['item']}) => {
@@ -45,6 +49,12 @@ const NotificationScreen: React.FC = () => {
           <AnimatedDotLoader
             isLoading={isLoading}
             containerStyle={styles.loaderContainer}
+          />
+        ) : notifications.length === 0 && !isLoading ? (
+          <NotFound
+            isVisible={true}
+            description={t('NoNotificationsFound')}
+            containerStyle={styles.notFoundContainer}
           />
         ) : (
           <FlatList

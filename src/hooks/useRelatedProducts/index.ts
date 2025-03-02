@@ -1,28 +1,34 @@
 import {useEffect, useState} from 'react';
-import {GET} from '../../api';
+import {API_ENDPOINTS, GET} from '../../api';
 import {Product} from '../../models';
 
-const useSeeMore = (endPointName: string) => {
+const useRelatedProducts = (brandId?: number) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isFetchingMoreProducts, setIsFetchingMoreProducts] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [isFetchingMoreProducts, setIsFetchingMoreProducts] = useState(false);
 
   const fetchProducts = async (page = 1) => {
     if (page > totalPages || isLoading) return;
 
-    if (page === 1) setIsLoading(true);
-    else setIsFetchingMoreProducts(true);
+    if (page === 1) {
+      setIsLoading(true);
+    } else {
+      setIsFetchingMoreProducts(true);
+    }
 
     try {
-      const response = await GET(`${endPointName}`, {page: page});
-      
+      const response = await GET(API_ENDPOINTS.GET_PRODUCTS_BY_BRAND, {
+        brand_id: brandId,
+        page: page,
+      });
+
       const fetchedProducts = response.data.map(
         (item: {
           id: number;
           name: string;
-          price: number;
+          price: string;
           rating: string;
           image: string;
         }) =>
@@ -32,29 +38,28 @@ const useSeeMore = (endPointName: string) => {
       setProducts(prevProducts =>
         page === 1 ? fetchedProducts : [...prevProducts, ...fetchedProducts],
       );
+
       setCurrentPage(response.current_page);
       setTotalPages(response.last_page);
     } catch (error) {
-      console.log('[DEBUG] ERROR WHILE FETCHING SEE MORE PRODUCTS:', error);
+      console.log('[DEBUG] ERROR WHILE FETCHING RELATED PRODUCTS:', error);
     } finally {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 2000);
+      setIsLoading(false);
       setIsFetchingMoreProducts(false);
     }
   };
 
   useEffect(() => {
     fetchProducts();
-  }, [endPointName]);
+  }, [brandId]);
 
   return {
     products,
     isLoading,
+    isFetchingMoreProducts,
     fetchProducts,
     fetchMoreProducts: () => fetchProducts(currentPage + 1),
-    isFetchingMoreProducts,
   };
 };
 
-export default useSeeMore;
+export default useRelatedProducts;

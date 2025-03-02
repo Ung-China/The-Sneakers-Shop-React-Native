@@ -52,8 +52,10 @@ const useBrand = () => {
     if (page > totalProductPages || isLoadingProduct) return;
 
     if (page === 1) {
-      setIsLoadingProduct(true);
       setProducts([]);
+      setProductPage(1);
+      setTotalProductPages(1); 
+      setIsLoadingProduct(true);
     } else setIsFetchingMoreProducts(true);
     try {
       const response = await GET(API_ENDPOINTS.GET_PRODUCTS_BY_BRAND, {
@@ -119,6 +121,7 @@ const useBrand = () => {
     setIsLoadingProduct,
     setProductPage,
     refreshProducts,
+    fetchBrandById,
   };
 };
 

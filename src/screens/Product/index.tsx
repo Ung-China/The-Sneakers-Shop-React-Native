@@ -2,14 +2,17 @@ import {
   Alert,
   FlatList,
   Platform,
-  RefreshControl,
   ScrollView,
   Text,
   View,
 } from 'react-native';
 import styles from './style';
 import {useTranslation} from 'react-i18next';
-import {useBrand, useProduct, useProductDetail, useTheme} from '../../hooks';
+import {
+  useProductDetail,
+  useRelatedProducts,
+  useTheme,
+} from '../../hooks';
 import {
   AnimatedDotLoader,
   FlexibleSwiper,
@@ -27,7 +30,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {ProductItemProps, StackParamList, VariantProps} from '../../types';
 import PriceTag from '../../components/PriceTag';
 import RatingTag from '../../components/RatingTag';
-import React, {useEffect} from 'react';
+import React from 'react';
 const ProductDetailScreen: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
   const route = useRoute<RouteProp<StackParamList, 'ProductDetail'>>();
@@ -38,30 +41,15 @@ const ProductDetailScreen: React.FC = () => {
   const {
     isLoading,
     productDetail,
-    fetchedProductDetail,
     activeVariant,
     price,
-    size,
     setActiveVariant,
     setSize,
     setPrice,
   } = useProductDetail(id);
 
-  const {
-    products,
-    fetchBrandById,
-    isLoading: isLoadingRelatedProducts,
-    fetchMoreProducts,
-    isFetchingMoreProducts,
-  } = useBrand();
-
-  useEffect(() => {
-    if (productDetail?.brandId) {
-      fetchBrandById(productDetail.brandId);
-    }
-  }, [productDetail?.brandId]);
-
-  // console.log('CHECK RELATED PRODUCT', products);
+  const {products, isFetchingMoreProducts, fetchMoreProducts} =
+    useRelatedProducts(6);
 
   const navigateBack = () => {
     return navigation.goBack();
@@ -127,6 +115,17 @@ const ProductDetailScreen: React.FC = () => {
     return Alert.alert('Go to product detail');
   };
 
+  const handleScroll = ({nativeEvent}: any) => {
+    const {layoutMeasurement, contentOffset, contentSize} = nativeEvent;
+
+    const isCloseToBottom =
+      layoutMeasurement.height + contentOffset.y >= contentSize.height - 20;
+
+    if (isCloseToBottom && !isFetchingMoreProducts) {
+      fetchMoreProducts();
+    }
+  };
+
   return (
     <View style={[styles.container, {backgroundColor: colors.primary}]}>
       {isLoading ? (
@@ -141,17 +140,13 @@ const ProductDetailScreen: React.FC = () => {
         <>
           <ScrollView
             showsVerticalScrollIndicator={false}
-            refreshControl={
-              <RefreshControl
-                refreshing={isLoading}
-                onRefresh={fetchedProductDetail}
-                style={{opacity: 0}}
-              />
-            }>
+            onScroll={handleScroll}
+            scrollEventThrottle={16}>
             {isLoading && <AnimatedDotLoader isLoading={isLoading} />}
+
             {productDetail && (
               <>
-                {/* <FlexibleSwiper
+                <FlexibleSwiper
                   imageUrlList={productDetail.images}
                   imageStyle={[
                     styles.swiperImageStyle,
@@ -168,9 +163,9 @@ const ProductDetailScreen: React.FC = () => {
                   iconSize={150}
                   autoPlay={false}
                   resizeMode="contain"
-                /> */}
+                />
 
-                {/* <View style={styles.body}>
+                <View style={styles.body}>
                   <View
                     style={[
                       styles.container1,
@@ -247,7 +242,7 @@ const ProductDetailScreen: React.FC = () => {
                       keyExtractor={item => item.id.toString()}
                     />
                   </View>
-                </View> */}
+                </View>
               </>
             )}
 
@@ -283,8 +278,6 @@ const ProductDetailScreen: React.FC = () => {
                 ItemSeparatorComponent={ItemSeparatorHeight}
                 contentContainerStyle={styles.contentContainer}
                 keyExtractor={item => item.id.toString()}
-                onEndReached={fetchMoreProducts}
-                onEndReachedThreshold={0.9}
               />
             </Section>
             <AnimatedDotLoader
@@ -293,7 +286,7 @@ const ProductDetailScreen: React.FC = () => {
             />
           </ScrollView>
 
-          {/* <Footer
+          <Footer
             safeAreaStyle={[
               styles.safeAreaStyle,
               {backgroundColor: colors.primary},
@@ -319,7 +312,7 @@ const ProductDetailScreen: React.FC = () => {
                 {t('buyNow')}
               </Text>
             </Touchable>
-          </Footer> */}
+          </Footer>
         </>
       )}
     </View>

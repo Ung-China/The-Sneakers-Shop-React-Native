@@ -22,6 +22,7 @@ import useNotificationDetail from './useNotificationDetail';
 import useSeeMore from './useSeeMore';
 import useProductDetail from './useProductDetail';
 import useSearchProduct from './useSearch';
+import useRelatedProducts from './useRelatedProducts';
 
 export {
   useLanguage,
@@ -48,4 +49,5 @@ export {
   useSeeMore,
   useProductDetail,
   useSearchProduct,
+  useRelatedProducts,
 };

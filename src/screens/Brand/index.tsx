@@ -16,7 +16,6 @@ import {useTranslation} from 'react-i18next';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {View} from 'react-native';
-import {useEffect} from 'react';
 import {dummyProducts} from '../../models/Product';
 
 const BrandScreen: React.FC = () => {

@@ -4,13 +4,13 @@ import {useTheme} from '../../hooks';
 import {NotFoundProps} from '../../types';
 import {Icons} from '../../constants';
 import {useTranslation} from 'react-i18next';
-const NotFound: React.FC<NotFoundProps> = ({isVisible, description}) => {
+const NotFound: React.FC<NotFoundProps> = ({isVisible, description,containerStyle}) => {
   const {colors, theme} = useTheme();
   const {t} = useTranslation();
 
   if (!isVisible) return null;
   return (
-    <View style={[styles.container, {backgroundColor: colors.primary}]}>
+    <View style={[styles.container, {backgroundColor: colors.primary},containerStyle]}>
       {/* <Icons.EMPTYBOX
         width={150}
         height={150}

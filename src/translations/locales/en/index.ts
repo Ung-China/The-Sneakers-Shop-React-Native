@@ -147,4 +147,5 @@ export const translateEN = {
   recommendedProducts: 'Recommended Products',
   popularProducts: 'Popular Products',
   Noproductsfound: 'No products found. Try searching for something else!',
+  NoNotificationsFound: 'No notifications found. Check back later!'
 };
