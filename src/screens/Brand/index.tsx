@@ -17,6 +17,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {View} from 'react-native';
 import {dummyProducts} from '../../models/Product';
+import {useEffect} from 'react';
 
 const BrandScreen: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
@@ -37,7 +38,16 @@ const BrandScreen: React.FC = () => {
     fetchMoreProducts,
     setProductPage,
     refreshProducts,
-  } = useBrand();
+    fetchBrandById,
+  } = useBrand(id);
+
+
+  useEffect(() => {
+    if (id) {
+      setBrandId(id);
+      fetchBrandById(id);
+    }
+  }, [id]);
 
   const productItem = ({
     item,

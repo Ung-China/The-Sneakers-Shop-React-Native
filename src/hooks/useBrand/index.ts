@@ -2,18 +2,19 @@ import {useEffect, useState} from 'react';
 import {API_ENDPOINTS, GET} from '../../api';
 import {Brand, Product} from '../../models';
 
-const useBrand = () => {
+const useBrand = (initialBrandId?: number) => {
   const [brands, setBrands] = useState<Brand[]>([]);
   const [products, setProducts] = useState([]);
   const [isLoadingBrands, setIsLoadingBrand] = useState(false);
   const [isLoadingProduct, setIsLoadingProduct] = useState(false);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
   const [isFetchingMoreProducts, setIsFetchingMoreProducts] = useState(false);
-  const [brandId, setBrandId] = useState<number | null>(null);
+  const [brandId, setBrandId] = useState<number | null>(initialBrandId ?? null);
   const [brandPage, setBrandPage] = useState(1);
   const [productPage, setProductPage] = useState(1);
   const [totalBrandPages, setTotalBrandPages] = useState(1);
   const [totalProductPages, setTotalProductPages] = useState(1);
+  const [firstLoad, setFirstLoad] = useState(true);  
 
   const fetchBrands = async (page = 1) => {
     if (page > totalBrandPages || isLoadingBrands) return;
@@ -36,15 +37,16 @@ const useBrand = () => {
       setBrandPage(response.current_page);
       setTotalBrandPages(response.last_page);
 
-      if (!brandId && fetchedBrands.length > 0) {
-        const firstBrandId = fetchedBrands[0].id;
-        setBrandId(firstBrandId);
-      }
+      if (firstLoad && !initialBrandId && fetchedBrands.length > 0) {
+        setBrandId(fetchedBrands[0].id);
+    }
+
     } catch (error) {
       console.error('[DEBUG] ERROR WHILE FETCHING BRANDS:', error);
     } finally {
       setIsLoadingBrand(false);
       setIsFetchingMore(false);
+      setFirstLoad(false);  
     }
   };
 
