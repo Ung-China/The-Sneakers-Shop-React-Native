@@ -149,6 +149,9 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   fetchMoreLoaderContainer: {
-    paddingTop:Padding.DEFAULT
+    paddingTop: Padding.DEFAULT,
+  },
+  productContentContainer: {
+    paddingHorizontal: Padding.DEFAULT,
   },
 });

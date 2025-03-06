@@ -4,7 +4,7 @@ import {Product, Variant} from '../../models';
 
 const useProductDetail = (id?: number) => {
   const [productDetail, setProductDetail] = useState<Product | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [size, setSize] = useState('');
   const [price, setPrice] = useState('');
   const [activeVariant, setActiveVariant] = useState<number | null>(null);

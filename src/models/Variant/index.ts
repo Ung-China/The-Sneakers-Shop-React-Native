@@ -18,9 +18,5 @@ export const variants: Variant[] = [
   new Variant(3, '36US', '120', '1'),
   new Variant(4, '37US', '120', '1'),
   new Variant(5, '38US', '120', '1'),
-  new Variant(6, '33US', '120', '1'),
-  new Variant(7, '35US', '120', '1'),
-  new Variant(8, '36US', '120', '1'),
-  new Variant(9, '37US', '120', '1'),
-  new Variant(10, '38US', '120', '1'),
+  new Variant(6, '38US', '120', '1'),
 ];
