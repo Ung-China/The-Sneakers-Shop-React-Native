@@ -14,13 +14,14 @@ const useBrand = (initialBrandId?: number) => {
   const [productPage, setProductPage] = useState(1);
   const [totalBrandPages, setTotalBrandPages] = useState(1);
   const [totalProductPages, setTotalProductPages] = useState(1);
-  const [firstLoad, setFirstLoad] = useState(true);  
+  const [firstLoad, setFirstLoad] = useState(true);
 
   const fetchBrands = async (page = 1) => {
     if (page > totalBrandPages || isLoadingBrands) return;
 
     if (page === 1) {
       setIsLoadingBrand(true);
+      setIsLoadingProduct(true);
     } else setIsFetchingMore(true);
 
     try {
@@ -39,24 +40,23 @@ const useBrand = (initialBrandId?: number) => {
 
       if (firstLoad && !initialBrandId && fetchedBrands.length > 0) {
         setBrandId(fetchedBrands[0].id);
-    }
-
+      }
     } catch (error) {
       console.error('[DEBUG] ERROR WHILE FETCHING BRANDS:', error);
     } finally {
       setIsLoadingBrand(false);
       setIsFetchingMore(false);
-      setFirstLoad(false);  
+      setFirstLoad(false);
     }
   };
 
   const fetchBrandById = async (id?: number, page = 1) => {
-    if (page > totalProductPages || isLoadingProduct) return;
+    if (page > totalProductPages) return;
 
     if (page === 1) {
       setProducts([]);
       setProductPage(1);
-      setTotalProductPages(1); 
+      setTotalProductPages(1);
       setIsLoadingProduct(true);
     } else setIsFetchingMoreProducts(true);
     try {
