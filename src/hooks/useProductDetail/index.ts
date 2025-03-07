@@ -41,8 +41,8 @@ const useProductDetail = (id?: number) => {
         response.image,
         response.description,
         response.images,
-        variants,
         response.brand_id,
+        variants,
       );
 
       setProductDetail(fetchedProductDetail);

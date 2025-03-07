@@ -9,11 +9,13 @@ import {
   AnimatedDotLoader,
   NotificationItem,
   NotFound,
+  NotificationItemSkeleton,
 } from '../../components';
 import {NotificationProps, StackParamList} from '../../types';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useTranslation} from 'react-i18next';
+import {dummyNotifications} from '../../models/Notification';
 
 const NotificationScreen: React.FC = () => {
   const {colors} = useTheme();
@@ -28,6 +30,10 @@ const NotificationScreen: React.FC = () => {
         onPress={() => handlePressToNotificationDetail(item)}
       />
     );
+  };
+
+  const productItemSkeleton = () => {
+    return <NotificationItemSkeleton />;
   };
 
   const handlePressToNotificationDetail = (item: NotificationProps['item']) => {
@@ -46,9 +52,20 @@ const NotificationScreen: React.FC = () => {
     <>
       <View style={[styles.container, {backgroundColor: colors.primary}]}>
         {isLoading ? (
-          <AnimatedDotLoader
-            isLoading={isLoading}
-            containerStyle={styles.loaderContainer}
+          <FlatList
+            data={dummyNotifications}
+            renderItem={productItemSkeleton}
+            showsVerticalScrollIndicator={false}
+            ItemSeparatorComponent={ItemSeparatorHeight}
+            contentContainerStyle={styles.notificationContentContainer}
+            keyExtractor={item => item.id.toString()}
+            refreshControl={
+              <RefreshControl
+                style={{opacity: 0}}
+                refreshing={false}
+                onRefresh={fetchNotifications}
+              />
+            }
           />
         ) : notifications.length === 0 && !isLoading ? (
           <NotFound
@@ -69,7 +86,7 @@ const NotificationScreen: React.FC = () => {
             refreshControl={
               <RefreshControl
                 style={{opacity: 0}}
-                refreshing={isLoading}
+                refreshing={false}
                 onRefresh={fetchNotifications}
               />
             }

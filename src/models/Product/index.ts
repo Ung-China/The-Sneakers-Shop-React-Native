@@ -8,8 +8,8 @@ export default class Product {
   image: string;
   description?: string;
   images?: string[];
-  variants?: Variant[];
   brandId?: number;
+  variants?: Variant[];
 
   constructor(
     id: number,
@@ -19,8 +19,8 @@ export default class Product {
     image: string,
     description?: string,
     images?: string[],
-    variants?: Variant[],
     brandId?: number,
+    variants?: Variant[],
   ) {
     this.id = id;
     this.name = name;
@@ -29,8 +29,8 @@ export default class Product {
     this.image = image;
     this.description = description;
     this.images = images;
-    this.variants = variants;
     this.brandId = brandId;
+    this.variants = variants;
   }
 }
 
@@ -43,8 +43,8 @@ export const dummyProducts: Product[] = [
     '',
     'A stylish and comfortable sneaker with a modern design.',
     [],
-    [],
     101,
+    [],
   ),
   new Product(
     2,
@@ -54,8 +54,8 @@ export const dummyProducts: Product[] = [
     '',
     'A stylish and comfortable sneaker with a modern design.',
     [],
-    [],
     101,
+    [],
   ),
   new Product(
     3,
@@ -65,8 +65,8 @@ export const dummyProducts: Product[] = [
     '',
     'A stylish and comfortable sneaker with a modern design.',
     [],
-    [],
     101,
+    [],
   ),
   new Product(
     4,
@@ -76,8 +76,8 @@ export const dummyProducts: Product[] = [
     '',
     'A stylish and comfortable sneaker with a modern design.',
     [],
-    [],
     101,
+    [],
   ),
   new Product(
     5,
@@ -87,8 +87,8 @@ export const dummyProducts: Product[] = [
     '',
     'A stylish and comfortable sneaker with a modern design.',
     [],
-    [],
     101,
+    [],
   ),
   new Product(
     6,
@@ -98,7 +98,29 @@ export const dummyProducts: Product[] = [
     '',
     'A stylish and comfortable sneaker with a modern design.',
     [],
+    101,
+    [],
+  ),
+  new Product(
+    7,
+    'Nike Air Max 270',
+    '149.99',
+    '4.7',
+    '',
+    'A stylish and comfortable sneaker with a modern design.',
     [],
     101,
+    [],
+  ),
+  new Product(
+    8,
+    'Nike Air Max 270',
+    '149.99',
+    '4.7',
+    '',
+    'A stylish and comfortable sneaker with a modern design.',
+    [],
+    101,
+    [],
   ),
 ];

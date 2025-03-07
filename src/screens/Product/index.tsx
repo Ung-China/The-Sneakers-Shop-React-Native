@@ -98,7 +98,7 @@ const ProductDetailScreen: React.FC = () => {
     return (
       <ProductItem
         item={item}
-        onPress={handlePressOnProduct}
+        onPress={() => handlePressOnProduct(item.id)}
         wrapperStyle={[
           styles.productWrapper,
           {marginRight: index % 2 === 0 ? Spacing.DEFAULT : 0},
@@ -107,8 +107,8 @@ const ProductDetailScreen: React.FC = () => {
     );
   };
 
-  const handlePressOnProduct = () => {
-    return Alert.alert('Go to product detail');
+  const handlePressOnProduct = (id: number) => {
+    navigation.replace('ProductDetail', {id});
   };
 
   const handleScroll = ({nativeEvent}: any) => {

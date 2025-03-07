@@ -64,7 +64,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
           <Text style={[styles.name, {color: colors.text}]} numberOfLines={1}>
             {item.name}
           </Text>
-          <PriceTag price={100} promotion={100} />
+          <PriceTag price={'100'} promotion={'100'} />
           <View style={styles.heroFooter}>
             <RatingTag averageRating={item.rating} totalRating={item.rating} />
             <IconButton

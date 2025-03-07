@@ -41,7 +41,6 @@ const BrandScreen: React.FC = () => {
     fetchBrandById,
   } = useBrand(id);
 
-
   useEffect(() => {
     if (id) {
       setBrandId(id);
@@ -59,7 +58,7 @@ const BrandScreen: React.FC = () => {
     return (
       <ProductItem
         item={item}
-        onPress={handlePressOnProduct}
+        onPress={() => handlePressOnProduct(item.id)}
         wrapperStyle={[
           styles.productWrapper,
           {marginRight: index % 2 === 0 ? Spacing.DEFAULT : 0},
@@ -89,8 +88,8 @@ const BrandScreen: React.FC = () => {
     setProductPage(1);
   };
 
-  const handlePressOnProduct = () => {
-    return Alert.alert('Go to product detail');
+  const handlePressOnProduct = (id: number) => {
+    navigation.navigate('ProductDetail', {id});
   };
 
   const handlePressToSearch = () => {

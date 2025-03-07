@@ -17,12 +17,12 @@ const useSeeMore = (endPointName: string) => {
 
     try {
       const response = await GET(`${endPointName}`, {page: page});
-      
+
       const fetchedProducts = response.data.map(
         (item: {
           id: number;
           name: string;
-          price: number;
+          price: string;
           rating: string;
           image: string;
         }) =>

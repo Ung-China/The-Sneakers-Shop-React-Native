@@ -3,8 +3,9 @@ import {RefreshControl, ScrollView, Text, View} from 'react-native';
 import {useRoute, RouteProp} from '@react-navigation/native';
 import styles from './style';
 import {StackParamList} from '../../types';
-import {AnimatedDotLoader, FlexibleSwiper} from '../../components';
+import {AnimatedDotLoader, FlexibleSwiper, Skeleton} from '../../components';
 import {useNotificationDetail, useTheme} from '../../hooks';
+import {Radius, Spacing} from '../../constants';
 
 const NotificationDetailScreen: React.FC = () => {
   const route = useRoute<RouteProp<StackParamList, 'NotificationDetail'>>();
@@ -17,20 +18,84 @@ const NotificationDetailScreen: React.FC = () => {
   return (
     <>
       {isLoading ? (
-        <AnimatedDotLoader
-          isLoading={isLoading}
-          containerStyle={[
-            styles.loaderContainer,
-            {backgroundColor: colors.primary},
-          ]}
-        />
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              style={{opacity: 0, height: 0}}
+              refreshing={false}
+              onRefresh={fetchedNotificationDetail}
+            />
+          }
+          style={[styles.container, {backgroundColor: colors.primary}]}>
+          <>
+            <Skeleton
+              containerStyle={{
+                marginHorizontal: Spacing.DEFAULT,
+                borderRadius: Radius.DEFAULT,
+                height: 200,
+              }}
+            />
+            <View style={styles.contentContainer}>
+              <Skeleton
+                containerStyle={{
+                  borderRadius: Radius.SMALL,
+                  height: 20,
+                  width: 300,
+                }}
+              />
+              <Skeleton
+                containerStyle={{
+                  borderRadius: Radius.SMALL,
+                  height: 20,
+                }}
+              />
+               <Skeleton
+                containerStyle={{
+                  borderRadius: Radius.SMALL,
+                  height: 20,
+                }}
+              />
+               <Skeleton
+                containerStyle={{
+                  borderRadius: Radius.SMALL,
+                  height: 20,
+                }}
+              />
+               <Skeleton
+                containerStyle={{
+                  borderRadius: Radius.SMALL,
+                  height: 20,
+                }}
+              />
+               <Skeleton
+                containerStyle={{
+                  borderRadius: Radius.SMALL,
+                  height: 20,
+                }}
+              />
+               <Skeleton
+                containerStyle={{
+                  borderRadius: Radius.SMALL,
+                  height: 20,
+                }}
+              />
+               <Skeleton
+                containerStyle={{
+                  borderRadius: Radius.SMALL,
+                  height: 20,
+                }}
+              />
+            </View>
+          </>
+        </ScrollView>
       ) : (
         <ScrollView
           showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl
               style={{opacity: 0, height: 0}}
-              refreshing={isLoading}
+              refreshing={false}
               onRefresh={fetchedNotificationDetail}
             />
           }

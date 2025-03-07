@@ -41,7 +41,7 @@ const SearchScreen: React.FC = () => {
     return (
       <ProductItem
         item={item}
-        onPress={handlePressOnProduct}
+        onPress={() => handlePressOnProduct(item.id)}
         wrapperStyle={[
           styles.productWrapper,
           {marginRight: index % 2 === 0 ? Spacing.DEFAULT : 0},
@@ -58,10 +58,9 @@ const SearchScreen: React.FC = () => {
     }
   };
 
-  const handlePressOnProduct = () => {
-    return Alert.alert('Go to product detail');
+  const handlePressOnProduct = (id: number) => {
+    navigation.navigate('ProductDetail', {id});
   };
-
   return (
     <>
       <View style={[styles.safeContainer, {backgroundColor: colors.primary}]}>

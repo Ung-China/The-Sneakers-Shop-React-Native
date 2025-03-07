@@ -21,6 +21,7 @@ const useNotification = () => {
         page: page,
       });
 
+
       const fetchedNotifications = response.data.map(
         (item: {
           id: number;
@@ -44,7 +45,7 @@ const useNotification = () => {
     } finally {
       setTimeout(() => {
         setIsLoading(false);
-      }, 1000);
+      }, 2000);
       setIsFetchingMoreNotifications(false);
     }
   };
