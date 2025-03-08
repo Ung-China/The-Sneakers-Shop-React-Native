@@ -21,7 +21,6 @@ const useNotification = () => {
         page: page,
       });
 
-
       const fetchedNotifications = response.data.map(
         (item: {
           id: number;

@@ -3,6 +3,7 @@ import {useFavorite, useTheme} from '../../hooks';
 import styles from './style';
 import {FlatList} from 'react-native-gesture-handler';
 import {
+  AnimatedDotLoader,
   FavoriteItem,
   FavoriteItemSkeleton,
   ItemSeparatorHeight,
@@ -14,7 +15,13 @@ import {dummyProducts} from '../../models/Product';
 
 const FavoriteScreen: React.FC = () => {
   const {colors} = useTheme();
-  const {favorites, isLoading, refreshFavorites} = useFavorite();
+  const {
+    favorites,
+    isLoading,
+    refreshFavorites,
+    isFetchingMoreFavorites,
+    fetchMoreFavorites,
+  } = useFavorite();
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
 
   const favoriteItem = ({item}: {item: ProductItemProps['item']}) => {
@@ -57,6 +64,8 @@ const FavoriteScreen: React.FC = () => {
           ItemSeparatorComponent={ItemSeparatorHeight}
           contentContainerStyle={styles.contentContainerStyle}
           keyExtractor={item => item.id.toString()}
+          onEndReached={fetchMoreFavorites}
+          onEndReachedThreshold={0.1}
           refreshControl={
             <RefreshControl
               style={{opacity: 0}}
@@ -66,6 +75,10 @@ const FavoriteScreen: React.FC = () => {
           }
         />
       )}
+      <AnimatedDotLoader
+        isLoading={isFetchingMoreFavorites}
+        containerStyle={styles.fetchMoreLoaderContainer}
+      />
     </View>
   );
 };
