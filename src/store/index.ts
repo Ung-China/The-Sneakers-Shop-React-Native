@@ -11,18 +11,24 @@ import {
 } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {combineReducers} from 'redux';
-import {languageReducer, themeReducer, userReducer} from './reducers';
+import {
+  languageReducer,
+  themeReducer,
+  userReducer,
+  favoriteReducer,
+} from './reducers';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['language', 'theme', 'user'],
+  whitelist: ['language', 'theme', 'user', 'favorites'],
 };
 
 const rootReducer = combineReducers({
   language: languageReducer,
   theme: themeReducer,
   user: userReducer,
+  favorites: favoriteReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

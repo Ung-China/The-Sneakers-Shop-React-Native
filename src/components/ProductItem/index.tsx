@@ -5,7 +5,7 @@ import Touchable from '../Touchable';
 import {CachedImage} from '@georstat/react-native-image-cache';
 import LoadingImage from '../LoadingImage';
 import {Icons, Radius, Spacing} from '../../constants';
-import {useTheme} from '../../hooks';
+import {useFavorite, useTheme} from '../../hooks';
 import PriceTag from '../PriceTag';
 import IconButton from '../IconButton';
 import RatingTag from '../RatingTag';
@@ -17,12 +17,10 @@ const ProductItem: React.FC<ProductItemProps> = ({
 }) => {
   const {colors} = useTheme();
 
+  const {isFavorite, toggleItemFavorite} = useFavorite();
+
   const onAddToCartPress = () => {
     return Alert.alert('Add to cart');
-  };
-
-  const onFavoritePress = () => {
-    return Alert.alert('Press add to favorite');
   };
 
   return (
@@ -56,8 +54,15 @@ const ProductItem: React.FC<ProductItemProps> = ({
 
         <IconButton
           style={[styles.heartButton, {backgroundColor: colors.lightGrey}]}
-          icon={<Icons.HEART color={colors.black} width={20} height={20} />}
-          onPress={onFavoritePress}
+          icon={
+            <Icons.HEART
+              color={isFavorite(item.id) ? 'none' :colors.black}
+              fill={isFavorite(item.id) ? colors.black : 'none'}
+              width={20}
+              height={20}
+            />
+          }
+          onPress={() => toggleItemFavorite(item)}
         />
 
         <View style={styles.hero}>

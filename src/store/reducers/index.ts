@@ -1,4 +1,5 @@
 import languageReducer from './Language';
 import themeReducer from './Theme';
 import userReducer from './User';
-export {languageReducer, themeReducer, userReducer};
+import favoriteReducer from './Favorite';
+export {languageReducer, themeReducer, userReducer, favoriteReducer};

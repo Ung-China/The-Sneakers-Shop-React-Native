@@ -40,6 +40,7 @@ import Skeleton from './Skeleton';
 import ProductItemSkeleton from './ProductItemSkeleton';
 import BrandItemSkeleton from './BrandItemSkeleton';
 import NotificationItemSkeleton from './NotificationItemSkeleton';
+import FavoriteItemSkeleton from './FavoriteItemSkeleton';
 export {
   HeaderComponent,
   HeaderTitleComponent,
@@ -83,4 +84,5 @@ export {
   ProductItemSkeleton,
   BrandItemSkeleton,
   NotificationItemSkeleton,
+  FavoriteItemSkeleton
 };

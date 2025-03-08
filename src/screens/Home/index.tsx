@@ -1,5 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, View, FlatList, RefreshControl} from 'react-native';
+import {
+  ScrollView,
+  View,
+  FlatList,
+  RefreshControl,
+  SafeAreaView,
+} from 'react-native';
 import styles from './style';
 import {
   AnimatedDotLoader,
@@ -171,24 +177,22 @@ const HomeScreen: React.FC = () => {
     fetchData();
   }, []);
   return (
-    <View
+    <SafeAreaView
       style={[
         styles.container,
         {
           backgroundColor: colors.primary,
-          paddingTop: isLoading ? 0 : Padding.TOP,
         },
       ]}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl
-            refreshing={isLoading}
+            refreshing={false}
             onRefresh={handleRefresh}
             style={{opacity: 0}}
           />
         }>
-        {isLoading && <AnimatedDotLoader isLoading={isLoading} />}
 
         <HomeHeader
           item={location}
@@ -522,7 +526,7 @@ const HomeScreen: React.FC = () => {
           </Section>
         )}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

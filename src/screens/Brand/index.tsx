@@ -115,10 +115,6 @@ const BrandScreen: React.FC = () => {
         isLoadingBrands={isLoadingBrands}>
         {isLoadingProduct ? (
           <>
-            <AnimatedDotLoader
-              isLoading={isLoadingProduct}
-              containerStyle={styles.dummyLoading}
-            />
             <FlatList
               data={dummyProducts}
               numColumns={2}

@@ -1,8 +1,7 @@
 import {View} from 'react-native';
 import styles from './style';
 import Touchable from '../Touchable';
-import {NotificationProps} from '../../types';
-import {Icons, Radius, Spacing} from '../../constants';
+import { Radius} from '../../constants';
 import {useTheme} from '../../hooks';
 import Skeleton from '../Skeleton';
 

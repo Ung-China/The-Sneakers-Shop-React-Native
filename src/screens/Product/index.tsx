@@ -1,7 +1,12 @@
 import {Alert, FlatList, Platform, ScrollView, Text, View} from 'react-native';
 import styles from './style';
 import {useTranslation} from 'react-i18next';
-import {useProductDetail, useRelatedProducts, useTheme} from '../../hooks';
+import {
+  useFavorite,
+  useProductDetail,
+  useRelatedProducts,
+  useTheme,
+} from '../../hooks';
 import {
   AnimatedDotLoader,
   FlexibleSwiper,
@@ -21,7 +26,7 @@ import {ProductItemProps, StackParamList, VariantProps} from '../../types';
 import PriceTag from '../../components/PriceTag';
 import RatingTag from '../../components/RatingTag';
 import React from 'react';
-import {dummyProducts} from '../../models/Product';
+import  {dummyProducts} from '../../models/Product';
 import {variants} from '../../models/Variant';
 const ProductDetailScreen: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
@@ -40,12 +45,10 @@ const ProductDetailScreen: React.FC = () => {
     setPrice,
   } = useProductDetail(id);
 
-  const {
-    products,
-    isFetchingMoreProducts,
-    fetchMoreProducts,
-    isLoading: isLoadingReleatedProducts,
-  } = useRelatedProducts(productDetail?.brandId);
+  const {products, isFetchingMoreProducts, fetchMoreProducts} =
+    useRelatedProducts(productDetail?.brandId);
+
+  const {isFavorite, toggleItemFavorite} = useFavorite();
 
   const navigateBack = () => {
     return navigation.goBack();
@@ -53,10 +56,6 @@ const ProductDetailScreen: React.FC = () => {
 
   const navigateToCart = () => {
     return navigation.navigate('Cart');
-  };
-
-  const toggleFavorite = () => {
-    return Alert.alert('Toggle Favorite');
   };
 
   const addToCart = () => {
@@ -203,9 +202,19 @@ const ProductDetailScreen: React.FC = () => {
                     <Text style={[styles.name, {color: colors.text}]}>
                       {productDetail.name}
                     </Text>
+
                     <IconButton
-                      onPress={toggleFavorite}
-                      icon={<Icons.HEART color={colors.text} />}
+                      onPress={() => toggleItemFavorite(productDetail)}
+                      icon={
+                        <Icons.HEART
+                          color={
+                            isFavorite(productDetail.id) ? 'none' : colors.text
+                          }
+                          fill={
+                            isFavorite(productDetail.id) ? colors.text : 'none'
+                          }
+                        />
+                      }
                       style={[
                         styles.heartContainer,
                         {backgroundColor: colors.primary},
