@@ -147,5 +147,7 @@ export const translateKH = {
   recommendedProducts: 'ផលិតផលដែលបានណែនាំ',
   popularProducts: 'ផលិតផលពេញនិយម',
   Noproductsfound: 'រកមិនឃើញផលិតផលទេ។ ព្យាយាមស្វែងរកអ្វីផ្សេងទៀត!',
-  NoNotificationsFound: 'មិនមានការជូនដំណឹងទេ។ សូមពិនិត្យម្តងទៀតនៅពេលក្រោយ!'
+  NoNotificationsFound: 'មិនមានការជូនដំណឹងទេ។ សូមពិនិត្យម្តងទៀតនៅពេលក្រោយ!',
+  NoFavoriteProductsFound: 'អ្នកមិនមានផលិតផលដែលចូលចិត្តនៅឡើយទេ!',
+
 };

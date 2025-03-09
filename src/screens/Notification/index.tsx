@@ -70,7 +70,7 @@ const NotificationScreen: React.FC = () => {
         ) : notifications.length === 0 && !isLoading ? (
           <NotFound
             isVisible={true}
-            description={t('NoNotificationsFound')}
+            description={t('NoFavoriteProductsFound')}
             containerStyle={styles.notFoundContainer}
           />
         ) : (

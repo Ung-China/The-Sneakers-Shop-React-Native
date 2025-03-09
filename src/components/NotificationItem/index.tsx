@@ -26,7 +26,7 @@ const NotificationItem: React.FC<NotificationProps> = ({onPress, item}) => {
       </View>
 
       <View style={styles.heroContainer}>
-        <Text style={[styles.title, {color: colors.text}]}>{item.title}</Text>
+        <Text numberOfLines={1} style={[styles.title, {color: colors.text}]}>{item.title}</Text>
         <Text
           style={[styles.description, {color: colors.text}]}
           numberOfLines={3}>

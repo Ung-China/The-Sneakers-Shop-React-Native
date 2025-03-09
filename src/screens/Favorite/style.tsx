@@ -17,4 +17,7 @@ export default StyleSheet.create({
     padding: Padding.DEFAULT,
     paddingBottom: Padding.BOTTOM * 2,
   },
+  notFoundContainer: {
+    paddingVertical: Padding.DEFAULT,
+  },
 });

@@ -7,14 +7,17 @@ import {
   FavoriteItem,
   FavoriteItemSkeleton,
   ItemSeparatorHeight,
+  NotFound,
 } from '../../components';
 import {ProductItemProps, StackParamList} from '../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {dummyProducts} from '../../models/Product';
+import { useTranslation } from 'react-i18next';
 
 const FavoriteScreen: React.FC = () => {
   const {colors} = useTheme();
+  const {t}=useTranslation();
   const {
     favorites,
     isLoading,
@@ -55,6 +58,12 @@ const FavoriteScreen: React.FC = () => {
               onRefresh={refreshFavorites}
             />
           }
+        />
+      ) : favorites.length === 0 && !isLoading ? (
+        <NotFound
+          isVisible={true}
+          description={t('NoNotificationsFound')}
+          containerStyle={styles.notFoundContainer}
         />
       ) : (
         <FlatList
