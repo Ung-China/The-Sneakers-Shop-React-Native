@@ -3,6 +3,7 @@ import styles from './style';
 import {useTranslation} from 'react-i18next';
 import {
   useFavorite,
+  useNotification,
   useProductDetail,
   useRelatedProducts,
   useTheme,
@@ -26,14 +27,18 @@ import {ProductItemProps, StackParamList, VariantProps} from '../../types';
 import PriceTag from '../../components/PriceTag';
 import RatingTag from '../../components/RatingTag';
 import React from 'react';
-import  {dummyProducts} from '../../models/Product';
+import {dummyProducts} from '../../models/Product';
 import {variants} from '../../models/Variant';
+import {ProductPromotionChecker} from '../../helpers';
+import {SlideInRight} from 'react-native-reanimated';
 const ProductDetailScreen: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
   const route = useRoute<RouteProp<StackParamList, 'ProductDetail'>>();
   const {id} = route.params;
   const {t} = useTranslation();
   const {colors} = useTheme();
+
+  const {notifications} = useNotification();
 
   const {
     isLoading,
@@ -44,6 +49,19 @@ const ProductDetailScreen: React.FC = () => {
     setSize,
     setPrice,
   } = useProductDetail(id);
+
+  // console.log('PRODUCT DETIAL', productDetail);
+  // console.log('CHECK PRODUCT ID', productDetail?.id);
+  // console.log('CHECK PRODUCT PRICE', productDetail?.price);
+
+  const {hasProductPromotion, productDiscountAmount} = ProductPromotionChecker({
+    productId: productDetail?.id,
+    defaultPrice: 65,
+    promotions: notifications,
+  });
+
+  console.log('HAS PROMOTION', hasProductPromotion);
+  console.log('DISCOUNT AMOUNT', productDiscountAmount);
 
   const {products, isFetchingMoreProducts, fetchMoreProducts} =
     useRelatedProducts(productDetail?.brandId);
@@ -168,7 +186,7 @@ const ProductDetailScreen: React.FC = () => {
                 imageUrlList={productDetail.images}
                 imageStyle={[
                   styles.swiperImageStyle,
-                  {backgroundColor: colors.primary},
+                  {backgroundColor: colors.white},
                 ]}
                 containerStyle={[
                   styles.swiperContainer,

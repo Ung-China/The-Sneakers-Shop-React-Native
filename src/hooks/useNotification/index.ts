@@ -22,13 +22,19 @@ const useNotification = () => {
       });
 
       const fetchedNotifications = response.data.map(
-        (item: {
-          id: number;
-          title: string;
-          description: string;
-          images: string[];
-        }) =>
-          new Notification(item.id, item.title, item.description, item.images),
+        (item: any) =>
+          new Notification(
+            item.id,
+            item.title,
+            item.description,
+            item.images,
+            item.promotion_type,
+            item.discount_type,
+            item.amount,
+            item.percent,
+            item.brands || [],
+            item.products || [],
+          ),
       );
 
       setNotifications(prevNotifications =>

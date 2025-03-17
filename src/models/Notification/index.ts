@@ -3,17 +3,35 @@ export default class Notification {
   title: string;
   description: string;
   images: string[];
+  discountType?: 'amount' | 'percent' | null;
+  promotionType?: 'product' | 'brand';
+  amount?: string | null;
+  percent?: string | null;
+  brands?: object[];
+  products?: object[];
 
   constructor(
     id: number,
     title: string,
     description: string,
     images: string[],
+    promotionType?: 'product' | 'brand',
+    discountType?: 'amount' | 'percent',
+    amount?: string | null,
+    percent?: string | null,
+    brands?: object[],
+    products?: object[],
   ) {
     this.id = id;
     this.title = title;
     this.description = description;
     this.images = images;
+    this.promotionType = promotionType;
+    this.discountType = discountType;
+    this.amount = amount;
+    this.percent = percent;
+    this.brands = brands || [];
+    this.products = products || [];
   }
 }
 
