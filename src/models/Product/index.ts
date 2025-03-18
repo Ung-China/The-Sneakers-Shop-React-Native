@@ -3,7 +3,7 @@ import Variant from '../Variant';
 export default class Product {
   id: number;
   name: string;
-  price: string;
+  price: number;
   rating: string;
   image: string;
   description?: string;
@@ -14,7 +14,7 @@ export default class Product {
   constructor(
     id: number,
     name: string,
-    price: string,
+    price: number,
     rating: string,
     image: string,
     description?: string,
@@ -38,7 +38,7 @@ export const dummyProducts: Product[] = [
   new Product(
     1,
     'Nike Air Max 270',
-    '149.99',
+    144,
     '4.7',
     '',
     'A stylish and comfortable sneaker with a modern design.',
@@ -49,7 +49,7 @@ export const dummyProducts: Product[] = [
   new Product(
     2,
     'Nike Air Max 270',
-    '149.99',
+    144,
     '4.7',
     '',
     'A stylish and comfortable sneaker with a modern design.',
@@ -60,7 +60,7 @@ export const dummyProducts: Product[] = [
   new Product(
     3,
     'Nike Air Max 270',
-    '149.99',
+    144,
     '4.7',
     '',
     'A stylish and comfortable sneaker with a modern design.',
@@ -71,7 +71,7 @@ export const dummyProducts: Product[] = [
   new Product(
     4,
     'Nike Air Max 270',
-    '149.99',
+    144,
     '4.7',
     '',
     'A stylish and comfortable sneaker with a modern design.',
@@ -82,7 +82,7 @@ export const dummyProducts: Product[] = [
   new Product(
     5,
     'Nike Air Max 270',
-    '149.99',
+    144,
     '4.7',
     '',
     'A stylish and comfortable sneaker with a modern design.',
@@ -93,7 +93,7 @@ export const dummyProducts: Product[] = [
   new Product(
     6,
     'Nike Air Max 270',
-    '149.99',
+    144,
     '4.7',
     '',
     'A stylish and comfortable sneaker with a modern design.',
@@ -104,7 +104,7 @@ export const dummyProducts: Product[] = [
   new Product(
     7,
     'Nike Air Max 270',
-    '149.99',
+    144,
     '4.7',
     '',
     'A stylish and comfortable sneaker with a modern design.',
@@ -115,7 +115,7 @@ export const dummyProducts: Product[] = [
   new Product(
     8,
     'Nike Air Max 270',
-    '149.99',
+    144,
     '4.7',
     '',
     'A stylish and comfortable sneaker with a modern design.',

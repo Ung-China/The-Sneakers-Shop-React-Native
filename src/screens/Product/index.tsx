@@ -49,14 +49,16 @@ const ProductDetailScreen: React.FC = () => {
     setPrice,
   } = useProductDetail(id);
 
-  const {hasProductPromotion, productDiscountAmount} = ProductPromotionChecker({
-    productId: id,
-    defaultPrice: price,
-    promotions: notifications,
-  });
+  const {hasProductPromotion, productDiscountAmount, finalPrice} =
+    ProductPromotionChecker({
+      productId: id,
+      defaultPrice: price,
+      promotions: notifications,
+      brandId: 11,
+    });
 
-  // console.log('HAS PROMOTION', hasProductPromotion);
-  // console.log('DISCOUNT AMOUNT', productDiscountAmount);
+  console.log('HAS PROMOTION', hasProductPromotion);
+  console.log('DISCOUNT AMOUNT', productDiscountAmount);
 
   const {products, isFetchingMoreProducts, fetchMoreProducts} =
     useRelatedProducts(productDetail?.brandId);
@@ -246,8 +248,8 @@ const ProductDetailScreen: React.FC = () => {
                 ) : (
                   <View style={styles.priceContaner}>
                     <PriceTag
-                      price={price}
-                      promotion={'100'}
+                      finalPrice={finalPrice}
+                      defaultPrice={price}
                       priceStyle={styles.priceStyle}
                       defaultPriceStyle={styles.defaultPriceStyle}
                     />

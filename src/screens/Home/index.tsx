@@ -193,7 +193,6 @@ const HomeScreen: React.FC = () => {
             style={{opacity: 0}}
           />
         }>
-
         <HomeHeader
           item={location}
           handlePressToShopLocation={handlePressToShopLocation}
@@ -280,7 +279,7 @@ const HomeScreen: React.FC = () => {
           </Section>
         )}
 
-        {isInitialLoading || isLoading ? (
+        {/* {isInitialLoading || isLoading ? (
           <Section
             title={t('shopByBrand')}
             actionButton={
@@ -407,7 +406,7 @@ const HomeScreen: React.FC = () => {
             autoPlay={true}
           />
         )}
-
+        
         {isInitialLoading || isLoading ? (
           <Section
             title={t('mostPopularShoes')}
@@ -524,7 +523,7 @@ const HomeScreen: React.FC = () => {
               ]}
             />
           </Section>
-        )}
+        )} */}
       </ScrollView>
     </SafeAreaView>
   );

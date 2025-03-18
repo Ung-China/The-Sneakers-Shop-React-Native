@@ -5,10 +5,11 @@ import Touchable from '../Touchable';
 import {CachedImage} from '@georstat/react-native-image-cache';
 import LoadingImage from '../LoadingImage';
 import {Icons, Radius, Spacing} from '../../constants';
-import {useFavorite, useTheme} from '../../hooks';
+import {useFavorite, useNotification, useTheme} from '../../hooks';
 import PriceTag from '../PriceTag';
 import IconButton from '../IconButton';
 import RatingTag from '../RatingTag';
+import {ProductPromotionChecker} from '../../helpers';
 
 const ProductItem: React.FC<ProductItemProps> = ({
   item,
@@ -16,12 +17,21 @@ const ProductItem: React.FC<ProductItemProps> = ({
   onPress,
 }) => {
   const {colors} = useTheme();
+  const {notifications} = useNotification();
 
   const {isFavorite, toggleItemFavorite} = useFavorite();
 
   const onAddToCartPress = () => {
     return Alert.alert('Add to cart');
   };
+
+  const {hasProductPromotion, productDiscountAmount, finalPrice} =
+    ProductPromotionChecker({
+      productId: item.id,
+      defaultPrice: item.price,
+      promotions: notifications,
+      brandId: item.brandId,
+    });
 
   return (
     <Touchable
@@ -56,7 +66,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
           style={[styles.heartButton, {backgroundColor: colors.lightGrey}]}
           icon={
             <Icons.HEART
-              color={isFavorite(item.id) ? 'none' :colors.black}
+              color={isFavorite(item.id) ? 'none' : colors.black}
               fill={isFavorite(item.id) ? colors.black : 'none'}
               width={20}
               height={20}
@@ -69,7 +79,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
           <Text style={[styles.name, {color: colors.text}]} numberOfLines={1}>
             {item.name}
           </Text>
-          <PriceTag price={'100'} promotion={'100'} />
+          <PriceTag finalPrice={finalPrice} defaultPrice={item.price} />
           <View style={styles.heroFooter}>
             <RatingTag averageRating={item.rating} totalRating={item.rating} />
             <IconButton

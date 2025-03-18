@@ -21,8 +21,6 @@ const useNotification = () => {
         page: page,
       });
 
-      console.log('CHECK NOTIFICATION', response.data);
-
       const fetchedNotifications = response.data.map(
         (item: any) =>
           new Notification(
@@ -30,10 +28,10 @@ const useNotification = () => {
             item.title,
             item.description,
             item.images,
-            item.promotion_type,
-            item.discount_type,
             Number(item.amount),
             Number(item.percent),
+            item.promotion_type,
+            item.discount_type,
             item.brands || [],
             item.products || [],
           ),

@@ -3,10 +3,10 @@ export default class Notification {
   title: string;
   description: string;
   images: string[];
+  amount: number;
+  percent: number;
   discountType?: 'amount' | 'percent' | null;
   promotionType?: 'product' | 'brand';
-  amount?: number;
-  percent?: number;
   brands?: {id: number}[];
   products?: {id: number}[];
 
@@ -15,10 +15,10 @@ export default class Notification {
     title: string,
     description: string,
     images: string[],
+    amount: number,
+    percent: number,
     promotionType?: 'product' | 'brand',
     discountType?: 'amount' | 'percent',
-    amount?: number,
-    percent?: number,
     brands?: {id: number}[],
     products?: {id: number}[],
   ) {
@@ -41,35 +41,47 @@ export const dummyNotifications: Notification[] = [
     'System Update',
     'Our system will undergo maintenance from 2:00 AM to 4:00 AM.',
     [],
+    10,
+    10,
   ),
   new Notification(
     2,
     'New Feature Released',
     'Check out our new dark mode feature in the settings.',
     [],
+    10,
+    10,
   ),
   new Notification(
     3,
     'Limited Time Offer',
     'Get 20% off on your next purchase. Offer valid till March 15.',
     [],
+    10,
+    10,
   ),
   new Notification(
     4,
     'Account Security Alert',
     'Unusual login detected from a new device.',
     [],
+    10,
+    10,
   ),
   new Notification(
     5,
     'Event Invitation',
     'Join our live webinar on product updates this Friday.',
     [],
+    10,
+    10,
   ),
   new Notification(
     6,
     'Subscription Renewal',
     'Your subscription will expire soon. Renew now to continue uninterrupted service.',
     [],
+    10,
+    10,
   ),
 ];

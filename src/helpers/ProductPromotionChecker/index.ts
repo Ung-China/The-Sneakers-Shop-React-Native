@@ -1,33 +1,48 @@
-import Notification from '../../models/Notification';
+import {Notification} from '../../models';
 
 const ProductPromotionChecker = ({
   productId,
   defaultPrice,
   promotions,
+  brandId,
 }: {
   productId: number;
   defaultPrice: number;
   promotions: Notification[];
+  brandId: number;
 }) => {
-  const promotion = promotions.find(promo =>
-    promo.products?.some(product => product.id === productId),
-  );
+  const promotion = promotions.find(promo => {
+    const isProductPromo = promo.products?.some(
+      product => product.id === productId,
+    );
+    const isBrandPromo =
+      promo.promotionType === 'brand' &&
+      promo.brands?.some(brand => brand.id === brandId);
+
+    return isProductPromo || isBrandPromo;
+  });
 
   if (!promotion) {
     return {
       hasProductPromotion: false,
       productDiscountAmount: 0,
+      finalPrice: defaultPrice,
     };
   }
 
   const isFixedDiscount = promotion.discountType === 'amount';
   const discountValue = isFixedDiscount
     ? promotion.amount
-    : ((promotion.percent ?? 0) / 100) * defaultPrice;
+    : (promotion.percent / 100) * defaultPrice;
+
+  const finalPrice = discountValue
+    ? defaultPrice - discountValue
+    : defaultPrice;
 
   return {
     hasProductPromotion: true,
     productDiscountAmount: discountValue,
+    finalPrice,
   };
 };
 
