@@ -30,7 +30,6 @@ import React from 'react';
 import {dummyProducts} from '../../models/Product';
 import {variants} from '../../models/Variant';
 import {ProductPromotionChecker} from '../../helpers';
-import {SlideInRight} from 'react-native-reanimated';
 const ProductDetailScreen: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
   const route = useRoute<RouteProp<StackParamList, 'ProductDetail'>>();
@@ -50,18 +49,14 @@ const ProductDetailScreen: React.FC = () => {
     setPrice,
   } = useProductDetail(id);
 
-  // console.log('PRODUCT DETIAL', productDetail);
-  // console.log('CHECK PRODUCT ID', productDetail?.id);
-  // console.log('CHECK PRODUCT PRICE', productDetail?.price);
-
   const {hasProductPromotion, productDiscountAmount} = ProductPromotionChecker({
-    productId: productDetail?.id,
-    defaultPrice: 65,
+    productId: id,
+    defaultPrice: price,
     promotions: notifications,
   });
 
-  console.log('HAS PROMOTION', hasProductPromotion);
-  console.log('DISCOUNT AMOUNT', productDiscountAmount);
+  // console.log('HAS PROMOTION', hasProductPromotion);
+  // console.log('DISCOUNT AMOUNT', productDiscountAmount);
 
   const {products, isFetchingMoreProducts, fetchMoreProducts} =
     useRelatedProducts(productDetail?.brandId);

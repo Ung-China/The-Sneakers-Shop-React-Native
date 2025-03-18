@@ -1,4 +1,4 @@
-const currencyFormat = (value: string) => {
+const currencyFormat = (value: number) => {
   return Number(value).toFixed(2);
 };
 

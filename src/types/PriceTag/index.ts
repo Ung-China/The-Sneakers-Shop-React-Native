@@ -1,7 +1,7 @@
 import {TextStyle, ViewStyle} from 'react-native';
 
 export interface PriceTagProps {
-  price: string;
+  price: number;
   promotion: string;
   defaultPriceStyle?: TextStyle;
   priceStyle?: TextStyle;

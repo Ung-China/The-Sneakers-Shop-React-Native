@@ -15,12 +15,14 @@ const useNotificationDetail = (id?: number) => {
         id: id,
       });
 
-      const fetchedNotificationDetail = new Notification(
-        response.id,
-        response.title,
-        response.description,
-        response.images,
-      );
+      const fetchedNotificationDetail = new Notification({
+        id: {
+          id: response.id,
+          title: response.title,
+          description: response.description,
+          images: response.images,
+        },
+      });
 
       setNotificationDetail(fetchedNotificationDetail);
     } catch (error) {

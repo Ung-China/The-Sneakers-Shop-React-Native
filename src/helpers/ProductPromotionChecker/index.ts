@@ -9,10 +9,6 @@ const ProductPromotionChecker = ({
   defaultPrice: number;
   promotions: Notification[];
 }) => {
-  console.log('CHECK PRODUCT ID', productId);
-  console.log('CHECK DEFAULT PRICE', defaultPrice);
-  console.log('CHECK PROMOTION', promotions);
-
   const promotion = promotions.find(promo =>
     promo.products?.some(product => product.id === productId),
   );
@@ -26,8 +22,8 @@ const ProductPromotionChecker = ({
 
   const isFixedDiscount = promotion.discountType === 'amount';
   const discountValue = isFixedDiscount
-    ? parseFloat(promotion.amount ?? '0')
-    : (parseFloat(promotion.percent ?? '0') / 100) * defaultPrice;
+    ? promotion.amount
+    : ((promotion.percent ?? 0) / 100) * defaultPrice;
 
   return {
     hasProductPromotion: true,

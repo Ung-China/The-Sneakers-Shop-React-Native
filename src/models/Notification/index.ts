@@ -5,10 +5,10 @@ export default class Notification {
   images: string[];
   discountType?: 'amount' | 'percent' | null;
   promotionType?: 'product' | 'brand';
-  amount?: string | null;
-  percent?: string | null;
-  brands?: object[];
-  products?: object[];
+  amount?: number;
+  percent?: number;
+  brands?: {id: number}[];
+  products?: {id: number}[];
 
   constructor(
     id: number,
@@ -17,10 +17,10 @@ export default class Notification {
     images: string[],
     promotionType?: 'product' | 'brand',
     discountType?: 'amount' | 'percent',
-    amount?: string | null,
-    percent?: string | null,
-    brands?: object[],
-    products?: object[],
+    amount?: number,
+    percent?: number,
+    brands?: {id: number}[],
+    products?: {id: number}[],
   ) {
     this.id = id;
     this.title = title;

@@ -6,7 +6,7 @@ const useProductDetail = (id?: number) => {
   const [productDetail, setProductDetail] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [size, setSize] = useState('');
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState(0);
   const [activeVariant, setActiveVariant] = useState<number | null>(null);
 
   const fetchedProductDetail = async () => {
@@ -17,19 +17,12 @@ const useProductDetail = (id?: number) => {
       });
 
       const variants = response.product_info.map(
-        (
-          item: {
-            product_size: string;
-            product_price: string;
-            product_qty: string;
-          },
-          index: number,
-        ) =>
+        (item: any, index: number) =>
           new Variant(
             index + 1,
             item.product_size,
-            item.product_price,
-            item.product_qty,
+            Number(item.product_price),
+            Number(item.product_qty),
           ),
       );
 
