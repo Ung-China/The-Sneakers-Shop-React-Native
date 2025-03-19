@@ -16,12 +16,13 @@ import {
   themeReducer,
   userReducer,
   favoriteReducer,
+  cartReducer,
 } from './reducers';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['language', 'theme', 'user', 'favorites'],
+  whitelist: ['language', 'theme', 'user', 'favorites', 'cart'],
 };
 
 const rootReducer = combineReducers({
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   theme: themeReducer,
   user: userReducer,
   favorites: favoriteReducer,
+  cart: cartReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -30,14 +30,24 @@ import React from 'react';
 import {dummyProducts} from '../../models/Product';
 import {variants} from '../../models/Variant';
 import {ProductPromotionChecker} from '../../helpers';
+import {useDispatch, useSelector} from 'react-redux';
+import {addToCart} from '../../store/actions';
+import {CartItem} from '../../models';
+import {AppDispatch, RootState} from '../../store';
+
 const ProductDetailScreen: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
   const route = useRoute<RouteProp<StackParamList, 'ProductDetail'>>();
   const {id, brandId} = route.params;
   const {t} = useTranslation();
   const {colors} = useTheme();
+  const dispatch = useDispatch();
 
   const {notifications} = useNotification();
+
+  const cartItems = useSelector((state: RootState) => state.cart.cart);
+
+  console.log('CART ITEM', cartItems);
 
   const {
     isLoading,
@@ -70,8 +80,20 @@ const ProductDetailScreen: React.FC = () => {
     return navigation.navigate('Cart');
   };
 
-  const addToCart = () => {
-    return Alert.alert('Add to cart');
+  const testProduct = new CartItem(
+    10,
+    101,
+    'Lipstick Classic Red',
+    'https://example.com/images/lipstick-red.png',
+    15.99,
+    'Matte Finish',
+    1,
+    1,
+  );
+
+  const handleAddToCart = () => {
+    console.log('CHECK TESTING PRODUCT', testProduct);
+    dispatch(addToCart(testProduct));
   };
 
   const goToCheckout = () => {
@@ -451,7 +473,7 @@ const ProductDetailScreen: React.FC = () => {
           ]}
           contentContainerStyle={[styles.footerContainer]}>
           <Touchable
-            onPress={addToCart}
+            onPress={handleAddToCart}
             style={[
               styles.buttonAddToCart,
               {backgroundColor: colors.secondary},

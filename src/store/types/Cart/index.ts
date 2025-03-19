@@ -22,17 +22,17 @@ interface AddToCartAction {
 
 interface IncreaseQuantityAction {
   type: typeof ActionTypes.INCREASE_QUANTITY;
-  payload: number;
+  payload: {productId: number; variantId: number};
 }
 
 interface DecreaseQuantityAction {
   type: typeof ActionTypes.DECREASE_QUANTITY;
-  payload: number;
+  payload: {productId: number; variantId: number};
 }
 
 interface RemoveFromCartAction {
   type: typeof ActionTypes.REMOVE_FROM_CART;
-  payload: number;
+  payload: {productId: number; variantId: number};
 }
 
 export type CartActionTypes =
