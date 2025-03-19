@@ -33,7 +33,7 @@ import {ProductPromotionChecker} from '../../helpers';
 const ProductDetailScreen: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
   const route = useRoute<RouteProp<StackParamList, 'ProductDetail'>>();
-  const {id} = route.params;
+  const {id, brandId} = route.params;
   const {t} = useTranslation();
   const {colors} = useTheme();
 
@@ -49,19 +49,16 @@ const ProductDetailScreen: React.FC = () => {
     setPrice,
   } = useProductDetail(id);
 
-  const {hasProductPromotion, productDiscountAmount, finalPrice} =
+  const {hasProductPromotion, finalPrice, discountType, discountValue} =
     ProductPromotionChecker({
       productId: id,
       defaultPrice: price,
       promotions: notifications,
-      brandId: 11,
+      brandId: brandId,
     });
 
-  console.log('HAS PROMOTION', hasProductPromotion);
-  console.log('DISCOUNT AMOUNT', productDiscountAmount);
-
   const {products, isFetchingMoreProducts, fetchMoreProducts} =
-    useRelatedProducts(productDetail?.brandId);
+    useRelatedProducts(brandId);
 
   const {isFavorite, toggleItemFavorite} = useFavorite();
 
@@ -113,7 +110,7 @@ const ProductDetailScreen: React.FC = () => {
       <ProductItem
         item={item}
         notifications={notifications}
-        onPress={() => handlePressOnProduct(item.id)}
+        onPress={() => handlePressOnProduct(item.id, item.brandId)}
         wrapperStyle={[
           styles.productWrapper,
           {marginRight: index % 2 === 0 ? Spacing.DEFAULT : 0},
@@ -122,8 +119,8 @@ const ProductDetailScreen: React.FC = () => {
     );
   };
 
-  const handlePressOnProduct = (id: number) => {
-    navigation.replace('ProductDetail', {id});
+  const handlePressOnProduct = (id: number, brandId: number) => {
+    navigation.replace('ProductDetail', {id, brandId});
   };
 
   const handleScroll = ({nativeEvent}: any) => {
@@ -164,6 +161,8 @@ const ProductDetailScreen: React.FC = () => {
       />
     );
   };
+
+  // console.log('CHECK PRODUCT DETAIL', productDetail);
 
   return (
     <View style={[styles.container, {backgroundColor: colors.primary}]}>
@@ -255,15 +254,18 @@ const ProductDetailScreen: React.FC = () => {
                       defaultPriceStyle={styles.defaultPriceStyle}
                     />
 
-                    <View
-                      style={[
-                        styles.discountContainer,
-                        {backgroundColor: colors.primary},
-                      ]}>
-                      <Text style={[styles.discount, {color: colors.text}]}>
-                        5% OFF
-                      </Text>
-                    </View>
+                    {hasProductPromotion && (
+                      <View
+                        style={[
+                          styles.discountContainer,
+                          {backgroundColor: colors.primary},
+                        ]}>
+                        <Text style={[styles.discount, {color: colors.text}]}>
+                          {discountValue}
+                          {discountType === 'percent' ? '%' : '$'} OFF
+                        </Text>
+                      </View>
+                    )}
                   </View>
                 )}
 

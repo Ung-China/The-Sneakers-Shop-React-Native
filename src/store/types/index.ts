@@ -6,12 +6,8 @@ import {
   LoginUserSuccessAction,
   LogoutUserSuccessAction,
 } from './UserTypes';
-import {
-  SetFavoritesAction,
-  ToggleFavoriteAction,
-  FavoriteActionTypes,
-  FavoriteState,
-} from './FavoriteType';
+import {FavoriteActionTypes, FavoriteState} from './FavoriteType';
+import {CartActionTypes, CartState} from './Cart';
 export type {
   LanguageState,
   ChangeLanguageAction,
@@ -23,4 +19,6 @@ export type {
   LogoutUserSuccessAction,
   FavoriteState,
   FavoriteActionTypes,
+  CartActionTypes,
+  CartState,
 };

@@ -1,66 +1,93 @@
-import Variant, {variants} from '../Variant';
 export default class CartItem {
   id: number;
+  brandId: number;
   name: string;
-  imageUrl: string;
+  image: string;
   price: number;
-  variant?: Variant;
+  variantName: string;
+  variantId: number;
+  quantity: number;
+
   constructor(
     id: number,
+    brandId: number,
     name: string,
-    imageUrl: string,
+    image: string,
     price: number,
-    variant: Variant,
+    variantName: string,
+    variantId: number,
+    quantity: number,
   ) {
     this.id = id;
+    this.brandId = brandId;
     this.name = name;
-    this.imageUrl = imageUrl;
+    this.image = image;
     this.price = price;
-    this.variant = variant;
+    this.variantName = variantName;
+    this.variantId = variantId;
+    this.quantity = quantity;
   }
 }
 
 export const cartItems: CartItem[] = [
   new CartItem(
     1,
+    101,
     'Lipstick Classic Red',
-    'https://primary.jwwb.nl/public/z/v/x/temp-kdqogeuvuogtgzwcbsmk/wjna50/air-jordan-4-retro-university-blue-1-10001.png',
+    'https://example.com/images/lipstick-red.png',
     15.99,
-    variants[0],
+    'Matte Finish',
+    1,
+    2,
   ),
   new CartItem(
     2,
-    'Lipstick Classic Red',
-    'https://primary.jwwb.nl/public/z/v/x/temp-kdqogeuvuogtgzwcbsmk/wjna50/air-jordan-4-retro-university-blue-1-10001.png',
-    15.99,
-    variants[0],
+    102,
+    'Lipstick Nude Pink',
+    'https://example.com/images/lipstick-nude.png',
+    12.99,
+    'Glossy Finish',
+    2,
+    1,
   ),
   new CartItem(
     3,
-    'Lipstick Classic Red',
-    'https://primary.jwwb.nl/public/z/v/x/temp-kdqogeuvuogtgzwcbsmk/wjna50/air-jordan-4-retro-university-blue-1-10001.png',
-    15.99,
-    variants[0],
+    103,
+    'Lipstick Deep Wine',
+    'https://example.com/images/lipstick-wine.png',
+    18.99,
+    'Velvet Finish',
+    3,
+    3,
   ),
   new CartItem(
     4,
-    'Lipstick Classic Red',
-    'https://primary.jwwb.nl/public/z/v/x/temp-kdqogeuvuogtgzwcbsmk/wjna50/air-jordan-4-retro-university-blue-1-10001.png',
-    15.99,
-    variants[0],
+    101,
+    'Lipstick Coral Bliss',
+    'https://example.com/images/lipstick-coral.png',
+    14.49,
+    'Creamy Finish',
+    4,
+    1,
   ),
   new CartItem(
     5,
-    'Lipstick Classic Red',
-    'https://primary.jwwb.nl/public/z/v/x/temp-kdqogeuvuogtgzwcbsmk/wjna50/air-jordan-4-retro-university-blue-1-10001.png',
-    15.99,
-    variants[0],
+    104,
+    'Lipstick Dark Plum',
+    'https://example.com/images/lipstick-plum.png',
+    17.99,
+    'Long-lasting',
+    5,
+    2,
   ),
   new CartItem(
     6,
-    'Lipstick Classic Red',
-    'https://primary.jwwb.nl/public/z/v/x/temp-kdqogeuvuogtgzwcbsmk/wjna50/air-jordan-4-retro-university-blue-1-10001.png',
-    15.99,
-    variants[0],
+    105,
+    'Lipstick Peachy Glow',
+    'https://example.com/images/lipstick-peach.png',
+    13.99,
+    'Hydrating Finish',
+    6,
+    1,
   ),
 ];

@@ -1,13 +1,14 @@
-import {Variant} from '../../models';
-
 export interface CartItemProps {
   onPress: () => void;
   isCheckout?: boolean;
   item: {
     id: number;
+    brandId: number;
     name: string;
-    imageUrl: string;
+    image: string;
     price: number;
-    variant?: Variant;
+    variantName: string;
+    variantId: number;
+    quantity: number;
   };
 }

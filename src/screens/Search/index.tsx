@@ -43,7 +43,7 @@ const SearchScreen: React.FC = () => {
       <ProductItem
         item={item}
         notifications={notifications}
-        onPress={() => handlePressOnProduct(item.id)}
+        onPress={() => handlePressOnProduct(item.id, item.brandId)}
         wrapperStyle={[
           styles.productWrapper,
           {marginRight: index % 2 === 0 ? Spacing.DEFAULT : 0},
@@ -60,8 +60,8 @@ const SearchScreen: React.FC = () => {
     }
   };
 
-  const handlePressOnProduct = (id: number) => {
-    navigation.navigate('ProductDetail', {id});
+  const handlePressOnProduct = (id: number, brandId: number) => {
+    navigation.navigate('ProductDetail', {id, brandId});
   };
   return (
     <>

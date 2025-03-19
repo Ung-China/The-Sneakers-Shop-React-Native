@@ -19,7 +19,7 @@ export type StackParamList = {
   NotificationDetail: {item: NotificationProps['item']};
   Brand: {id?: number};
   OrderHistoryDetail: undefined;
-  ProductDetail: {id: number};
+  ProductDetail: {id: number; brandId: number};
   EditProfile: undefined;
   Checkout: undefined;
   Delivery: undefined;

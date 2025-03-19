@@ -43,7 +43,7 @@ const HomeScreen: React.FC = () => {
   const {colors} = useTheme();
   const {location} = useLocation();
   const {t} = useTranslation();
-  const {notifications} = useNotification();
+  const {notifications, fetchNotifications} = useNotification();
 
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
 
@@ -54,7 +54,7 @@ const HomeScreen: React.FC = () => {
     return (
       <ProductItem
         item={item}
-        onPress={() => handlePressOnProduct(item.id)}
+        onPress={() => handlePressOnProduct(item.id, item.brandId)}
         notifications={notifications}
       />
     );
@@ -90,8 +90,8 @@ const HomeScreen: React.FC = () => {
     navigation.navigate('Brand', {id});
   };
 
-  const handlePressOnProduct = (id: number) => {
-    navigation.navigate('ProductDetail', {id});
+  const handlePressOnProduct = (id: number, brandId: number) => {
+    navigation.navigate('ProductDetail', {id, brandId});
   };
 
   const {sliders, fetchSliders, isLoading: isLoadingSliders} = useSlider();
@@ -161,6 +161,7 @@ const HomeScreen: React.FC = () => {
       await fetchAllProducts();
       await fetchNewRecommendedProducts();
       await fetchPopularProducts();
+      await fetchNotifications();
     } finally {
       setIsLoading(false);
     }
@@ -175,6 +176,7 @@ const HomeScreen: React.FC = () => {
         await fetchAllProducts();
         await fetchNewRecommendedProducts();
         await fetchPopularProducts();
+        await fetchNotifications();
       } finally {
         setIsInitialLoading(false);
       }

@@ -25,7 +25,7 @@ const BrandScreen: React.FC = () => {
   const {id} = route.params || {};
   const {colors} = useTheme();
   const {t} = useTranslation();
-  const {notifications} = useNotification();
+  const {notifications, fetchNotifications} = useNotification();
 
   const {
     brands,
@@ -129,7 +129,10 @@ const BrandScreen: React.FC = () => {
                 <RefreshControl
                   style={{opacity: 0, paddingTop: -30}}
                   refreshing={false}
-                  onRefresh={refreshProducts}
+                  onRefresh={() => {
+                    refreshProducts();
+                    fetchNotifications();
+                  }}
                   progressViewOffset={10}
                 />
               }

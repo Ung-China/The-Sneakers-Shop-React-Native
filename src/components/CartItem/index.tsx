@@ -45,7 +45,7 @@ const CartItem: React.FC<CartItemProps> = ({
       {isCheckout ? (
         <View style={[styles.container, {backgroundColor: colors.secondary}]}>
           <CachedImage
-            source={item.imageUrl}
+            source={item.image}
             style={[styles.imageStyle, {backgroundColor: colors.white}]}
             imageStyle={{borderRadius: Radius.DEFAULT}}
             loadingImageComponent={() => (
@@ -59,7 +59,7 @@ const CartItem: React.FC<CartItemProps> = ({
             <Text style={[styles.name, {color: colors.text}]}>{item.name}</Text>
 
             <Text style={[styles.size, {color: colors.text}]}>
-              {t('size')} {item.variant?.size}
+              {t('size')} {item.variantName}
             </Text>
 
             <View style={styles.footerContainer}>
@@ -78,7 +78,7 @@ const CartItem: React.FC<CartItemProps> = ({
             <View
               style={[styles.container, {backgroundColor: colors.secondary}]}>
               <CachedImage
-                source={item.imageUrl}
+                source={item.image}
                 style={[styles.imageStyle, {backgroundColor: colors.white}]}
                 imageStyle={{borderRadius: Radius.DEFAULT}}
                 loadingImageComponent={() => (
@@ -100,7 +100,7 @@ const CartItem: React.FC<CartItemProps> = ({
                 </View>
 
                 <Text style={[styles.size, {color: colors.text}]}>
-                  {t('size')} {item.variant?.size}
+                  {t('size')} {item.variantName}
                 </Text>
 
                 <View style={styles.footerContainer}>
