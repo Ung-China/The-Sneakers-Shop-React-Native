@@ -1,6 +1,6 @@
 import {Alert, FlatList, RefreshControl, Text} from 'react-native';
 import styles from './style';
-import {useBrand, useTheme} from '../../hooks';
+import {useBrand, useNotification, useTheme} from '../../hooks';
 import {
   AnimatedDotLoader,
   FlexibleInput,
@@ -25,6 +25,7 @@ const BrandScreen: React.FC = () => {
   const {id} = route.params || {};
   const {colors} = useTheme();
   const {t} = useTranslation();
+  const {notifications} = useNotification();
 
   const {
     brands,
@@ -58,6 +59,7 @@ const BrandScreen: React.FC = () => {
     return (
       <ProductItem
         item={item}
+        notifications={notifications}
         onPress={() => handlePressOnProduct(item.id)}
         wrapperStyle={[
           styles.productWrapper,

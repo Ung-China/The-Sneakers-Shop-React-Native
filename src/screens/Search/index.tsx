@@ -1,5 +1,5 @@
 import {Alert, FlatList, Text, View} from 'react-native';
-import {useSearchProduct, useTheme} from '../../hooks';
+import {useNotification, useSearchProduct, useTheme} from '../../hooks';
 import styles from './style';
 import {
   AnimatedDotLoader,
@@ -19,6 +19,7 @@ import React from 'react';
 const SearchScreen: React.FC = () => {
   const {colors} = useTheme();
   const {t} = useTranslation();
+  const {notifications} = useNotification();
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
 
   const {
@@ -41,6 +42,7 @@ const SearchScreen: React.FC = () => {
     return (
       <ProductItem
         item={item}
+        notifications={notifications}
         onPress={() => handlePressOnProduct(item.id)}
         wrapperStyle={[
           styles.productWrapper,

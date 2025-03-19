@@ -1,5 +1,5 @@
 import {StyleProp, ViewStyle} from 'react-native';
-import {Variant} from '../../models';
+import {Notification, Variant} from '../../models';
 
 export interface ProductItemProps {
   onPress: (id?: number) => void;
@@ -15,4 +15,5 @@ export interface ProductItemProps {
     brandId: number;
     variants?: Variant[];
   };
+  notifications: Notification[];
 }

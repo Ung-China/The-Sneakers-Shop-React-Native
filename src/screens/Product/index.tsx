@@ -112,6 +112,7 @@ const ProductDetailScreen: React.FC = () => {
     return (
       <ProductItem
         item={item}
+        notifications={notifications}
         onPress={() => handlePressOnProduct(item.id)}
         wrapperStyle={[
           styles.productWrapper,

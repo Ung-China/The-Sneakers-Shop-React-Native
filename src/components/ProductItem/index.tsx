@@ -15,9 +15,9 @@ const ProductItem: React.FC<ProductItemProps> = ({
   item,
   wrapperStyle,
   onPress,
+  notifications,
 }) => {
   const {colors} = useTheme();
-  const {notifications} = useNotification();
 
   const {isFavorite, toggleItemFavorite} = useFavorite();
 
@@ -25,7 +25,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
     return Alert.alert('Add to cart');
   };
 
-  const {hasProductPromotion, productDiscountAmount, finalPrice} =
+  const {hasProductPromotion, finalPrice, discountType, discountValue} =
     ProductPromotionChecker({
       productId: item.id,
       defaultPrice: item.price,
@@ -54,13 +54,18 @@ const ProductItem: React.FC<ProductItemProps> = ({
           )}
         />
 
-        <View style={styles.promotionContainer}>
-          <Icons.DISCOUNTTAG width={40} height={40} color={'red'} />
-          <View style={styles.promotionWrapper}>
-            <Text style={styles.value}>20%</Text>
-            <Text style={styles.discountText}>OFF</Text>
+        {hasProductPromotion && (
+          <View style={styles.promotionContainer}>
+            <Icons.DISCOUNTTAG width={40} height={40} color={'red'} />
+            <View style={styles.promotionWrapper}>
+              <Text style={styles.value}>
+                {discountValue}
+                {discountType === 'percent' ? '%' : '$'}
+              </Text>
+              <Text style={styles.discountText}>OFF</Text>
+            </View>
           </View>
-        </View>
+        )}
 
         <IconButton
           style={[styles.heartButton, {backgroundColor: colors.lightGrey}]}

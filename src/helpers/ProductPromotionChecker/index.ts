@@ -27,6 +27,8 @@ const ProductPromotionChecker = ({
       hasProductPromotion: false,
       productDiscountAmount: 0,
       finalPrice: defaultPrice,
+      discountType: null,
+      discountValue: 0,
     };
   }
 
@@ -41,8 +43,9 @@ const ProductPromotionChecker = ({
 
   return {
     hasProductPromotion: true,
-    productDiscountAmount: discountValue,
     finalPrice,
+    discountType: isFixedDiscount ? 'amount' : 'percent',
+    discountValue,
   };
 };
 

@@ -24,6 +24,7 @@ import {
 import {
   useBrand,
   useLocation,
+  useNotification,
   useSeeMore,
   useShoesSlider,
   useSlider,
@@ -42,6 +43,7 @@ const HomeScreen: React.FC = () => {
   const {colors} = useTheme();
   const {location} = useLocation();
   const {t} = useTranslation();
+  const {notifications} = useNotification();
 
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
 
@@ -50,7 +52,11 @@ const HomeScreen: React.FC = () => {
 
   const productItem = ({item}: {item: ProductItemProps['item']}) => {
     return (
-      <ProductItem item={item} onPress={() => handlePressOnProduct(item.id)} />
+      <ProductItem
+        item={item}
+        onPress={() => handlePressOnProduct(item.id)}
+        notifications={notifications}
+      />
     );
   };
 
@@ -279,7 +285,7 @@ const HomeScreen: React.FC = () => {
           </Section>
         )}
 
-        {/* {isInitialLoading || isLoading ? (
+        {isInitialLoading || isLoading ? (
           <Section
             title={t('shopByBrand')}
             actionButton={
@@ -406,7 +412,7 @@ const HomeScreen: React.FC = () => {
             autoPlay={true}
           />
         )}
-        
+
         {isInitialLoading || isLoading ? (
           <Section
             title={t('mostPopularShoes')}
@@ -523,7 +529,7 @@ const HomeScreen: React.FC = () => {
               ]}
             />
           </Section>
-        )} */}
+        )}
       </ScrollView>
     </SafeAreaView>
   );
