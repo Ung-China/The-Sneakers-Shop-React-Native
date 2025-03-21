@@ -7,7 +7,7 @@ const useProductDetail = (id?: number) => {
   const [isLoading, setIsLoading] = useState(true);
   const [size, setSize] = useState('');
   const [price, setPrice] = useState(0);
-  const [activeVariant, setActiveVariant] = useState<number | null>(null);
+  const [activeVariantId, setActiveVariantId] = useState<number | null>(null);
 
   const fetchedProductDetail = async () => {
     setIsLoading(true);
@@ -29,7 +29,7 @@ const useProductDetail = (id?: number) => {
       const fetchedProductDetail = new Product(
         response.id,
         response.name,
-        response.price,
+        Number(response.price),
         response.rating,
         response.image,
         response.description,
@@ -40,7 +40,7 @@ const useProductDetail = (id?: number) => {
 
       setProductDetail(fetchedProductDetail);
       if (variants.length > 0) {
-        setActiveVariant(0);
+        setActiveVariantId(0);
         setSize(variants[0].size);
         setPrice(variants[0].price);
       }
@@ -61,10 +61,10 @@ const useProductDetail = (id?: number) => {
     isLoading,
     productDetail,
     fetchedProductDetail,
-    activeVariant,
+    activeVariantId,
     price,
     size,
-    setActiveVariant,
+    setActiveVariantId,
     setSize,
     setPrice,
   };

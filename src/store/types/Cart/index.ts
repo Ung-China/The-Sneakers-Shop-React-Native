@@ -1,15 +1,5 @@
 import {ActionTypes} from '../../../constants';
-
-export interface CartItem {
-  id: number;
-  brandId: number;
-  name: string;
-  image: string;
-  price: number;
-  variantName: string;
-  variantId: number;
-  quantity: number;
-}
+import {CartItem} from '../../../models';
 
 export interface CartState {
   cart: CartItem[];

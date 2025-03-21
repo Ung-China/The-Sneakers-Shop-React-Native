@@ -8,7 +8,7 @@ export interface CartItemProps {
     image: string;
     price: number;
     variantName: string;
-    variantId: number;
+    variantId: number | null;
     quantity: number;
   };
 }

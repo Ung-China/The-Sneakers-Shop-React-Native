@@ -21,7 +21,7 @@ const useFavorite = () => {
   }, []);
 
   const favorites: Product[] = useSelector(
-    (state: RootState) => state.favorites.favorites || [],
+    (state: RootState) => state.favorites.favorites,
   );
 
   const isFavorite = (id: number): boolean =>

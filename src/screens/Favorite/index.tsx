@@ -1,5 +1,5 @@
 import {RefreshControl, View} from 'react-native';
-import {useFavorite, useTheme} from '../../hooks';
+import {useFavorite, useNotification, useTheme} from '../../hooks';
 import styles from './style';
 import {FlatList} from 'react-native-gesture-handler';
 import {
@@ -13,11 +13,11 @@ import {ProductItemProps, StackParamList} from '../../types';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {dummyProducts} from '../../models/Product';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 const FavoriteScreen: React.FC = () => {
   const {colors} = useTheme();
-  const {t}=useTranslation();
+  const {t} = useTranslation();
   const {
     favorites,
     isLoading,
@@ -26,10 +26,15 @@ const FavoriteScreen: React.FC = () => {
     fetchMoreFavorites,
   } = useFavorite();
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
+  const {notifications} = useNotification();
 
   const favoriteItem = ({item}: {item: ProductItemProps['item']}) => {
     return (
-      <FavoriteItem item={item} onPress={() => handlePressOnProduct(item.id)} />
+      <FavoriteItem
+        item={item}
+        onPress={() => handlePressOnProduct(item.id, item.brandId)}
+        notifications={notifications}
+      />
     );
   };
 
@@ -37,8 +42,8 @@ const FavoriteScreen: React.FC = () => {
     return <FavoriteItemSkeleton />;
   };
 
-  const handlePressOnProduct = (id: number) => {
-    navigation.navigate('ProductDetail', {id});
+  const handlePressOnProduct = (id: number, brandId: number) => {
+    navigation.navigate('ProductDetail', {id, brandId});
   };
 
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, FlatList, Alert} from 'react-native';
 import styles from './style';
-import {useTheme} from '../../hooks';
+import {useCart, useTheme} from '../../hooks';
 import {cartItems} from '../../models/CartItem';
 import {CartItem, Footer, ItemSeparatorHeight, Section} from '../../components';
 import {CartItemProps, StackParamList} from '../../types';
@@ -15,6 +15,9 @@ const CartScreen: React.FC = () => {
   const {colors} = useTheme();
   const {t} = useTranslation();
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
+  const {cartItems} = useCart();
+
+  console.log('CHECK CART ITEMS', cartItems);
 
   const cartItem = ({item}: {item: CartItemProps['item']}) => {
     return <CartItem item={item} onPress={handleOnPressToProductDetail} />;

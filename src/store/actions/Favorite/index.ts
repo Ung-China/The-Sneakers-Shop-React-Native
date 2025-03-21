@@ -2,9 +2,9 @@ import {ActionTypes} from '../../../constants';
 import {Product} from '../../../models';
 import {FavoriteActionTypes} from '../../types';
 
-export const setFavorites = (favorites: Product[]): FavoriteActionTypes => ({
+export const setFavorites = (item: Product): FavoriteActionTypes => ({
   type: ActionTypes.SET_FAVORITES,
-  payload: favorites,
+  payload: item,
 });
 
 export const toggleFavorite = (product: Product): FavoriteActionTypes => ({

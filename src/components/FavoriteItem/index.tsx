@@ -42,7 +42,7 @@ const FavoriteItem: React.FC<ProductItemProps> = ({item, onPress}) => {
             />
           </View>
 
-          <PriceTag price={item.price} promotion={'100'} />
+          <PriceTag finalPrice={item.price} defaultPrice={100} />
 
           <View style={styles.footerContainer}>
             <RatingTag averageRating={item.rating} totalRating={item.rating} />

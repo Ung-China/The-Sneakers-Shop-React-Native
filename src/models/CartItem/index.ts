@@ -5,7 +5,7 @@ export default class CartItem {
   image: string;
   price: number;
   variantName: string;
-  variantId: number;
+  variantId: number | null;
   quantity: number;
 
   constructor(
@@ -15,7 +15,7 @@ export default class CartItem {
     image: string,
     price: number,
     variantName: string,
-    variantId: number,
+    variantId: number | null,
     quantity: number,
   ) {
     this.id = id;

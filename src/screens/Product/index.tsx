@@ -2,6 +2,7 @@ import {Alert, FlatList, Platform, ScrollView, Text, View} from 'react-native';
 import styles from './style';
 import {useTranslation} from 'react-i18next';
 import {
+  useCart,
   useFavorite,
   useNotification,
   useProductDetail,
@@ -30,10 +31,6 @@ import React from 'react';
 import {dummyProducts} from '../../models/Product';
 import {variants} from '../../models/Variant';
 import {ProductPromotionChecker} from '../../helpers';
-import {useDispatch, useSelector} from 'react-redux';
-import {addToCart} from '../../store/actions';
-import {CartItem} from '../../models';
-import {AppDispatch, RootState} from '../../store';
 
 const ProductDetailScreen: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
@@ -41,21 +38,18 @@ const ProductDetailScreen: React.FC = () => {
   const {id, brandId} = route.params;
   const {t} = useTranslation();
   const {colors} = useTheme();
-  const dispatch = useDispatch();
 
   const {notifications} = useNotification();
-
-  const cartItems = useSelector((state: RootState) => state.cart.cart);
-
-  console.log('CART ITEM', cartItems);
+  const {addProductToCart, cartItems} = useCart();
 
   const {
     isLoading,
     productDetail,
-    activeVariant,
+    activeVariantId,
     price,
-    setActiveVariant,
+    setActiveVariantId,
     setSize,
+    size,
     setPrice,
   } = useProductDetail(id);
 
@@ -80,20 +74,21 @@ const ProductDetailScreen: React.FC = () => {
     return navigation.navigate('Cart');
   };
 
-  const testProduct = new CartItem(
-    10,
-    101,
-    'Lipstick Classic Red',
-    'https://example.com/images/lipstick-red.png',
-    15.99,
-    'Matte Finish',
-    1,
-    1,
-  );
-
   const handleAddToCart = () => {
-    console.log('CHECK TESTING PRODUCT', testProduct);
-    dispatch(addToCart(testProduct));
+    if (productDetail) {
+      const cartItem = {
+        id: id,
+        brandId: brandId,
+        name: productDetail.name,
+        image: productDetail.image,
+        price: productDetail.price,
+        variantName: size,
+        variantId: activeVariantId,
+        quantity: 1,
+      };
+
+      addProductToCart(cartItem);
+    }
   };
 
   const goToCheckout = () => {
@@ -110,12 +105,12 @@ const ProductDetailScreen: React.FC = () => {
     return (
       <VariantItem
         onPress={() => {
-          setActiveVariant(index);
+          setActiveVariantId(index);
           setSize(item.size);
           setPrice(item.price);
         }}
         item={item}
-        isActive={activeVariant === index}
+        isActive={activeVariantId === index}
         containerStyle={{marginLeft: Spacing.DEFAULT}}
       />
     );
@@ -183,8 +178,6 @@ const ProductDetailScreen: React.FC = () => {
       />
     );
   };
-
-  // console.log('CHECK PRODUCT DETAIL', productDetail);
 
   return (
     <View style={[styles.container, {backgroundColor: colors.primary}]}>
@@ -388,27 +381,35 @@ const ProductDetailScreen: React.FC = () => {
           </>
         )}
 
-        <IconButton
-          onPress={navigateBack}
-          icon={
-            Platform.OS === 'ios' ? (
-              <Icons.ARROWLEFT color={colors.text} width={23} height={23} />
-            ) : (
-              <Icons.LEFTARROWANDROID
-                color={colors.text}
-                width={30}
-                height={30}
-              />
-            )
-          }
-          style={[styles.backContainer]}
-        />
+        {!isLoading && (
+          <>
+            <IconButton
+              onPress={navigateBack}
+              icon={
+                Platform.OS === 'ios' ? (
+                  <Icons.ARROWLEFT
+                    color={colors.black}
+                    width={23}
+                    height={23}
+                  />
+                ) : (
+                  <Icons.LEFTARROWANDROID
+                    color={colors.text}
+                    width={30}
+                    height={30}
+                  />
+                )
+              }
+              style={[styles.backContainer]}
+            />
 
-        <IconButton
-          onPress={navigateToCart}
-          icon={<Icons.CART color={colors.text} width={25} height={25} />}
-          style={[styles.cartContainer]}
-        />
+            <IconButton
+              onPress={navigateToCart}
+              icon={<Icons.CART color={colors.black} width={25} height={25} />}
+              style={[styles.cartContainer]}
+            />
+          </>
+        )}
 
         {productDetail && (
           <>

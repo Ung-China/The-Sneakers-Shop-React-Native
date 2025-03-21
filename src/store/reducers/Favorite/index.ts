@@ -15,17 +15,17 @@ const favoriteReducer = (
       return {...state, favorites: action.payload};
 
     case ActionTypes.TOGGLE_FAVORITE: {
-      const product = action.payload;
-      const exists = state.favorites.some(item => item.id === product.id);
+      const item = action.payload;
+      const exists = state.favorites.some(favorite => favorite.id === item.id);
 
       let updatedFavorites: Product[];
 
       if (exists) {
         updatedFavorites = state.favorites.filter(
-          item => item.id !== product.id,
+          favorite => favorite.id !== item.id,
         );
       } else {
-        updatedFavorites = [...state.favorites, product];
+        updatedFavorites = [...state.favorites, item];
       }
 
       return {...state, favorites: updatedFavorites};

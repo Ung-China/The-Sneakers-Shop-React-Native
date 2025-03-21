@@ -24,6 +24,7 @@ import useProductDetail from './useProductDetail';
 import useSearchProduct from './useSearch';
 import useRelatedProducts from './useRelatedProducts';
 import useFavorite from './useFavorite';
+import useCart from './useCart';
 
 export {
   useLanguage,
@@ -52,4 +53,5 @@ export {
   useSearchProduct,
   useRelatedProducts,
   useFavorite,
+  useCart,
 };

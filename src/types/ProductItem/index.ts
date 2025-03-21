@@ -2,7 +2,7 @@ import {StyleProp, ViewStyle} from 'react-native';
 import {Notification, Variant} from '../../models';
 
 export interface ProductItemProps {
-  onPress: (id?: number) => void;
+  onPress: (id?: number, brandId?: number) => void;
   wrapperStyle?: StyleProp<ViewStyle>;
   item: {
     id: number;

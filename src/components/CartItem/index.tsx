@@ -40,6 +40,8 @@ const CartItem: React.FC<CartItemProps> = ({
     );
   };
 
+  console.log('CHECK CART ITEM TEST', item);
+
   return (
     <>
       {isCheckout ? (
