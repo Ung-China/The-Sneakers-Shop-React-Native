@@ -16,31 +16,22 @@ const CartItem: React.FC<CartItemProps> = ({
   item,
   onPress,
   isCheckout = false,
+  onDelete,
+  onDecrease,
+  onIncrease,
 }) => {
   const {colors} = useTheme();
   const {t} = useTranslation();
 
-  const handleOnPressDelete = () => {
-    return Alert.alert('Delete this product from cart');
-  };
-
-  const handleOnPressIncreaseQTY = () => {
-    return Alert.alert('Increase quantity');
-  };
-  const handleOnPressDecreaseQTY = () => {
-    return Alert.alert('Decrease quantity');
-  };
   const rightAction = () => {
     return (
-      <Touchable onPress={handleOnPressDelete}>
+      <Touchable onPress={onDelete}>
         <View style={styles.rightActionContainer}>
           <Icons.TRASH color="white" width={30} height={25} />
         </View>
       </Touchable>
     );
   };
-
-  console.log('CHECK CART ITEM TEST', item);
 
   return (
     <>
@@ -95,10 +86,7 @@ const CartItem: React.FC<CartItemProps> = ({
                   <Text style={[styles.name, {color: colors.text}]}>
                     {item.name}
                   </Text>
-                  <IconButton
-                    onPress={handleOnPressDelete}
-                    icon={<Icons.CLOSE />}
-                  />
+                  <IconButton onPress={onDelete} icon={<Icons.CLOSE />} />
                 </View>
 
                 <Text style={[styles.size, {color: colors.text}]}>
@@ -110,17 +98,11 @@ const CartItem: React.FC<CartItemProps> = ({
                     ${currencyFormat(item.price)}
                   </Text>
                   <View style={styles.quantityContainer}>
-                    <IconButton
-                      onPress={handleOnPressDecreaseQTY}
-                      icon={<Icons.MINUS />}
-                    />
+                    <IconButton onPress={onDecrease} icon={<Icons.MINUS />} />
                     <Text style={[styles.quantity, {color: colors.text}]}>
-                      10
+                      {item.quantity}
                     </Text>
-                    <IconButton
-                      onPress={handleOnPressIncreaseQTY}
-                      icon={<Icons.PLUS />}
-                    />
+                    <IconButton onPress={onIncrease} icon={<Icons.PLUS />} />
                   </View>
                 </View>
               </View>

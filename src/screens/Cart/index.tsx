@@ -2,7 +2,6 @@ import React from 'react';
 import {View, Text, FlatList, Alert} from 'react-native';
 import styles from './style';
 import {useCart, useTheme} from '../../hooks';
-import {cartItems} from '../../models/CartItem';
 import {CartItem, Footer, ItemSeparatorHeight, Section} from '../../components';
 import {CartItemProps, StackParamList} from '../../types';
 import FlexibleTouchable from '../../components/FlexibleTouchable';
@@ -15,20 +14,31 @@ const CartScreen: React.FC = () => {
   const {colors} = useTheme();
   const {t} = useTranslation();
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
-  const {cartItems} = useCart();
-
-  console.log('CHECK CART ITEMS', cartItems);
+  const {
+    cartItems,
+    removeProductFromCart,
+    increaseProductQuantity,
+    decreaseProductQuantity,
+  } = useCart();
 
   const cartItem = ({item}: {item: CartItemProps['item']}) => {
-    return <CartItem item={item} onPress={handleOnPressToProductDetail} />;
+    return (
+      <CartItem
+        item={item}
+        onPress={() => handleOnPressToProductDetail(item.id, item.brandId)}
+        onDelete={() => removeProductFromCart(item.id, item.variantId)}
+        onIncrease={() => increaseProductQuantity(item.id, item.variantId)}
+        onDecrease={() => decreaseProductQuantity(item.id, item.variantId)}
+      />
+    );
   };
 
   const handleOnPressToCheckout = () => {
     navigation.navigate('Delivery');
   };
 
-  const handleOnPressToProductDetail = () => {
-    return Alert.alert('Go to product detail');
+  const handleOnPressToProductDetail = (id: number, brandId: number) => {
+    navigation.navigate('ProductDetail', {id, brandId});
   };
 
   return (

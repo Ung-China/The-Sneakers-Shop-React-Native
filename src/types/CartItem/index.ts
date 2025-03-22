@@ -1,5 +1,8 @@
 export interface CartItemProps {
   onPress: () => void;
+  onDelete: (id: number, variantId: number) => void;
+  onIncrease: (id: number, variantId: number) => void;
+  onDecrease?: (id: number, variantId: number) => void;
   isCheckout?: boolean;
   item: {
     id: number;

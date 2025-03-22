@@ -6,16 +6,17 @@ export const addToCart = (item: CartItem) => ({
   payload: item,
 });
 
-export const increaseQuantity = (id: number) => ({
+export const increaseQuantity = (productId: number, variantId: number) => ({
   type: ActionTypes.INCREASE_QUANTITY,
-  payload: id,
+  payload: {productId, variantId},
 });
 
-export const decreaseQuantity = (id: number) => ({
+export const decreaseQuantity = (productId: number, variantId: number) => ({
   type: ActionTypes.DECREASE_QUANTITY,
-  payload: id,
+  payload: {productId, variantId},
 });
-export const removeFromCart = (id: number) => ({
+
+export const removeFromCart = (productId: number, variantId: number) => ({
   type: ActionTypes.REMOVE_FROM_CART,
-  payload: id,
+  payload: {productId, variantId},
 });

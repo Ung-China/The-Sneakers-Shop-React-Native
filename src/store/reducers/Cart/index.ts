@@ -18,20 +18,16 @@ const cartReducer = (
         item => item.id === newItem.id && item.variantId === newItem.variantId,
       );
 
-      let updatedCart;
-      if (existingItem) {
-        // If item exists, increase quantity
-        updatedCart = state.cart.map(item =>
-          item.id === newItem.id && item.variantId === newItem.variantId
-            ? {...item, quantity: item.quantity + 1} // Increase quantity
-            : item,
-        );
-      } else {
-        // If item doesn't exist, add it with default quantity 1
-        updatedCart = [...state.cart, {...newItem, quantity: 1}];
-      }
-
-      return {...state, cart: updatedCart};
+      return {
+        ...state,
+        cart: existingItem
+          ? state.cart.map(item =>
+              item.id === newItem.id && item.variantId === newItem.variantId
+                ? {...item, quantity: item.quantity + 1} // Increase quantity
+                : item,
+            )
+          : [...state.cart, {...newItem, quantity: 1}], // Add new item
+      };
     }
 
     case ActionTypes.INCREASE_QUANTITY: {
@@ -65,7 +61,7 @@ const cartReducer = (
       return {
         ...state,
         cart: state.cart.filter(
-          item => !(item.id === productId && item.variantId === variantId), // Remove item matching productId and variantId
+          item => !(item.id === productId && item.variantId === variantId), // Remove item
         ),
       };
     }
