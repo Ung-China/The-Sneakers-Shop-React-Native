@@ -83,7 +83,9 @@ const CartItem: React.FC<CartItemProps> = ({
               />
               <View style={styles.hero}>
                 <View style={styles.heroHeader}>
-                  <Text style={[styles.name, {color: colors.text}]}>
+                  <Text
+                    numberOfLines={1}
+                    style={[styles.name, {color: colors.text}]}>
                     {item.name}
                   </Text>
                   <IconButton onPress={onDelete} icon={<Icons.CLOSE />} />

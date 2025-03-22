@@ -43,4 +43,7 @@ export default StyleSheet.create({
     fontFamily: Fonts.MEDIUM,
     fontSize: FontSizes.extraLarge,
   },
+  notFoundContainer: {
+    paddingVertical: Padding.DEFAULT,
+  },
 });

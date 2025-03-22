@@ -84,7 +84,11 @@ const ProductItem: React.FC<ProductItemProps> = ({
           <Text style={[styles.name, {color: colors.text}]} numberOfLines={1}>
             {item.name}
           </Text>
-          <PriceTag finalPrice={finalPrice} defaultPrice={item.price} />
+          <PriceTag
+            finalPrice={finalPrice}
+            defaultPrice={hasProductPromotion ? item.price : null}
+          />
+
           <View style={styles.heroFooter}>
             <RatingTag averageRating={item.rating} totalRating={item.rating} />
             <IconButton

@@ -149,5 +149,6 @@ export const translateKH = {
   Noproductsfound: 'រកមិនឃើញផលិតផលទេ។ ព្យាយាមស្វែងរកអ្វីផ្សេងទៀត!',
   NoNotificationsFound: 'មិនមានការជូនដំណឹងទេ។ សូមពិនិត្យម្តងទៀតនៅពេលក្រោយ!',
   NoFavoriteProductsFound: 'អ្នកមិនមានផលិតផលដែលចូលចិត្តនៅឡើយទេ!',
-
+  NoCartItemFound: 'កន្ត្រករបស់អ្នកនៅទទេ។ ចាប់ផ្តើមទិញឥឡូវនេះ!',
+  NoNotificationFound: 'អ្នកមិនមានការជូនដំណឹងទេ។',
 };

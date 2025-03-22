@@ -149,4 +149,6 @@ export const translateEN = {
   Noproductsfound: 'No products found. Try searching for something else!',
   NoNotificationsFound: 'No notifications found. Check back later!',
   NoFavoriteProductsFound: 'You have no favorite products yet!',
+  NoCartItemFound: 'Your cart is empty. Start shopping now!',
+  NoNotificationFound: 'You have no notifications.',
 };
