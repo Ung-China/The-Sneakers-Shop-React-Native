@@ -43,7 +43,11 @@ const CustomSnackbar: React.FC<CustomSnackbarProps> = ({
         backgroundColor: colors.text,
         display: 'none',
       }}
-      backgroundStyle={{backgroundColor: backgroundColor, borderRadius: 0}}>
+      backgroundStyle={{
+        backgroundColor: backgroundColor,
+        height: 0,
+        borderRadius: 0,
+      }}>
       <BottomSheetView style={[styles.container, contentContainer]}>
         {content}
       </BottomSheetView>

@@ -1,4 +1,12 @@
-import {Alert, FlatList, Platform, ScrollView, Text, View} from 'react-native';
+import {
+  Alert,
+  FlatList,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
 import styles from './style';
 import {useTranslation} from 'react-i18next';
 import {
@@ -478,14 +486,12 @@ const ProductDetailScreen: React.FC = () => {
           customSnackbarRef={customSnackbarRef}
           onCloseCustomSnackbar={onCloseCustomSnackbar}
           onCustomSnackbarChanges={onCustomSnackbarChanges}
+          contentContainer={{
+            paddingBottom: Padding.BOTTOM * 2,
+            backgroundColor: '#4BB543',
+          }}
           content={
             <View>
-              <Text>Hello Brother</Text>
-              <Text>Hello Brother</Text>
-              <Text>Hello Brother</Text>
-              <Text>Hello Brother</Text>
-              <Text>Hello Brother</Text>
-              <Text>Hello Brother</Text>
               <Text>Hello Brother</Text>
             </View>
           }
