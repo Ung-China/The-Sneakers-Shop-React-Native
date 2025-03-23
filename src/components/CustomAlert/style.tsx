@@ -23,8 +23,7 @@ export default StyleSheet.create({
   },
   header: {
     gap: Gap.EXTRA_SMALL,
-    paddingHorizontal: Padding.DEFAULT,
-    paddingTop: Padding.DEFAULT,
+    padding: Padding.DEFAULT,
   },
   inputContainer: {
     padding: Padding.DEFAULT,
@@ -88,5 +87,10 @@ export default StyleSheet.create({
     fontFamily: Fonts.REGULAR,
     fontSize: FontSizes.default,
     lineHeight: Spacing.EXTRA_LARGE,
+  },
+  singleButton: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

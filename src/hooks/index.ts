@@ -25,6 +25,7 @@ import useSearchProduct from './useSearch';
 import useRelatedProducts from './useRelatedProducts';
 import useFavorite from './useFavorite';
 import useCart from './useCart';
+import useCustomSnackbar from './useCustomSnackbar';
 
 export {
   useLanguage,
@@ -54,4 +55,5 @@ export {
   useRelatedProducts,
   useFavorite,
   useCart,
+  useCustomSnackbar,
 };

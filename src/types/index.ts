@@ -47,6 +47,8 @@ import {AnimatedDotLoaderProps} from './AnimatedDotLoader';
 import {SeeMoreProps} from './SeeMore';
 import {NotFoundProps} from './NotFound';
 import {SkeletonProps} from './SkeletonProps';
+import {CustomAlertProps} from './CustomAlert';
+import {CustomSnackbarProps} from './CustomSnackbar';
 
 export type {
   BottomTabParamList,
@@ -98,4 +100,6 @@ export type {
   SeeMoreProps,
   NotFoundProps,
   SkeletonProps,
+  CustomAlertProps,
+  CustomSnackbarProps,
 };

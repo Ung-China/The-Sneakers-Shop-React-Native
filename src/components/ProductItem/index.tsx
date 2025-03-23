@@ -5,7 +5,7 @@ import Touchable from '../Touchable';
 import {CachedImage} from '@georstat/react-native-image-cache';
 import LoadingImage from '../LoadingImage';
 import {Icons, Radius, Spacing} from '../../constants';
-import {useFavorite, useNotification, useTheme} from '../../hooks';
+import {useCart, useFavorite, useNotification, useTheme} from '../../hooks';
 import PriceTag from '../PriceTag';
 import IconButton from '../IconButton';
 import RatingTag from '../RatingTag';
@@ -20,6 +20,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
   const {colors} = useTheme();
 
   const {isFavorite, toggleItemFavorite} = useFavorite();
+  const {addProductToCart} = useCart();
 
   const onAddToCartPress = () => {
     return Alert.alert('Add to cart');
@@ -32,6 +33,23 @@ const ProductItem: React.FC<ProductItemProps> = ({
       promotions: notifications,
       brandId: item.brandId,
     });
+
+  const handleAddToCart = () => {
+    if (item) {
+      const cartItem = {
+        id: item.id,
+        brandId: item.brandId,
+        name: item.name,
+        image: item.image,
+        price: item.price,
+        variantName: size,
+        variantId: activeVariantId,
+        quantity: 1,
+      };
+
+      addProductToCart(cartItem);
+    }
+  };
 
   return (
     <Touchable

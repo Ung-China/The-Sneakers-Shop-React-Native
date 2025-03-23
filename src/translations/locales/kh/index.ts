@@ -151,4 +151,8 @@ export const translateKH = {
   NoFavoriteProductsFound: 'អ្នកមិនមានផលិតផលដែលចូលចិត្តនៅឡើយទេ!',
   NoCartItemFound: 'កន្ត្រករបស់អ្នកនៅទទេ។ ចាប់ផ្តើមទិញឥឡូវនេះ!',
   NoNotificationFound: 'អ្នកមិនមានការជូនដំណឹងទេ។',
+  ok: 'យល់ព្រម',
+  removeproducttitle: 'លុបផលិតផល',
+  removeproductdescription:
+    'តើអ្នកប្រាកដជាចង់លុបផលិតផលនេះចេញពីកន្ត្រករបស់អ្នកឬ?',
 };

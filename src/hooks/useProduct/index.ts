@@ -28,7 +28,13 @@ const useProduct = () => {
           rating: string;
           image: string;
         }) =>
-          new Product(item.id, item.name, item.price, item.rating, item.image),
+          new Product(
+            item.id,
+            item.name,
+            Number(item.price),
+            item.rating,
+            item.image,
+          ),
       );
 
       setProducts(prevProducts =>

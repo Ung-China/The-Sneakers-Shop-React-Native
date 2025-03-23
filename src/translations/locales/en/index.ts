@@ -151,4 +151,8 @@ export const translateEN = {
   NoFavoriteProductsFound: 'You have no favorite products yet!',
   NoCartItemFound: 'Your cart is empty. Start shopping now!',
   NoNotificationFound: 'You have no notifications.',
+  ok: 'Okay',
+  removeproducttitle: 'Remove Product',
+  removeproductdescription:
+    'Are you sure you want to remove this product from your cart?',
 };

@@ -100,7 +100,11 @@ const CartItem: React.FC<CartItemProps> = ({
                     ${currencyFormat(item.price)}
                   </Text>
                   <View style={styles.quantityContainer}>
-                    <IconButton onPress={onDecrease} icon={<Icons.MINUS />} />
+                    <IconButton
+                      onPress={item.quantity === 1 ? onDelete : onDecrease}
+                      icon={<Icons.MINUS />}
+                    />
+
                     <Text style={[styles.quantity, {color: colors.text}]}>
                       {item.quantity}
                     </Text>

@@ -3,6 +3,7 @@ import styles from './style';
 import {useTranslation} from 'react-i18next';
 import {
   useCart,
+  useCustomSnackbar,
   useFavorite,
   useNotification,
   useProductDetail,
@@ -11,6 +12,7 @@ import {
 } from '../../hooks';
 import {
   AnimatedDotLoader,
+  CustomSnackbar,
   FlexibleSwiper,
   Footer,
   ItemSeparatorHeight,
@@ -40,7 +42,13 @@ const ProductDetailScreen: React.FC = () => {
   const {colors} = useTheme();
 
   const {notifications} = useNotification();
-  const {addProductToCart, cartItems} = useCart();
+  const {addProductToCart} = useCart();
+  const {
+    customSnackbarRef,
+    toggleCustomSnackbar,
+    onCustomSnackbarChanges,
+    onCloseCustomSnackbar,
+  } = useCustomSnackbar();
 
   const {
     isLoading,
@@ -95,6 +103,10 @@ const ProductDetailScreen: React.FC = () => {
     return Alert.alert('Go to checkout');
   };
 
+  const handlePressOnProduct = (id: number, brandId: number) => {
+    navigation.replace('ProductDetail', {id, brandId});
+  };
+
   const variantItem = ({
     item,
     index,
@@ -134,10 +146,6 @@ const ProductDetailScreen: React.FC = () => {
         ]}
       />
     );
-  };
-
-  const handlePressOnProduct = (id: number, brandId: number) => {
-    navigation.replace('ProductDetail', {id, brandId});
   };
 
   const handleScroll = ({nativeEvent}: any) => {
@@ -465,6 +473,24 @@ const ProductDetailScreen: React.FC = () => {
           </>
         )}
       </ScrollView>
+      <>
+        <CustomSnackbar
+          customSnackbarRef={customSnackbarRef}
+          onCloseCustomSnackbar={onCloseCustomSnackbar}
+          onCustomSnackbarChanges={onCustomSnackbarChanges}
+          content={
+            <View>
+              <Text>Hello Brother</Text>
+              <Text>Hello Brother</Text>
+              <Text>Hello Brother</Text>
+              <Text>Hello Brother</Text>
+              <Text>Hello Brother</Text>
+              <Text>Hello Brother</Text>
+              <Text>Hello Brother</Text>
+            </View>
+          }
+        />
+      </>
 
       {isLoading ? null : (
         <Footer
@@ -484,7 +510,7 @@ const ProductDetailScreen: React.FC = () => {
             </Text>
           </Touchable>
           <Touchable
-            onPress={goToCheckout}
+            onPress={toggleCustomSnackbar}
             style={[
               styles.buttonAddToCart,
               {backgroundColor: colors.primaryReversed},

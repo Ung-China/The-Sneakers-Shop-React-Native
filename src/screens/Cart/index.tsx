@@ -1,13 +1,13 @@
 import React from 'react';
-import {View, Text, FlatList, Alert} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 import styles from './style';
 import {useCart, useTheme} from '../../hooks';
 import {
   CartItem,
+  CustomAlert,
   Footer,
   ItemSeparatorHeight,
   NotFound,
-  Section,
 } from '../../components';
 import {CartItemProps, StackParamList} from '../../types';
 import FlexibleTouchable from '../../components/FlexibleTouchable';
@@ -22,9 +22,12 @@ const CartScreen: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
   const {
     cartItems,
-    removeProductFromCart,
     increaseProductQuantity,
     decreaseProductQuantity,
+    handleDeletePress,
+    confirmDelete,
+    isAlertVisible,
+    setAlertVisible,
   } = useCart();
 
   const cartItem = ({item}: {item: CartItemProps['item']}) => {
@@ -32,7 +35,7 @@ const CartScreen: React.FC = () => {
       <CartItem
         item={item}
         onPress={() => handleOnPressToProductDetail(item.id, item.brandId)}
-        onDelete={() => removeProductFromCart(item.id, item.variantId)}
+        onDelete={() => handleDeletePress(item.id, item.variantId)}
         onIncrease={() => increaseProductQuantity(item.id, item.variantId)}
         onDecrease={() => decreaseProductQuantity(item.id, item.variantId)}
       />
@@ -63,7 +66,7 @@ const CartScreen: React.FC = () => {
             showsVerticalScrollIndicator={false}
             ItemSeparatorComponent={ItemSeparatorHeight}
             contentContainerStyle={styles.contentContainerStyle}
-            keyExtractor={item => item.id.toString()}
+            keyExtractor={item => `${item.id}-${item.variantId}`}
           />
           <Footer
             safeAreaStyle={[
@@ -92,6 +95,13 @@ const CartScreen: React.FC = () => {
               onPress={handleOnPressToCheckout}
             />
           </Footer>
+          <CustomAlert
+            isVisible={isAlertVisible}
+            title={t('removeproducttitle')}
+            description={t('removeproductdescription')}
+            onPress={confirmDelete}
+            onClose={() => setAlertVisible(false)}
+          />
         </>
       )}
     </View>

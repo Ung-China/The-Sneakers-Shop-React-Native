@@ -27,7 +27,8 @@ const OTPModal: React.FC<OTPModalProps> = ({
       animationType={animationType}
       onRequestClose={onClose}>
       <View style={styles.modalOverlay}>
-        <View style={[styles.modalContent, {backgroundColor: colors.primary}]}>
+        <View
+          style={[styles.modalContent, {backgroundColor: colors.secondary}]}>
           <View style={styles.header}>
             <Text style={[styles.title, {color: colors.text}]}>
               {t('verifyPhoneNumber')}
@@ -55,19 +56,28 @@ const OTPModal: React.FC<OTPModalProps> = ({
               theme={{
                 pinCodeContainerStyle: {
                   ...styles.pinCodeContainer,
-                  backgroundColor: colors.secondary,
+                  backgroundColor: colors.secondaryReversed,
                 },
-                pinCodeTextStyle: {...styles.pinCodeText, color: colors.text},
+                pinCodeTextStyle: {
+                  ...styles.pinCodeText,
+                  color: colors.primary,
+                },
                 focusedPinCodeContainerStyle: styles.activePinCodeContainer,
                 focusStickStyle: {
                   ...styles.focusStick,
-                  backgroundColor: colors.text,
+                  backgroundColor: colors.primary,
                 },
               }}
             />
 
             {errorOTP && <Text style={styles.errorOTP}>{errorOTP}</Text>}
-            <FlatButton label={t('resend')} labelStyle={styles.resendLabel} />
+            <FlatButton
+              label={t('resend')}
+              labelStyle={[
+                styles.resendLabel,
+                {color: colors.secondaryReversed},
+              ]}
+            />
           </View>
 
           <View style={[styles.footer, {borderTopColor: colors.grey}]}>
