@@ -7,18 +7,21 @@ import {
   OrderScreen,
   ProfileScreen,
 } from '../../screens';
-import {useTheme} from '../../hooks';
+import {useCart, useTheme} from '../../hooks';
 import {Fonts, FontSizes, Icons} from '../../constants';
 import {StackParamList} from '../../types/StackTypes';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useTranslation} from 'react-i18next';
 import {BottomTabParamList} from '../../types';
+import {Text, View} from 'react-native';
+import styles from './style';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 const Stack = createNativeStackNavigator<StackParamList>();
 
 export const BottomTabNavigator = () => {
   const {colors} = useTheme();
+  const {cartItemsCount} = useCart();
   const {t} = useTranslation();
 
   return (
@@ -72,10 +75,14 @@ export const BottomTabNavigator = () => {
         component={CartScreen}
         options={{
           tabBarIcon: ({color, size, focused}) => (
-            <Icons.CART
-              color={focused ? colors.icon : 'grey'}
-              // fill={focused ? colors.icon : 'transparent'}
-            />
+            <View>
+              <Icons.CART color={focused ? colors.icon : 'grey'} />
+              {cartItemsCount > 0 && (
+                <View style={styles.qunatityContainer}>
+                  <Text style={styles.quantity}>{cartItemsCount}</Text>
+                </View>
+              )}
+            </View>
           ),
           tabBarLabel: t('cart'),
           headerShown: true,

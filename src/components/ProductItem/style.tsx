@@ -62,12 +62,12 @@ export default StyleSheet.create({
     color: 'white',
     fontSize: FontSizes.extraSmall,
     fontFamily: Fonts.REGULAR,
-    lineHeight: 11,
+    lineHeight: 10,
   },
   discountText: {
     color: 'white',
     fontSize: FontSizes.extraSmall,
     fontFamily: Fonts.REGULAR,
-    lineHeight: 11,
+    lineHeight: 10,
   },
 });

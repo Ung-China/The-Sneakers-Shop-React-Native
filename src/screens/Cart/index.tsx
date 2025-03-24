@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, FlatList} from 'react-native';
 import styles from './style';
-import {useCart, useTheme} from '../../hooks';
+import {useCart, useNotification, useTheme} from '../../hooks';
 import {
   CartItem,
   CustomAlert,
@@ -19,7 +19,9 @@ import {StackNavigationProp} from '@react-navigation/stack';
 const CartScreen: React.FC = () => {
   const {colors} = useTheme();
   const {t} = useTranslation();
+  const {notifications} = useNotification();
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
+
   const {
     cartItems,
     increaseProductQuantity,
@@ -38,6 +40,7 @@ const CartScreen: React.FC = () => {
         onDelete={() => handleDeletePress(item.id, item.variantId)}
         onIncrease={() => increaseProductQuantity(item.id, item.variantId)}
         onDecrease={() => decreaseProductQuantity(item.id, item.variantId)}
+        notifications={notifications}
       />
     );
   };

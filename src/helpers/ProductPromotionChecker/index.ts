@@ -33,13 +33,11 @@ const ProductPromotionChecker = ({
   }
 
   const isFixedDiscount = promotion.discountType === 'amount';
-  const discountValue = isFixedDiscount
-    ? promotion.amount
-    : (promotion.percent / 100) * defaultPrice;
+  const discountValue = isFixedDiscount ? promotion.amount : promotion.percent;
 
   const finalPrice = discountValue
     ? defaultPrice - discountValue
-    : defaultPrice;
+    : (defaultPrice * discountValue) / 100;
 
   return {
     hasProductPromotion: true,

@@ -1,14 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {
-  ScrollView,
-  View,
-  FlatList,
-  RefreshControl,
-  SafeAreaView,
-} from 'react-native';
+import {ScrollView, FlatList, RefreshControl, SafeAreaView} from 'react-native';
 import styles from './style';
 import {
-  AnimatedDotLoader,
   BrandItem,
   BrandItemSkeleton,
   FlatButton,

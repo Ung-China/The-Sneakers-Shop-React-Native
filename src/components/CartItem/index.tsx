@@ -11,6 +11,8 @@ import currencyFormat from '../../helpers/CurrencyFormat';
 import {useTranslation} from 'react-i18next';
 import IconButton from '../IconButton';
 import React from 'react';
+import {ProductPromotionChecker} from '../../helpers';
+import PriceTag from '../PriceTag';
 
 const CartItem: React.FC<CartItemProps> = ({
   item,
@@ -19,9 +21,18 @@ const CartItem: React.FC<CartItemProps> = ({
   onDelete,
   onDecrease,
   onIncrease,
+  notifications,
 }) => {
   const {colors} = useTheme();
   const {t} = useTranslation();
+
+  const {hasProductPromotion, finalPrice, discountType, discountValue} =
+    ProductPromotionChecker({
+      productId: item.id,
+      defaultPrice: item.price,
+      promotions: notifications,
+      brandId: item.brandId,
+    });
 
   const rightAction = () => {
     return (
@@ -56,9 +67,10 @@ const CartItem: React.FC<CartItemProps> = ({
             </Text>
 
             <View style={styles.footerContainer}>
-              <Text style={[styles.price, {color: colors.text}]}>
-                ${currencyFormat(item.price)}
-              </Text>
+              <PriceTag
+                finalPrice={finalPrice}
+                defaultPrice={hasProductPromotion ? item.price : null}
+              />
               <View style={styles.quantityContainer}>
                 <Text style={[styles.quantity, {color: colors.text}]}>x10</Text>
               </View>
@@ -81,6 +93,20 @@ const CartItem: React.FC<CartItemProps> = ({
                   />
                 )}
               />
+
+              {hasProductPromotion && (
+                <View style={styles.promotionContainer}>
+                  <Icons.DISCOUNTTAG width={40} height={40} color={'red'} />
+                  <View style={styles.promotionWrapper}>
+                    <Text style={styles.value}>
+                      {discountValue}
+                      {discountType === 'percent' ? '%' : '$'}
+                    </Text>
+                    <Text style={styles.discountText}>OFF</Text>
+                  </View>
+                </View>
+              )}
+
               <View style={styles.hero}>
                 <View style={styles.heroHeader}>
                   <Text
@@ -96,9 +122,13 @@ const CartItem: React.FC<CartItemProps> = ({
                 </Text>
 
                 <View style={styles.footerContainer}>
-                  <Text style={[styles.price, {color: colors.text}]}>
-                    ${currencyFormat(item.price)}
-                  </Text>
+                  {/* <Text style={[styles.price, {color: colors.text}]}>
+                    ${currencyFormat(finalPrice)}
+                  </Text> */}
+                  <PriceTag
+                    finalPrice={finalPrice}
+                    defaultPrice={hasProductPromotion ? item.price : null}
+                  />
                   <View style={styles.quantityContainer}>
                     <IconButton
                       onPress={item.quantity === 1 ? onDelete : onDecrease}

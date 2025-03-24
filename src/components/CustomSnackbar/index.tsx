@@ -23,7 +23,7 @@ const CustomSnackbar: React.FC<CustomSnackbarProps> = ({
     (props: any) => (
       <BottomSheetBackdrop
         opacity={0}
-        disappearsOnIndex={-1}
+        disappearsOnIndex={1}
         appearsOnIndex={0}
         {...props}
       />

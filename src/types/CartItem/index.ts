@@ -1,3 +1,5 @@
+import {Notification} from '../../models';
+
 export interface CartItemProps {
   onPress: () => void;
   onDelete: (id: number, variantId: number) => void;
@@ -14,4 +16,5 @@ export interface CartItemProps {
     variantId: number | null;
     quantity: number;
   };
+  notifications: Notification[];
 }

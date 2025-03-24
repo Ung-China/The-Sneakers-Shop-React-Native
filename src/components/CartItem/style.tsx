@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {colors} from '../../constants/colors/colorTypes';
-import {Fonts, FontSizes, Gap, Padding, Radius} from '../../constants';
+import {Fonts, FontSizes, Gap, Padding, Radius, Spacing} from '../../constants';
 
 export default StyleSheet.create({
   container: {
@@ -61,5 +61,32 @@ export default StyleSheet.create({
   footerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  promotionContainer: {
+    position: 'absolute',
+    left: -7,
+    top: -7,
+    margin: Spacing.SMALL,
+  },
+  promotionWrapper: {
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  value: {
+    color: 'white',
+    fontSize: FontSizes.extraSmall,
+    fontFamily: Fonts.REGULAR,
+    lineHeight: 10,
+  },
+  discountText: {
+    color: 'white',
+    fontSize: FontSizes.extraSmall,
+    fontFamily: Fonts.REGULAR,
+    lineHeight: 10,
   },
 });

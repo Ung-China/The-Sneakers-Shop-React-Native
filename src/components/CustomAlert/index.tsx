@@ -1,3 +1,4 @@
+import React from 'react';
 import {Modal, Text, View} from 'react-native';
 import styles from './style';
 import {CustomAlertProps} from '../../types';

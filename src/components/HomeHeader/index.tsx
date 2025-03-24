@@ -1,6 +1,6 @@
-import {Alert, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import styles from './style';
-import {useTheme} from '../../hooks';
+import {useCart, useTheme} from '../../hooks';
 import FlexibleTouchable from '../FlexibleTouchable';
 import IconButton from '../IconButton';
 import {Icons} from '../../constants';
@@ -13,6 +13,7 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({
   handlePressToShopLocation,
 }) => {
   const {colors} = useTheme();
+  const {cartItemsCount} = useCart();
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
 
   const handlePressToNotifications = () => {
@@ -22,6 +23,7 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({
   const handlePressToCart = () => {
     navigation.navigate('Cart');
   };
+
   return (
     <View style={[styles.container, {backgroundColor: colors.secondary}]}>
       <View style={styles.leadingContainer}>
@@ -46,6 +48,11 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({
           onPress={handlePressToCart}
           icon={<Icons.CART height={30} width={30} color={colors.icon} />}
         />
+        {cartItemsCount > 0 && (
+          <View style={styles.qunatityContainer}>
+            <Text style={styles.quantity}>{cartItemsCount}</Text>
+          </View>
+        )}
       </View>
     </View>
   );

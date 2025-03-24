@@ -77,6 +77,10 @@ const ProductDetailScreen: React.FC = () => {
       brandId: brandId,
     });
 
+  console.log('CHECK NOTIFICATION', notifications);
+
+  console.log('CHECK DISCOUNT VALUE', discountValue);
+
   const {products, isFetchingMoreProducts, fetchMoreProducts} =
     useRelatedProducts(brandId);
 
@@ -111,7 +115,7 @@ const ProductDetailScreen: React.FC = () => {
 
       setTimeout(() => {
         onCloseCustomSnackbar();
-      }, 3000);
+      }, 1500);
     }
   };
 
@@ -434,9 +438,11 @@ const ProductDetailScreen: React.FC = () => {
                   <Icons.CART color={colors.black} width={25} height={25} />
                 }
               />
-              <View style={styles.qunatityContainer}>
-                <Text style={styles.quantity}>{cartItemsCount}</Text>
-              </View>
+              {cartItemsCount > 0 && (
+                <View style={styles.qunatityContainer}>
+                  <Text style={styles.quantity}>{cartItemsCount}</Text>
+                </View>
+              )}
             </View>
           </>
         )}
