@@ -82,6 +82,8 @@ const ProductDetailScreen: React.FC = () => {
 
   const {isFavorite, toggleItemFavorite} = useFavorite();
 
+  const {cartItemsCount} = useCart();
+
   const navigateBack = () => {
     return navigation.goBack();
   };
@@ -104,6 +106,12 @@ const ProductDetailScreen: React.FC = () => {
       };
 
       addProductToCart(cartItem);
+
+      toggleCustomSnackbar();
+
+      setTimeout(() => {
+        onCloseCustomSnackbar();
+      }, 3000);
     }
   };
 
@@ -419,11 +427,17 @@ const ProductDetailScreen: React.FC = () => {
               style={[styles.backContainer]}
             />
 
-            <IconButton
-              onPress={navigateToCart}
-              icon={<Icons.CART color={colors.black} width={25} height={25} />}
-              style={[styles.cartContainer]}
-            />
+            <View style={[styles.cartContainer]}>
+              <IconButton
+                onPress={navigateToCart}
+                icon={
+                  <Icons.CART color={colors.black} width={25} height={25} />
+                }
+              />
+              <View style={styles.qunatityContainer}>
+                <Text style={styles.quantity}>{cartItemsCount}</Text>
+              </View>
+            </View>
           </>
         )}
 
@@ -490,11 +504,7 @@ const ProductDetailScreen: React.FC = () => {
             paddingBottom: Padding.BOTTOM * 2,
             backgroundColor: '#4BB543',
           }}
-          content={
-            <View>
-              <Text>Hello Brother</Text>
-            </View>
-          }
+          text={t('addedToCartSuccess')}
         />
       </>
 

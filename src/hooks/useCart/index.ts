@@ -47,6 +47,8 @@ const useCart = () => {
     setAlertVisible(false);
   };
 
+  const cartItemsCount = cartItems.length;
+
   return {
     addProductToCart,
     removeProductFromCart,
@@ -57,6 +59,7 @@ const useCart = () => {
     confirmDelete,
     isAlertVisible,
     setAlertVisible,
+    cartItemsCount,
   };
 };
 

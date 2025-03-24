@@ -155,4 +155,5 @@ export const translateEN = {
   removeproducttitle: 'Remove Product',
   removeproductdescription:
     'Are you sure you want to remove this product from your cart?',
+  addedToCartSuccess: 'Product successfully added to cart!',
 };

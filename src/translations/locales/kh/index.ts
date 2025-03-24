@@ -155,4 +155,5 @@ export const translateKH = {
   removeproducttitle: 'លុបផលិតផល',
   removeproductdescription:
     'តើអ្នកប្រាកដជាចង់លុបផលិតផលនេះចេញពីកន្ត្រករបស់អ្នកឬ?',
+  addedToCartSuccess: 'ផលិតផលត្រូវបានបញ្ចូលទៅក្នុងកន្ត្រកដោយជោគជ័យ!',
 };

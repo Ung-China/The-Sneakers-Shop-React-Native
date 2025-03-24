@@ -145,4 +145,21 @@ export default StyleSheet.create({
   productContentContainer: {
     paddingHorizontal: Padding.DEFAULT,
   },
+  qunatityContainer: {
+    backgroundColor: 'red',
+    position: 'absolute',
+    right: -8,
+    top: -4,
+    borderRadius: Screen_Dimensions.WIDTH,
+    width: 20,
+    height: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  quantity: {
+    fontFamily: Fonts.MEDIUM,
+    fontSize: FontSizes.default,
+    textAlign: 'center',
+    color: 'white',
+  },
 });
