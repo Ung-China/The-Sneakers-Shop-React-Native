@@ -40,7 +40,7 @@ const FlexibleInput: React.FC<FlexibleInputProps> = ({
 
           <Touchable onPress={onPress} style={styles.textInput}>
             <Text style={[styles.placeHolder, {color: colors.grey}]}>
-              {placeholder}
+              {value ? value : placeholder}
             </Text>
           </Touchable>
 

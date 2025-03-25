@@ -1,7 +1,12 @@
 import React from 'react';
 import {View, Text, FlatList} from 'react-native';
 import styles from './style';
-import {useCart, useNotification, useTheme} from '../../hooks';
+import {
+  useCalculateTotalPrice,
+  useCart,
+  useNotification,
+  useTheme,
+} from '../../hooks';
 import {
   CartItem,
   CustomAlert,
@@ -31,6 +36,8 @@ const CartScreen: React.FC = () => {
     isAlertVisible,
     setAlertVisible,
   } = useCart();
+
+  const {totalPrice} = useCalculateTotalPrice(cartItems, notifications);
 
   const cartItem = ({item}: {item: CartItemProps['item']}) => {
     return (
@@ -82,7 +89,7 @@ const CartScreen: React.FC = () => {
                 {t('total')}
               </Text>
               <Text style={[styles.total, {color: colors.text}]}>
-                ${currencyFormat(100)}
+                ${currencyFormat(totalPrice)}
               </Text>
             </View>
             <FlexibleTouchable

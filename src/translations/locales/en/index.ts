@@ -156,4 +156,6 @@ export const translateEN = {
   removeproductdescription:
     'Are you sure you want to remove this product from your cart?',
   addedToCartSuccess: 'Product successfully added to cart!',
+  province: 'Province',
+  selectProvince: 'Select Province',
 };

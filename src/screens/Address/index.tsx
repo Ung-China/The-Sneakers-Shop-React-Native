@@ -31,14 +31,14 @@ const AddressScreen: React.FC = () => {
   const {colors} = useTheme();
   const {t} = useTranslation();
   const {
-    activeAddressLabel,
+    handleProvinceSheetChanges,
+    bottomSheetProvinceModalRef,
     toggleAddressLabel,
-    handleCitySheetChanges,
-    bottomSheetCityModalRef,
-    toggleCitySheet,
-    handleCitySheetDismiss,
-    activeCity,
-    toggleCity,
+    activeAddressLabel,
+    toggleProvinceSheet,
+    toggleProvince,
+    activeProvince,
+    province,
   } = useAddress();
 
   const addressLabelItem = ({
@@ -129,9 +129,10 @@ const AddressScreen: React.FC = () => {
                 ]}
               />
               <FlexibleInput
-                label={t('city')}
-                placeholder={t('selectCity')}
-                onPress={toggleCitySheet}
+                label={t('province')}
+                placeholder={t('selectProvince')}
+                onPress={toggleProvinceSheet}
+                value={province}
                 contentContainerStyle={[
                   styles.cityContainer,
                   {backgroundColor: colors.secondary},
@@ -174,12 +175,14 @@ const AddressScreen: React.FC = () => {
         </Footer>
       </KeyboardAvoidingView>
       <BottomSheet
-        bottomSheetModalRef={bottomSheetCityModalRef}
-        onSheetChanges={handleCitySheetChanges}
-        handleLogisticSheetDismiss={handleCitySheetDismiss}
+        bottomSheetModalRef={bottomSheetProvinceModalRef}
+        onSheetChanges={handleProvinceSheetChanges}
+        handleLogisticSheetDismiss={() => {}}
         snapPoints={['80%']}
         enableDynamicSizing={false}
-        content={<CityModal onPress={toggleCity} isActive={activeCity} />}
+        content={
+          <CityModal onPress={toggleProvince} isActive={activeProvince} />
+        }
       />
     </>
   );

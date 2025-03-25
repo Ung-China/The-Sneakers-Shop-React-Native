@@ -77,10 +77,6 @@ const ProductDetailScreen: React.FC = () => {
       brandId: brandId,
     });
 
-  console.log('CHECK NOTIFICATION', notifications);
-
-  console.log('CHECK DISCOUNT VALUE', discountValue);
-
   const {products, isFetchingMoreProducts, fetchMoreProducts} =
     useRelatedProducts(brandId);
 

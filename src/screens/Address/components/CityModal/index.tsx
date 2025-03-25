@@ -17,7 +17,7 @@ const CityModal: React.FC<CityModalProps> = ({onPress, isActive}) => {
     return (
       <CityItem
         item={item}
-        onPress={() => onPress(index)}
+        onPress={() => onPress(index, item.name)}
         isActive={isActive === index}
       />
     );

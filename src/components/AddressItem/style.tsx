@@ -21,4 +21,12 @@ export default StyleSheet.create({
     fontFamily: Fonts.REGULAR,
     fontSize: FontSizes.default,
   },
+  rightActionContainer: {
+    flex: 1,
+    padding: Padding.DEFAULT,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'red',
+    borderRadius: Radius.DEFAULT,
+  },
 });
