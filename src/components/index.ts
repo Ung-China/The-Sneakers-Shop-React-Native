@@ -30,7 +30,7 @@ import BottomSheet from './BottomSheet';
 import LogisticItem from './LogisticItem';
 import AddressItem from './AddressItem';
 import AddressLabelItem from './AddressLabelItem';
-import CityItem from './CityItem';
+import ProvinceItem from './ProvinceItem';
 import OTPModal from './OTPModal';
 import LoadingModal from './LoadingModal';
 import LocationItem from './LocationItem';
@@ -76,7 +76,7 @@ export {
   LogisticItem,
   AddressItem,
   AddressLabelItem,
-  CityItem,
+  ProvinceItem,
   OTPModal,
   LoadingModal,
   LocationItem,

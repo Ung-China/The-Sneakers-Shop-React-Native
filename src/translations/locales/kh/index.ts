@@ -158,4 +158,5 @@ export const translateKH = {
   addedToCartSuccess: 'ផលិតផលត្រូវបានបញ្ចូលទៅក្នុងកន្ត្រកដោយជោគជ័យ!',
   province: 'ខេត្ត',
   selectProvince: 'ជ្រើសរើសខេត្ត',
+  provinceisrequired: 'ទាមទារខេត្ត!',
 };

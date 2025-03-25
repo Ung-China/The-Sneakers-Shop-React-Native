@@ -5,9 +5,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  Alert,
   FlatList,
-  SafeAreaView,
 } from 'react-native';
 import styles from './style';
 import {useTheme} from '../../hooks';
@@ -25,7 +23,7 @@ import {Icons} from '../../constants';
 import {addressLabels} from '../../models/AddressLabel';
 import {AddressLabelItemProps} from '../../types';
 import useAddress from '../../hooks/useAddress';
-import {CityModal} from './components';
+import {ProvinceModal} from './components';
 
 const AddressScreen: React.FC = () => {
   const {colors} = useTheme();
@@ -34,11 +32,23 @@ const AddressScreen: React.FC = () => {
     handleProvinceSheetChanges,
     bottomSheetProvinceModalRef,
     toggleAddressLabel,
-    activeAddressLabel,
+    activeLabel,
+    label,
     toggleProvinceSheet,
     toggleProvince,
     activeProvince,
     province,
+    errorProvince,
+    save,
+    setPhoneNumber,
+    phoneNumber,
+    errorPhoneNumber,
+    setStreetLine1,
+    streetLine1,
+    setStreetLine2,
+    streetLine2,
+    setNoted,
+    note,
   } = useAddress();
 
   const addressLabelItem = ({
@@ -50,9 +60,9 @@ const AddressScreen: React.FC = () => {
   }) => {
     return (
       <AddressLabelItem
-        onPress={() => toggleAddressLabel(index)}
+        onPress={() => toggleAddressLabel(index, item.name)}
         item={item}
-        isActive={activeAddressLabel === index}
+        isActive={activeLabel === index}
       />
     );
   };
@@ -97,6 +107,9 @@ const AddressScreen: React.FC = () => {
               <FlexibleInput
                 label={t('phoneNumber')}
                 placeholder={t('enterPhoneNumber')}
+                onChangeText={setPhoneNumber}
+                value={phoneNumber}
+                error={errorPhoneNumber}
                 editable={true}
                 textInputStyle={[
                   styles.textInputStyle,
@@ -114,6 +127,8 @@ const AddressScreen: React.FC = () => {
                 label={t('streetLine1')}
                 placeholder={t('enterStreet1')}
                 editable={true}
+                value={streetLine1}
+                onChangeText={setStreetLine1}
                 textInputStyle={[
                   styles.textInputStyle,
                   {backgroundColor: colors.secondary},
@@ -123,6 +138,8 @@ const AddressScreen: React.FC = () => {
                 label={t('streetLine2')}
                 placeholder={t('enterStreet1')}
                 editable={true}
+                value={streetLine2}
+                onChangeText={setStreetLine2}
                 textInputStyle={[
                   styles.textInputStyle,
                   {backgroundColor: colors.secondary},
@@ -133,6 +150,7 @@ const AddressScreen: React.FC = () => {
                 placeholder={t('selectProvince')}
                 onPress={toggleProvinceSheet}
                 value={province}
+                error={errorProvince}
                 contentContainerStyle={[
                   styles.cityContainer,
                   {backgroundColor: colors.secondary},
@@ -146,6 +164,8 @@ const AddressScreen: React.FC = () => {
                 placeholder={t('noteSomething')}
                 editable={true}
                 multiline={true}
+                value={note}
+                onChangeText={setNoted}
                 textInputStyle={[
                   styles.textInputStyle,
                   {backgroundColor: colors.secondary},
@@ -163,7 +183,7 @@ const AddressScreen: React.FC = () => {
             {borderColor: colors.grey, backgroundColor: colors.primary},
           ]}>
           <Touchable
-            onPress={() => {}}
+            onPress={save}
             style={[
               styles.saveButton,
               {backgroundColor: colors.secondaryReversed},
@@ -177,11 +197,11 @@ const AddressScreen: React.FC = () => {
       <BottomSheet
         bottomSheetModalRef={bottomSheetProvinceModalRef}
         onSheetChanges={handleProvinceSheetChanges}
-        handleLogisticSheetDismiss={() => {}}
+        handleSheetDismiss={() => {}}
         snapPoints={['80%']}
         enableDynamicSizing={false}
         content={
-          <CityModal onPress={toggleProvince} isActive={activeProvince} />
+          <ProvinceModal onPress={toggleProvince} isActive={activeProvince} />
         }
       />
     </>

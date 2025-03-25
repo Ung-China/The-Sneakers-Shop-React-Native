@@ -11,6 +11,7 @@ import Location from './Location';
 import Slider from './Slider';
 import ProductTest from './ProductTest';
 import Promotion from './Promotion';
+import Province from './Province';
 export {
   ProfileMenu,
   Language,
@@ -25,4 +26,5 @@ export {
   Slider,
   ProductTest,
   Promotion,
+  Province,
 };

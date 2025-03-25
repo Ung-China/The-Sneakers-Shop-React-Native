@@ -1,21 +1,21 @@
 import {View} from 'react-native';
-import {cities} from '../../../../models/City';
-import {CityItem, ItemSeparatorHeight} from '../../../../components';
+import {provinces} from '../../../../models/Province';
+import {ProvinceItem, ItemSeparatorHeight} from '../../../../components';
 import styles from './style';
-import {CityItemProps, CityModalProps} from '../../../../types';
+import {ProvinceItemProps, ProvinceProps} from '../../../../types';
 import React from 'react';
 import {FlatList} from 'react-native-gesture-handler';
 
-const CityModal: React.FC<CityModalProps> = ({onPress, isActive}) => {
-  const cityItem = ({
+const ProvinceModal: React.FC<ProvinceProps> = ({onPress, isActive}) => {
+  const provinceItem = ({
     item,
     index,
   }: {
-    item: CityItemProps['item'];
+    item: ProvinceItemProps['item'];
     index: number;
   }) => {
     return (
-      <CityItem
+      <ProvinceItem
         item={item}
         onPress={() => onPress(index, item.name)}
         isActive={isActive === index}
@@ -26,8 +26,8 @@ const CityModal: React.FC<CityModalProps> = ({onPress, isActive}) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={cities}
-        renderItem={cityItem}
+        data={provinces}
+        renderItem={provinceItem}
         showsVerticalScrollIndicator={false}
         ItemSeparatorComponent={ItemSeparatorHeight}
         contentContainerStyle={styles.contentContainer}
@@ -37,4 +37,4 @@ const CityModal: React.FC<CityModalProps> = ({onPress, isActive}) => {
   );
 };
 
-export default CityModal;
+export default ProvinceModal;

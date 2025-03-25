@@ -1,3 +1,3 @@
-import CityModal from './CityModal';
+import ProvinceModal from './ProvinceModal';
 
-export {CityModal};
+export {ProvinceModal};

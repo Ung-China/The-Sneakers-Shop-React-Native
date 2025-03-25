@@ -12,7 +12,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
   content,
   onSheetChanges,
   bottomSheetModalRef,
-  handleLogisticSheetDismiss,
+  handleSheetDismiss,
   snapPoints,
   enableDynamicSizing = true,
   contentContainer,
@@ -37,7 +37,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
       snapPoints={snapPoints}
       enableDynamicSizing={enableDynamicSizing}
       enablePanDownToClose={true}
-      onDismiss={handleLogisticSheetDismiss}
+      onDismiss={handleSheetDismiss}
       handleIndicatorStyle={{backgroundColor: colors.text}}
       backgroundStyle={{backgroundColor: colors.primary}}>
       <BottomSheetView

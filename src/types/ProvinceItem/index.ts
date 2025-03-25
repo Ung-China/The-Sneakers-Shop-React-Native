@@ -1,4 +1,4 @@
-export interface CityItemProps {
+export interface ProvinceItemProps {
   onPress: () => void;
   isActive: boolean;
   item: {

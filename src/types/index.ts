@@ -36,8 +36,8 @@ import {LogisticModalProps} from './LogisticModal';
 import {DeliveryModalProps} from './DeliveryModal';
 import {DeliveryProps} from './Delivery';
 import {AddressLabelItemProps} from './AddressLabelItem';
-import {CityItemProps} from './CityItem';
-import {CityModalProps} from './City';
+import {ProvinceItemProps} from './ProvinceItem';
+import {ProvinceProps} from './Province';
 import {LoginModalProps} from './Login';
 import {OTPModalProps} from './OTPModal';
 import {ApiRequestProps} from './ApiRequest';
@@ -89,8 +89,8 @@ export type {
   DeliveryModalProps,
   DeliveryProps,
   AddressLabelItemProps,
-  CityItemProps,
-  CityModalProps,
+  ProvinceItemProps,
+  ProvinceProps,
   LoginModalProps,
   OTPModalProps,
   ApiRequestProps,

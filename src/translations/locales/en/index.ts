@@ -158,4 +158,5 @@ export const translateEN = {
   addedToCartSuccess: 'Product successfully added to cart!',
   province: 'Province',
   selectProvince: 'Select Province',
+  provinceisrequired: 'Province is required!',
 };

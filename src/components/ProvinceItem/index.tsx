@@ -1,10 +1,14 @@
 import {Text} from 'react-native';
-import {CityItemProps} from '../../types';
+import {ProvinceItemProps} from '../../types';
 import Touchable from '../Touchable';
 import {useTheme} from '../../hooks';
 import styles from './style';
 
-const CityItem: React.FC<CityItemProps> = ({item, onPress, isActive}) => {
+const ProvinceItem: React.FC<ProvinceItemProps> = ({
+  item,
+  onPress,
+  isActive,
+}) => {
   const {colors} = useTheme();
 
   return (
@@ -29,4 +33,4 @@ const CityItem: React.FC<CityItemProps> = ({item, onPress, isActive}) => {
   );
 };
 
-export default CityItem;
+export default ProvinceItem;
