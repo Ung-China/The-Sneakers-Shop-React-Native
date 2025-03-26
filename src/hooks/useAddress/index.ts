@@ -1,6 +1,11 @@
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {useCallback, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
+import {Address} from '../../models';
+import {useDispatch, useSelector} from 'react-redux';
+import {addAddress} from '../../store/actions';
+import {RootState} from '../../store';
+import {useNavigation} from '@react-navigation/native';
 
 const useAddress = () => {
   const [activeLabel, setActiveLabel] = useState(0);
@@ -9,14 +14,17 @@ const useAddress = () => {
   const [errorPhoneNumber, setErrorPhoneNumber] = useState('');
   const [streetLine1, setStreetLine1] = useState('');
   const [streetLine2, setStreetLine2] = useState('');
-  const [activeProvince, setActiveProvince] = useState();
+  const [activeProvince, setActiveProvince] = useState(null);
   const [province, setProvince] = useState('');
   const [errorProvince, setErrorProvince] = useState('');
   const [note, setNoted] = useState('');
+  const bottomSheetProvinceModalRef = useRef<BottomSheetModal>(null);
 
   const {t} = useTranslation();
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
 
-  const bottomSheetProvinceModalRef = useRef<BottomSheetModal>(null);
+  const addresses = useSelector((state: RootState) => state.address.address);
 
   const handleProvinceSheetChanges = useCallback((index: number) => {
     console.log('Province Sheet changed to index', index);
@@ -50,31 +58,34 @@ const useAddress = () => {
       valid = false;
       setErrorPhoneNumber(t('phoneisrequired'));
     }
-    if (!province.trim()) {
+
+    if (province === '') {
+      console.log('Checking province', province);
       setErrorProvince(t('provinceisrequired'));
       valid = false;
     }
 
     return valid;
-  }, [phoneNumber]);
+  }, [phoneNumber, province]);
 
   const save = () => {
     if (!validate()) {
       return;
     }
-
-    console.log('✅ Address Data:', {
+    const newAddress = new Address(
+      Date.now(),
       label,
       phoneNumber,
       streetLine1,
       streetLine2,
       province,
-      activeProvince,
       note,
-    });
+    );
+    dispatch(addAddress(newAddress));
   };
 
   return {
+    addresses,
     handleProvinceSheetChanges,
     bottomSheetProvinceModalRef,
     toggleAddressLabel,
@@ -83,6 +94,7 @@ const useAddress = () => {
     toggleProvinceSheet,
     toggleProvince,
     activeProvince,
+    setProvince,
     province,
     errorProvince,
     save,

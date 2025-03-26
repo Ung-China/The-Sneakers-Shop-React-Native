@@ -8,6 +8,7 @@ import {
   decreaseQuantity,
   removeFromCart,
 } from './Cart';
+import {addAddress, removeAddress} from './Address';
 export {
   changeLanguageActions,
   setThemeActions,
@@ -20,4 +21,6 @@ export {
   increaseQuantity,
   decreaseQuantity,
   removeFromCart,
+  addAddress,
+  removeAddress,
 };

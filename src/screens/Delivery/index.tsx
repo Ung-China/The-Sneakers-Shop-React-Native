@@ -139,7 +139,7 @@ const DeliveryScreen: React.FC = () => {
       <BottomSheet
         bottomSheetModalRef={bottomSheetDeliveryModalRef}
         onSheetChanges={handleDeliverySheetChanges}
-        handleLogisticSheetDismiss={() => {}}
+        handleSheetDismiss={() => {}}
         enableDynamicSizing={true}
         content={
           <DeliveryModal
@@ -154,7 +154,7 @@ const DeliveryScreen: React.FC = () => {
       <BottomSheet
         bottomSheetModalRef={bottomSheetLogisticModalRef}
         onSheetChanges={handleLogisticSheetChanges}
-        handleLogisticSheetDismiss={handleLogisticSheetDismiss}
+        handleSheetDismiss={handleLogisticSheetDismiss}
         enableDynamicSizing={true}
         content={
           <LogisticModal

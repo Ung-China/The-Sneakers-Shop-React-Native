@@ -27,6 +27,7 @@ import useFavorite from './useFavorite';
 import useCart from './useCart';
 import useCustomSnackbar from './useCustomSnackbar';
 import useCalculateTotalPrice from './useCalculateTotalPrice';
+import useAddress from './useAddress';
 
 export {
   useLanguage,
@@ -58,4 +59,5 @@ export {
   useCart,
   useCustomSnackbar,
   useCalculateTotalPrice,
+  useAddress,
 };

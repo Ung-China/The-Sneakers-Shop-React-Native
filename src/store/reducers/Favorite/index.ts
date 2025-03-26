@@ -6,10 +6,7 @@ const initialState: FavoriteState = {
   favorites: [],
 };
 
-const favoriteReducer = (
-  state = initialState,
-  action: FavoriteActionTypes,
-): FavoriteState => {
+const favoriteReducer = (state = initialState, action: any): FavoriteState => {
   switch (action.type) {
     case ActionTypes.SET_FAVORITES:
       return {...state, favorites: action.payload};

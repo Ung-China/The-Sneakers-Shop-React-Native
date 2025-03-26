@@ -8,6 +8,7 @@ import {
 } from './UserTypes';
 import {FavoriteActionTypes, FavoriteState} from './FavoriteType';
 import {CartActionTypes, CartState} from './Cart';
+import {AddressState, AddressActionType} from './Address';
 export type {
   LanguageState,
   ChangeLanguageAction,
@@ -21,4 +22,6 @@ export type {
   FavoriteActionTypes,
   CartActionTypes,
   CartState,
+  AddressActionType,
+  AddressState,
 };

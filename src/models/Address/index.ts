@@ -1,30 +1,27 @@
 export default class Address {
   id: number;
-  country: string;
-  label: string[];
+  label: string;
   phoneNumber: string;
   streetLine1: string;
   streetLine2: string;
-  city: string[];
+  province: string;
   note: string;
 
   constructor(
     id: number,
-    country: string,
-    label: string[],
+    label: string,
     phoneNumber: string,
     streetLine1: string,
     streetLine2: string,
-    city: string[],
+    province: string,
     note: string,
   ) {
     this.id = id;
-    this.country = country;
     this.label = label;
     this.phoneNumber = phoneNumber;
     this.streetLine1 = streetLine1;
     this.streetLine2 = streetLine2;
-    this.city = city;
+    this.province = province;
     this.note = note;
   }
 }

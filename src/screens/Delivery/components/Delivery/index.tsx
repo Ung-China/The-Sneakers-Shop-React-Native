@@ -6,10 +6,9 @@ import {
   ItemSeparatorHeight,
   Touchable,
 } from '../../../../components';
-import {useTheme} from '../../../../hooks';
+import {useAddress, useTheme} from '../../../../hooks';
 import {useTranslation} from 'react-i18next';
 import {DeliveryModalProps, DeliveryProps} from '../../../../types';
-import {addresss} from '../../../../models/Address';
 import {Icons} from '../../../../constants';
 import {FlatList} from 'react-native-gesture-handler';
 
@@ -22,6 +21,7 @@ const DeliveryModal: React.FC<DeliveryModalProps> = ({
 }) => {
   const {colors} = useTheme();
   const {t} = useTranslation();
+  const {addresses} = useAddress();
 
   const addressItem = ({item}: {item: DeliveryProps['item']}) => {
     return (
@@ -56,7 +56,7 @@ const DeliveryModal: React.FC<DeliveryModalProps> = ({
       </View>
       <View style={styles.body}>
         <FlatList
-          data={addresss}
+          data={addresses}
           renderItem={addressItem}
           ListFooterComponent={footerCompenent}
           showsVerticalScrollIndicator={false}

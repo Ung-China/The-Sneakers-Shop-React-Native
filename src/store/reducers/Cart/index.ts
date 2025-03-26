@@ -5,15 +5,11 @@ const initialState: CartState = {
   cart: [],
 };
 
-const cartReducer = (
-  state = initialState,
-  action: CartActionTypes,
-): CartState => {
+const cartReducer = (state = initialState, action: any): CartState => {
   switch (action.type) {
     case ActionTypes.ADD_TO_CART: {
       const newItem = action.payload;
 
-      // Check if item with the same id and variantId already exists in the cart
       const existingItem = state.cart.find(
         item => item.id === newItem.id && item.variantId === newItem.variantId,
       );
@@ -23,10 +19,10 @@ const cartReducer = (
         cart: existingItem
           ? state.cart.map(item =>
               item.id === newItem.id && item.variantId === newItem.variantId
-                ? {...item, quantity: item.quantity + 1} // Increase quantity
+                ? {...item, quantity: item.quantity + 1}
                 : item,
             )
-          : [...state.cart, {...newItem, quantity: 1}], // Add new item
+          : [...state.cart, {...newItem, quantity: 1}],
       };
     }
 
@@ -36,7 +32,7 @@ const cartReducer = (
         ...state,
         cart: state.cart.map(item =>
           item.id === productId && item.variantId === variantId
-            ? {...item, quantity: item.quantity + 1} // Increase quantity
+            ? {...item, quantity: item.quantity + 1}
             : item,
         ),
       };
@@ -49,10 +45,10 @@ const cartReducer = (
         cart: state.cart
           .map(item =>
             item.id === productId && item.variantId === variantId
-              ? {...item, quantity: item.quantity - 1} // Decrease quantity
+              ? {...item, quantity: item.quantity - 1}
               : item,
           )
-          .filter(item => item.quantity > 0), // Remove items with 0 quantity
+          .filter(item => item.quantity > 0),
       };
     }
 
@@ -61,7 +57,7 @@ const cartReducer = (
       return {
         ...state,
         cart: state.cart.filter(
-          item => !(item.id === productId && item.variantId === variantId), // Remove item
+          item => !(item.id === productId && item.variantId === variantId),
         ),
       };
     }

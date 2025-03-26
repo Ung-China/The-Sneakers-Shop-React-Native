@@ -28,6 +28,7 @@ import {ProvinceModal} from './components';
 const AddressScreen: React.FC = () => {
   const {colors} = useTheme();
   const {t} = useTranslation();
+
   const {
     handleProvinceSheetChanges,
     bottomSheetProvinceModalRef,
@@ -37,6 +38,7 @@ const AddressScreen: React.FC = () => {
     toggleProvinceSheet,
     toggleProvince,
     activeProvince,
+    setProvince,
     province,
     errorProvince,
     save,
@@ -183,7 +185,7 @@ const AddressScreen: React.FC = () => {
             {borderColor: colors.grey, backgroundColor: colors.primary},
           ]}>
           <Touchable
-            onPress={save}
+            onPress={() => save()}
             style={[
               styles.saveButton,
               {backgroundColor: colors.secondaryReversed},
