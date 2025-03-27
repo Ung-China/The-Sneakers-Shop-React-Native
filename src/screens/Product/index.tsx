@@ -51,12 +51,7 @@ const ProductDetailScreen: React.FC = () => {
 
   const {notifications} = useNotification();
   const {addProductToCart} = useCart();
-  const {
-    customSnackbarRef,
-    toggleCustomSnackbar,
-    onCustomSnackbarChanges,
-    onCloseCustomSnackbar,
-  } = useCustomSnackbar();
+  const {customSnackbarRef, showSnackbar} = useCustomSnackbar();
 
   const {
     isLoading,
@@ -107,11 +102,7 @@ const ProductDetailScreen: React.FC = () => {
 
       addProductToCart(cartItem);
 
-      toggleCustomSnackbar();
-
-      setTimeout(() => {
-        onCloseCustomSnackbar();
-      }, 1500);
+      showSnackbar();
     }
   };
 
@@ -228,10 +219,7 @@ const ProductDetailScreen: React.FC = () => {
                   styles.swiperContainer,
                   {backgroundColor: colors.primary},
                 ]}
-                loadingImageStyle={[
-                  styles.swiperLoadingImageStyle,
-                  {backgroundColor: colors.primary},
-                ]}
+                loadingImageStyle={[styles.swiperLoadingImageStyle]}
                 iconSize={150}
                 autoPlay={false}
                 resizeMode="contain"
@@ -418,7 +406,7 @@ const ProductDetailScreen: React.FC = () => {
                   />
                 ) : (
                   <Icons.LEFTARROWANDROID
-                    color={colors.text}
+                    color={colors.black}
                     width={30}
                     height={30}
                   />
@@ -500,10 +488,8 @@ const ProductDetailScreen: React.FC = () => {
       <>
         <CustomSnackbar
           customSnackbarRef={customSnackbarRef}
-          onCloseCustomSnackbar={onCloseCustomSnackbar}
-          onCustomSnackbarChanges={onCustomSnackbarChanges}
           contentContainer={{
-            paddingBottom: Padding.BOTTOM * 2,
+            paddingBottom: Padding.BOTTOM,
             backgroundColor: '#4BB543',
           }}
           text={t('addedToCartSuccess')}
@@ -528,7 +514,7 @@ const ProductDetailScreen: React.FC = () => {
             </Text>
           </Touchable>
           <Touchable
-            onPress={toggleCustomSnackbar}
+            onPress={() => {}}
             style={[
               styles.buttonAddToCart,
               {backgroundColor: colors.primaryReversed},

@@ -24,10 +24,12 @@ import {addressLabels} from '../../models/AddressLabel';
 import {AddressLabelItemProps} from '../../types';
 import useAddress from '../../hooks/useAddress';
 import {ProvinceModal} from './components';
+import {useNavigation} from '@react-navigation/native';
 
 const AddressScreen: React.FC = () => {
   const {colors} = useTheme();
   const {t} = useTranslation();
+  const navigation = useNavigation();
 
   const {
     handleProvinceSheetChanges,
@@ -51,7 +53,7 @@ const AddressScreen: React.FC = () => {
     streetLine2,
     setNoted,
     note,
-  } = useAddress();
+  } = useAddress(navigation);
 
   const addressLabelItem = ({
     item,
@@ -185,7 +187,7 @@ const AddressScreen: React.FC = () => {
             {borderColor: colors.grey, backgroundColor: colors.primary},
           ]}>
           <Touchable
-            onPress={() => save()}
+            onPress={save}
             style={[
               styles.saveButton,
               {backgroundColor: colors.secondaryReversed},

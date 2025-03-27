@@ -1,6 +1,6 @@
 import {FlatList, View} from 'react-native';
 import styles from './style';
-import {useSeeMore, useTheme} from '../../hooks';
+import {useNotification, useSeeMore, useTheme} from '../../hooks';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {ProductItemProps, StackParamList} from '../../types';
 import {
@@ -20,6 +20,7 @@ const SeeMoreScreen: React.FC = () => {
   const {colors} = useTheme();
   const route = useRoute<RouteProp<StackParamList, 'SeeMoreScreen'>>();
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
+  const {notifications} = useNotification();
 
   const {screenName, endPointName} = route.params;
 
@@ -31,6 +32,10 @@ const SeeMoreScreen: React.FC = () => {
     isFetchingMoreProducts,
   } = useSeeMore(endPointName);
 
+  const handlePressOnProduct = (id: number, brandId: number) => {
+    navigation.navigate('ProductDetail', {id, brandId});
+  };
+
   const productItem = ({
     item,
     index,
@@ -41,7 +46,8 @@ const SeeMoreScreen: React.FC = () => {
     return (
       <ProductItem
         item={item}
-        onPress={() => {}}
+        onPress={() => handlePressOnProduct(item.id, item.brandId)}
+        notifications={notifications}
         wrapperStyle={[
           styles.productWrapper,
           {marginRight: index % 2 === 0 ? Spacing.DEFAULT : 0},

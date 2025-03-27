@@ -7,7 +7,7 @@ export default StyleSheet.create({
   },
   notificationContentContainer: {
     padding: Padding.DEFAULT,
-    paddingBottom: Padding.BOTTOM * 2,
+    paddingBottom: Padding.BOTTOM,
   },
   loaderContainer: {
     flex: 1,
@@ -20,9 +20,9 @@ export default StyleSheet.create({
     left: 0,
     right: 0,
     padding: Padding.DEFAULT,
-    paddingBottom: Padding.BOTTOM * 2,
+    paddingBottom: Padding.BOTTOM,
   },
   notFoundContainer: {
-    paddingVertical:Padding.DEFAULT
+    paddingVertical: Padding.DEFAULT,
   },
 });

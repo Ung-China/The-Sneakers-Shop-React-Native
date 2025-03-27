@@ -29,7 +29,7 @@ export default StyleSheet.create({
     left: 0,
     right: 0,
     padding: Padding.DEFAULT,
-    paddingBottom: Padding.BOTTOM * 2,
+    paddingBottom: Padding.BOTTOM,
   },
   dummyLoading: {
     paddingVertical: Padding.DEFAULT,

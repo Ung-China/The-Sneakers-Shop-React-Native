@@ -25,7 +25,7 @@ export default StyleSheet.create({
     marginTop: Spacing.DEFAULT,
   },
   buttonContainer: {
-    paddingBottom: Padding.BOTTOM * 2,
+    paddingBottom: Padding.BOTTOM,
     margin: Spacing.DEFAULT,
     gap: Gap.DEFAULT,
   },

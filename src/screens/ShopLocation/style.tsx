@@ -16,7 +16,7 @@ export default StyleSheet.create({
   locationContainer: {
     position: 'absolute',
     bottom: 0,
-    paddingBottom: Padding.BOTTOM * 2,
+    paddingBottom: Padding.BOTTOM,
   },
   markerContainer: {
     alignItems: 'center',

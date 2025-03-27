@@ -5,9 +5,8 @@ import {Address} from '../../models';
 import {useDispatch, useSelector} from 'react-redux';
 import {addAddress} from '../../store/actions';
 import {RootState} from '../../store';
-import {useNavigation} from '@react-navigation/native';
 
-const useAddress = () => {
+const useAddress = (navigation: any) => {
   const [activeLabel, setActiveLabel] = useState(0);
   const [label, setLabel] = useState('Home');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -22,8 +21,6 @@ const useAddress = () => {
 
   const {t} = useTranslation();
   const dispatch = useDispatch();
-  const navigation = useNavigation();
-
   const addresses = useSelector((state: RootState) => state.address.address);
 
   const handleProvinceSheetChanges = useCallback((index: number) => {
@@ -72,6 +69,7 @@ const useAddress = () => {
     if (!validate()) {
       return;
     }
+
     const newAddress = new Address(
       Date.now(),
       label,
@@ -82,6 +80,7 @@ const useAddress = () => {
       note,
     );
     dispatch(addAddress(newAddress));
+    navigation.goBack();
   };
 
   return {

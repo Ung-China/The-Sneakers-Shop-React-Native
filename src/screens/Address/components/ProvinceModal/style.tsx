@@ -6,6 +6,6 @@ export default StyleSheet.create({
     padding: Padding.DEFAULT,
   },
   contentContainer: {
-    paddingBottom: Padding.BOTTOM * 2,
+    paddingBottom: Padding.BOTTOM,
   },
 });

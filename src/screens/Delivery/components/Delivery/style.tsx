@@ -32,7 +32,7 @@ export default StyleSheet.create({
   footerContainer: {
     flexDirection: 'row',
     gap: Gap.DEFAULT,
-    paddingBottom: Padding.BOTTOM * 2,
+    paddingBottom: Padding.BOTTOM,
   },
   buttonContainer: {
     width: Screen_Dimensions.WIDTH / 2 - 22.5,

@@ -15,7 +15,7 @@ export default StyleSheet.create({
   },
   contentContainer: {
     paddingHorizontal: Padding.DEFAULT,
-    paddingBottom: Padding.BOTTOM * 2,
+    paddingBottom: Padding.BOTTOM,
   },
   productWrapper: {
     width:
@@ -59,7 +59,7 @@ export default StyleSheet.create({
     left: 0,
     right: 0,
     padding: Padding.DEFAULT,
-    paddingBottom: Padding.BOTTOM * 2,
+    paddingBottom: Padding.BOTTOM,
   },
   noDataContainer: {
     flex: 1,

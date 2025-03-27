@@ -6,16 +6,14 @@ import {
   BottomSheetView,
 } from '@gorhom/bottom-sheet';
 import React, {useCallback} from 'react';
-import {useTheme} from '../../hooks';
-import {Text, View} from 'react-native';
+import {useCustomSnackbar, useTheme} from '../../hooks';
+import {Text} from 'react-native';
 
 const CustomSnackbar: React.FC<CustomSnackbarProps> = ({
+  text,
   backgroundColor,
   customSnackbarRef,
-  onCustomSnackbarChanges,
-  onCloseCustomSnackbar,
   contentContainer,
-  text,
 }) => {
   const {colors} = useTheme();
 
@@ -34,11 +32,10 @@ const CustomSnackbar: React.FC<CustomSnackbarProps> = ({
   return (
     <BottomSheetModal
       ref={customSnackbarRef}
-      onChange={onCustomSnackbarChanges}
+      // onChange={onCustomSnackbarChanges}
       backdropComponent={renderBackdrop}
       enablePanDownToClose={true}
       enableDynamicSizing={true}
-      onDismiss={onCloseCustomSnackbar}
       overDragResistanceFactor={0}
       handleIndicatorStyle={{
         backgroundColor: colors.text,

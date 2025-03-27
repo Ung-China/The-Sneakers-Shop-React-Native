@@ -11,7 +11,7 @@ import {colors} from '../../../../constants/colors/colorTypes';
 
 export default StyleSheet.create({
   container: {
-    paddingBottom: Padding.BOTTOM * 2,
+    paddingBottom: Padding.BOTTOM,
   },
   header: {
     flexDirection: 'row',
