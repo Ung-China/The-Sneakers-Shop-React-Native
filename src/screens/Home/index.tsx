@@ -4,6 +4,7 @@ import styles from './style';
 import {
   BrandItem,
   BrandItemSkeleton,
+  CustomSnackbar,
   FlatButton,
   FlexibleInput,
   FlexibleSwiper,
@@ -16,6 +17,7 @@ import {
 } from '../../components';
 import {
   useBrand,
+  useCustomSnackbar,
   useLocation,
   useNotification,
   useSeeMore,
@@ -43,30 +45,6 @@ const HomeScreen: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
 
-  const productItem = ({item}: {item: ProductItemProps['item']}) => {
-    return (
-      <ProductItem
-        item={item}
-        onPress={() => handlePressOnProduct(item.id, item.brandId)}
-        notifications={notifications}
-      />
-    );
-  };
-
-  const productItemSkeleton = () => {
-    return <ProductItemSkeleton />;
-  };
-
-  const brandItem = ({item}: {item: BrandProps['item']}) => {
-    return (
-      <BrandItem item={item} onPress={() => handlePressOnBrand(item.id)} />
-    );
-  };
-
-  const brandItemSkeleton = () => {
-    return <BrandItemSkeleton />;
-  };
-
   const handlePressToSearch = () => {
     navigation.navigate('Search');
   };
@@ -86,6 +64,8 @@ const HomeScreen: React.FC = () => {
   const handlePressOnProduct = (id: number, brandId: number) => {
     navigation.navigate('ProductDetail', {id, brandId});
   };
+
+  const {customSnackbarRef, type, message, showSnackbar} = useCustomSnackbar();
 
   const {sliders, fetchSliders, isLoading: isLoadingSliders} = useSlider();
   const {
@@ -177,6 +157,32 @@ const HomeScreen: React.FC = () => {
 
     fetchData();
   }, []);
+
+  const productItem = ({item}: {item: ProductItemProps['item']}) => {
+    return (
+      <ProductItem
+        item={item}
+        onPress={() => handlePressOnProduct(item.id, item.brandId)}
+        notifications={notifications}
+        showSnackbar={showSnackbar}
+      />
+    );
+  };
+
+  const productItemSkeleton = () => {
+    return <ProductItemSkeleton />;
+  };
+
+  const brandItem = ({item}: {item: BrandProps['item']}) => {
+    return (
+      <BrandItem item={item} onPress={() => handlePressOnBrand(item.id)} />
+    );
+  };
+
+  const brandItemSkeleton = () => {
+    return <BrandItemSkeleton />;
+  };
+
   return (
     <SafeAreaView
       style={[
@@ -525,6 +531,11 @@ const HomeScreen: React.FC = () => {
             />
           </Section>
         )}
+        <CustomSnackbar
+          customSnackbarRef={customSnackbarRef}
+          type={type}
+          text={message}
+        />
       </ScrollView>
     </SafeAreaView>
   );

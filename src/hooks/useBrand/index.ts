@@ -76,6 +76,7 @@ const useBrand = (initialBrandId?: number) => {
             '',
             [],
             item.brand_id,
+            item.product_info,
           ),
       );
 

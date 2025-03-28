@@ -23,14 +23,18 @@ const useSearchProduct = () => {
       });
 
       const fetchedProducts = response.data.map(
-        (item: {
-          id: number;
-          name: string;
-          price: string;
-          rating: string;
-          image: string;
-        }) =>
-          new Product(item.id, item.name, item.price, item.rating, item.image),
+        (item: any) =>
+          new Product(
+            item.id,
+            item.name,
+            Number(item.price),
+            item.rating,
+            item.image,
+            '',
+            [],
+            item.brand_id,
+            item.product_info,
+          ),
       );
 
       setProducts(prevProducts =>

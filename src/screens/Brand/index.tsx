@@ -1,8 +1,14 @@
 import {Alert, FlatList, RefreshControl, Text} from 'react-native';
 import styles from './style';
-import {useBrand, useNotification, useTheme} from '../../hooks';
+import {
+  useBrand,
+  useCustomSnackbar,
+  useNotification,
+  useTheme,
+} from '../../hooks';
 import {
   AnimatedDotLoader,
+  CustomSnackbar,
   FlexibleInput,
   FlexibleTab,
   ItemSeparatorHeight,
@@ -42,6 +48,8 @@ const BrandScreen: React.FC = () => {
     fetchBrandById,
   } = useBrand(id);
 
+  const {customSnackbarRef, type, message, showSnackbar} = useCustomSnackbar();
+
   useEffect(() => {
     if (id) {
       setBrandId(id);
@@ -65,6 +73,7 @@ const BrandScreen: React.FC = () => {
           styles.productWrapper,
           {marginRight: index % 2 === 0 ? Spacing.DEFAULT : 0},
         ]}
+        showSnackbar={showSnackbar}
       />
     );
   };
@@ -164,6 +173,11 @@ const BrandScreen: React.FC = () => {
       <AnimatedDotLoader
         isLoading={isFetchingMoreProducts}
         containerStyle={styles.fetchMoreLoaderContainer}
+      />
+      <CustomSnackbar
+        customSnackbarRef={customSnackbarRef}
+        type={type}
+        text={message}
       />
     </View>
   );

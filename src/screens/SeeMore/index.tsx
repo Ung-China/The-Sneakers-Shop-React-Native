@@ -1,10 +1,16 @@
 import {FlatList, View} from 'react-native';
 import styles from './style';
-import {useNotification, useSeeMore, useTheme} from '../../hooks';
+import {
+  useCustomSnackbar,
+  useNotification,
+  useSeeMore,
+  useTheme,
+} from '../../hooks';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {ProductItemProps, StackParamList} from '../../types';
 import {
   AnimatedDotLoader,
+  CustomSnackbar,
   ItemSeparatorHeight,
   ProductItem,
   ProductItemSkeleton,
@@ -21,6 +27,7 @@ const SeeMoreScreen: React.FC = () => {
   const route = useRoute<RouteProp<StackParamList, 'SeeMoreScreen'>>();
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
   const {notifications} = useNotification();
+  const {customSnackbarRef, type, message, showSnackbar} = useCustomSnackbar();
 
   const {screenName, endPointName} = route.params;
 
@@ -52,6 +59,7 @@ const SeeMoreScreen: React.FC = () => {
           styles.productWrapper,
           {marginRight: index % 2 === 0 ? Spacing.DEFAULT : 0},
         ]}
+        showSnackbar={showSnackbar}
       />
     );
   };
@@ -117,6 +125,11 @@ const SeeMoreScreen: React.FC = () => {
           }
         />
       )}
+      <CustomSnackbar
+        customSnackbarRef={customSnackbarRef}
+        type={type}
+        text={message}
+      />
       <AnimatedDotLoader
         isLoading={isFetchingMoreProducts}
         containerStyle={styles.fetchMoreLoaderContainer}

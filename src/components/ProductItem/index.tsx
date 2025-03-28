@@ -5,26 +5,31 @@ import Touchable from '../Touchable';
 import {CachedImage} from '@georstat/react-native-image-cache';
 import LoadingImage from '../LoadingImage';
 import {Icons, Radius, Spacing} from '../../constants';
-import {useCart, useFavorite, useNotification, useTheme} from '../../hooks';
+import {
+  useCart,
+  useCustomSnackbar,
+  useFavorite,
+  useNotification,
+  useTheme,
+} from '../../hooks';
 import PriceTag from '../PriceTag';
 import IconButton from '../IconButton';
 import RatingTag from '../RatingTag';
 import {ProductPromotionChecker} from '../../helpers';
+import {useTranslation} from 'react-i18next';
 
 const ProductItem: React.FC<ProductItemProps> = ({
   item,
   wrapperStyle,
   onPress,
   notifications,
+  showSnackbar,
 }) => {
   const {colors} = useTheme();
 
   const {isFavorite, toggleItemFavorite} = useFavorite();
   const {addProductToCart} = useCart();
-
-  const onAddToCartPress = () => {
-    return Alert.alert('Add to cart');
-  };
+  const {t} = useTranslation();
 
   const {hasProductPromotion, finalPrice, discountType, discountValue} =
     ProductPromotionChecker({
@@ -48,6 +53,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
       };
 
       addProductToCart(cartItem);
+      showSnackbar('success', t('addedToCartSuccess'));
     }
   };
 

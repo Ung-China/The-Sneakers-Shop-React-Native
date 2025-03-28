@@ -151,6 +151,7 @@ const ProductDetailScreen: React.FC = () => {
           styles.productWrapper,
           {marginRight: index % 2 === 0 ? Spacing.DEFAULT : 0},
         ]}
+        showSnackbar={showSnackbar}
       />
     );
   };
@@ -485,14 +486,13 @@ const ProductDetailScreen: React.FC = () => {
           </>
         )}
       </ScrollView>
-      <>
-        <CustomSnackbar
-          customSnackbarRef={customSnackbarRef}
-          type={type}
-          text={message}
-          contentContainer={{paddingBottom: Padding.BOTTOM}}
-        />
-      </>
+
+      <CustomSnackbar
+        customSnackbarRef={customSnackbarRef}
+        type={type}
+        text={message}
+        contentContainer={{paddingBottom: Padding.BOTTOM}}
+      />
 
       {isLoading ? null : (
         <Footer

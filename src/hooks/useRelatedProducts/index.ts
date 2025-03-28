@@ -35,6 +35,7 @@ const useRelatedProducts = (brandId?: number) => {
             '',
             [],
             item.brand_id,
+            item.product_info,
           ),
       );
 

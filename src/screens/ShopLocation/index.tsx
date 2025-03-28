@@ -145,7 +145,7 @@ const ShopLocation: React.FC = () => {
       <BottomSheet
         bottomSheetModalRef={bottomSheetOpenMapModalRef}
         onSheetChanges={handleOpenMapSheetChanges}
-        handleLogisticSheetDismiss={handleOpenModalSheetDismiss}
+        handleSheetDismiss={handleOpenModalSheetDismiss}
         enableDynamicSizing={true}
         content={
           <OpenMapModal

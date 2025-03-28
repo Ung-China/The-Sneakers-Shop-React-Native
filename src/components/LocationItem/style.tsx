@@ -12,6 +12,7 @@ export default StyleSheet.create({
   },
   loadingImagestyle: {
     backgroundColor: colors.white,
+    height: '100%',
   },
   contentContainer: {
     flex: 1,

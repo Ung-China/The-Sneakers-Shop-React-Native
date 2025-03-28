@@ -16,4 +16,5 @@ export interface ProductItemProps {
     variants?: Variant[];
   };
   notifications: Notification[];
+  showSnackbar: (type: 'success' | 'error' | 'info', message: string) => void;
 }

@@ -1,8 +1,14 @@
 import {Alert, FlatList, Text, View} from 'react-native';
-import {useNotification, useSearchProduct, useTheme} from '../../hooks';
+import {
+  useCustomSnackbar,
+  useNotification,
+  useSearchProduct,
+  useTheme,
+} from '../../hooks';
 import styles from './style';
 import {
   AnimatedDotLoader,
+  CustomSnackbar,
   FlexibleInput,
   ItemSeparatorHeight,
   NotFound,
@@ -31,6 +37,7 @@ const SearchScreen: React.FC = () => {
     name,
     setName,
   } = useSearchProduct();
+  const {customSnackbarRef, type, message, showSnackbar} = useCustomSnackbar();
 
   const productItem = ({
     item,
@@ -48,6 +55,7 @@ const SearchScreen: React.FC = () => {
           styles.productWrapper,
           {marginRight: index % 2 === 0 ? Spacing.DEFAULT : 0},
         ]}
+        showSnackbar={showSnackbar}
       />
     );
   };
@@ -110,7 +118,11 @@ const SearchScreen: React.FC = () => {
           />
         )}
       </View>
-
+      <CustomSnackbar
+        customSnackbarRef={customSnackbarRef}
+        type={type}
+        text={message}
+      />
       <AnimatedDotLoader
         isLoading={isFetchingMoreProducts}
         containerStyle={styles.fetchMoreLoaderContainer}
