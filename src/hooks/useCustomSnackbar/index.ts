@@ -4,23 +4,29 @@ import {useCallback, useRef, useState} from 'react';
 const useCustomSnackbar = () => {
   const customSnackbarRef = useRef<BottomSheetModal>(null);
 
-  const showSnackbar = useCallback(() => {
-    if (customSnackbarRef.current) {
-      customSnackbarRef.current.present();
-      setTimeout(() => {
-        customSnackbarRef.current?.close();
-      }, 1000);
-    }
-  }, []);
+  const [type, setType] = useState('success');
+  const [message, setMessage] = useState('');
 
-  const onCustomSnackbarChanges = useCallback((index: number) => {
-    console.log('Custom Snackbar changed to index', index);
-  }, []);
+  const showSnackbar = useCallback(
+    (type = 'success', message = '', duration = 2000) => {
+      setType(type);
+      setMessage(message);
+
+      if (customSnackbarRef.current) {
+        customSnackbarRef.current.present();
+        setTimeout(() => {
+          customSnackbarRef.current?.close();
+        }, duration);
+      }
+    },
+    [],
+  );
 
   return {
     customSnackbarRef,
+    type,
+    message,
     showSnackbar,
-    onCustomSnackbarChanges,
   };
 };
 

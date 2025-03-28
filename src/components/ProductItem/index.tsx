@@ -42,8 +42,8 @@ const ProductItem: React.FC<ProductItemProps> = ({
         name: item.name,
         image: item.image,
         price: item.price,
-        variantName: size,
-        variantId: activeVariantId,
+        variantName: item.variants[0].product_size,
+        variantId: 0,
         quantity: 1,
       };
 
@@ -115,7 +115,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
                 styles.addToCart,
                 {backgroundColor: colors.secondaryReversed},
               ]}
-              onPress={onAddToCartPress}
+              onPress={handleAddToCart}
             />
           </View>
         </View>

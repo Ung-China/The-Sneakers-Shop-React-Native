@@ -27,8 +27,9 @@ const useSeeMore = (endPointName: string) => {
             item.rating,
             item.image,
             '',
-            item.var,
+            [],
             item.brand_id,
+            item.product_info,
           ),
       );
 

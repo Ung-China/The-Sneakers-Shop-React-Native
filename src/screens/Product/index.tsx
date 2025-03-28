@@ -51,7 +51,7 @@ const ProductDetailScreen: React.FC = () => {
 
   const {notifications} = useNotification();
   const {addProductToCart} = useCart();
-  const {customSnackbarRef, showSnackbar} = useCustomSnackbar();
+  const {showSnackbar, customSnackbarRef, type, message} = useCustomSnackbar();
 
   const {
     isLoading,
@@ -102,7 +102,7 @@ const ProductDetailScreen: React.FC = () => {
 
       addProductToCart(cartItem);
 
-      showSnackbar();
+      showSnackbar('success', t('addedToCartSuccess'));
     }
   };
 
@@ -488,11 +488,9 @@ const ProductDetailScreen: React.FC = () => {
       <>
         <CustomSnackbar
           customSnackbarRef={customSnackbarRef}
-          contentContainer={{
-            paddingBottom: Padding.BOTTOM,
-            backgroundColor: '#4BB543',
-          }}
-          text={t('addedToCartSuccess')}
+          type={type}
+          text={message}
+          contentContainer={{paddingBottom: Padding.BOTTOM}}
         />
       </>
 
