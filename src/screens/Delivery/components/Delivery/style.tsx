@@ -24,7 +24,9 @@ export default StyleSheet.create({
   separator: {
     height: 0.5,
   },
-  body: {},
+  body: {
+    maxHeight: 400,
+  },
   safeAreaStyle: {
     borderTopWidth: 0.5,
     marginBottom: Spacing.DEFAULT,

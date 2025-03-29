@@ -159,4 +159,5 @@ export const translateKH = {
   province: 'ខេត្ត',
   selectProvince: 'ជ្រើសរើសខេត្ត',
   provinceisrequired: 'ទាមទារខេត្ត!',
+  addressSavedSuccessfully: 'អាសយដ្ឋានត្រូវបានរក្សាទុកដោយជោគជ័យ!',
 };

@@ -159,4 +159,5 @@ export const translateEN = {
   province: 'Province',
   selectProvince: 'Select Province',
   provinceisrequired: 'Province is required!',
+  addressSavedSuccessfully: 'Address saved successfully!',
 };

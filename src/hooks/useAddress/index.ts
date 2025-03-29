@@ -5,8 +5,9 @@ import {Address} from '../../models';
 import {useDispatch, useSelector} from 'react-redux';
 import {addAddress} from '../../store/actions';
 import {RootState} from '../../store';
+import {SnackbarEventEmitter} from '../../utils';
 
-const useAddress = (navigation: any) => {
+const useAddress = (navigation?: any) => {
   const [activeLabel, setActiveLabel] = useState(0);
   const [label, setLabel] = useState('Home');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -81,6 +82,10 @@ const useAddress = (navigation: any) => {
     );
     dispatch(addAddress(newAddress));
     navigation.goBack();
+    SnackbarEventEmitter.emit('SHOW_SNACKBAR', {
+      type: 'success',
+      message: t('addressSavedSuccessfully'),
+    });
   };
 
   return {

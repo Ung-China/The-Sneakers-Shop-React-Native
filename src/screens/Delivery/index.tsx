@@ -1,9 +1,14 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {ScrollView, Text, View} from 'react-native';
-import {useDelivery, useTheme} from '../../hooks';
+import {useCustomSnackbar, useDelivery, useTheme} from '../../hooks';
 import styles from './style';
-import {BottomSheet, Footer, OptionItem} from '../../components';
+import {
+  BottomSheet,
+  CustomSnackbar,
+  Footer,
+  OptionItem,
+} from '../../components';
 import FlexibleTouchable from '../../components/FlexibleTouchable';
 import IconButton from '../../components/IconButton';
 import {Icons} from '../../constants';
@@ -37,6 +42,8 @@ const DeliveryScreen: React.FC = () => {
     handleNavigateToScreenAddress,
     handleNavigateToScreenCheckout,
   } = useDelivery();
+
+  const {customSnackbarRef, type, message} = useCustomSnackbar();
 
   return (
     <>
@@ -135,7 +142,6 @@ const DeliveryScreen: React.FC = () => {
           onPress={handleNavigateToScreenCheckout}
         />
       </Footer>
-
       <BottomSheet
         bottomSheetModalRef={bottomSheetDeliveryModalRef}
         onSheetChanges={handleDeliverySheetChanges}
@@ -164,6 +170,11 @@ const DeliveryScreen: React.FC = () => {
             toggleLogistic={toggleLogistic}
           />
         }
+      />
+      <CustomSnackbar
+        customSnackbarRef={customSnackbarRef}
+        type={type}
+        text={message}
       />
     </>
   );
