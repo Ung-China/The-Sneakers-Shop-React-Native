@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
 import {
   BottomSheetBackdrop,
   BottomSheetModal,
@@ -50,10 +50,14 @@ const CustomSnackbar: React.FC<CustomSnackbarProps> = ({
       <BottomSheetView
         style={[
           style.container,
-          {backgroundColor: SNACKBAR_COLORS[type] || SNACKBAR_COLORS.success},
+          {
+            backgroundColor: SNACKBAR_COLORS[type] || SNACKBAR_COLORS.success,
+          },
           contentContainer,
         ]}>
-        <Text style={style.text}>{text}</Text>
+        <View>
+          <Text style={style.text}>{text}</Text>
+        </View>
       </BottomSheetView>
     </BottomSheetModal>
   );
