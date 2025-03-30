@@ -63,4 +63,8 @@ export default StyleSheet.create({
     height: 0.5,
     marginVertical: Padding.DEFAULT,
   },
+  deliveryError: {
+    fontFamily: Fonts.REGULAR,
+    fontSize: FontSizes.default,
+  },
 });

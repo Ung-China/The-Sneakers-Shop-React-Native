@@ -11,7 +11,6 @@ import styles from './style';
 import {useTranslation} from 'react-i18next';
 import {
   useCart,
-  useCustomSnackbar,
   useFavorite,
   useNotification,
   useProductDetail,
@@ -51,7 +50,6 @@ const ProductDetailScreen: React.FC = () => {
 
   const {notifications} = useNotification();
   const {addProductToCart} = useCart();
-  const {showSnackbar, customSnackbarRef, type, message} = useCustomSnackbar();
 
   const {
     isLoading,
@@ -151,7 +149,6 @@ const ProductDetailScreen: React.FC = () => {
           styles.productWrapper,
           {marginRight: index % 2 === 0 ? Spacing.DEFAULT : 0},
         ]}
-        showSnackbar={showSnackbar}
       />
     );
   };
@@ -486,13 +483,6 @@ const ProductDetailScreen: React.FC = () => {
           </>
         )}
       </ScrollView>
-
-      <CustomSnackbar
-        customSnackbarRef={customSnackbarRef}
-        type={type}
-        text={message}
-        contentContainer={{paddingBottom: Padding.BOTTOM}}
-      />
 
       {isLoading ? null : (
         <Footer

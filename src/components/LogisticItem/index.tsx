@@ -11,6 +11,7 @@ const LogisticItem: React.FC<LogisticProps> = ({
   containerStyle,
 }) => {
   const {colors} = useTheme();
+
   return (
     <Touchable onPress={onPress}>
       <View

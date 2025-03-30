@@ -2,6 +2,7 @@ import {Text, View} from 'react-native';
 import styles from './style';
 import {
   AddressItem,
+  CustomSnackbar,
   Footer,
   ItemSeparatorHeight,
   Touchable,

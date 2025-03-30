@@ -4,7 +4,6 @@ import styles from './style';
 import {
   BrandItem,
   BrandItemSkeleton,
-  CustomSnackbar,
   FlatButton,
   FlexibleInput,
   FlexibleSwiper,
@@ -17,7 +16,6 @@ import {
 } from '../../components';
 import {
   useBrand,
-  useCustomSnackbar,
   useLocation,
   useNotification,
   useSeeMore,
@@ -64,8 +62,6 @@ const HomeScreen: React.FC = () => {
   const handlePressOnProduct = (id: number, brandId: number) => {
     navigation.navigate('ProductDetail', {id, brandId});
   };
-
-  const {customSnackbarRef, type, message, showSnackbar} = useCustomSnackbar();
 
   const {sliders, fetchSliders, isLoading: isLoadingSliders} = useSlider();
   const {
@@ -164,7 +160,6 @@ const HomeScreen: React.FC = () => {
         item={item}
         onPress={() => handlePressOnProduct(item.id, item.brandId)}
         notifications={notifications}
-        showSnackbar={showSnackbar}
       />
     );
   };
@@ -531,11 +526,6 @@ const HomeScreen: React.FC = () => {
             />
           </Section>
         )}
-        <CustomSnackbar
-          customSnackbarRef={customSnackbarRef}
-          type={type}
-          text={message}
-        />
       </ScrollView>
     </SafeAreaView>
   );

@@ -12,6 +12,10 @@ const DarkTheme: Themes = {
   black: '#000000',
   lightGrey: '#F4F4F4',
   grey: 'grey',
+  success: '#4BB543',
+  error: '#FF4C4C',
+  warning: '#FFA500',
+  info: '#2196F3',
 };
 
 export default DarkTheme;

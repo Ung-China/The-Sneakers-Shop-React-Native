@@ -1,14 +1,9 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {ScrollView, Text, View} from 'react-native';
-import {useCustomSnackbar, useDelivery, useTheme} from '../../hooks';
+import {useDelivery, useTheme} from '../../hooks';
 import styles from './style';
-import {
-  BottomSheet,
-  CustomSnackbar,
-  Footer,
-  OptionItem,
-} from '../../components';
+import {BottomSheet, Footer, OptionItem} from '../../components';
 import FlexibleTouchable from '../../components/FlexibleTouchable';
 import IconButton from '../../components/IconButton';
 import {Icons} from '../../constants';
@@ -22,14 +17,11 @@ const DeliveryScreen: React.FC = () => {
     selectOption,
 
     bottomSheetLogisticModalRef,
-    handleLogisticSheetChanges,
-    handleLogisticSheetDismiss,
     toggleCloseLogisticSheet,
+
+    handleLogisticSheetChanges,
     toggleApplyLogistic,
-    activeLogistic,
-    toggleLogistic,
     toggleLogisticSheet,
-    selectedLogistic,
 
     bottomSheetDeliveryModalRef,
     handleDeliverySheetChanges,
@@ -41,9 +33,12 @@ const DeliveryScreen: React.FC = () => {
 
     handleNavigateToScreenAddress,
     handleNavigateToScreenCheckout,
-  } = useDelivery();
 
-  const {customSnackbarRef, type, message} = useCustomSnackbar();
+    setActiveLogistic,
+    activeLogistic,
+    setLogistic,
+    logistic,
+  } = useDelivery();
 
   return (
     <>
@@ -63,8 +58,8 @@ const DeliveryScreen: React.FC = () => {
             <OptionItem
               title={t('pickUp')}
               description={t('takeYourProductByYourself')}
-              onPress={() => selectOption('pickUp')}
-              isActive={selectedOption === 'pickUp'}
+              onPress={() => selectOption('pickup')}
+              isActive={selectedOption === 'pickup'}
             />
             <OptionItem
               title={t('deliveryMan')}
@@ -74,7 +69,7 @@ const DeliveryScreen: React.FC = () => {
             />
           </View>
 
-          {selectedOption === 'pickUp' && null}
+          {selectedOption === 'pickup' && null}
           {selectedOption === 'delivery' && (
             <View
               style={[
@@ -93,14 +88,18 @@ const DeliveryScreen: React.FC = () => {
                 />
               </View>
               <View style={styles.body}>
-                <Text style={[styles.shippingLabel, {color: colors.text}]}>
+                <Text style={[styles.shippingLabel, {color: colors.grey}]}>
                   Home
                 </Text>
-                <Text style={[styles.shipping, {color: colors.text}]}>
+                <Text style={[styles.shipping, {color: colors.grey}]}>
                   Siem Reap
                 </Text>
-                <Text style={[styles.shipping, {color: colors.text}]}>
+                <Text style={[styles.shipping, {color: colors.grey}]}>
                   Siem Reap
+                </Text>
+
+                <Text style={[styles.deliveryError]}>
+                  {t('pleaseEnterShippingAddress')}
                 </Text>
               </View>
               <View
@@ -118,9 +117,15 @@ const DeliveryScreen: React.FC = () => {
                 />
               </View>
               <View style={styles.body}>
-                <Text style={[styles.shippingLabel, {color: colors.text}]}>
-                  {selectedLogistic.name}
-                </Text>
+                {logistic ? (
+                  <Text style={[styles.shippingLabel, {color: colors.grey}]}>
+                    {logistic}
+                  </Text>
+                ) : (
+                  <Text style={[styles.deliveryError, {color: colors.grey}]}>
+                    {t('pleaseChoseLogisticCompany')}
+                  </Text>
+                )}
               </View>
             </View>
           )}
@@ -160,21 +165,16 @@ const DeliveryScreen: React.FC = () => {
       <BottomSheet
         bottomSheetModalRef={bottomSheetLogisticModalRef}
         onSheetChanges={handleLogisticSheetChanges}
-        handleSheetDismiss={handleLogisticSheetDismiss}
         enableDynamicSizing={true}
         content={
           <LogisticModal
             onPressCancel={toggleCloseLogisticSheet}
             onPressApply={toggleApplyLogistic}
+            setActiveLogistic={setActiveLogistic}
             activeLogistic={activeLogistic}
-            toggleLogistic={toggleLogistic}
+            setLogistic={setLogistic}
           />
         }
-      />
-      <CustomSnackbar
-        customSnackbarRef={customSnackbarRef}
-        type={type}
-        text={message}
       />
     </>
   );

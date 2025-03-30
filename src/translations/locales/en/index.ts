@@ -160,4 +160,6 @@ export const translateEN = {
   selectProvince: 'Select Province',
   provinceisrequired: 'Province is required!',
   addressSavedSuccessfully: 'Address saved successfully!',
+  pleaseChoseLogisticCompany: 'Please choose a logistics company.',
+  pleaseEnterShippingAddress: 'Please enter your shipping address.',
 };

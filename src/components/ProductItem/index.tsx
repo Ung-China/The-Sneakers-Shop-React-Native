@@ -4,26 +4,20 @@ import styles from './style';
 import Touchable from '../Touchable';
 import {CachedImage} from '@georstat/react-native-image-cache';
 import LoadingImage from '../LoadingImage';
-import {Icons, Radius, Spacing} from '../../constants';
-import {
-  useCart,
-  useCustomSnackbar,
-  useFavorite,
-  useNotification,
-  useTheme,
-} from '../../hooks';
+import {Fonts, Icons, Radius, Spacing} from '../../constants';
+import {useCart, useFavorite, useNotification, useTheme} from '../../hooks';
 import PriceTag from '../PriceTag';
 import IconButton from '../IconButton';
 import RatingTag from '../RatingTag';
 import {ProductPromotionChecker} from '../../helpers';
 import {useTranslation} from 'react-i18next';
+import Snackbar from 'react-native-snackbar';
 
 const ProductItem: React.FC<ProductItemProps> = ({
   item,
   wrapperStyle,
   onPress,
   notifications,
-  showSnackbar,
 }) => {
   const {colors} = useTheme();
 
@@ -51,9 +45,14 @@ const ProductItem: React.FC<ProductItemProps> = ({
         variantId: 0,
         quantity: 1,
       };
-
       addProductToCart(cartItem);
-      showSnackbar('success', t('addedToCartSuccess'));
+      Snackbar.show({
+        text: t('addedToCartSuccess'),
+        textColor: 'white',
+        duration: Snackbar.LENGTH_LONG,
+        backgroundColor: colors.success,
+        fontFamily: Fonts.REGULAR,
+      });
     }
   };
 

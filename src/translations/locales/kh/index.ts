@@ -160,4 +160,6 @@ export const translateKH = {
   selectProvince: 'ជ្រើសរើសខេត្ត',
   provinceisrequired: 'ទាមទារខេត្ត!',
   addressSavedSuccessfully: 'អាសយដ្ឋានត្រូវបានរក្សាទុកដោយជោគជ័យ!',
+  pleaseChoseLogisticCompany: 'សូមជ្រើសរើសក្រុមហ៊ុនដឹកជញ្ជូន!',
+  pleaseEnterShippingAddress: 'សូមបញ្ចូលអាសយដ្ឋានដឹកជញ្ជូនរបស់អ្នក!',
 };

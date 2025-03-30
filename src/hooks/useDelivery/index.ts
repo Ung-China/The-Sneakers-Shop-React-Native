@@ -5,75 +5,73 @@ import {addresss} from '../../models/Address';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {StackParamList} from '../../types';
+import {useTranslation} from 'react-i18next';
+import Snackbar from 'react-native-snackbar';
+import {colors} from '../../constants/colors/colorTypes';
+import {Fonts} from '../../constants';
 
 const useDelivery = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
-  const [selectedOption, setSelectedOption] = useState<'pickUp' | 'delivery'>(
-    'pickUp',
+  const {t} = useTranslation();
+
+  const [selectedOption, setSelectedOption] = useState<'pickup' | 'delivery'>(
+    'pickup',
   );
+
   const bottomSheetDeliveryModalRef = useRef<BottomSheetModal>(null);
   const bottomSheetLogisticModalRef = useRef<BottomSheetModal>(null);
-  const [selectedLogistic, setSelectedLogistic] = useState<{
-    id: number;
-    name: string;
-  }>({
-    id: logistics[0]?.id || 0,
-    name: logistics[0]?.name || '',
-  });
-  const [activeLogistic, setActiveLogistic] = useState<number>(
-    logistics[0]?.id || 0,
-  );
-  const selectOption = (option: 'pickUp' | 'delivery') => {
+
+  const [logistic, setLogistic] = useState('');
+  const [activeLogistic, setActiveLogistic] = useState<number | null>(null);
+
+  const selectOption = (option: 'pickup' | 'delivery') => {
     setSelectedOption(option);
   };
   const [activeAddress, setActiveAddress] = useState<number>(
     addresss[0]?.id || 0,
   );
 
-  const toggleDeliverySheet = useCallback(() => {
-    bottomSheetDeliveryModalRef.current?.present();
-  }, []);
-
   const toggleLogisticSheet = useCallback(() => {
     bottomSheetLogisticModalRef.current?.present();
   }, []);
 
-  const toggleCloseDeliverySheet = useCallback(() => {
-    bottomSheetDeliveryModalRef.current?.close();
-  }, []);
-
   const toggleCloseLogisticSheet = useCallback(() => {
-    setActiveLogistic(selectedLogistic.id);
     bottomSheetLogisticModalRef.current?.close();
-  }, []);
-
-  const handleDeliverySheetChanges = useCallback((index: number) => {
-    console.log('Delivery Sheet changed to index', index);
   }, []);
 
   const handleLogisticSheetChanges = useCallback((index: number) => {
     console.log('Logistic Sheet changed to index', index);
   }, []);
 
-  const toggleLogistic = (id: number) => {
-    setActiveLogistic(id);
-  };
+  const toggleApplyLogistic = useCallback(() => {
+    if (activeLogistic === null) {
+      Snackbar.show({
+        text: t('pleaseChoseLogisticCompany'),
+        textColor: 'white',
+        duration: Snackbar.LENGTH_LONG,
+        backgroundColor: colors.error,
+        fontFamily: Fonts.REGULAR,
+      });
+    } else {
+      bottomSheetLogisticModalRef.current?.close();
+    }
+  }, [activeLogistic]);
+
+  const handleDeliverySheetChanges = useCallback((index: number) => {
+    console.log('Delivery Sheet changed to index', index);
+  }, []);
+
+  const toggleCloseDeliverySheet = useCallback(() => {
+    bottomSheetDeliveryModalRef.current?.close();
+  }, []);
 
   const toggleAddress = (id: number) => {
     setActiveAddress(id);
   };
 
-  const toggleApplyLogistic = useCallback(() => {
-    const logistic = logistics.find(item => item.id === activeLogistic);
-    if (logistic) {
-      setSelectedLogistic({id: logistic.id, name: logistic.name});
-    }
-    bottomSheetLogisticModalRef.current?.close();
-  }, [activeLogistic]);
-
-  const handleLogisticSheetDismiss = useCallback(() => {
-    setActiveLogistic(selectedLogistic.id);
-  }, [selectedLogistic]);
+  const toggleDeliverySheet = useCallback(() => {
+    bottomSheetDeliveryModalRef.current?.present();
+  }, []);
 
   const handleNavigateToScreenAddress = useCallback(() => {
     bottomSheetDeliveryModalRef.current?.close();
@@ -90,13 +88,9 @@ const useDelivery = () => {
 
     bottomSheetLogisticModalRef,
     handleLogisticSheetChanges,
-    handleLogisticSheetDismiss,
     toggleCloseLogisticSheet,
     toggleApplyLogistic,
-    activeLogistic,
-    toggleLogistic,
     toggleLogisticSheet,
-    selectedLogistic,
 
     bottomSheetDeliveryModalRef,
     handleDeliverySheetChanges,
@@ -108,6 +102,11 @@ const useDelivery = () => {
 
     handleNavigateToScreenAddress,
     handleNavigateToScreenCheckout,
+
+    setActiveLogistic,
+    setLogistic,
+    activeLogistic,
+    logistic,
   };
 };
 export default useDelivery;

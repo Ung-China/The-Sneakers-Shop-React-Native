@@ -42,7 +42,6 @@ import BrandItemSkeleton from './BrandItemSkeleton';
 import NotificationItemSkeleton from './NotificationItemSkeleton';
 import FavoriteItemSkeleton from './FavoriteItemSkeleton';
 import CustomAlert from './CustomAlert';
-import CustomSnackbar from './CustomSnackbar';
 export {
   HeaderComponent,
   HeaderTitleComponent,
@@ -88,5 +87,4 @@ export {
   NotificationItemSkeleton,
   FavoriteItemSkeleton,
   CustomAlert,
-  CustomSnackbar,
 };

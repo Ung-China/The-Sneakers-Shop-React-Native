@@ -16,8 +16,9 @@ import {FlatList} from 'react-native-gesture-handler';
 const LogisticModal: React.FC<LogisticModalProps> = ({
   onPressApply,
   onPressCancel,
+  setActiveLogistic,
   activeLogistic,
-  toggleLogistic,
+  setLogistic,
 }) => {
   const {colors} = useTheme();
   const {t} = useTranslation();
@@ -31,9 +32,12 @@ const LogisticModal: React.FC<LogisticModalProps> = ({
   }) => {
     return (
       <LogisticItem
-        onPress={() => toggleLogistic(item.id)}
+        onPress={() => {
+          setActiveLogistic(index);
+          setLogistic(item.name);
+        }}
         item={item}
-        isActive={activeLogistic === item.id}
+        isActive={activeLogistic === index}
         containerStyle={{marginLeft: index % 2 === 0 ? 0 : Spacing.DEFAULT}}
       />
     );

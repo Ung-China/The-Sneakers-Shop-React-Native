@@ -25,7 +25,6 @@ import useSearchProduct from './useSearch';
 import useRelatedProducts from './useRelatedProducts';
 import useFavorite from './useFavorite';
 import useCart from './useCart';
-import useCustomSnackbar from './useCustomSnackbar';
 import useCalculateTotalPrice from './useCalculateTotalPrice';
 import useAddress from './useAddress';
 
@@ -57,7 +56,6 @@ export {
   useRelatedProducts,
   useFavorite,
   useCart,
-  useCustomSnackbar,
   useCalculateTotalPrice,
   useAddress,
 };

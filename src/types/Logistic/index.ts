@@ -5,7 +5,6 @@ export interface LogisticProps {
   isActive: boolean;
   containerStyle: StyleProp<ViewStyle>;
   item: {
-    id: number;
     name: string;
   };
 }
