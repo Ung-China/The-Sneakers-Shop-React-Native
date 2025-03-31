@@ -22,13 +22,10 @@ const DeliveryScreen: React.FC = () => {
     toggleApplyAddress,
     toggleDeliverySheet,
 
-    setActiveAddress,
-    setAddress,
     setTempAddress,
     setTempActiveAddress,
-    activeAddress,
-    address,
     tempActiveAddress,
+    address,
     errorAddress,
 
     handleNavigateToScreenAddress,
@@ -48,6 +45,7 @@ const DeliveryScreen: React.FC = () => {
 
   console.log('CHECK_DELIVERY_OPTION', selectedOption);
   console.log('CHECK_LOGISTIC_COMPANY', logistic);
+  console.log('CHECK_ADDRESS', address);
 
   return (
     <>
@@ -97,19 +95,27 @@ const DeliveryScreen: React.FC = () => {
                 />
               </View>
               <View style={styles.body}>
-                {/* <Text style={[styles.shippingLabel, {color: colors.grey}]}>
-                  Home
-                </Text>
-                <Text style={[styles.shipping, {color: colors.grey}]}>
-                  Siem Reap
-                </Text>
-                <Text style={[styles.shipping, {color: colors.grey}]}>
-                  Siem Reap
-                </Text> */}
-
-                <Text style={[styles.deliveryError]}>
-                  {t('pleaseEnterShippingAddress')}
-                </Text>
+                {address ? (
+                  <>
+                    <Text style={[styles.shippingLabel, {color: colors.grey}]}>
+                      {address?.label}
+                    </Text>
+                    <Text style={[styles.shipping, {color: colors.grey}]}>
+                      {address?.streetLine1}
+                    </Text>
+                    <Text style={[styles.shipping, {color: colors.grey}]}>
+                      {address?.province} - {address?.phoneNumber}
+                    </Text>
+                  </>
+                ) : (
+                  <Text
+                    style={[
+                      styles.deliveryError,
+                      {color: errorAddress ? 'red' : colors.grey},
+                    ]}>
+                    {t('pleaseEnterShippingAddress')}
+                  </Text>
+                )}
               </View>
               <View
                 style={[styles.separator, {backgroundColor: colors.grey}]}

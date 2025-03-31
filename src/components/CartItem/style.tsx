@@ -29,7 +29,6 @@ export default StyleSheet.create({
     borderRadius: Radius.DEFAULT,
   },
   name: {
-    flex: 1,
     fontFamily: Fonts.REGULAR,
     fontSize: FontSizes.large,
   },

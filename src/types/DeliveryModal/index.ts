@@ -1,12 +1,12 @@
+import {Address} from '../../models';
+
 export interface DeliveryModalProps {
   onPress?: () => void;
   onPressCancel?: () => void;
   onPressApply?: () => void;
   isActive?: boolean;
-  activeAddress?: number;
+  activeAddress: null;
   setActiveAddress: (id: number) => void;
-
-  // toggleAddress: (id: number) => void;
-  setAddress: string;
+  setAddress: (address: Address) => void;
   handleNavigateToScreenAddress: () => void;
 }

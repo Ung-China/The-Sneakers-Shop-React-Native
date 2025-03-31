@@ -2,6 +2,6 @@ export interface LogisticModalProps {
   onPressCancel: () => void;
   onPressApply: () => void;
   setActiveLogistic: (id: number) => void;
-  activeLogistic: number;
+  activeLogistic: null;
   setLogistic: (name: string) => void;
 }

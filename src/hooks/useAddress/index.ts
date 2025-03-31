@@ -85,7 +85,7 @@ const useAddress = (navigation?: any) => {
     Snackbar.show({
       text: t('addressSavedSuccessfully'),
       textColor: 'white',
-      duration: Snackbar.LENGTH_LONG,
+      duration: Snackbar.LENGTH_SHORT,
       backgroundColor: colors.success,
       fontFamily: Fonts.REGULAR,
     });

@@ -1,6 +1,5 @@
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {useCallback, useRef, useState} from 'react';
-import {addresss} from '../../models/Address';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {StackParamList} from '../../types';
@@ -8,6 +7,7 @@ import {useTranslation} from 'react-i18next';
 import {colors} from '../../constants/colors/colorTypes';
 import {Fonts} from '../../constants';
 import Snackbar from 'react-native-snackbar';
+import {Address} from '../../models';
 
 const useDelivery = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
@@ -23,11 +23,9 @@ const useDelivery = () => {
 
   const [activeAddress, setActiveAddress] = useState(null);
   const [tempActiveAddress, setTempActiveAddress] = useState(null);
-  const [address, setAddress] = useState();
-  const [tempAddress, setTempAddress] = useState();
+  const [address, setAddress] = useState<Address | null>(null);
+  const [tempAddress, setTempAddress] = useState<Address | null>(null);
   const [errorAddress, setErrorAddress] = useState(false);
-
-  console.log('CHECK ADDRESS', address);
 
   const [selectedOption, setSelectedOption] = useState('pickup');
 
@@ -52,7 +50,7 @@ const useDelivery = () => {
       Snackbar.show({
         text: t('pleaseChoseLogisticCompany'),
         textColor: 'white',
-        duration: Snackbar.LENGTH_LONG,
+        duration: Snackbar.LENGTH_SHORT,
         backgroundColor: colors.error,
         fontFamily: Fonts.REGULAR,
       });
@@ -76,24 +74,20 @@ const useDelivery = () => {
   }, []);
 
   const toggleApplyAddress = useCallback(() => {
-    if (setTempActiveAddress === null) {
+    if (tempActiveAddress === null) {
       Snackbar.show({
         text: t('pleaseChooseAddress'),
         textColor: 'white',
-        duration: Snackbar.LENGTH_LONG,
+        duration: Snackbar.LENGTH_SHORT,
         backgroundColor: colors.error,
         fontFamily: Fonts.REGULAR,
       });
     } else {
       setActiveAddress(tempActiveAddress);
       setAddress(tempAddress);
-      bottomSheetLogisticModalRef.current?.close();
+      bottomSheetDeliveryModalRef.current?.close();
     }
-  }, [setTempActiveAddress, tempAddress]);
-
-  // const toggleAddress = (id: number) => {
-  //   setActiveAddress(id);
-  // };
+  }, [tempActiveAddress, tempAddress]);
 
   const handleNavigateToScreenAddress = useCallback(() => {
     bottomSheetDeliveryModalRef.current?.close();
@@ -113,19 +107,13 @@ const useDelivery = () => {
       setErrorLogistic(false);
     }
 
-    // if (!activeAddress) {
-    //   setErrorAddress(true);
-    //   Snackbar.show({
-    //     text: t('pleaseSelectAddress'),
-    //     textColor: 'white',
-    //     duration: Snackbar.LENGTH_LONG,
-    //     backgroundColor: colors.error,
-    //     fontFamily: Fonts.REGULAR,
-    //   });
-    //   hasError = true;
-    // } else {
-    //   setErrorAddress(false);
-    // }
+    if (!address) {
+      setErrorAddress(true);
+
+      hasError = true;
+    } else {
+      setErrorAddress(false);
+    }
 
     if (!hasError) {
       navigation.navigate('Checkout');

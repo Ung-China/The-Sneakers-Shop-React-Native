@@ -72,7 +72,9 @@ const CartItem: React.FC<CartItemProps> = ({
                 defaultPrice={hasProductPromotion ? item.price : null}
               />
               <View style={styles.quantityContainer}>
-                <Text style={[styles.quantity, {color: colors.text}]}>x10</Text>
+                <Text style={[styles.quantity, {color: colors.text}]}>
+                  x {item.quantity}
+                </Text>
               </View>
             </View>
           </View>
@@ -111,7 +113,7 @@ const CartItem: React.FC<CartItemProps> = ({
                 <View style={styles.heroHeader}>
                   <Text
                     numberOfLines={1}
-                    style={[styles.name, {color: colors.text}]}>
+                    style={[styles.name, {color: colors.text, flex: 1}]}>
                     {item.name}
                   </Text>
                   <IconButton onPress={onDelete} icon={<Icons.CLOSE />} />
@@ -122,9 +124,6 @@ const CartItem: React.FC<CartItemProps> = ({
                 </Text>
 
                 <View style={styles.footerContainer}>
-                  {/* <Text style={[styles.price, {color: colors.text}]}>
-                    ${currencyFormat(finalPrice)}
-                  </Text> */}
                   <PriceTag
                     finalPrice={finalPrice}
                     defaultPrice={hasProductPromotion ? item.price : null}

@@ -1,6 +1,6 @@
 import {useTranslation} from 'react-i18next';
 import {FlatList, Text, View} from 'react-native';
-import {useTheme} from '../../hooks';
+import {useCart, useNotification, useTheme} from '../../hooks';
 import {ScrollView} from 'react-native';
 import styles from './style';
 import React from 'react';
@@ -22,9 +22,21 @@ import ImageCropPicker from 'react-native-image-crop-picker';
 const CheckoutScreen: React.FC = () => {
   const {t} = useTranslation();
   const {colors} = useTheme();
+  const {cartItems} = useCart();
+  const {notifications} = useNotification();
 
   const cartItem = ({item}: {item: CartItemProps['item']}) => {
-    return <CartItem item={item} onPress={() => {}} isCheckout={true} />;
+    return (
+      <CartItem
+        item={item}
+        onPress={() => {}}
+        onDelete={() => {}}
+        onIncrease={() => {}}
+        onDecrease={() => {}}
+        isCheckout={true}
+        notifications={notifications}
+      />
+    );
   };
 
   const openImagePicker = async () => {
@@ -42,11 +54,11 @@ const CheckoutScreen: React.FC = () => {
 
   return (
     <>
-      {/* <ScrollView
+      <ScrollView
         showsVerticalScrollIndicator={false}
         style={[styles.container, {backgroundColor: colors.primary}]}>
         <FlatList
-          data={cartItems.slice(3)}
+          data={cartItems}
           renderItem={cartItem}
           showsVerticalScrollIndicator={false}
           scrollEnabled={false}
@@ -204,11 +216,8 @@ const CheckoutScreen: React.FC = () => {
             </Touchable>
           </View>
         </View>
-      </ScrollView> */}
+      </ScrollView>
 
-      <View style={{flex: 1}}>
-        <Text>Checkout Screen</Text>
-      </View>
       <Footer
         safeAreaStyle={[
           styles.safeAreaStyle,

@@ -1,6 +1,5 @@
 import {ActionTypes} from '../../../constants';
 import {Address} from '../../../models';
-import {AddressActionType} from '../../types';
 
 export const addAddress = (item: Address): any => ({
   type: ActionTypes.ADD_ADDRESS,
