@@ -49,7 +49,8 @@ export default StyleSheet.create({
   shippingContainer: {
     padding: Padding.DEFAULT,
     borderRadius: Radius.DEFAULT,
-    margin: Spacing.DEFAULT,
+    marginHorizontal: Spacing.DEFAULT,
+    marginTop: Spacing.DEFAULT,
   },
   shippngHeader: {
     flexDirection: 'row',
@@ -77,6 +78,7 @@ export default StyleSheet.create({
   },
   paymentContainer: {
     paddingHorizontal: Padding.DEFAULT,
+    marginTop: Spacing.DEFAULT,
   },
   labelContainer: {
     gap: Gap.EXTRA_SMALL,

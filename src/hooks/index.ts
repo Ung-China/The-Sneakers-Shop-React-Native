@@ -27,6 +27,7 @@ import useFavorite from './useFavorite';
 import useCart from './useCart';
 import useCalculateTotalPrice from './useCalculateTotalPrice';
 import useAddress from './useAddress';
+import useCheckout from './useCheckout';
 
 export {
   useLanguage,
@@ -58,4 +59,5 @@ export {
   useCart,
   useCalculateTotalPrice,
   useAddress,
+  useCheckout,
 };

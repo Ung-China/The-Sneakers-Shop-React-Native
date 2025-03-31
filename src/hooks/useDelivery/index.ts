@@ -96,7 +96,7 @@ const useDelivery = () => {
 
   const handleNavigateToScreenCheckout = useCallback(() => {
     if (selectedOption === 'pickup') {
-      return navigation.navigate('Checkout');
+      return navigation.navigate('Checkout', {selectedOption});
     }
     let hasError = false;
 
@@ -116,7 +116,7 @@ const useDelivery = () => {
     }
 
     if (!hasError) {
-      navigation.navigate('Checkout');
+      navigation.navigate('Checkout', {selectedOption, logistic, address});
     }
   }, [logistic, activeAddress, selectedOption]);
 

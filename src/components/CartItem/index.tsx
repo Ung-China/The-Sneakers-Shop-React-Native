@@ -60,7 +60,11 @@ const CartItem: React.FC<CartItemProps> = ({
             )}
           />
           <View style={styles.hero}>
-            <Text style={[styles.name, {color: colors.text}]}>{item.name}</Text>
+            <Text
+              numberOfLines={1}
+              style={[styles.name, {color: colors.text, width: '95%'}]}>
+              {item.name}
+            </Text>
 
             <Text style={[styles.size, {color: colors.text}]}>
               {t('size')} {item.variantName}

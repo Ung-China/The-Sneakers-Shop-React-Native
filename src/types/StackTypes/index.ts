@@ -1,3 +1,4 @@
+import {Address} from '../../models';
 import {NotificationProps} from '../Notification';
 import {SeeMoreProps} from '../SeeMore';
 
@@ -21,7 +22,7 @@ export type StackParamList = {
   OrderHistoryDetail: undefined;
   ProductDetail: {id: number; brandId: number};
   EditProfile: undefined;
-  Checkout: undefined;
+  Checkout: {selectedOption: string; logistic?: any; address?: Address};
   Delivery: undefined;
   Address: undefined;
   LoginModal: undefined;

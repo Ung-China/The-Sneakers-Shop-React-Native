@@ -21,15 +21,11 @@ const DeliveryScreen: React.FC = () => {
     toggleCloseDeliverySheet,
     toggleApplyAddress,
     toggleDeliverySheet,
-
     setTempAddress,
     setTempActiveAddress,
     tempActiveAddress,
     address,
     errorAddress,
-
-    handleNavigateToScreenAddress,
-    handleNavigateToScreenCheckout,
 
     bottomSheetLogisticModalRef,
     toggleCloseLogisticSheet,
@@ -41,11 +37,10 @@ const DeliveryScreen: React.FC = () => {
     tempActiveLogistic,
     logistic,
     errorLogistic,
-  } = useDelivery();
 
-  console.log('CHECK_DELIVERY_OPTION', selectedOption);
-  console.log('CHECK_LOGISTIC_COMPANY', logistic);
-  console.log('CHECK_ADDRESS', address);
+    handleNavigateToScreenAddress,
+    handleNavigateToScreenCheckout,
+  } = useDelivery();
 
   return (
     <>

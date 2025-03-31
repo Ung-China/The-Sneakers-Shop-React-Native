@@ -1,6 +1,11 @@
 import {useTranslation} from 'react-i18next';
 import {FlatList, Text, View} from 'react-native';
-import {useCart, useNotification, useTheme} from '../../hooks';
+import {
+  useCalculateTotalPrice,
+  useCart,
+  useNotification,
+  useTheme,
+} from '../../hooks';
 import {ScrollView} from 'react-native';
 import styles from './style';
 import React from 'react';
@@ -13,17 +18,22 @@ import {
   Touchable,
 } from '../../components';
 import FlexibleTouchable from '../../components/FlexibleTouchable';
-import {cartItems} from '../../models/CartItem';
-import {CartItemProps} from '../../types';
+import {CartItemProps, StackParamList} from '../../types';
 import {formatCurrency} from '../../helpers';
 import {Icons} from '../../constants';
 import ImageCropPicker from 'react-native-image-crop-picker';
+import {RouteProp, useRoute} from '@react-navigation/native';
 
 const CheckoutScreen: React.FC = () => {
   const {t} = useTranslation();
   const {colors} = useTheme();
   const {cartItems} = useCart();
   const {notifications} = useNotification();
+  const route = useRoute<RouteProp<StackParamList, 'Checkout'>>();
+  const {selectedOption, logistic, address} = route.params;
+  const deliveryCost = selectedOption === 'pickup' ? 0 : 2.5;
+  const {totalPrice, totalPriceWithDelivery, totalDiscount} =
+    useCalculateTotalPrice(cartItems, notifications, deliveryCost);
 
   const cartItem = ({item}: {item: CartItemProps['item']}) => {
     return (
@@ -74,16 +84,7 @@ const CheckoutScreen: React.FC = () => {
           ]}>
           <FlexibleLabel
             label={t('amount')}
-            value={formatCurrency(290)}
-            showDollar={true}
-            labelStyle={[styles.priceLabel, {color: colors.text}]}
-            valueStyle={[styles.priceValue, {color: colors.text}]}
-            containerStyle={styles.priceContainerStyle}
-          />
-
-          <FlexibleLabel
-            label={t('deliveryType')}
-            value={formatCurrency(2)}
+            value={formatCurrency(totalPrice)}
             showDollar={true}
             labelStyle={[styles.priceLabel, {color: colors.text}]}
             valueStyle={[styles.priceValue, {color: colors.text}]}
@@ -92,7 +93,7 @@ const CheckoutScreen: React.FC = () => {
 
           <FlexibleLabel
             label={t('deliveryFee')}
-            value={formatCurrency(2)}
+            value={formatCurrency(deliveryCost)}
             showDollar={true}
             labelStyle={[styles.priceLabel, {color: colors.text}]}
             valueStyle={[styles.priceValue, {color: colors.text}]}
@@ -101,7 +102,7 @@ const CheckoutScreen: React.FC = () => {
 
           <FlexibleLabel
             label={t('discount')}
-            value={formatCurrency(20)}
+            value={formatCurrency(totalDiscount)}
             showDollar={true}
             labelStyle={[styles.priceLabel, {color: colors.text}]}
             valueStyle={[styles.priceValue, {color: colors.text}]}
@@ -117,7 +118,7 @@ const CheckoutScreen: React.FC = () => {
 
           <FlexibleLabel
             label={t('total')}
-            value={formatCurrency(300)}
+            value={formatCurrency(totalPriceWithDelivery)}
             showDollar={true}
             labelStyle={[styles.priceLabel, {color: colors.text}]}
             valueStyle={[styles.priceValue, {color: colors.text}]}
@@ -125,39 +126,41 @@ const CheckoutScreen: React.FC = () => {
           />
         </View>
 
-        <View
-          style={[
-            styles.shippingContainer,
-            {backgroundColor: colors.secondary},
-          ]}>
-          <View style={styles.shippngHeader}>
-            <Text style={[styles.label, {color: colors.text}]}>
-              {t('shippingAddress')}
-            </Text>
+        {selectedOption === 'delivery' && (
+          <View
+            style={[
+              styles.shippingContainer,
+              {backgroundColor: colors.secondary},
+            ]}>
+            <View style={styles.shippngHeader}>
+              <Text style={[styles.label, {color: colors.text}]}>
+                {t('shippingAddress')}
+              </Text>
+            </View>
+            <View style={styles.body}>
+              <Text style={[styles.shippingLabel, {color: colors.text}]}>
+                {address?.label}
+              </Text>
+              <Text style={[styles.shipping, {color: colors.text}]}>
+                {address?.streetLine1}
+              </Text>
+              <Text style={[styles.shipping, {color: colors.text}]}>
+                {address?.province} - {address?.phoneNumber}
+              </Text>
+            </View>
+            <View style={[styles.separator, {backgroundColor: colors.grey}]} />
+            <View style={styles.shippngHeader}>
+              <Text style={[styles.label, {color: colors.text}]}>
+                {t('logistic')}
+              </Text>
+            </View>
+            <View style={styles.body}>
+              <Text style={[styles.shippingLabel, {color: colors.text}]}>
+                {logistic}
+              </Text>
+            </View>
           </View>
-          <View style={styles.body}>
-            <Text style={[styles.shippingLabel, {color: colors.text}]}>
-              Home
-            </Text>
-            <Text style={[styles.shipping, {color: colors.text}]}>
-              Siem Reap
-            </Text>
-            <Text style={[styles.shipping, {color: colors.text}]}>
-              Siem Reap
-            </Text>
-          </View>
-          <View style={[styles.separator, {backgroundColor: colors.grey}]} />
-          <View style={styles.shippngHeader}>
-            <Text style={[styles.label, {color: colors.text}]}>
-              {t('logistic')}
-            </Text>
-          </View>
-          <View style={styles.body}>
-            <Text style={[styles.shippingLabel, {color: colors.text}]}>
-              VET Express
-            </Text>
-          </View>
-        </View>
+        )}
 
         <View style={styles.paymentContainer}>
           <View style={styles.labelContainer}>
