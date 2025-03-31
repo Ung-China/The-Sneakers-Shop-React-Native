@@ -4,6 +4,9 @@ export interface DeliveryModalProps {
   onPressApply?: () => void;
   isActive?: boolean;
   activeAddress?: number;
-  toggleAddress: (id: number) => void;
+  setActiveAddress: (id: number) => void;
+
+  // toggleAddress: (id: number) => void;
+  setAddress: string;
   handleNavigateToScreenAddress: () => void;
 }

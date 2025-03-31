@@ -16,29 +16,38 @@ const DeliveryScreen: React.FC = () => {
     selectedOption,
     selectOption,
 
-    bottomSheetLogisticModalRef,
-    toggleCloseLogisticSheet,
-
-    handleLogisticSheetChanges,
-    toggleApplyLogistic,
-    toggleLogisticSheet,
-
     bottomSheetDeliveryModalRef,
     handleDeliverySheetChanges,
     toggleCloseDeliverySheet,
-
-    activeAddress,
-    toggleAddress,
+    toggleApplyAddress,
     toggleDeliverySheet,
+
+    setActiveAddress,
+    setAddress,
+    setTempAddress,
+    setTempActiveAddress,
+    activeAddress,
+    address,
+    tempActiveAddress,
+    errorAddress,
 
     handleNavigateToScreenAddress,
     handleNavigateToScreenCheckout,
 
-    setActiveLogistic,
-    activeLogistic,
-    setLogistic,
+    bottomSheetLogisticModalRef,
+    toggleCloseLogisticSheet,
+    handleLogisticSheetChanges,
+    toggleApplyLogistic,
+    toggleLogisticSheet,
+    setTempLogistic,
+    setTempActiveLogistic,
+    tempActiveLogistic,
     logistic,
+    errorLogistic,
   } = useDelivery();
+
+  console.log('CHECK_DELIVERY_OPTION', selectedOption);
+  console.log('CHECK_LOGISTIC_COMPANY', logistic);
 
   return (
     <>
@@ -88,7 +97,7 @@ const DeliveryScreen: React.FC = () => {
                 />
               </View>
               <View style={styles.body}>
-                <Text style={[styles.shippingLabel, {color: colors.grey}]}>
+                {/* <Text style={[styles.shippingLabel, {color: colors.grey}]}>
                   Home
                 </Text>
                 <Text style={[styles.shipping, {color: colors.grey}]}>
@@ -96,7 +105,7 @@ const DeliveryScreen: React.FC = () => {
                 </Text>
                 <Text style={[styles.shipping, {color: colors.grey}]}>
                   Siem Reap
-                </Text>
+                </Text> */}
 
                 <Text style={[styles.deliveryError]}>
                   {t('pleaseEnterShippingAddress')}
@@ -122,7 +131,11 @@ const DeliveryScreen: React.FC = () => {
                     {logistic}
                   </Text>
                 ) : (
-                  <Text style={[styles.deliveryError, {color: colors.grey}]}>
+                  <Text
+                    style={[
+                      styles.deliveryError,
+                      {color: errorLogistic ? 'red' : colors.grey},
+                    ]}>
                     {t('pleaseChoseLogisticCompany')}
                   </Text>
                 )}
@@ -155,9 +168,10 @@ const DeliveryScreen: React.FC = () => {
         content={
           <DeliveryModal
             onPressCancel={toggleCloseDeliverySheet}
-            onPressApply={toggleApplyLogistic}
-            activeAddress={activeAddress}
-            toggleAddress={toggleAddress}
+            onPressApply={toggleApplyAddress}
+            setActiveAddress={setTempActiveAddress}
+            activeAddress={tempActiveAddress}
+            setAddress={setTempAddress}
             handleNavigateToScreenAddress={handleNavigateToScreenAddress}
           />
         }
@@ -170,9 +184,9 @@ const DeliveryScreen: React.FC = () => {
           <LogisticModal
             onPressCancel={toggleCloseLogisticSheet}
             onPressApply={toggleApplyLogistic}
-            setActiveLogistic={setActiveLogistic}
-            activeLogistic={activeLogistic}
-            setLogistic={setLogistic}
+            setActiveLogistic={setTempActiveLogistic}
+            activeLogistic={tempActiveLogistic}
+            setLogistic={setTempLogistic}
           />
         }
       />

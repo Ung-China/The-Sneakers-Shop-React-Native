@@ -2,7 +2,6 @@ import {Text, View} from 'react-native';
 import styles from './style';
 import {
   AddressItem,
-  CustomSnackbar,
   Footer,
   ItemSeparatorHeight,
   Touchable,
@@ -16,8 +15,9 @@ import {FlatList} from 'react-native-gesture-handler';
 const DeliveryModal: React.FC<DeliveryModalProps> = ({
   onPressCancel,
   onPressApply,
+  setActiveAddress,
   activeAddress,
-  toggleAddress,
+  setAddress,
   handleNavigateToScreenAddress,
 }) => {
   const {colors} = useTheme();
@@ -27,7 +27,10 @@ const DeliveryModal: React.FC<DeliveryModalProps> = ({
   const addressItem = ({item}: {item: DeliveryProps['item']}) => {
     return (
       <AddressItem
-        onPress={() => toggleAddress(item.id)}
+        onPress={() => {
+          setActiveAddress(item.id);
+          setAddress(item);
+        }}
         item={item}
         isActive={activeAddress === item.id}
       />

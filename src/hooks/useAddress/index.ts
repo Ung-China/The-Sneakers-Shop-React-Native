@@ -5,6 +5,9 @@ import {Address} from '../../models';
 import {useDispatch, useSelector} from 'react-redux';
 import {addAddress} from '../../store/actions';
 import {RootState} from '../../store';
+import Snackbar from 'react-native-snackbar';
+import {colors} from '../../constants/colors/colorTypes';
+import {Fonts} from '../../constants';
 
 const useAddress = (navigation?: any) => {
   const [activeLabel, setActiveLabel] = useState(0);
@@ -78,8 +81,14 @@ const useAddress = (navigation?: any) => {
       note,
     );
     dispatch(addAddress(newAddress));
-
     navigation.goBack();
+    Snackbar.show({
+      text: t('addressSavedSuccessfully'),
+      textColor: 'white',
+      duration: Snackbar.LENGTH_LONG,
+      backgroundColor: colors.success,
+      fontFamily: Fonts.REGULAR,
+    });
   };
 
   return {

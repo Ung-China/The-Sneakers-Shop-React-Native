@@ -162,4 +162,5 @@ export const translateKH = {
   addressSavedSuccessfully: 'អាសយដ្ឋានត្រូវបានរក្សាទុកដោយជោគជ័យ!',
   pleaseChoseLogisticCompany: 'សូមជ្រើសរើសក្រុមហ៊ុនដឹកជញ្ជូន!',
   pleaseEnterShippingAddress: 'សូមបញ្ចូលអាសយដ្ឋានដឹកជញ្ជូនរបស់អ្នក!',
+  pleaseChooseAddress: 'សូមជ្រើសរើសអាសយដ្ឋាន!',
 };

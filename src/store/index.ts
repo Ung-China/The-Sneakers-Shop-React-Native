@@ -23,7 +23,7 @@ import {
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['language', 'theme', 'user', 'favorites', 'cart'],
+  whitelist: ['language', 'theme', 'user', 'favorites', 'cart', 'address'],
 };
 
 const rootReducer = combineReducers({

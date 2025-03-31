@@ -12,7 +12,6 @@ import {useTheme} from '../../hooks';
 import {
   AddressLabelItem,
   BottomSheet,
-  CustomSnackbar,
   FlexibleInput,
   Footer,
   ItemSeparatorWidth,

@@ -49,7 +49,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
       Snackbar.show({
         text: t('addedToCartSuccess'),
         textColor: 'white',
-        duration: Snackbar.LENGTH_LONG,
+        duration: Snackbar.LENGTH_SHORT,
         backgroundColor: colors.success,
         fontFamily: Fonts.REGULAR,
       });

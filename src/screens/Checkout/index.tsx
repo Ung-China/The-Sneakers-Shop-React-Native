@@ -42,7 +42,7 @@ const CheckoutScreen: React.FC = () => {
 
   return (
     <>
-      <ScrollView
+      {/* <ScrollView
         showsVerticalScrollIndicator={false}
         style={[styles.container, {backgroundColor: colors.primary}]}>
         <FlatList
@@ -204,8 +204,11 @@ const CheckoutScreen: React.FC = () => {
             </Touchable>
           </View>
         </View>
-      </ScrollView>
+      </ScrollView> */}
 
+      <View style={{flex: 1}}>
+        <Text>Checkout Screen</Text>
+      </View>
       <Footer
         safeAreaStyle={[
           styles.safeAreaStyle,
