@@ -29,6 +29,7 @@ const CreateAccountScreen: React.FC = () => {
   const {
     // sendOTP,
     verifyOTP,
+    isVerified,
     loading,
     // isModalVisible,
     // phoneNumber,
@@ -54,7 +55,7 @@ const CreateAccountScreen: React.FC = () => {
   const {
     isLoading,
     isModalVisible,
-    isVerified,
+    // isVerified,
     sendOTP,
     responseOTP,
     phoneNumber,
@@ -69,7 +70,7 @@ const CreateAccountScreen: React.FC = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           {isVerified ? (
             <View style={styles.inputContainer}>
-              {/* <FlexibleInput
+              <FlexibleInput
                 prefixIcon={<Icons.PROFILE color={colors.grey} />}
                 onPressRightAction={() => {}}
                 placeholder={t('name')}
@@ -116,7 +117,7 @@ const CreateAccountScreen: React.FC = () => {
                   styles.contentContainerStyle,
                   {backgroundColor: colors.secondary},
                 ]}
-              /> */}
+              />
             </View>
           ) : (
             <View style={styles.inputContainer}>

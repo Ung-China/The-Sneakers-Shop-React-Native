@@ -3,6 +3,7 @@ import {FlatList, Text, View} from 'react-native';
 import {
   useCalculateTotalPrice,
   useCart,
+  useCheckout,
   useNotification,
   useTheme,
 } from '../../hooks';
@@ -14,15 +15,16 @@ import {
   FlexibleLabel,
   Footer,
   ItemSeparatorHeight,
-  OptionItem,
+  PaymentMethodItem,
   Touchable,
 } from '../../components';
 import FlexibleTouchable from '../../components/FlexibleTouchable';
-import {CartItemProps, StackParamList} from '../../types';
+import {CartItemProps, PaymentMethodProps, StackParamList} from '../../types';
 import {formatCurrency} from '../../helpers';
 import {Icons} from '../../constants';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import {RouteProp, useRoute} from '@react-navigation/native';
+import {dummyPaymentMethods} from '../../models/PaymentMethod';
 
 const CheckoutScreen: React.FC = () => {
   const {t} = useTranslation();
@@ -35,6 +37,9 @@ const CheckoutScreen: React.FC = () => {
   const {totalPrice, totalPriceWithDelivery, totalDiscount} =
     useCalculateTotalPrice(cartItems, notifications, deliveryCost);
 
+  const {activePaymentMethod, setPaymentMethod, setActivePaymentMethod} =
+    useCheckout();
+
   const cartItem = ({item}: {item: CartItemProps['item']}) => {
     return (
       <CartItem
@@ -45,6 +50,19 @@ const CheckoutScreen: React.FC = () => {
         onDecrease={() => {}}
         isCheckout={true}
         notifications={notifications}
+      />
+    );
+  };
+
+  const optionItem = ({item}: {item: PaymentMethodProps['item']}) => {
+    return (
+      <PaymentMethodItem
+        item={item}
+        onPress={() => {
+          setPaymentMethod(item.value);
+          setActivePaymentMethod(item.id);
+        }}
+        isActive={activePaymentMethod === item.id}
       />
     );
   };
@@ -171,26 +189,13 @@ const CheckoutScreen: React.FC = () => {
               {t('pleaseCompletYourPaymentToFinish')}
             </Text>
             <View style={styles.optionContainer}>
-              <OptionItem
-                title="ABA BANK"
-                description="001 904 779 | Ing China"
-                onPress={() => {}}
-                prefixIcon={<Icons.ABABANK />}
-                contentContainer={styles.optionContentContainer}
-              />
-              <OptionItem
-                title="ABA BANK"
-                description="001 904 779 | Ing China"
-                onPress={() => {}}
-                prefixIcon={<Icons.ACLEDABANK />}
-                contentContainer={styles.optionContentContainer}
-              />
-              <OptionItem
-                title="ABA BANK"
-                description="001 904 779 | Ing China"
-                onPress={() => {}}
-                prefixIcon={<Icons.WINGBANK />}
-                contentContainer={styles.optionContentContainer}
+              <FlatList
+                data={dummyPaymentMethods}
+                renderItem={optionItem}
+                showsVerticalScrollIndicator={false}
+                scrollEnabled={false}
+                ItemSeparatorComponent={ItemSeparatorHeight}
+                keyExtractor={item => item.id.toString()}
               />
             </View>
           </View>

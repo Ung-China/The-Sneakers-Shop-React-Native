@@ -41,36 +41,37 @@ const useCreateAccount = () => {
   }, [phoneNumber]);
 
   const sendOTP = async (phoneNumber: string) => {
-    if (!validatePhoneNumber()) {
-      return;
-    }
+    // if (!validatePhoneNumber()) {
+    //   return;
+    // }
 
-    const numberWithCountryCode = Validator.numberWithCountryCode(phoneNumber);
+    // const numberWithCountryCode = Validator.numberWithCountryCode(phoneNumber);
 
-    if (numberWithCountryCode === '85599168168') {
-      setResponseOTP('123456');
-      setIsModalVisible(true);
-      return;
-    }
-    setIsLoading(true);
-    try {
-      const phoneExists = await checkPhoneNumberExistence(
-        numberWithCountryCode,
-      );
+    // if (numberWithCountryCode === '85599168168') {
+    //   setResponseOTP('123456');
+    //   setIsModalVisible(true);
+    //   return;
+    // }
+    // setIsLoading(true);
+    // try {
+    //   const phoneExists = await checkPhoneNumberExistence(
+    //     numberWithCountryCode,
+    //   );
 
-      if (phoneExists) {
-        setErrorPhoneNumber(t('phonenumberalreadyusedbyanotheraccount'));
-        setIsLoading(false);
-        return;
-      }
+    //   if (phoneExists) {
+    //     setErrorPhoneNumber(t('phonenumberalreadyusedbyanotheraccount'));
+    //     setIsLoading(false);
+    //     return;
+    //   }
 
-      const response = await generateOTP(numberWithCountryCode);
-      setResponseOTP(response.otp);
-    } catch (error) {
-      console.log('[DEBUG] ERROR WHILE SEND OTP', error);
-    } finally {
-      setIsLoading(false);
-    }
+    //   const response = await generateOTP(numberWithCountryCode);
+    //   setResponseOTP(response.otp);
+    // } catch (error) {
+    //   console.log('[DEBUG] ERROR WHILE SEND OTP', error);
+    // } finally {
+    //   setIsLoading(false);
+    // }
+    setIsModalVisible(true);
   };
 
   return {

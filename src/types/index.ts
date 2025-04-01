@@ -49,6 +49,7 @@ import {NotFoundProps} from './NotFound';
 import {SkeletonProps} from './SkeletonProps';
 import {CustomAlertProps} from './CustomAlert';
 import {CustomSnackbarProps} from './CustomSnackbar';
+import {PaymentMethodProps} from './PaymentMethod';
 
 export type {
   BottomTabParamList,
@@ -102,4 +103,5 @@ export type {
   SkeletonProps,
   CustomAlertProps,
   CustomSnackbarProps,
+  PaymentMethodProps,
 };

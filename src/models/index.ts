@@ -13,6 +13,7 @@ import ProductTest from './ProductTest';
 import Promotion from './Promotion';
 import Province from './Province';
 import Address from './Address';
+import PaymentMethod from './PaymentMethod';
 export {
   ProfileMenu,
   Language,
@@ -29,4 +30,5 @@ export {
   Promotion,
   Province,
   Address,
+  PaymentMethod,
 };
