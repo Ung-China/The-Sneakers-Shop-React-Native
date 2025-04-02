@@ -83,7 +83,7 @@ export const StackNavigator = () => {
       <Stack.Screen
         name="Favorite"
         component={FavoriteScreen}
-        options={{title: 'Favorite'}}
+        options={{title: t('favorite')}}
       />
       <Stack.Screen
         name="CurrentLocation"
