@@ -21,6 +21,7 @@ const ProfileScreen: React.FC = () => {
     handleNavigateToCreateAccount,
     handleNavigateToForgotPassword,
   } = useProfile();
+
   const {loading, signInWithGoogle} = useSinInWIthGmail();
 
   const renderHeader = () => (

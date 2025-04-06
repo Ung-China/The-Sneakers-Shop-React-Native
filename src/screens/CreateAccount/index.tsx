@@ -28,40 +28,46 @@ const CreateAccountScreen: React.FC = () => {
 
   const {
     // sendOTP,
-    verifyOTP,
-    isVerified,
-    loading,
+    // verifyOTP,
+    // isVerified,
+    // loading,
     // isModalVisible,
     // phoneNumber,
     // setPhoneNumber,
     // errorPhoneNumber,
     // isVerified,
     // closeModal,
-    setOTP,
-    OTP,
-    errorOTP,
-    name,
-    errorName,
-    setName,
-    password,
-    errorPassword,
-    setPassword,
-    confirmPassword,
-    errorConfirmPassword,
-    setConfirmPassword,
-    createAccount,
+    // setOTP,
+    // OTP,
+    // errorOTP,
+    // name,
+    // errorName,
+    // setName,
+    // password,
+    // errorPassword,
+    // setPassword,
+    // confirmPassword,
+    // errorConfirmPassword,
+    // setConfirmPassword,
+    // createAccount,
   } = useSignInWithPhoneNumber();
 
   const {
     isLoading,
     isModalVisible,
-    // isVerified,
+
+    isVerified,
     sendOTP,
-    responseOTP,
+
+    toggleModal,
+
+    setPhoneNumber,
     phoneNumber,
     errorPhoneNumber,
-    setPhoneNumber,
-    toggleModal,
+
+    setOTP,
+    OTP,
+    errorOTP,
   } = useCreateAccount();
 
   return (
@@ -75,9 +81,9 @@ const CreateAccountScreen: React.FC = () => {
                 onPressRightAction={() => {}}
                 placeholder={t('name')}
                 editable={true}
-                value={name}
-                onChangeText={setName}
-                error={errorName}
+                // value={name}
+                // onChangeText={setName}
+                // error={errorName}
                 textInputStyle={[styles.textInputStyle]}
                 contentContainerStyle={[
                   styles.contentContainerStyle,
@@ -92,9 +98,9 @@ const CreateAccountScreen: React.FC = () => {
                 onPressRightAction={() => {}}
                 placeholder={t('password')}
                 editable={true}
-                value={password}
-                onChangeText={setPassword}
-                error={errorPassword}
+                // value={password}
+                // onChangeText={setPassword}
+                // error={errorPassword}
                 textInputStyle={[styles.textInputStyle]}
                 contentContainerStyle={[
                   styles.contentContainerStyle,
@@ -109,9 +115,9 @@ const CreateAccountScreen: React.FC = () => {
                 onPressRightAction={() => {}}
                 placeholder={t('confirmPassword')}
                 editable={true}
-                value={confirmPassword}
-                onChangeText={setConfirmPassword}
-                error={errorConfirmPassword}
+                // value={confirmPassword}
+                // onChangeText={setConfirmPassword}
+                // error={errorConfirmPassword}
                 textInputStyle={[styles.textInputStyle]}
                 contentContainerStyle={[
                   styles.contentContainerStyle,
@@ -169,7 +175,7 @@ const CreateAccountScreen: React.FC = () => {
               </Touchable>
             ) : (
               <Touchable
-                onPress={() => sendOTP(phoneNumber)}
+                onPress={sendOTP}
                 style={[
                   styles.footerButton,
                   {backgroundColor: colors.secondaryReversed},
@@ -184,7 +190,7 @@ const CreateAccountScreen: React.FC = () => {
           <OTPModal
             isVisible={isModalVisible}
             onClose={toggleModal}
-            onPress={() => verifyOTP(phoneNumber, OTP)}
+            // onPress={() => verifyOTP(phoneNumber, OTP)}
             phoneNumber={phoneNumber}
             setOTP={setOTP}
             errorOTP={errorOTP}

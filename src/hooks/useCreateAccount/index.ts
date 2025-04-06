@@ -3,19 +3,21 @@ import {Validator} from '../../helpers';
 import {generateOTP} from '../../services';
 import usePhoneNumberExistence from '../usePhoneNumberExistence';
 import {useTranslation} from 'react-i18next';
+import {API_ENDPOINTS, POST} from '../../api';
+import axios from 'axios';
 
 const useCreateAccount = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
-  const [responseOTP, setResponseOTP] = useState('');
+
   const [phoneNumber, setPhoneNumber] = useState('');
   const [errorPhoneNumber, setErrorPhoneNumber] = useState('');
 
-  const {checkPhoneNumberExistence} = usePhoneNumberExistence();
-  const {t} = useTranslation();
+  const [OTP, setOTP] = useState('');
+  const [errorOTP, setErrorOTP] = useState('');
 
-  console.log('CHECK RESPONSE OTP', responseOTP);
+  const {t} = useTranslation();
 
   const toggleModal = () => {
     setIsModalVisible(prev => !prev);
@@ -40,38 +42,37 @@ const useCreateAccount = () => {
     return valid;
   }, [phoneNumber]);
 
-  const sendOTP = async (phoneNumber: string) => {
-    // if (!validatePhoneNumber()) {
-    //   return;
-    // }
+  const sendOTP = async () => {
+    if (!validatePhoneNumber()) {
+      return;
+    }
 
-    // const numberWithCountryCode = Validator.numberWithCountryCode(phoneNumber);
+    const numberWithCountryCode = Validator.numberWithCountryCode(phoneNumber);
+
+    console.log('CHECK PHONE NUMBER', phoneNumber);
+
+    // setIsModalVisible(true);
 
     // if (numberWithCountryCode === '85599168168') {
     //   setResponseOTP('123456');
     //   setIsModalVisible(true);
     //   return;
     // }
-    // setIsLoading(true);
-    // try {
-    //   const phoneExists = await checkPhoneNumberExistence(
-    //     numberWithCountryCode,
-    //   );
 
-    //   if (phoneExists) {
-    //     setErrorPhoneNumber(t('phonenumberalreadyusedbyanotheraccount'));
-    //     setIsLoading(false);
-    //     return;
-    //   }
+    try {
+      setIsLoading(true);
 
-    //   const response = await generateOTP(numberWithCountryCode);
-    //   setResponseOTP(response.otp);
-    // } catch (error) {
-    //   console.log('[DEBUG] ERROR WHILE SEND OTP', error);
-    // } finally {
-    //   setIsLoading(false);
-    // }
-    setIsModalVisible(true);
+      const response = await POST(API_ENDPOINTS.SEND_OTP, {
+        phone: numberWithCountryCode,
+      });
+
+      console.log('CHECK RESPONSE', response);
+    } catch (error) {
+      console.log('[DEBUG] ERROR WHILE SEND OTP', error);
+    } finally {
+      setIsLoading(false);
+      setIsModalVisible(true);
+    }
   };
 
   return {
@@ -79,11 +80,16 @@ const useCreateAccount = () => {
     isModalVisible,
     isVerified,
     sendOTP,
-    responseOTP,
+
+    toggleModal,
+
+    setPhoneNumber,
     phoneNumber,
     errorPhoneNumber,
-    setPhoneNumber,
-    toggleModal,
+
+    setOTP,
+    OTP,
+    errorOTP,
   };
 };
 

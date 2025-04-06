@@ -15,6 +15,8 @@ const API_ENDPOINTS = {
   GET_PRODUCT_DETAIL: '/get_product_detail',
   SEARCH_PRODUCTS: '/products/search',
   GET_PRODUCTS_BY_BRAND: '/get_products_by_brand',
+  SEND_OTP: '/register-with-phone',
+  CREATE_ACCOUNT: '/verify-otp',
 };
 
 export default API_ENDPOINTS;
