@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {Text, View} from 'react-native';
 import styles from './style';
 import {TextInput} from 'react-native-gesture-handler';
@@ -24,10 +24,11 @@ const FlexibleInput: React.FC<FlexibleInputProps> = ({
   contentContainerStyle,
   prefixIcon,
   suffixIcon,
-  autoFocus = true,
+  autoFocus = false,
   secureTextEntry,
 }) => {
   const {colors} = useTheme();
+
   return (
     <View style={[styles.container, containerStyle]}>
       {label && (

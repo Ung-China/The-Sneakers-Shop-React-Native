@@ -55,19 +55,26 @@ const CreateAccountScreen: React.FC = () => {
   const {
     isLoading,
     isModalVisible,
-
     isVerified,
     sendOTP,
-
+    verifyOTP,
     toggleModal,
-
     setPhoneNumber,
     phoneNumber,
     errorPhoneNumber,
-
     setOTP,
     OTP,
     errorOTP,
+    createAccount,
+    name,
+    setName,
+    errorName,
+    password,
+    setPassword,
+    errorPassword,
+    confirmPassword,
+    setConfirmPassword,
+    errorConfirmPassword,
   } = useCreateAccount();
 
   return (
@@ -81,9 +88,10 @@ const CreateAccountScreen: React.FC = () => {
                 onPressRightAction={() => {}}
                 placeholder={t('name')}
                 editable={true}
-                // value={name}
-                // onChangeText={setName}
-                // error={errorName}
+                autoFocus={true}
+                value={name}
+                onChangeText={setName}
+                error={errorName}
                 textInputStyle={[styles.textInputStyle]}
                 contentContainerStyle={[
                   styles.contentContainerStyle,
@@ -98,9 +106,9 @@ const CreateAccountScreen: React.FC = () => {
                 onPressRightAction={() => {}}
                 placeholder={t('password')}
                 editable={true}
-                // value={password}
-                // onChangeText={setPassword}
-                // error={errorPassword}
+                value={password}
+                onChangeText={setPassword}
+                error={errorPassword}
                 textInputStyle={[styles.textInputStyle]}
                 contentContainerStyle={[
                   styles.contentContainerStyle,
@@ -115,9 +123,9 @@ const CreateAccountScreen: React.FC = () => {
                 onPressRightAction={() => {}}
                 placeholder={t('confirmPassword')}
                 editable={true}
-                // value={confirmPassword}
-                // onChangeText={setConfirmPassword}
-                // error={errorConfirmPassword}
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
+                error={errorConfirmPassword}
                 textInputStyle={[styles.textInputStyle]}
                 contentContainerStyle={[
                   styles.contentContainerStyle,
@@ -142,6 +150,7 @@ const CreateAccountScreen: React.FC = () => {
                 value={phoneNumber}
                 onChangeText={setPhoneNumber}
                 editable={true}
+                autoFocus={true}
                 keyboardType={KeyboardTypes.PHONE_NUMBER}
                 textInputStyle={[styles.textInputStyle]}
                 contentContainerStyle={[
@@ -162,8 +171,7 @@ const CreateAccountScreen: React.FC = () => {
             ]}>
             {isVerified ? (
               <Touchable
-                // onPress={createAccount}
-                onPress={() => {}}
+                onPress={createAccount}
                 style={[
                   styles.footerButton,
                   {backgroundColor: colors.secondaryReversed},
@@ -190,11 +198,12 @@ const CreateAccountScreen: React.FC = () => {
           <OTPModal
             isVisible={isModalVisible}
             onClose={toggleModal}
-            // onPress={() => verifyOTP(phoneNumber, OTP)}
+            onPress={verifyOTP}
             phoneNumber={phoneNumber}
             setOTP={setOTP}
             errorOTP={errorOTP}
           />
+
           <LoadingModal visible={isLoading} />
         </KeyboardAvoidingView>
       </View>
