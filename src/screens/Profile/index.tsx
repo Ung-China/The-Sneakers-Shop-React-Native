@@ -1,6 +1,6 @@
 import {FlatList, View} from 'react-native';
 import ProfileHeader from '../../components/ProfileHeader';
-import {useProfile, useSinInWIthGmail, useTheme} from '../../hooks';
+import {useProfile, useSinInWIthGmail, useTheme, useUser} from '../../hooks';
 import ProfileMenuItem from '../../components/ProfileMenuItem';
 import {ProfileMenu} from '../../models';
 import styles from './style';
@@ -21,6 +21,9 @@ const ProfileScreen: React.FC = () => {
     handleNavigateToCreateAccount,
     handleNavigateToForgotPassword,
   } = useProfile();
+  const {user} = useUser();
+
+  console.log('CHECK USER', user);
 
   const {loading, signInWithGoogle} = useSinInWIthGmail();
 

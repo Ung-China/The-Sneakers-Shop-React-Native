@@ -1,23 +1,23 @@
 export default class User {
-  uid: string;
+  id: string;
   name: string;
   email: string;
   phoneNumber: string;
   image: string;
-  password?: string;
+  token: string;
   constructor(
-    uid: string,
+    id: string,
     name: string,
     email: string,
     phoneNumber: string,
     image: string,
-    password?: string,
+    token: string,
   ) {
-    this.uid = uid;
+    this.id = id;
     this.name = name;
     this.email = email;
     this.phoneNumber = phoneNumber;
     this.image = image;
-    this.password = password;
+    this.token = token;
   }
 }

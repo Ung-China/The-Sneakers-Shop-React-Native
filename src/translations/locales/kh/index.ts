@@ -163,4 +163,7 @@ export const translateKH = {
   pleaseChoseLogisticCompany: 'សូមជ្រើសរើសក្រុមហ៊ុនដឹកជញ្ជូន!',
   pleaseEnterShippingAddress: 'សូមបញ្ចូលអាសយដ្ឋានដឹកជញ្ជូនរបស់អ្នក!',
   pleaseChooseAddress: 'សូមជ្រើសរើសអាសយដ្ឋាន!',
+  confirmPassword: 'បញ្ជាក់ពាក្យសម្ងាត់',
+  accountCreationFailed: 'បរាជ័យក្នុងការបង្កើតគណនី។ សូមព្យាយាមម្តងទៀត។',
+  accountCreated: 'បង្កើតគណនីបានជោគជ័យ!',
 };

@@ -163,4 +163,6 @@ export const translateEN = {
   pleaseChoseLogisticCompany: 'Please choose a logistics company.',
   pleaseEnterShippingAddress: 'Please enter your shipping address.',
   pleaseChooseAddress: 'Please choose a address!',
+  accountCreationFailed: 'Failed to create account. Please try again.',
+  accountCreated: 'Account created successfully!',
 };

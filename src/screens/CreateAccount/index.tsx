@@ -6,11 +6,7 @@ import {
   View,
 } from 'react-native';
 import styles from './style';
-import {
-  useCreateAccount,
-  useSignInWithPhoneNumber,
-  useTheme,
-} from '../../hooks';
+import {useCreateAccount, useTheme} from '../../hooks';
 import {useTranslation} from 'react-i18next';
 import React from 'react';
 import {
@@ -25,32 +21,6 @@ import {Icons, KeyboardTypes} from '../../constants';
 const CreateAccountScreen: React.FC = () => {
   const {colors} = useTheme();
   const {t} = useTranslation();
-
-  const {
-    // sendOTP,
-    // verifyOTP,
-    // isVerified,
-    // loading,
-    // isModalVisible,
-    // phoneNumber,
-    // setPhoneNumber,
-    // errorPhoneNumber,
-    // isVerified,
-    // closeModal,
-    // setOTP,
-    // OTP,
-    // errorOTP,
-    // name,
-    // errorName,
-    // setName,
-    // password,
-    // errorPassword,
-    // setPassword,
-    // confirmPassword,
-    // errorConfirmPassword,
-    // setConfirmPassword,
-    // createAccount,
-  } = useSignInWithPhoneNumber();
 
   const {
     isLoading,
@@ -75,6 +45,10 @@ const CreateAccountScreen: React.FC = () => {
     confirmPassword,
     setConfirmPassword,
     errorConfirmPassword,
+    togglePasswordVisibility,
+    passwordVisible,
+    toggleConfirmPasswordVisibility,
+    confirmPasswordVisible,
   } = useCreateAccount();
 
   return (
@@ -101,9 +75,15 @@ const CreateAccountScreen: React.FC = () => {
               <FlexibleInput
                 prefixIcon={<Icons.KEY color={colors.grey} />}
                 suffixIcon={
-                  <Icons.EYEOFF color={colors.grey} width={23} height={23} />
+                  passwordVisible ? (
+                    <Icons.EYEOFF color={colors.grey} width={23} height={23} />
+                  ) : (
+                    <Icons.EYE color={colors.grey} width={23} height={23} />
+                  )
                 }
-                onPressRightAction={() => {}}
+                autoFocus={true}
+                secureTextEntry={passwordVisible}
+                onPressRightAction={togglePasswordVisibility}
                 placeholder={t('password')}
                 editable={true}
                 value={password}
@@ -118,9 +98,15 @@ const CreateAccountScreen: React.FC = () => {
               <FlexibleInput
                 prefixIcon={<Icons.KEY color={colors.grey} />}
                 suffixIcon={
-                  <Icons.EYEOFF color={colors.grey} width={23} height={23} />
+                  confirmPasswordVisible ? (
+                    <Icons.EYEOFF color={colors.grey} width={23} height={23} />
+                  ) : (
+                    <Icons.EYE color={colors.grey} width={23} height={23} />
+                  )
                 }
-                onPressRightAction={() => {}}
+                autoFocus={true}
+                secureTextEntry={confirmPasswordVisible}
+                onPressRightAction={toggleConfirmPasswordVisibility}
                 placeholder={t('confirmPassword')}
                 editable={true}
                 value={confirmPassword}
