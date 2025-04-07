@@ -136,7 +136,6 @@ const useCreateAccount = () => {
       setIsLoading(false);
       setIsModalVisible(true);
     }
-    setIsModalVisible(true);
   };
 
   const verifyOTP = async () => {
@@ -152,15 +151,14 @@ const useCreateAccount = () => {
         return;
       }
 
-      setIsVerified(true);
-      toggleModal();
+      setIsModalVisible(false);
       setErrorOTP('');
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE SEND OTP', error);
     } finally {
       setIsLoading(false);
+      setIsVerified(true);
     }
-    setIsVerified(true);
   };
 
   const createAccount = async () => {
@@ -186,7 +184,7 @@ const useCreateAccount = () => {
         response.customer_info.name,
         response.customer_info.email,
         response.customer_info.phone,
-        response.customer_info.image,
+        response.customer_info.image_url,
         response.customer_info.token,
       );
 

@@ -16,6 +16,7 @@ const OTPModal: React.FC<OTPModalProps> = ({
   phoneNumber,
   setOTP,
   errorOTP,
+  sendOTP,
 }) => {
   const {colors} = useTheme();
   const {t} = useTranslation();
@@ -47,7 +48,6 @@ const OTPModal: React.FC<OTPModalProps> = ({
               type="numeric"
               secureTextEntry={false}
               onTextChange={text => {
-                console.log('INPUT_OTP', text);
                 setOTP(text);
               }}
               textInputProps={{
@@ -72,6 +72,7 @@ const OTPModal: React.FC<OTPModalProps> = ({
 
             {errorOTP && <Text style={styles.errorOTP}>{errorOTP}</Text>}
             <FlatButton
+              onPress={sendOTP}
               label={t('resend')}
               labelStyle={[
                 styles.resendLabel,

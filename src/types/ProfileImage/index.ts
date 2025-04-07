@@ -5,4 +5,5 @@ export interface ProfileImageProps {
   imageStyle?: StyleProp<ImageStyle>;
   loadingImageStyle?: StyleProp<ImageStyle>;
   iconSize?: number;
+  image?: string;
 }

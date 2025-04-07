@@ -8,7 +8,6 @@ import {User} from '../../models';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../../store';
 import {loginUserSuccess} from '../../store/actions';
-import {singIn} from '../../services';
 import {useTranslation} from 'react-i18next';
 import {Validator} from '../../helpers';
 
@@ -71,15 +70,16 @@ const useSinInWIthGmail = () => {
 
         const user = firebaseUserCredential.user;
 
-        const userInfo = new User(
-          user.uid,
-          user.displayName || '',
-          user.email || '',
-          user.phoneNumber || '',
-          user.photoURL || '',
-        );
+        // const userInfo = new User(
+        //   user.uid,
+        //   user.displayName || '',
+        //   user.email || '',
+        //   user.phoneNumber || '',
+        //   user.photoURL || '',
 
-        const response = await singIn(userInfo);
+        // );
+
+        // const response = await singIn(user);
         dispatch(loginUserSuccess(response));
       } else {
         console.log('ID Token is missing');

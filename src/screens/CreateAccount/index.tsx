@@ -1,10 +1,4 @@
-import {
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import styles from './style';
 import {useCreateAccount, useTheme} from '../../hooks';
 import {useTranslation} from 'react-i18next';
@@ -62,7 +56,6 @@ const CreateAccountScreen: React.FC = () => {
                 onPressRightAction={() => {}}
                 placeholder={t('name')}
                 editable={true}
-                autoFocus={true}
                 value={name}
                 onChangeText={setName}
                 error={errorName}
@@ -81,7 +74,6 @@ const CreateAccountScreen: React.FC = () => {
                     <Icons.EYE color={colors.grey} width={23} height={23} />
                   )
                 }
-                autoFocus={true}
                 secureTextEntry={passwordVisible}
                 onPressRightAction={togglePasswordVisibility}
                 placeholder={t('password')}
@@ -104,7 +96,6 @@ const CreateAccountScreen: React.FC = () => {
                     <Icons.EYE color={colors.grey} width={23} height={23} />
                   )
                 }
-                autoFocus={true}
                 secureTextEntry={confirmPasswordVisible}
                 onPressRightAction={toggleConfirmPasswordVisibility}
                 placeholder={t('confirmPassword')}
@@ -148,50 +139,45 @@ const CreateAccountScreen: React.FC = () => {
           )}
         </ScrollView>
 
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-          <Footer
-            safeAreaStyle={[
-              styles.footerContainer,
-              {backgroundColor: colors.primary},
-            ]}>
-            {isVerified ? (
-              <Touchable
-                onPress={createAccount}
-                style={[
-                  styles.footerButton,
-                  {backgroundColor: colors.secondaryReversed},
-                ]}>
-                <Text
-                  style={[styles.footerLabel, {color: colors.textReversed}]}>
-                  {t('done')}
-                </Text>
-              </Touchable>
-            ) : (
-              <Touchable
-                onPress={sendOTP}
-                style={[
-                  styles.footerButton,
-                  {backgroundColor: colors.secondaryReversed},
-                ]}>
-                <Text
-                  style={[styles.footerLabel, {color: colors.textReversed}]}>
-                  {t('continue')}
-                </Text>
-              </Touchable>
-            )}
-          </Footer>
-          <OTPModal
-            isVisible={isModalVisible}
-            onClose={toggleModal}
-            onPress={verifyOTP}
-            phoneNumber={phoneNumber}
-            setOTP={setOTP}
-            errorOTP={errorOTP}
-          />
-
-          <LoadingModal visible={isLoading} />
-        </KeyboardAvoidingView>
+        <Footer
+          safeAreaStyle={[
+            styles.footerContainer,
+            {backgroundColor: colors.primary},
+          ]}>
+          {isVerified ? (
+            <Touchable
+              onPress={createAccount}
+              style={[
+                styles.footerButton,
+                {backgroundColor: colors.secondaryReversed},
+              ]}>
+              <Text style={[styles.footerLabel, {color: colors.textReversed}]}>
+                {t('done')}
+              </Text>
+            </Touchable>
+          ) : (
+            <Touchable
+              onPress={sendOTP}
+              style={[
+                styles.footerButton,
+                {backgroundColor: colors.secondaryReversed},
+              ]}>
+              <Text style={[styles.footerLabel, {color: colors.textReversed}]}>
+                {t('continue')}
+              </Text>
+            </Touchable>
+          )}
+        </Footer>
+        <OTPModal
+          isVisible={isModalVisible}
+          onClose={toggleModal}
+          onPress={verifyOTP}
+          phoneNumber={phoneNumber}
+          setOTP={setOTP}
+          errorOTP={errorOTP}
+          sendOTP={sendOTP}
+        />
+        <LoadingModal visible={isLoading} />
       </View>
     </>
   );

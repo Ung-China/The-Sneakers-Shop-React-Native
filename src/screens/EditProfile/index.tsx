@@ -1,12 +1,6 @@
 import {useTranslation} from 'react-i18next';
-import {
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
-import {useEditProfile, useTheme} from '../../hooks';
+import {ScrollView, Text, View} from 'react-native';
+import {useEditProfile, useTheme, useUser} from '../../hooks';
 import styles from './style';
 import {FlexibleInput, Footer, ProfileImage, Touchable} from '../../components';
 import IconButton from '../../components/IconButton';
@@ -16,6 +10,8 @@ import ImagePicker from 'react-native-image-crop-picker';
 const EditProfileScreen: React.FC = () => {
   const {t} = useTranslation();
   const {colors} = useTheme();
+  const {user} = useUser();
+
   const {
     fullName,
     phoneNumber,
@@ -33,7 +29,11 @@ const EditProfileScreen: React.FC = () => {
     setOldPassword,
     setNewPassword,
     updateProfile,
-  } = useEditProfile();
+  } = useEditProfile({
+    name: user?.name,
+    phoneNumber: user?.phoneNumber,
+    email: user?.email,
+  });
 
   const openImagePicker = async () => {
     try {
@@ -58,6 +58,7 @@ const EditProfileScreen: React.FC = () => {
               imageStyle={styles.imageStyle}
               loadingImageStyle={styles.loadingImageStyle}
               iconSize={70}
+              image={user?.image}
             />
           </Touchable>
           <IconButton
@@ -134,26 +135,23 @@ const EditProfileScreen: React.FC = () => {
           />
         </View>
       </ScrollView>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 15 : 0}>
-        <Footer
-          safeAreaStyle={[
-            styles.footerContainer,
-            {backgroundColor: colors.primary},
+
+      <Footer
+        safeAreaStyle={[
+          styles.footerContainer,
+          {backgroundColor: colors.primary},
+        ]}>
+        <Touchable
+          onPress={updateProfile}
+          style={[
+            styles.saveButton,
+            {backgroundColor: colors.secondaryReversed},
           ]}>
-          <Touchable
-            onPress={updateProfile}
-            style={[
-              styles.saveButton,
-              {backgroundColor: colors.secondaryReversed},
-            ]}>
-            <Text style={[styles.save, {color: colors.textReversed}]}>
-              {t('save')}
-            </Text>
-          </Touchable>
-        </Footer>
-      </KeyboardAvoidingView>
+          <Text style={[styles.save, {color: colors.textReversed}]}>
+            {t('save')}
+          </Text>
+        </Touchable>
+      </Footer>
     </View>
   );
 };

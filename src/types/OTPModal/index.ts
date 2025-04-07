@@ -6,4 +6,5 @@ export interface OTPModalProps {
   phoneNumber: string;
   errorOTP: string;
   setOTP: (text: string) => void;
+  sendOTP: () => void;
 }

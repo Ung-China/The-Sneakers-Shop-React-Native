@@ -1,5 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {FontSizes, Gap, Padding, Screen_Dimensions} from '../../constants';
+import {
+  Fonts,
+  FontSizes,
+  Gap,
+  Padding,
+  Screen_Dimensions,
+} from '../../constants';
 
 export default StyleSheet.create({
   container: {
@@ -32,10 +38,11 @@ export default StyleSheet.create({
   },
   nameText: {
     fontSize: FontSizes.extraLarge,
-    fontWeight: 'bold',
+    fontFamily: Fonts.MEDIUM,
   },
   greetingText: {
     fontSize: FontSizes.large,
+    fontFamily: Fonts.REGULAR,
   },
   buttonContainer: {
     padding: Padding.SMALL,

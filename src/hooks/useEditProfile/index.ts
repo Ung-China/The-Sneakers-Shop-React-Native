@@ -2,14 +2,21 @@ import {useCallback, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Validator} from '../../helpers';
 
-const useEditProfile = () => {
+const useEditProfile = (initialUser?: {
+  name?: string;
+  phoneNumber?: string;
+  email?: string;
+}) => {
   const {t} = useTranslation();
 
-  const [fullName, setFullName] = useState<string>('');
-  const [phoneNumber, setPhoneNumber] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
+  const [fullName, setFullName] = useState<string>(initialUser?.name ?? '');
+  const [phoneNumber, setPhoneNumber] = useState<string>(
+    initialUser?.phoneNumber ?? '',
+  );
+  const [email, setEmail] = useState<string>(initialUser?.email ?? '');
   const [oldPassword, setOldPassword] = useState<string>('');
   const [newPassword, setNewPassword] = useState<string>('');
+
   const [errorFullName, setErrorFullName] = useState<string>('');
   const [errorPhoneNumber, setErrorPhoneNumber] = useState<string>('');
   const [errorEmail, setErrorEmail] = useState<string>('');
@@ -44,7 +51,7 @@ const useEditProfile = () => {
     if (email === '') {
       valid = false;
       setErrorEmail(t('emailisrequired'));
-    } else if (!Validator.validateEmail(phoneNumber)) {
+    } else if (!Validator.validateEmail(email)) {
       valid = false;
       setErrorEmail(t('pleaseenteravalidemailaddress'));
     }
@@ -93,4 +100,5 @@ const useEditProfile = () => {
     updateProfile,
   };
 };
+
 export default useEditProfile;

@@ -165,4 +165,8 @@ export const translateEN = {
   pleaseChooseAddress: 'Please choose a address!',
   accountCreationFailed: 'Failed to create account. Please try again.',
   accountCreated: 'Account created successfully!',
+  greeting: 'Hello,',
+  welcome_back: 'Welcome back again',
+  welcome_guest: 'Welcome to our app',
+  guest: 'Guest',
 };

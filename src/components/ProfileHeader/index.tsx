@@ -3,11 +3,14 @@ import ProfileImage from '../ProfileImage';
 import styles from './style';
 import Touchable from '../Touchable';
 import {Icons} from '../../constants';
-import {useTheme} from '../../hooks';
+import {useTheme, useUser} from '../../hooks';
 import {ProfileHeaderProps} from '../../types';
+import {useTranslation} from 'react-i18next';
 
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({onPress}) => {
   const {colors} = useTheme();
+  const {user, isLoggedIn} = useUser();
+  const {t} = useTranslation();
 
   return (
     <Touchable onPress={onPress}>
@@ -18,13 +21,15 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({onPress}) => {
             imageStyle={styles.imageStyle}
             loadingImageStyle={styles.loadingImageStyle}
             iconSize={70}
+            image={user?.image}
           />
           <View style={styles.nameContainer}>
             <Text style={[styles.nameText, {color: colors.text}]}>
-              Hello, China!
+              {t('greeting')},{' '}
+              {isLoggedIn && user?.name ? user.name : t('welcome_guest')}!
             </Text>
             <Text style={[styles.greetingText, {color: colors.text}]}>
-              Welcome back again
+              {isLoggedIn ? t('welcome_back') : t('welcome_guest')}
             </Text>
           </View>
         </View>

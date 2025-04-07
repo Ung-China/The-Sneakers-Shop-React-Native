@@ -7,10 +7,11 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
   imageStyle,
   loadingImageStyle,
   iconSize,
+  image,
 }) => {
   return (
     <CachedImage
-      source={'https://ebook-api-psi.vercel.app/uploads/images/china.JPG'}
+      source={image}
       style={imageContainer}
       imageStyle={imageStyle}
       loadingImageComponent={() => (

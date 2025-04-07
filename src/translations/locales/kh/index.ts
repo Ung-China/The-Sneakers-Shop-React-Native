@@ -166,4 +166,8 @@ export const translateKH = {
   confirmPassword: 'បញ្ជាក់ពាក្យសម្ងាត់',
   accountCreationFailed: 'បរាជ័យក្នុងការបង្កើតគណនី។ សូមព្យាយាមម្តងទៀត។',
   accountCreated: 'បង្កើតគណនីបានជោគជ័យ!',
+  greeting: 'សួស្តី',
+  welcome_back: 'សូមស្វាគមន៍មកវិញ',
+  welcome_guest: 'សូមស្វាគមន៍មកកាន់កម្មវិធីរបស់យើង',
+  guest: 'ភ្ញៀវ',
 };
