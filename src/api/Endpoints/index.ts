@@ -1,8 +1,4 @@
 const API_ENDPOINTS = {
-  LOGIN: '/login',
-  GENERATE_OTP: '/generate-otp',
-  CHECK_PHONE_NUMBER_EXISTENCE: '/check-phone-number-existence',
-
   GET_SLIDERS: '/get_banner_sliders',
   GET_SHOES_SLIDER: '/get_shoes_sliders',
   GET_BRANDS: '/get_brands',
@@ -17,6 +13,8 @@ const API_ENDPOINTS = {
   GET_PRODUCTS_BY_BRAND: '/get_products_by_brand',
   SEND_OTP: '/register-with-phone',
   CREATE_ACCOUNT: '/verify-otp',
+  SEND_OTP_FORGOT_PASSWORD: '/forget-password',
+  CHANGE_PASSWORD: '/verify-otp-and-reset-password',
 };
 
 export default API_ENDPOINTS;

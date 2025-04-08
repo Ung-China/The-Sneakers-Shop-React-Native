@@ -130,11 +130,18 @@ const useCreateAccount = () => {
       console.log('[DEBUG] OTP RESPONSE', response);
 
       setResOTP(response.otp);
+      setIsModalVisible(true);
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE SEND OTP', error);
+      Snackbar.show({
+        text: t('phoneNumberAlreadyUsed'),
+        textColor: 'white',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: colors.error,
+        fontFamily: Fonts.REGULAR,
+      });
     } finally {
       setIsLoading(false);
-      setIsModalVisible(true);
     }
   };
 
@@ -153,11 +160,11 @@ const useCreateAccount = () => {
 
       setIsModalVisible(false);
       setErrorOTP('');
+      setIsVerified(true);
     } catch (error) {
-      console.log('[DEBUG] ERROR WHILE SEND OTP', error);
+      console.log('[DEBUG] ERROR WHILE VERIFY OTP', error);
     } finally {
       setIsLoading(false);
-      setIsVerified(true);
     }
   };
 

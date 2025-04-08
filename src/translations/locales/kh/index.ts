@@ -170,4 +170,9 @@ export const translateKH = {
   welcome_back: 'សូមស្វាគមន៍មកវិញ',
   welcome_guest: 'សូមស្វាគមន៍មកកាន់កម្មវិធីរបស់យើង',
   guest: 'ភ្ញៀវ',
+  phoneNumberAlreadyUsed: 'លេខទូរសព្ទ័នេះត្រូវបានប្រើរួចហើយ។',
+  otpSendFailed: 'បរាជ័យក្នុងការផ្ញើ OTP ។ សូមព្យាយាមម្តងទៀត។',
+  userNotFound: 'មិនមានគណនីដែលភ្ជាប់ជាមួយលេខទូរសព្ទ័នេះទេ។',
+  passwordChangeFailed: 'បរាជ័យក្នុងការប្តូរពាក្យសម្ងាត់។ សូមព្យាយាមម្តងទៀត។',
+  passwordChanged: 'ប្តូរពាក្យសម្ងាត់បានជោគជ័យ។',
 };

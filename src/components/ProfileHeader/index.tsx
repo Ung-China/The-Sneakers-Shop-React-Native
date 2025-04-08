@@ -26,10 +26,10 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({onPress}) => {
           <View style={styles.nameContainer}>
             <Text style={[styles.nameText, {color: colors.text}]}>
               {t('greeting')},{' '}
-              {isLoggedIn && user?.name ? user.name : t('welcome_guest')}!
+              {isLoggedIn && user?.name ? user.name : t('guest')}!
             </Text>
             <Text style={[styles.greetingText, {color: colors.text}]}>
-              {isLoggedIn ? t('welcome_back') : t('welcome_guest')}
+              {t('welcome_guest')}
             </Text>
           </View>
         </View>

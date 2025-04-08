@@ -169,4 +169,9 @@ export const translateEN = {
   welcome_back: 'Welcome back again',
   welcome_guest: 'Welcome to our app',
   guest: 'Guest',
+  phoneNumberAlreadyUsed: 'This phone number is already in use.',
+  otpSendFailed: 'Failed to send OTP. Please try again.',
+  userNotFound: 'No account found with this phone number.',
+  passwordChangeFailed: 'Failed to change password. Please try again.',
+  passwordChanged: 'Password changed successfully.',
 };
