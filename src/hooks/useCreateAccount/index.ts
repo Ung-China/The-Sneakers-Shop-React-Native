@@ -160,7 +160,9 @@ const useCreateAccount = () => {
 
       setIsModalVisible(false);
       setErrorOTP('');
-      setIsVerified(true);
+      setTimeout(() => {
+        setIsVerified(true);
+      }, 1000);
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE VERIFY OTP', error);
     } finally {

@@ -19,6 +19,7 @@ import {
   SearchScreen,
   SeeMoreScreen,
   ShopLocation,
+  LoginScreen,
 } from '../../screens';
 import {BottomTabNavigator} from '../BottomTabNavigator';
 import {useTheme} from '../../hooks';
@@ -157,6 +158,15 @@ export const StackNavigator = () => {
           headerShadowVisible: false,
           presentation: 'modal',
           title: t('resetPassword'),
+        }}
+      />
+      <Stack.Screen
+        name="LoginScreen"
+        component={LoginScreen}
+        options={{
+          headerShadowVisible: false,
+          presentation: 'modal',
+          title: t('login'),
         }}
       />
       <Stack.Screen

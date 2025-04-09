@@ -5,16 +5,16 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {StackParamList} from '../../types';
 import {useCallback, useRef, useState} from 'react';
-import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {Alert} from 'react-native';
 import useTheme from '../useTheme';
+import useUser from '../useUser';
 const useProfile = () => {
   const {t} = useTranslation();
   const {theme, setColorTheme} = useTheme();
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
-  const bottomSheetLogincModalRef = useRef<BottomSheetModal>(null);
 
   const [isDarkMode, setIsDarkMode] = useState(theme === 'dark');
+  const {isLoggedIn} = useUser();
 
   const menuItems = [
     new ProfileMenu(9, 'Cart', Icons.CART, t('cart'), Icons.ARROWRIGHT, false),
@@ -67,7 +67,7 @@ const useProfile = () => {
       Icons.ARROWRIGHT,
       false,
     ),
-    new ProfileMenu(7, 'LoginModal', undefined, t('login'), undefined, true),
+    new ProfileMenu(7, 'Login', undefined, t('login'), undefined, false),
     new ProfileMenu(
       8,
       'DeleteAccountModal',
@@ -83,36 +83,30 @@ const useProfile = () => {
     setColorTheme(value ? 'dark' : 'light');
   };
 
-  const toggleLoginSheet = useCallback(() => {
-    bottomSheetLogincModalRef.current?.present();
-  }, []);
-
   const handleLoginSheetChanges = useCallback((index: number) => {
     console.log('Login Sheet changed to index', index);
-  }, []);
-
-  const handleLoginSheetDismiss = useCallback(() => {
-    bottomSheetLogincModalRef.current?.close();
   }, []);
 
   const handleNavigateToEditProfile = useCallback(() => {
     navigation.navigate('EditProfile');
   }, []);
 
+  const handleNavigateToLogin = useCallback(() => {
+    navigation.navigate('LoginScreen');
+  }, []);
+
   const handleNavigateToCreateAccount = useCallback(() => {
-    bottomSheetLogincModalRef.current?.close();
     navigation.navigate('CreateAccount');
   }, []);
 
   const handleNavigateToForgotPassword = useCallback(() => {
-    bottomSheetLogincModalRef.current?.close();
     navigation.navigate('ForgotPassword');
   }, []);
 
   const handleMenuPress = useCallback(
     (screenName?: string) => {
-      if (screenName === 'LoginModal') {
-        toggleLoginSheet();
+      if (screenName === 'Login') {
+        handleNavigateToLogin();
       } else if (screenName === 'DeleteAccountModal') {
         Alert.alert('Delete Account');
       } else if (screenName === 'Appearance') {
@@ -121,7 +115,7 @@ const useProfile = () => {
         navigation.navigate(screenName);
       }
     },
-    [navigation, toggleTheme, toggleLoginSheet, isDarkMode],
+    [navigation, toggleTheme, handleNavigateToLogin, isDarkMode],
   );
 
   return {
@@ -130,9 +124,7 @@ const useProfile = () => {
     isDarkMode,
     handleMenuPress,
     handleNavigateToEditProfile,
-    bottomSheetLogincModalRef,
     handleLoginSheetChanges,
-    handleLoginSheetDismiss,
     handleNavigateToCreateAccount,
     handleNavigateToForgotPassword,
   };

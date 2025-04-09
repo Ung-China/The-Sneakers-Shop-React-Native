@@ -2,7 +2,8 @@ import axios from 'axios';
 import {ApiRequestProps} from '../../types';
 
 const apiInstance = axios.create({
-  baseURL: 'https://the-sneaker.laravel.cloud/api',
+  // baseURL: 'https://the-sneaker.laravel.cloud/api',
+  baseURL: 'http://127.0.0.1:8000/api',
   timeout: 5000,
 });
 

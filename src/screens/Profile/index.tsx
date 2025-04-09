@@ -1,11 +1,9 @@
 import {FlatList, View} from 'react-native';
 import ProfileHeader from '../../components/ProfileHeader';
-import {useProfile, useSinInWIthGmail, useTheme} from '../../hooks';
+import {useProfile, useTheme} from '../../hooks';
 import ProfileMenuItem from '../../components/ProfileMenuItem';
 import {ProfileMenu} from '../../models';
 import styles from './style';
-import {BottomSheet, LoadingModal} from '../../components';
-import LoginModal from './components';
 
 const ProfileScreen: React.FC = () => {
   const {colors} = useTheme();
@@ -15,18 +13,12 @@ const ProfileScreen: React.FC = () => {
     isDarkMode,
     handleNavigateToEditProfile,
     handleMenuPress,
-    bottomSheetLogincModalRef,
-    handleLoginSheetChanges,
-    handleLoginSheetDismiss,
-    handleNavigateToCreateAccount,
-    handleNavigateToForgotPassword,
   } = useProfile();
-
-  const {loading, signInWithGoogle} = useSinInWIthGmail();
 
   const renderHeader = () => (
     <ProfileHeader onPress={handleNavigateToEditProfile} />
   );
+
   const renderProfileItem = ({item}: {item: ProfileMenu}) => (
     <ProfileMenuItem
       item={item}
@@ -49,24 +41,6 @@ const ProfileScreen: React.FC = () => {
         ItemSeparatorComponent={itemSeparator}
         showsVerticalScrollIndicator={false}
       />
-
-      <BottomSheet
-        bottomSheetModalRef={bottomSheetLogincModalRef}
-        onSheetChanges={handleLoginSheetChanges}
-        handleSheetDismiss={handleLoginSheetDismiss}
-        snapPoints={['90%']}
-        enableDynamicSizing={false}
-        contentContainer={{flex: 1}}
-        content={
-          <LoginModal
-            handleLoginWithGoogle={signInWithGoogle}
-            handleNavigateToCreateAccount={handleNavigateToCreateAccount}
-            handleNavigateToForgotPassword={handleNavigateToForgotPassword}
-            handleLoginSheetDismiss={handleLoginSheetDismiss}
-          />
-        }
-      />
-      <LoadingModal visible={loading} />
     </View>
   );
 };

@@ -15,6 +15,7 @@ const API_ENDPOINTS = {
   CREATE_ACCOUNT: '/verify-otp',
   SEND_OTP_FORGOT_PASSWORD: '/forget-password',
   CHANGE_PASSWORD: '/verify-otp-and-reset-password',
+  LOGIN: '/login-with-phone',
 };
 
 export default API_ENDPOINTS;

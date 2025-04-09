@@ -20,6 +20,7 @@ import CreateAccountScreen from './CreateAccount';
 import ForgotPasswordScreen from './ForgotPassword';
 import ShopLocation from './ShopLocation';
 import SeeMoreScreen from './SeeMore';
+import LoginScreen from './Login';
 
 export {
   NotificationScreen,
@@ -44,4 +45,5 @@ export {
   ForgotPasswordScreen,
   ShopLocation,
   SeeMoreScreen,
+  LoginScreen,
 };

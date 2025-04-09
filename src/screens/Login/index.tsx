@@ -1,47 +1,38 @@
-import {Alert, Text, View} from 'react-native';
-import styles from './style';
+import {Text, View} from 'react-native';
 import {useTranslation} from 'react-i18next';
-import {useSinInWIthGmail, useTheme} from '../../../../hooks';
-import IconButton from '../../../../components/IconButton';
-import {Icons} from '../../../../constants';
-import {FlatButton, FlexibleInput} from '../../../../components';
-import FlexibleTouchable from '../../../../components/FlexibleTouchable';
-import {LoginModalProps} from '../../../../types';
 import React from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
-
-const LoginModal: React.FC<LoginModalProps> = ({
-  handleNavigateToCreateAccount,
-  handleNavigateToForgotPassword,
-  handleLoginSheetDismiss,
-  handleLoginWithGoogle,
-}) => {
-  const {t} = useTranslation();
+import {useLogin, useProfile, useTheme} from '../../hooks';
+import IconButton from '../../components/IconButton';
+import {Icons} from '../../constants';
+import {FlatButton, FlexibleInput, LoadingModal} from '../../components';
+import FlexibleTouchable from '../../components/FlexibleTouchable';
+import styles from './style';
+const LoginScreen: React.FC = () => {
   const {colors} = useTheme();
+  const {t} = useTranslation();
+
+  const {handleNavigateToCreateAccount, handleNavigateToForgotPassword} =
+    useProfile();
+
   const {
+    isLoading,
     phoneNumber,
     setPhoneNumber,
     errorPhoneNumber,
     password,
     setPassword,
     errorPassword,
-    loginWithPhoneNumber,
     passwordVisible,
     togglePasswordVisibility,
-  } = useSinInWIthGmail();
+    login,
+  } = useLogin();
+
   return (
     <>
-      <View style={styles.header}>
-        <Text style={[styles.headerLabel, {color: colors.text}]}>
-          {t('login')}
-        </Text>
-        <IconButton
-          onPress={handleLoginSheetDismiss}
-          icon={<Icons.CLOSEMODAL color={colors.grey} width={25} height={25} />}
-        />
-      </View>
-      <View style={[styles.separator, {backgroundColor: colors.grey}]} />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={[styles.container, {backgroundColor: colors.primary}]}>
         <View style={styles.inputContainer}>
           <FlexibleInput
             prefixIcon={<Icons.PROFILE color={colors.grey} />}
@@ -80,7 +71,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
             ]}
           />
           <FlexibleTouchable
-            onPress={loginWithPhoneNumber}
+            onPress={login}
             label={t('login')}
             labelStyle={[styles.buttonStyle, {color: colors.textReversed}]}
             containerStyle={{backgroundColor: colors.secondaryReversed}}
@@ -98,7 +89,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
           </View>
           <View style={styles.socialContainer}>
             <IconButton
-              onPress={handleLoginWithGoogle}
+              onPress={() => {}}
               icon={<Icons.GOOGLE />}
               style={styles.socialButton}
             />
@@ -110,9 +101,10 @@ const LoginModal: React.FC<LoginModalProps> = ({
             containerStyle={styles.forgotPasswordContainer}
           />
         </View>
+        <LoadingModal visible={isLoading} />
       </ScrollView>
     </>
   );
 };
 
-export default LoginModal;
+export default LoginScreen;

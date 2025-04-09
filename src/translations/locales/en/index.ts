@@ -174,4 +174,8 @@ export const translateEN = {
   userNotFound: 'No account found with this phone number.',
   passwordChangeFailed: 'Failed to change password. Please try again.',
   passwordChanged: 'Password changed successfully.',
+  passwordmustbeatleast8characters: 'Password must be at least 8 characters',
+  loginSuccess: 'You have successfully logged in to your account.',
+  loginFailed:
+    'Login attempt failed. Please check your credentials and try again.',
 };

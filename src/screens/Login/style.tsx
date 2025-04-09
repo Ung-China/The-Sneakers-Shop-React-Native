@@ -1,17 +1,10 @@
 import {StyleSheet} from 'react-native';
-import {
-  Fonts,
-  FontSizes,
-  Gap,
-  Padding,
-  Radius,
-  Spacing,
-} from '../../../../constants';
-import {colors} from '../../../../constants/colors/colorTypes';
+import {Fonts, FontSizes, Gap, Padding, Radius, Spacing} from '../../constants';
+import {colors} from '../../constants/colors/colorTypes';
 
 export default StyleSheet.create({
   container: {
-    paddingBottom: Padding.BOTTOM,
+    flex: 1,
   },
   header: {
     flexDirection: 'row',
@@ -30,6 +23,7 @@ export default StyleSheet.create({
   inputContainer: {
     padding: Padding.DEFAULT,
     gap: Gap.DEFAULT,
+    flex: 1,
   },
   textInputStyle: {
     paddingHorizontal: Padding.DEFAULT,

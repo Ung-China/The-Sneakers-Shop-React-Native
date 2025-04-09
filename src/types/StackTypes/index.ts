@@ -31,4 +31,5 @@ export type StackParamList = {
   ForgotPassword: undefined;
   ShopLocation: undefined;
   SeeMoreScreen: SeeMoreProps;
+  LoginScreen: undefined;
 };
