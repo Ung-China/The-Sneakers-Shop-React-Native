@@ -1,4 +1,4 @@
-import {Alert, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import ProfileImage from '../ProfileImage';
 import styles from './style';
 import Touchable from '../Touchable';
@@ -13,19 +13,24 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({onPress}) => {
   const {t} = useTranslation();
 
   return (
-    <Touchable onPress={onPress}>
+    <Touchable onPress={onPress} disabled={!isLoggedIn}>
       <View style={styles.container}>
         <View style={styles.profileInfoContainer}>
-          <ProfileImage
-            imageContainer={styles.imageContainer}
-            imageStyle={styles.imageStyle}
-            loadingImageStyle={styles.loadingImageStyle}
-            iconSize={70}
-            image={user?.image}
-          />
+          {isLoggedIn ? (
+            <ProfileImage
+              imageContainer={styles.imageContainer}
+              imageStyle={styles.imageStyle}
+              loadingImageStyle={styles.loadingImageStyle}
+              iconSize={70}
+              image={user?.image}
+            />
+          ) : (
+            <Icons.GUEST width={80} height={80} />
+          )}
+
           <View style={styles.nameContainer}>
             <Text style={[styles.nameText, {color: colors.text}]}>
-              {t('greeting')},{' '}
+              {t('greeting')}{' '}
               {isLoggedIn && user?.name ? user.name : t('guest')}!
             </Text>
             <Text style={[styles.greetingText, {color: colors.text}]}>
@@ -33,11 +38,16 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({onPress}) => {
             </Text>
           </View>
         </View>
-        <Touchable
-          onPress={onPress}
-          style={[styles.buttonContainer, {backgroundColor: colors.secondary}]}>
-          <Icons.EDIT color={colors.icon} />
-        </Touchable>
+        {isLoggedIn && (
+          <Touchable
+            onPress={onPress}
+            style={[
+              styles.buttonContainer,
+              {backgroundColor: colors.secondary},
+            ]}>
+            <Icons.EDIT color={colors.icon} />
+          </Touchable>
+        )}
       </View>
     </Touchable>
   );

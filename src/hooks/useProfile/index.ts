@@ -1,5 +1,5 @@
 import {ProfileMenu} from '../../models';
-import {Icons} from '../../constants';
+import {Fonts, Icons} from '../../constants';
 import {useTranslation} from 'react-i18next';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -8,13 +8,22 @@ import {useCallback, useRef, useState} from 'react';
 import {Alert} from 'react-native';
 import useTheme from '../useTheme';
 import useUser from '../useUser';
+import {useDispatch} from 'react-redux';
+import {AppDispatch} from '../../store';
+import {logoutUserSuccess} from '../../store/actions';
+import Snackbar from 'react-native-snackbar';
+import {colors} from '../../constants/colors/colorTypes';
+
 const useProfile = () => {
   const {t} = useTranslation();
   const {theme, setColorTheme} = useTheme();
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
 
   const [isDarkMode, setIsDarkMode] = useState(theme === 'dark');
+  const [logoutVisible, setLogoutVisible] = useState(false);
+
   const {isLoggedIn} = useUser();
+  const dispatch = useDispatch<AppDispatch>();
 
   const menuItems = [
     new ProfileMenu(9, 'Cart', Icons.CART, t('cart'), Icons.ARROWRIGHT, false),
@@ -67,16 +76,29 @@ const useProfile = () => {
       Icons.ARROWRIGHT,
       false,
     ),
-    new ProfileMenu(7, 'Login', undefined, t('login'), undefined, false),
+    isLoggedIn
+      ? new ProfileMenu(7, 'Logout', undefined, t('logout'), undefined, false)
+      : new ProfileMenu(7, 'Login', undefined, t('login'), undefined, false),
     new ProfileMenu(
       8,
-      'DeleteAccountModal',
+      'Delete',
       undefined,
       t('deleteMyAccount'),
       undefined,
       true,
     ),
   ];
+
+  const logout = useCallback(() => {
+    dispatch(logoutUserSuccess());
+    Snackbar.show({
+      text: t('logoutSuccess'),
+      textColor: 'white',
+      duration: Snackbar.LENGTH_SHORT,
+      backgroundColor: colors.success,
+      fontFamily: Fonts.REGULAR,
+    });
+  }, [dispatch]);
 
   const toggleTheme = (value: boolean) => {
     setIsDarkMode(value);
@@ -107,7 +129,9 @@ const useProfile = () => {
     (screenName?: string) => {
       if (screenName === 'Login') {
         handleNavigateToLogin();
-      } else if (screenName === 'DeleteAccountModal') {
+      } else if (screenName === 'Logout') {
+        setLogoutVisible(true);
+      } else if (screenName === 'Delete') {
         Alert.alert('Delete Account');
       } else if (screenName === 'Appearance') {
         toggleTheme(!isDarkMode);
@@ -127,6 +151,9 @@ const useProfile = () => {
     handleLoginSheetChanges,
     handleNavigateToCreateAccount,
     handleNavigateToForgotPassword,
+    logoutVisible,
+    setLogoutVisible,
+    logout,
   };
 };
 

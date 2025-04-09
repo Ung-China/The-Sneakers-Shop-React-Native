@@ -25,10 +25,14 @@ const CustomAlert: React.FC<CustomAlertProps> = ({
       <View style={styles.modalOverlay}>
         <View style={[styles.modalContent, {backgroundColor: colors.primary}]}>
           <View style={styles.header}>
-            <Text style={[styles.title, {color: colors.text}]}>{title}</Text>
-            <Text style={[styles.description, {color: colors.text}]}>
-              {description}
-            </Text>
+            {title && (
+              <Text style={[styles.title, {color: colors.text}]}>{title}</Text>
+            )}
+            {description && (
+              <Text style={[styles.description, {color: colors.text}]}>
+                {description}
+              </Text>
+            )}
           </View>
 
           <View

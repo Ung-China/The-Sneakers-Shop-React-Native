@@ -178,4 +178,7 @@ export const translateEN = {
   loginSuccess: 'You have successfully logged in to your account.',
   loginFailed:
     'Login attempt failed. Please check your credentials and try again.',
+  logout: 'Logout',
+  logoutDescription: 'Are you sure you want to log out?',
+  logoutSuccess: 'You have successfully logged out.',
 };

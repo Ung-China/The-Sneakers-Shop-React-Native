@@ -10,7 +10,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 const EditProfileScreen: React.FC = () => {
   const {t} = useTranslation();
   const {colors} = useTheme();
-  const {user} = useUser();
+  const {user, isLoggedIn} = useUser();
 
   const {
     fullName,
@@ -53,13 +53,17 @@ const EditProfileScreen: React.FC = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.editProfileContainer}>
           <Touchable onPress={openImagePicker}>
-            <ProfileImage
-              imageContainer={styles.imageContainer}
-              imageStyle={styles.imageStyle}
-              loadingImageStyle={styles.loadingImageStyle}
-              iconSize={70}
-              image={user?.image}
-            />
+            {isLoggedIn ? (
+              <ProfileImage
+                imageContainer={styles.imageContainer}
+                imageStyle={styles.imageStyle}
+                loadingImageStyle={styles.loadingImageStyle}
+                iconSize={70}
+                image={user?.image}
+              />
+            ) : (
+              <Icons.GUEST width={70} height={70} />
+            )}
           </Touchable>
           <IconButton
             onPress={openImagePicker}

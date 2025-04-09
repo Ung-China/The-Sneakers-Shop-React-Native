@@ -55,6 +55,7 @@ import Time from '../../assets/icons/time.svg';
 import AppleMap from '../../assets/icons/appleMap.svg';
 import GoogleMap from '../../assets/icons/googleMap.svg';
 import EmptyBox from '../../assets/icons/emptyBox.svg';
+import Guest from '../../assets/icons/guest.svg';
 
 const Icons = {
   HOME: Home,
@@ -114,6 +115,7 @@ const Icons = {
   APPLEMAP: AppleMap,
   GOOGLEMAP: GoogleMap,
   EMPTYBOX: EmptyBox,
+  GUEST: Guest,
 };
 
 export default Icons;
