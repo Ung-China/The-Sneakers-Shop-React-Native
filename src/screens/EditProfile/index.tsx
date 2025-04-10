@@ -2,10 +2,15 @@ import {useTranslation} from 'react-i18next';
 import {ScrollView, Text, View} from 'react-native';
 import {useEditProfile, useTheme, useUser} from '../../hooks';
 import styles from './style';
-import {FlexibleInput, Footer, ProfileImage, Touchable} from '../../components';
+import {
+  FlexibleInput,
+  Footer,
+  LoadingModal,
+  ProfileImage,
+  Touchable,
+} from '../../components';
 import IconButton from '../../components/IconButton';
 import {Icons} from '../../constants';
-import ImagePicker from 'react-native-image-crop-picker';
 
 const EditProfileScreen: React.FC = () => {
   const {t} = useTranslation();
@@ -13,6 +18,7 @@ const EditProfileScreen: React.FC = () => {
   const {user} = useUser();
 
   const {
+    isLoading,
     fullName,
     phoneNumber,
     email,
@@ -30,6 +36,7 @@ const EditProfileScreen: React.FC = () => {
     setNewPassword,
     updateProfile,
     openImagePicker,
+    profileImage,
   } = useEditProfile();
 
   return (
@@ -42,7 +49,7 @@ const EditProfileScreen: React.FC = () => {
               imageStyle={styles.imageStyle}
               loadingImageStyle={styles.loadingImageStyle}
               iconSize={70}
-              image={user?.image}
+              image={profileImage?.path ? profileImage.path : user?.image}
             />
           </Touchable>
           <IconButton
@@ -133,6 +140,7 @@ const EditProfileScreen: React.FC = () => {
           </Text>
         </Touchable>
       </Footer>
+      <LoadingModal visible={isLoading} />
     </View>
   );
 };

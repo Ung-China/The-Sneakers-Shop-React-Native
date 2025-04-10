@@ -181,4 +181,6 @@ export const translateEN = {
   logout: 'Logout',
   logoutDescription: 'Are you sure you want to log out?',
   logoutSuccess: 'You have successfully logged out.',
+  accountUpdated: 'Profile updated successfully',
+  accountUpdateFailed: 'Update failed: Incorrect old password',
 };

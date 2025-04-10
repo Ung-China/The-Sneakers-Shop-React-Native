@@ -23,8 +23,9 @@ const apiRequest = async ({
 
     if (['post', 'put', 'patch', 'delete'].includes(method)) {
       if (data instanceof FormData) {
+        config.data = data;
         config.headers = {
-          ...config.headers,
+          ...headers,
           'Content-Type': 'multipart/form-data',
         };
       } else {

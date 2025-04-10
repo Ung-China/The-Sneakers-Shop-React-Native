@@ -7,10 +7,15 @@ import {API_ENDPOINTS, POST} from '../../api';
 import Snackbar from 'react-native-snackbar';
 import {colors} from '../../constants/colors/colorTypes';
 import {Fonts} from '../../constants';
+import {User} from '../../models';
+import {useDispatch} from 'react-redux';
+import {AppDispatch} from '../../store';
+import {loginUserSuccess} from '../../store/actions';
 
 const useEditProfile = () => {
   const {t} = useTranslation();
   const {user, isLoggedIn} = useUser();
+  const dispatch = useDispatch<AppDispatch>();
 
   const [isLoading, setIsLoading] = useState(false);
   const [fullName, setFullName] = useState<string>('');
@@ -101,19 +106,11 @@ const useEditProfile = () => {
           type: profileImage.mime,
         });
       }
-
       formData.append('name', fullName);
       formData.append('email', email);
       formData.append('phone', numberWithCountryCode);
       formData.append('old_password', oldPassword);
-
       formData.append('new_password', newPassword);
-
-      console.log('CHECK FORM DATA', formData);
-
-      console.log('Form Data Name:', fullName);
-      console.log('Form Data Email:', email);
-      console.log('Form Data Phone:', numberWithCountryCode);
 
       const response = await POST(
         API_ENDPOINTS.UPDATE_USER_INFO,
@@ -121,11 +118,19 @@ const useEditProfile = () => {
         {},
         {
           Authorization: `Bearer ${user?.token}`,
-          'Content-Type': 'multipart/form-data',
         },
       );
 
-      console.log('[DEBUG] RESPONSE UPDATE USER PROFILE', response);
+      const fetchedUser = new User(
+        response.id,
+        response.name,
+        response.email,
+        response.phone,
+        response.image_url,
+        response.token ?? user?.token,
+      );
+
+      dispatch(loginUserSuccess(fetchedUser));
 
       Snackbar.show({
         text: t('accountUpdated'),
@@ -149,6 +154,7 @@ const useEditProfile = () => {
   };
 
   return {
+    isLoading,
     fullName,
     phoneNumber,
     email,
@@ -168,6 +174,7 @@ const useEditProfile = () => {
     validateFields,
     updateProfile,
     openImagePicker,
+    profileImage,
   };
 };
 

@@ -12,6 +12,11 @@ import {loginUserSuccess} from '../../store/actions';
 import {useNavigation} from '@react-navigation/native';
 import {BottomTabParamList} from '../../types';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
 
 const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -105,6 +110,49 @@ const useLogin = () => {
     }
   };
 
+  const loginWithGoogle = async () => {
+    GoogleSignin.configure();
+    try {
+      setIsLoading(true);
+      await GoogleSignin.hasPlayServices();
+      const response = await GoogleSignin.signIn();
+
+      const {idToken} = response.data;
+
+      if (idToken) {
+        const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+        const firebaseUserCredential = await auth().signInWithCredential(
+          googleCredential,
+        );
+
+        const user = firebaseUserCredential.user;
+
+        console.log('[DEBUG] USER FROM GOOGLE SIGN IN', user);
+      } else {
+        console.log('ID Token is missing');
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        switch (error.message) {
+          case statusCodes.IN_PROGRESS:
+            console.log('Sign-in in progress');
+            break;
+          case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
+            console.log('Play services are not available');
+            break;
+          default:
+            console.log('An error occurred: ', error.message);
+            break;
+        }
+      } else {
+        console.log('An unknown error occurred');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return {
     isLoading,
     phoneNumber,
@@ -116,6 +164,7 @@ const useLogin = () => {
     passwordVisible,
     togglePasswordVisibility,
     login,
+    loginWithGoogle,
   };
 };
 

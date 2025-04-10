@@ -78,9 +78,6 @@ const useSinInWIthGmail = () => {
         //   user.photoURL || '',
 
         // );
-
-        // const response = await singIn(user);
-        dispatch(loginUserSuccess(response));
       } else {
         console.log('ID Token is missing');
       }

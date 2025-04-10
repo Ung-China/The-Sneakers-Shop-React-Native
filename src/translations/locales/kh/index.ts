@@ -183,4 +183,6 @@ export const translateKH = {
   logout: 'ចាកចេញ',
   logoutDescription: 'តើអ្នកពិតជាចង់ចាកចេញមែនទេ?',
   logoutSuccess: 'អ្នកបានចាកចេញដោយជោគជ័យ។',
+  accountUpdated: 'កែប្រែព័ត៌មានគណនីដោយជោគជ័យ',
+  accountUpdateFailed: 'បរាជ័យក្នុងការកែប្រែ៖ ពាក្យសម្ងាត់ចាស់មិនត្រឹមត្រូវទេ',
 };

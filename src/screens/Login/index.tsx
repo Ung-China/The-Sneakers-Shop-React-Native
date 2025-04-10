@@ -26,6 +26,7 @@ const LoginScreen: React.FC = () => {
     passwordVisible,
     togglePasswordVisibility,
     login,
+    loginWithGoogle,
   } = useLogin();
 
   return (
@@ -89,7 +90,7 @@ const LoginScreen: React.FC = () => {
           </View>
           <View style={styles.socialContainer}>
             <IconButton
-              onPress={() => {}}
+              onPress={loginWithGoogle}
               icon={<Icons.GOOGLE />}
               style={styles.socialButton}
             />
