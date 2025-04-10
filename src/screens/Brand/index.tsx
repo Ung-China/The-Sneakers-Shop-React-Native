@@ -1,4 +1,4 @@
-import {Alert, FlatList, RefreshControl, Text} from 'react-native';
+import {Alert, FlatList, RefreshControl} from 'react-native';
 import styles from './style';
 import {useBrand, useNotification, useTheme} from '../../hooks';
 import {

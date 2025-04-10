@@ -10,7 +10,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 const EditProfileScreen: React.FC = () => {
   const {t} = useTranslation();
   const {colors} = useTheme();
-  const {user, isLoggedIn} = useUser();
+  const {user} = useUser();
 
   const {
     fullName,
@@ -29,41 +29,21 @@ const EditProfileScreen: React.FC = () => {
     setOldPassword,
     setNewPassword,
     updateProfile,
-  } = useEditProfile({
-    name: user?.name,
-    phoneNumber: user?.phoneNumber,
-    email: user?.email,
-  });
-
-  const openImagePicker = async () => {
-    try {
-      const image = await ImagePicker.openPicker({
-        width: 500,
-        height: 500,
-        cropping: true,
-      });
-      console.log('CHECK IMAGE', image.path);
-    } catch (error) {
-      console.log('[DEBUG] IMAGE_INPUT', error);
-    }
-  };
+    openImagePicker,
+  } = useEditProfile();
 
   return (
     <View style={[styles.container, {backgroundColor: colors.primary}]}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.editProfileContainer}>
           <Touchable onPress={openImagePicker}>
-            {isLoggedIn ? (
-              <ProfileImage
-                imageContainer={styles.imageContainer}
-                imageStyle={styles.imageStyle}
-                loadingImageStyle={styles.loadingImageStyle}
-                iconSize={70}
-                image={user?.image}
-              />
-            ) : (
-              <Icons.GUEST width={70} height={70} />
-            )}
+            <ProfileImage
+              imageContainer={styles.imageContainer}
+              imageStyle={styles.imageStyle}
+              loadingImageStyle={styles.loadingImageStyle}
+              iconSize={70}
+              image={user?.image}
+            />
           </Touchable>
           <IconButton
             onPress={openImagePicker}
@@ -71,7 +51,6 @@ const EditProfileScreen: React.FC = () => {
             style={styles.editIconContaner}
           />
         </View>
-
         <View style={styles.inputContainer}>
           <FlexibleInput
             label={t('fullName')}
@@ -111,7 +90,6 @@ const EditProfileScreen: React.FC = () => {
           />
           <FlexibleInput
             label={t('oldPassword')}
-            // placeholder="ingchina2004@gmail.com"
             editable={true}
             value={oldPassword}
             onChangeText={setOldPassword}
@@ -123,7 +101,6 @@ const EditProfileScreen: React.FC = () => {
           />
           <FlexibleInput
             label={t('newPassword')}
-            // placeholder="ingchina2004@gmail.com"
             editable={true}
             value={newPassword}
             onChangeText={setNewPassword}

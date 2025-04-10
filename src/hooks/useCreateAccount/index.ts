@@ -103,11 +103,17 @@ const useCreateAccount = () => {
     if (password === '') {
       valid = false;
       setErrorPassword(t('Passwordisrequired'));
+    } else if (password.length < 8) {
+      valid = false;
+      setErrorPassword(t('passwordmustbeatleast8characters'));
     }
 
     if (confirmPassword === '') {
       valid = false;
       setErrorConfirmPassword(t('Confirmpasswordisrequired'));
+    } else if (confirmPassword.length < 8) {
+      valid = false;
+      setErrorPassword(t('passwordmustbeatleast8characters'));
     }
 
     return valid;

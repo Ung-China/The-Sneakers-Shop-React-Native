@@ -175,11 +175,6 @@ const useForgotPassword = () => {
       const numberWithCountryCode =
         Validator.numberWithCountryCode(phoneNumber);
 
-      console.log('CHECK PHONE', numberWithCountryCode);
-      console.log('CHECK OTP', OTP);
-      console.log('CEHCK PASSWORD', password);
-      console.log('CHECK CONFIRM PASSWORD', confirmPassword);
-
       const response = await POST(API_ENDPOINTS.CHANGE_PASSWORD, {
         phone: numberWithCountryCode,
         otp: OTP,

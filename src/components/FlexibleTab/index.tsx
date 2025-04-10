@@ -1,11 +1,10 @@
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import styles from './style';
 import ItemSeparatorWidth from '../ItemSeparatorWidth';
 import {FlexibleTabItemProps, FlexibleTabProps} from '../../types';
 import {useFlexibleTab} from './hooks';
 import FlexibleTabItem from '../FlexibleTabItem';
 import React from 'react';
-import BrandItemSkeleton from '../BrandItemSkeleton';
 import {dummyBrands} from '../../models/Brand';
 import Skeleton from '../Skeleton';
 import {Radius} from '../../constants';

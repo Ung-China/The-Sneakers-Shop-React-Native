@@ -2,7 +2,6 @@ import axios from 'axios';
 import {ApiRequestProps} from '../../types';
 
 const apiInstance = axios.create({
-  // baseURL: 'https://the-sneaker.laravel.cloud/api',
   baseURL: 'http://127.0.0.1:8000/api',
   timeout: 5000,
 });
@@ -12,16 +11,25 @@ const apiRequest = async ({
   endpoint,
   data = {},
   params = {},
-}: ApiRequestProps) => {
+  headers = {},
+}: ApiRequestProps & {headers?: any}) => {
   try {
     const config: any = {
       method,
       url: endpoint,
       params,
+      headers,
     };
 
     if (['post', 'put', 'patch', 'delete'].includes(method)) {
-      config.data = data;
+      if (data instanceof FormData) {
+        config.headers = {
+          ...config.headers,
+          'Content-Type': 'multipart/form-data',
+        };
+      } else {
+        config.data = data;
+      }
     }
 
     const response = await apiInstance(config);
@@ -32,11 +40,15 @@ const apiRequest = async ({
   }
 };
 
-const POST = (endpoint: string, data: object, params = {}) =>
-  apiRequest({method: 'post', endpoint, data, params});
+const POST = (
+  endpoint: string,
+  data: object | FormData,
+  params = {},
+  headers = {},
+) => apiRequest({method: 'post', endpoint, data, params, headers});
 
-const GET = (endpoint: string, params = {}) =>
-  apiRequest({method: 'get', endpoint, params});
+const GET = (endpoint: string, params = {}, headers = {}) =>
+  apiRequest({method: 'get', endpoint, params, headers});
 
 const UPDATE = (endpoint: string, data: object, params = {}) =>
   apiRequest({method: 'put', endpoint, data, params});

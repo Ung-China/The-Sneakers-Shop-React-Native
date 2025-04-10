@@ -16,6 +16,8 @@ const API_ENDPOINTS = {
   SEND_OTP_FORGOT_PASSWORD: '/forget-password',
   CHANGE_PASSWORD: '/verify-otp-and-reset-password',
   LOGIN: '/login-with-phone',
+  GET_USER_INFO: '/customer-profile',
+  UPDATE_USER_INFO: '/update-profile',
 };
 
 export default API_ENDPOINTS;
