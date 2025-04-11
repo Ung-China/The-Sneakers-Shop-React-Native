@@ -54,24 +54,8 @@ const useEditProfile = () => {
       setErrorFullName(t('fullNameisrequired'));
     }
 
-    if (phoneNumber === '') {
-      valid = false;
-      setErrorPhoneNumber(t('phoneisrequired'));
-    } else if (Validator.validatePhoneNumber(phoneNumber)) {
-      valid = false;
-      setErrorPhoneNumber(t('pleaseenteravalidphonenumber'));
-    }
-
-    if (email === '') {
-      valid = false;
-      setErrorEmail(t('emailisrequired'));
-    } else if (!Validator.validateEmail(email)) {
-      valid = false;
-      setErrorEmail(t('pleaseenteravalidemailaddress'));
-    }
-
     return valid;
-  }, [fullName, phoneNumber, email]);
+  }, [fullName]);
 
   const openImagePicker = async () => {
     try {

@@ -115,9 +115,9 @@ const useLogin = () => {
     try {
       setIsLoading(true);
       await GoogleSignin.hasPlayServices();
-      const response = await GoogleSignin.signIn();
+      const googleUser = await GoogleSignin.signIn();
 
-      const {idToken} = response.data;
+      const {idToken} = googleUser.data;
 
       if (idToken) {
         const googleCredential = auth.GoogleAuthProvider.credential(idToken);
@@ -126,9 +126,33 @@ const useLogin = () => {
           googleCredential,
         );
 
-        const user = firebaseUserCredential.user;
+        const firebaseUser = firebaseUserCredential.user;
 
-        console.log('[DEBUG] USER FROM GOOGLE SIGN IN', user);
+        const response = await POST(API_ENDPOINTS.LOGIN_WITH_GMAIL, {
+          email: firebaseUser.email,
+          displayName: firebaseUser.displayName,
+          photoURL: firebaseUser.photoURL,
+          uid: firebaseUser.uid,
+        });
+
+        const user = new User(
+          response.customer.id,
+          response.customer.name,
+          response.customer.email,
+          response.customer.phone,
+          response.customer.image_url,
+          response.token,
+        );
+
+        dispatch(loginUserSuccess(user));
+        navigation.navigate('Profile');
+        Snackbar.show({
+          text: t('loginSuccess'),
+          textColor: 'white',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: colors.success,
+          fontFamily: Fonts.REGULAR,
+        });
       } else {
         console.log('ID Token is missing');
       }
