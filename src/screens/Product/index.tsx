@@ -1,12 +1,4 @@
-import {
-  Alert,
-  FlatList,
-  Platform,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import {Alert, FlatList, Platform, ScrollView, Text, View} from 'react-native';
 import styles from './style';
 import {useTranslation} from 'react-i18next';
 import {
@@ -19,7 +11,6 @@ import {
 } from '../../hooks';
 import {
   AnimatedDotLoader,
-  CustomSnackbar,
   FlexibleSwiper,
   Footer,
   ItemSeparatorHeight,
@@ -69,6 +60,11 @@ const ProductDetailScreen: React.FC = () => {
       promotions: notifications,
       brandId: brandId,
     });
+
+  console.log('CHECK HAS PROMOTION', hasProductPromotion);
+  console.log('CHECK FINAL PRICE', finalPrice);
+  console.log('CHECK DISCOUNT TYPE', discountType);
+  console.log('CHECK DISCOUNT VALUE', discountValue);
 
   const {products, isFetchingMoreProducts, fetchMoreProducts} =
     useRelatedProducts(brandId);
@@ -429,7 +425,7 @@ const ProductDetailScreen: React.FC = () => {
           </>
         )}
 
-        {productDetail && (
+        {/* {productDetail && (
           <>
             {isLoading ? (
               <>
@@ -481,7 +477,7 @@ const ProductDetailScreen: React.FC = () => {
               </>
             )}
           </>
-        )}
+        )} */}
       </ScrollView>
 
       {isLoading ? null : (

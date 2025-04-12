@@ -7,6 +7,8 @@ export default class CartItem {
   variantName: string;
   variantId: number | null;
   quantity: number;
+  discountType: string;
+  discount: string;
 
   constructor(
     id: number,
@@ -17,6 +19,8 @@ export default class CartItem {
     variantName: string,
     variantId: number | null,
     quantity: number,
+    discountType: string,
+    discount: string,
   ) {
     this.id = id;
     this.brandId = brandId;
@@ -26,6 +30,8 @@ export default class CartItem {
     this.variantName = variantName;
     this.variantId = variantId;
     this.quantity = quantity;
+    this.discountType = discountType;
+    this.discount = discount;
   }
 }
 
@@ -39,6 +45,8 @@ export const cartItems: CartItem[] = [
     'Matte Finish',
     1,
     2,
+    '',
+    '',
   ),
   new CartItem(
     2,
@@ -49,6 +57,8 @@ export const cartItems: CartItem[] = [
     'Glossy Finish',
     2,
     1,
+    '',
+    '',
   ),
   new CartItem(
     3,
@@ -59,6 +69,8 @@ export const cartItems: CartItem[] = [
     'Velvet Finish',
     3,
     3,
+    '',
+    '',
   ),
   new CartItem(
     4,
@@ -69,6 +81,8 @@ export const cartItems: CartItem[] = [
     'Creamy Finish',
     4,
     1,
+    '',
+    '',
   ),
   new CartItem(
     5,
@@ -79,6 +93,8 @@ export const cartItems: CartItem[] = [
     'Long-lasting',
     5,
     2,
+    '',
+    '',
   ),
   new CartItem(
     6,
@@ -89,5 +105,7 @@ export const cartItems: CartItem[] = [
     'Hydrating Finish',
     6,
     1,
+    '',
+    '',
   ),
 ];

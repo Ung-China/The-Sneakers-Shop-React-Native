@@ -9,12 +9,9 @@ import useOrderDetail from './useOrderDetail';
 import useProduct from './useProduct';
 import useEditProfile from './useEditProfile';
 import useDelivery from './useDelivery';
-import useSinInWIthGmail from './useSinInWIthGmail';
-import useSignInWithPhoneNumber from './useSignInWithPhoneNumber';
 import useShopLocation from './useShopLocation';
 import useForgotPassword from './useForgotPassword';
 import useOTP from './useOTP';
-import usePhoneNumberExistence from './usePhoneNumberExistence';
 import useCreateAccount from './useCreateAccount';
 import useBrand from './useBrand';
 import useNotification from './useNotification';
@@ -42,12 +39,9 @@ export {
   useProduct,
   useEditProfile,
   useDelivery,
-  useSinInWIthGmail,
-  useSignInWithPhoneNumber,
   useShopLocation,
   useForgotPassword,
   useOTP,
-  usePhoneNumberExistence,
   useCreateAccount,
   useShoesSlider,
   useBrand,

@@ -3,7 +3,7 @@ import {RefreshControl, ScrollView, Text, View} from 'react-native';
 import {useRoute, RouteProp} from '@react-navigation/native';
 import styles from './style';
 import {StackParamList} from '../../types';
-import {AnimatedDotLoader, FlexibleSwiper, Skeleton} from '../../components';
+import {FlexibleSwiper, Skeleton} from '../../components';
 import {useNotificationDetail, useTheme} from '../../hooks';
 import {Radius, Spacing} from '../../constants';
 
@@ -50,37 +50,37 @@ const NotificationDetailScreen: React.FC = () => {
                   height: 20,
                 }}
               />
-               <Skeleton
+              <Skeleton
                 containerStyle={{
                   borderRadius: Radius.SMALL,
                   height: 20,
                 }}
               />
-               <Skeleton
+              <Skeleton
                 containerStyle={{
                   borderRadius: Radius.SMALL,
                   height: 20,
                 }}
               />
-               <Skeleton
+              <Skeleton
                 containerStyle={{
                   borderRadius: Radius.SMALL,
                   height: 20,
                 }}
               />
-               <Skeleton
+              <Skeleton
                 containerStyle={{
                   borderRadius: Radius.SMALL,
                   height: 20,
                 }}
               />
-               <Skeleton
+              <Skeleton
                 containerStyle={{
                   borderRadius: Radius.SMALL,
                   height: 20,
                 }}
               />
-               <Skeleton
+              <Skeleton
                 containerStyle={{
                   borderRadius: Radius.SMALL,
                   height: 20,

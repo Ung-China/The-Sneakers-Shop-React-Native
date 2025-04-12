@@ -22,6 +22,7 @@ import {
   useShoesSlider,
   useSlider,
   useTheme,
+  useUser,
 } from '../../hooks';
 import {Icons, Padding, Radius, Spacing} from '../../constants';
 import {useTranslation} from 'react-i18next';
