@@ -44,8 +44,8 @@ const ProductItem: React.FC<ProductItemProps> = ({
         variantName: item.variants[0].product_size,
         variantId: 0,
         quantity: 1,
-        discountType: 'test',
-        discount: 'test',
+        discountType: discountType,
+        discount: discountValue,
       };
       addProductToCart(cartItem);
       Snackbar.show({

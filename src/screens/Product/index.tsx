@@ -21,7 +21,7 @@ import {
   VariantItem,
 } from '../../components';
 import IconButton from '../../components/IconButton';
-import {Icons, Padding, Radius, Spacing} from '../../constants';
+import {Fonts, Icons, Padding, Radius, Spacing} from '../../constants';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ProductItemProps, StackParamList, VariantProps} from '../../types';
@@ -31,6 +31,7 @@ import React from 'react';
 import {dummyProducts} from '../../models/Product';
 import {variants} from '../../models/Variant';
 import {ProductPromotionChecker} from '../../helpers';
+import Snackbar from 'react-native-snackbar';
 
 const ProductDetailScreen: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
@@ -61,11 +62,6 @@ const ProductDetailScreen: React.FC = () => {
       brandId: brandId,
     });
 
-  console.log('CHECK HAS PROMOTION', hasProductPromotion);
-  console.log('CHECK FINAL PRICE', finalPrice);
-  console.log('CHECK DISCOUNT TYPE', discountType);
-  console.log('CHECK DISCOUNT VALUE', discountValue);
-
   const {products, isFetchingMoreProducts, fetchMoreProducts} =
     useRelatedProducts(brandId);
 
@@ -92,16 +88,49 @@ const ProductDetailScreen: React.FC = () => {
         variantName: size,
         variantId: activeVariantId,
         quantity: 1,
+        discountType: discountType,
+        discount: discountValue,
       };
 
       addProductToCart(cartItem);
 
-      showSnackbar('success', t('addedToCartSuccess'));
+      Snackbar.show({
+        text: t('addedToCartSuccess'),
+        textColor: 'white',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: colors.success,
+        fontFamily: Fonts.REGULAR,
+      });
     }
   };
 
-  const goToCheckout = () => {
-    return Alert.alert('Go to checkout');
+  const handleBuyNow = () => {
+    if (productDetail) {
+      const cartItem = {
+        id: id,
+        brandId: brandId,
+        name: productDetail.name,
+        image: productDetail.image,
+        price: productDetail.price,
+        variantName: size,
+        variantId: activeVariantId,
+        quantity: 1,
+        discountType: discountType,
+        discount: discountValue,
+      };
+
+      addProductToCart(cartItem);
+
+      navigation.navigate('Delivery');
+
+      Snackbar.show({
+        text: t('addedToCartSuccess'),
+        textColor: 'white',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: colors.success,
+        fontFamily: Fonts.REGULAR,
+      });
+    }
   };
 
   const handlePressOnProduct = (id: number, brandId: number) => {
@@ -425,7 +454,7 @@ const ProductDetailScreen: React.FC = () => {
           </>
         )}
 
-        {/* {productDetail && (
+        {productDetail && (
           <>
             {isLoading ? (
               <>
@@ -477,7 +506,7 @@ const ProductDetailScreen: React.FC = () => {
               </>
             )}
           </>
-        )} */}
+        )}
       </ScrollView>
 
       {isLoading ? null : (
@@ -498,7 +527,7 @@ const ProductDetailScreen: React.FC = () => {
             </Text>
           </Touchable>
           <Touchable
-            onPress={() => {}}
+            onPress={handleBuyNow}
             style={[
               styles.buttonAddToCart,
               {backgroundColor: colors.primaryReversed},

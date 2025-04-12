@@ -7,8 +7,8 @@ export default class CartItem {
   variantName: string;
   variantId: number | null;
   quantity: number;
-  discountType: string;
-  discount: string;
+  discountType: string | null;
+  discount: number;
 
   constructor(
     id: number,
@@ -20,7 +20,7 @@ export default class CartItem {
     variantId: number | null,
     quantity: number,
     discountType: string,
-    discount: string,
+    discount: number,
   ) {
     this.id = id;
     this.brandId = brandId;
@@ -46,7 +46,7 @@ export const cartItems: CartItem[] = [
     1,
     2,
     '',
-    '',
+    1,
   ),
   new CartItem(
     2,
@@ -58,7 +58,7 @@ export const cartItems: CartItem[] = [
     2,
     1,
     '',
-    '',
+    1,
   ),
   new CartItem(
     3,
@@ -70,7 +70,7 @@ export const cartItems: CartItem[] = [
     3,
     3,
     '',
-    '',
+    1,
   ),
   new CartItem(
     4,
@@ -82,7 +82,7 @@ export const cartItems: CartItem[] = [
     4,
     1,
     '',
-    '',
+    1,
   ),
   new CartItem(
     5,
@@ -94,7 +94,7 @@ export const cartItems: CartItem[] = [
     5,
     2,
     '',
-    '',
+    1,
   ),
   new CartItem(
     6,
@@ -106,6 +106,6 @@ export const cartItems: CartItem[] = [
     6,
     1,
     '',
-    '',
+    1,
   ),
 ];
