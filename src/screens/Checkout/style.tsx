@@ -117,9 +117,31 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: Gap.SMALL,
+    zIndex: 1,
+  },
+  successContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Gap.SMALL,
   },
   uploadLabel: {
     fontFamily: Fonts.REGULAR,
+    fontSize: FontSizes.large,
+    textAlign: 'center',
+  },
+  reUpload: {
+    fontFamily: Fonts.REGULAR,
     fontSize: FontSizes.default,
+    textAlign: 'center',
+  },
+  payslip: {
+    width: Screen_Dimensions.WIDTH - 30,
+    height: 170,
+    position: 'absolute',
+    zIndex: -1,
+    borderRadius: Radius.DEFAULT,
+    marginVertical: Spacing.DEFAULT,
+    borderWidth: 1,
+    borderStyle: 'dashed',
   },
 });

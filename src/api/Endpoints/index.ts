@@ -19,6 +19,7 @@ const API_ENDPOINTS = {
   GET_USER_INFO: '/customer-profile',
   UPDATE_USER_INFO: '/update-profile',
   LOGIN_WITH_GMAIL: '/google-login',
+  CHECKOUT: '/orders',
 };
 
 export default API_ENDPOINTS;

@@ -11,6 +11,7 @@ import {ScrollView} from 'react-native';
 import styles from './style';
 import React from 'react';
 import {
+  AnimatedDotLoader,
   CartItem,
   FlexibleLabel,
   Footer,
@@ -22,7 +23,6 @@ import FlexibleTouchable from '../../components/FlexibleTouchable';
 import {CartItemProps, PaymentMethodProps, StackParamList} from '../../types';
 import {formatCurrency} from '../../helpers';
 import {Icons} from '../../constants';
-import ImageCropPicker from 'react-native-image-crop-picker';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {dummyPaymentMethods} from '../../models/PaymentMethod';
 
@@ -37,8 +37,16 @@ const CheckoutScreen: React.FC = () => {
   const {totalPrice, totalPriceWithDelivery, totalDiscount} =
     useCalculateTotalPrice(cartItems, notifications, deliveryCost);
 
-  const {activePaymentMethod, setPaymentMethod, setActivePaymentMethod} =
-    useCheckout();
+  const {
+    activePaymentMethod,
+    paymentMethod,
+    setPaymentMethod,
+    setActivePaymentMethod,
+    openImagePicker,
+    paySlipLoading,
+    hasSelectedPaySlip,
+    checkOut,
+  } = useCheckout({selectedOption, logistic, address});
 
   const cartItem = ({item}: {item: CartItemProps['item']}) => {
     return (
@@ -65,19 +73,6 @@ const CheckoutScreen: React.FC = () => {
         isActive={activePaymentMethod === item.id}
       />
     );
-  };
-
-  const openImagePicker = async () => {
-    try {
-      const image = await ImageCropPicker.openPicker({
-        width: 500,
-        height: 500,
-        cropping: true,
-      });
-      console.log('CHECK IMAGE', image.path);
-    } catch (error) {
-      console.log('[DEBUG] IMAGE_INPUT', error);
-    }
   };
 
   return (
@@ -190,7 +185,13 @@ const CheckoutScreen: React.FC = () => {
             </Text>
             <View style={styles.optionContainer}>
               <FlatList
-                data={dummyPaymentMethods}
+                data={
+                  selectedOption === 'pickup'
+                    ? dummyPaymentMethods.filter(
+                        item => item.value !== 'cash_on_delivery',
+                      )
+                    : dummyPaymentMethods
+                }
                 renderItem={optionItem}
                 showsVerticalScrollIndicator={false}
                 scrollEnabled={false}
@@ -199,30 +200,62 @@ const CheckoutScreen: React.FC = () => {
               />
             </View>
           </View>
-          <View style={styles.labelContainer}>
-            <Text style={[styles.mainLabel, {color: colors.text}]}>
-              {t('paySlip')}
-            </Text>
-            <Text style={[styles.subLabel, {color: colors.grey}]}>
-              {t('pleaseUploadYourPaymentPaySlip')}
-            </Text>
-            <Touchable
-              onPress={openImagePicker}
-              style={[
-                styles.uploadPayslip,
-                {
-                  backgroundColor: colors.secondary,
-                  borderColor: colors.grey,
-                },
-              ]}>
-              <View style={styles.iconContainer}>
-                <Icons.UPLOADIMAGE width={50} height={50} color={colors.grey} />
-                <Text style={[styles.uploadLabel, {color: colors.text}]}>
-                  {t('clickHereToUpload')}
+          {paymentMethod !== 'cash_on_delivery' &&
+            paymentMethod !== 'pay_at_store' && (
+              <View style={styles.labelContainer}>
+                <Text style={[styles.mainLabel, {color: colors.text}]}>
+                  {t('paySlip')}
                 </Text>
+                <Text style={[styles.subLabel, {color: colors.grey}]}>
+                  {t('pleaseUploadYourPaymentPaySlip')}
+                </Text>
+                <Touchable
+                  onPress={openImagePicker}
+                  style={[
+                    styles.uploadPayslip,
+                    {
+                      backgroundColor: colors.secondary,
+                      borderColor: colors.grey,
+                    },
+                  ]}>
+                  <View style={styles.iconContainer}>
+                    <View style={styles.iconContainer}>
+                      {paySlipLoading ? (
+                        <AnimatedDotLoader isLoading={true} />
+                      ) : !hasSelectedPaySlip ? (
+                        <>
+                          <Icons.UPLOADIMAGE
+                            width={50}
+                            height={50}
+                            color={colors.grey}
+                          />
+                          <Text
+                            style={[styles.uploadLabel, {color: colors.text}]}>
+                            {t('clickHereToUpload')}
+                          </Text>
+                        </>
+                      ) : (
+                        <>
+                          <View style={styles.successContainer}>
+                            <Icons.SUCCESSICON width={25} height={25} />
+                            <Text
+                              style={[
+                                styles.uploadLabel,
+                                {color: colors.text},
+                              ]}>
+                              {t('fileUploadedSuccessfully')}
+                            </Text>
+                          </View>
+                          <Text style={[styles.reUpload, {color: colors.text}]}>
+                            {t('tapToReuploadPayslip')}
+                          </Text>
+                        </>
+                      )}
+                    </View>
+                  </View>
+                </Touchable>
               </View>
-            </Touchable>
-          </View>
+            )}
         </View>
       </ScrollView>
 
@@ -238,7 +271,7 @@ const CheckoutScreen: React.FC = () => {
             {color: colors.textReversed, textAlign: 'center'})
           }
           containerStyle={{backgroundColor: colors.primaryReversed}}
-          onPress={() => {}}
+          onPress={checkOut}
         />
       </Footer>
     </>

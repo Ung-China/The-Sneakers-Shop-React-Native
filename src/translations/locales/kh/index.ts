@@ -185,4 +185,12 @@ export const translateKH = {
   logoutSuccess: 'អ្នកបានចាកចេញដោយជោគជ័យ។',
   accountUpdated: 'កែប្រែព័ត៌មានគណនីដោយជោគជ័យ',
   accountUpdateFailed: 'បរាជ័យក្នុងការកែប្រែ៖ ពាក្យសម្ងាត់ចាស់មិនត្រឹមត្រូវទេ',
+  cash_on_delivery_text: 'បង់ប្រាក់នៅពេលការបញ្ជាទិញរបស់អ្នកទៅដល់',
+  fileUploadedSuccessfully: 'ឯកសារត្រូវបានផ្ទុកឡើងជោគជ័យ',
+  tapToReuploadPayslip: 'ចុចដើម្បីផ្ទុកឡើងវិញសន្លឹកបង់ប្រាក់របស់អ្នក',
+  payslipRequired: 'ត្រូវការបង្កាន់ដៃបង់ប្រាក់ដើម្បីបន្ត។',
+  paymentMethodRequired: 'សូមជ្រើសរើសវិធីសាស្រ្តបង់ប្រាក់។',
+  pay_at_store_text: 'បង់ប្រាក់នៅហាងពេលអ្នកទៅយកទំនិញ',
+  cash_on_delivery_name: 'ទូទាត់ជាសាច់ប្រាក់ពេលទទួលទំនិញ',
+  pay_at_store_name: 'ទូទាត់នៅហាង',
 };

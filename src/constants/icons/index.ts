@@ -56,6 +56,8 @@ import AppleMap from '../../assets/icons/appleMap.svg';
 import GoogleMap from '../../assets/icons/googleMap.svg';
 import EmptyBox from '../../assets/icons/emptyBox.svg';
 import Guest from '../../assets/icons/guest.svg';
+import SuccessIcon from '../../assets/icons/successIcon.svg';
+import CashOnDelivery from '../../assets/icons/cashOnDelivery.svg';
 
 const Icons = {
   HOME: Home,
@@ -116,6 +118,8 @@ const Icons = {
   GOOGLEMAP: GoogleMap,
   EMPTYBOX: EmptyBox,
   GUEST: Guest,
+  SUCCESSICON: SuccessIcon,
+  CASHONDELIVERY: CashOnDelivery,
 };
 
 export default Icons;

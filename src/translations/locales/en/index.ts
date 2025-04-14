@@ -183,4 +183,12 @@ export const translateEN = {
   logoutSuccess: 'You have successfully logged out.',
   accountUpdated: 'Profile updated successfully',
   accountUpdateFailed: 'Update failed: Incorrect old password',
+  cash_on_delivery_text: 'Pay in cash when your order arrives',
+  fileUploadedSuccessfully: 'File uploaded successfully',
+  tapToReuploadPayslip: 'Tap to re-upload your payslip',
+  payslipRequired: 'Payment slip is required to proceed.',
+  paymentMethodRequired: 'Please select a payment method.',
+  pay_at_store_text: 'Pay directly at the store when picking up',
+  cash_on_delivery_name: 'Cash on Delivery',
+  pay_at_store_name: 'Pay at Store',
 };

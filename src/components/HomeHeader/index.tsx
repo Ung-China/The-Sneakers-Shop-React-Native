@@ -7,6 +7,7 @@ import {Icons} from '../../constants';
 import {HomeHeaderProps, StackParamList} from '../../types';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import Touchable from '../Touchable';
 
 const HomeHeader: React.FC<HomeHeaderProps> = ({
   item,
@@ -44,15 +45,17 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({
             <Icons.NOTIFICATION height={30} width={30} color={colors.icon} />
           }
         />
-        <IconButton
-          onPress={handlePressToCart}
-          icon={<Icons.CART height={30} width={30} color={colors.icon} />}
-        />
-        {cartItemsCount > 0 && (
-          <View style={styles.qunatityContainer}>
-            <Text style={styles.quantity}>{cartItemsCount}</Text>
-          </View>
-        )}
+        <Touchable onPress={handlePressToCart}>
+          <IconButton
+            onPress={handlePressToCart}
+            icon={<Icons.CART height={30} width={30} color={colors.icon} />}
+          />
+          {cartItemsCount > 0 && (
+            <View style={styles.qunatityContainer}>
+              <Text style={styles.quantity}>{cartItemsCount}</Text>
+            </View>
+          )}
+        </Touchable>
       </View>
     </View>
   );

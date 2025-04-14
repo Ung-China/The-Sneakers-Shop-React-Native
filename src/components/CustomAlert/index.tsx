@@ -23,7 +23,8 @@ const CustomAlert: React.FC<CustomAlertProps> = ({
   return (
     <Modal visible={isVisible} transparent={true} animationType={animationType}>
       <View style={styles.modalOverlay}>
-        <View style={[styles.modalContent, {backgroundColor: colors.primary}]}>
+        <View
+          style={[styles.modalContent, {backgroundColor: colors.secondary}]}>
           <View style={styles.header}>
             {title && (
               <Text style={[styles.title, {color: colors.text}]}>{title}</Text>
