@@ -46,7 +46,8 @@ const CheckoutScreen: React.FC = () => {
     paySlipLoading,
     hasSelectedPaySlip,
     checkOut,
-  } = useCheckout({selectedOption, logistic, address});
+    paymentOptions,
+  } = useCheckout({selectedOption, logistic, address, deliveryCost});
 
   const cartItem = ({item}: {item: CartItemProps['item']}) => {
     return (
@@ -185,13 +186,7 @@ const CheckoutScreen: React.FC = () => {
             </Text>
             <View style={styles.optionContainer}>
               <FlatList
-                data={
-                  selectedOption === 'pickup'
-                    ? dummyPaymentMethods.filter(
-                        item => item.value !== 'cash_on_delivery',
-                      )
-                    : dummyPaymentMethods
-                }
+                data={paymentOptions}
                 renderItem={optionItem}
                 showsVerticalScrollIndicator={false}
                 scrollEnabled={false}
