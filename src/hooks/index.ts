@@ -11,7 +11,6 @@ import useEditProfile from './useEditProfile';
 import useDelivery from './useDelivery';
 import useShopLocation from './useShopLocation';
 import useForgotPassword from './useForgotPassword';
-import useOTP from './useOTP';
 import useCreateAccount from './useCreateAccount';
 import useBrand from './useBrand';
 import useNotification from './useNotification';
@@ -41,7 +40,6 @@ export {
   useDelivery,
   useShopLocation,
   useForgotPassword,
-  useOTP,
   useCreateAccount,
   useShoesSlider,
   useBrand,

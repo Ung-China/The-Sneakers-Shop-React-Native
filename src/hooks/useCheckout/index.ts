@@ -93,78 +93,82 @@ const useCheckout = ({
   }, [paymentMethod, paySlip]);
 
   const checkOut = async () => {
-    // if (!validateCheckout()) {
-    //   return;
-    // }
-    // try {
-    //   setIsLoading(true);
-    //   const formData = new FormData();
-    //   formData.append('customer_id', user?.id);
-    //   formData.append('order_type', selectedOption);
-    //   formData.append('delivery_type', logistic);
-    //   formData.append('delivery_fee', deliveryCost);
-    //   formData.append('payment_method', paymentMethod);
-    //   if (paySlip) {
-    //     formData.append('pay_slip', {
-    //       uri: paySlip.path,
-    //       name: 'payslip.jpg',
-    //       type: paySlip.mime,
-    //     });
-    //   }
-    //   if (
-    //     selectedOption === 'delivery' &&
-    //     address &&
-    //     typeof address === 'object'
-    //   ) {
-    //     Object.entries(address).forEach(([key, value]) => {
-    //       console.log(`address[${key}]:`, value);
-    //       formData.append(`address[${key}]`, String(value));
-    //     });
-    //   }
-    //   cartItems.forEach((item, index) => {
-    //     formData.append(`order_details[${index}][product_id]`, String(item.id));
-    //     formData.append(
-    //       `order_details[${index}][brand_id]`,
-    //       String(item.brandId),
-    //     );
-    //     formData.append(
-    //       `order_details[${index}][product_qty]`,
-    //       String(item.quantity),
-    //     );
-    //     formData.append(
-    //       `order_details[${index}][product_price]`,
-    //       String(item.price),
-    //     );
-    //     formData.append(
-    //       `order_details[${index}][product_size]`,
-    //       item.variantName,
-    //     );
-    //     formData.append(
-    //       `order_details[${index}][discount]`,
-    //       String(item.discount),
-    //     );
-    //     if (item.discountType) {
-    //       formData.append(
-    //         `order_details[${index}][discount_type]`,
-    //         item.discountType,
-    //       );
-    //     }
-    //   });
-    //   const response = await POST(
-    //     API_ENDPOINTS.CHECKOUT,
-    //     formData,
-    //     {},
-    //     {
-    //       Authorization: `Bearer ${user?.token}`,
-    //     },
-    //   );
-    //   console.log('CHECK RESPONSE', response);
-    // } catch (error) {
-    //   console.log('[DEBUG] ERROR WHILE CHECKOUT', error);
-    // } finally {
-    // }
+    if (!validateCheckout()) {
+      return;
+    }
 
-    navigation.navigate('OrderSuccessScreen');
+    try {
+      setIsLoading(true);
+      const formData = new FormData();
+
+      formData.append('customer_id', user?.id);
+      formData.append('order_type', selectedOption);
+      formData.append('delivery_type', logistic);
+      formData.append('delivery_fee', deliveryCost);
+      formData.append('payment_method', paymentMethod);
+
+      if (paySlip) {
+        formData.append('pay_slip', {
+          uri: paySlip.path,
+          name: 'payslip.jpg',
+          type: paySlip.mime,
+        });
+      }
+
+      formData.append('address', address);
+
+      cartItems.forEach((item, index) => {
+        formData.append(`order_details[${index}][product_id]`, String(item.id));
+        formData.append(
+          `order_details[${index}][brand_id]`,
+          String(item.brandId),
+        );
+        formData.append(
+          `order_details[${index}][product_qty]`,
+          String(item.quantity),
+        );
+        formData.append(
+          `order_details[${index}][product_price]`,
+          String(item.price),
+        );
+        formData.append(
+          `order_details[${index}][product_size]`,
+          item.variantName,
+        );
+        formData.append(
+          `order_details[${index}][discount]`,
+          String(item.discount),
+        );
+        if (item.discountType) {
+          formData.append(
+            `order_details[${index}][discount_type]`,
+            item.discountType,
+          );
+        }
+      });
+
+      const response = await POST(
+        API_ENDPOINTS.CHECKOUT,
+        formData,
+        {},
+        {
+          Authorization: `Bearer ${user?.token}`,
+        },
+      );
+
+      navigation.navigate('OrderSuccessScreen');
+    } catch (error) {
+      console.log('[DEBUG] ERROR WHILE CHECKOUT:', error);
+      Snackbar.show({
+        text: t('checkoutfail'),
+        textColor: 'white',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: colors.error,
+        fontFamily: Fonts.REGULAR,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return {

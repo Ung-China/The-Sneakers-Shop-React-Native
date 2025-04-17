@@ -25,7 +25,6 @@ import {CartItemProps, PaymentMethodProps, StackParamList} from '../../types';
 import {formatCurrency} from '../../helpers';
 import {Icons} from '../../constants';
 import {RouteProp, useRoute} from '@react-navigation/native';
-import {dummyPaymentMethods} from '../../models/PaymentMethod';
 
 const CheckoutScreen: React.FC = () => {
   const {t} = useTranslation();

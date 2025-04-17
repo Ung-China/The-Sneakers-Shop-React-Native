@@ -196,4 +196,5 @@ export const translateEN = {
     "Thank you for your order. We'll process it shortly.",
   backToHome: 'Back to Home',
   orderSuccess: 'Order Successful',
+  checkoutfail: 'Something went wrong during checkout. Please try again later.',
 };

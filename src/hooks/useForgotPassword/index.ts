@@ -5,8 +5,6 @@ import {API_ENDPOINTS, POST} from '../../api';
 import Snackbar from 'react-native-snackbar';
 import {colors} from '../../constants/colors/colorTypes';
 import {Fonts} from '../../constants';
-import {User} from '../../models';
-import {loginUserSuccess} from '../../store/actions';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../../store';
 import {useNavigation} from '@react-navigation/native';
@@ -29,7 +27,6 @@ const useForgotPassword = () => {
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(true);
 
   const {t} = useTranslation();
-  const dispatch = useDispatch<AppDispatch>();
   const navigation =
     useNavigation<BottomTabNavigationProp<BottomTabParamList>>();
 

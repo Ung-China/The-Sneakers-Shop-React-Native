@@ -30,15 +30,14 @@ export default StyleSheet.create({
     paddingHorizontal: Padding.DEFAULT,
   },
   footerContainer: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-
-    elevation: 2,
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 1,
+    // },
+    // shadowOpacity: 0.2,
+    // shadowRadius: 1.41,
+    // elevation: 2,
   },
   footerButton: {
     paddingVertical: Padding.DEFAULT,

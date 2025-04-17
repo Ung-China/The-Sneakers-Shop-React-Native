@@ -39,6 +39,9 @@ const HomeScreen: React.FC = () => {
   const {t} = useTranslation();
   const {notifications, fetchNotifications} = useNotification();
 
+  const {user} = useUser();
+  console.log('CEHCK USER', user?.token);
+
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
 
   const [isLoading, setIsLoading] = useState(false);
