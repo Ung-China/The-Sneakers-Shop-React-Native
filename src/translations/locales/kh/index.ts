@@ -193,4 +193,9 @@ export const translateKH = {
   pay_at_store_text: 'បង់ប្រាក់នៅហាងពេលអ្នកទៅយកទំនិញ',
   cash_on_delivery_name: 'ទូទាត់ជាសាច់ប្រាក់ពេលទទួលទំនិញ',
   pay_at_store_name: 'ទូទាត់នៅហាង',
+  orderSuccessTitle: 'ការបញ្ជាទិញបានជោគជ័យ!',
+  orderSuccessDescription:
+    'សូមអរគុណសម្រាប់ការបញ្ជាទិញ! យើងនឹងដំណើរការនៅពេលឆាប់ៗនេះ។',
+  backToHome: 'ត្រលប់ទៅទំព័រដើម',
+  orderSuccess: 'ការបញ្ជាទិញជោគជ័យ',
 };

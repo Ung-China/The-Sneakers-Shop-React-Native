@@ -48,8 +48,6 @@ const NotificationScreen: React.FC = () => {
     isFetchingMoreNotifications,
   } = useNotification();
 
-  console.log('CHECK NOTIFICATION', notifications);
-
   return (
     <>
       <View style={[styles.container, {backgroundColor: colors.primary}]}>

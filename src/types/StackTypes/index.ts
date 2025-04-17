@@ -32,4 +32,5 @@ export type StackParamList = {
   ShopLocation: undefined;
   SeeMoreScreen: SeeMoreProps;
   LoginScreen: undefined;
+  OrderSuccessScreen: undefined;
 };

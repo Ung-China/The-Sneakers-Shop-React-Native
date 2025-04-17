@@ -90,6 +90,7 @@ const useEditProfile = () => {
           type: profileImage.mime,
         });
       }
+
       formData.append('name', fullName);
       formData.append('email', email);
       formData.append('phone', numberWithCountryCode);

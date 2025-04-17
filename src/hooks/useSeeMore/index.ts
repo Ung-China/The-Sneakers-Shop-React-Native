@@ -41,9 +41,7 @@ const useSeeMore = (endPointName: string) => {
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE FETCHING SEE MORE PRODUCTS:', error);
     } finally {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 2000);
+      setIsLoading(false);
       setIsFetchingMoreProducts(false);
     }
   };

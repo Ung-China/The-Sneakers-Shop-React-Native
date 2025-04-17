@@ -90,9 +90,7 @@ const useBrand = (initialBrandId?: number) => {
       console.error('[DEBUG] ERROR WHILE FETCHING PRODUCTS BY BRAND:', error);
     } finally {
       setIsFetchingMoreProducts(false);
-      setTimeout(() => {
-        setIsLoadingProduct(false);
-      }, 2000);
+      setIsLoadingProduct(false);
     }
   };
 

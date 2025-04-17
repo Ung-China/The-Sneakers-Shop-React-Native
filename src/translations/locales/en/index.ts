@@ -191,4 +191,9 @@ export const translateEN = {
   pay_at_store_text: 'Pay directly at the store when picking up',
   cash_on_delivery_name: 'Cash on Delivery',
   pay_at_store_name: 'Pay at Store',
+  orderSuccessTitle: 'Order Placed Successfully!',
+  orderSuccessDescription:
+    "Thank you for your order. We'll process it shortly.",
+  backToHome: 'Back to Home',
+  orderSuccess: 'Order Successful',
 };

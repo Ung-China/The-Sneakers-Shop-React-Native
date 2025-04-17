@@ -21,6 +21,7 @@ import ForgotPasswordScreen from './ForgotPassword';
 import ShopLocation from './ShopLocation';
 import SeeMoreScreen from './SeeMore';
 import LoginScreen from './Login';
+import OrderSuccessScreen from './OrderSuccess';
 
 export {
   NotificationScreen,
@@ -46,4 +47,5 @@ export {
   ShopLocation,
   SeeMoreScreen,
   LoginScreen,
+  OrderSuccessScreen,
 };

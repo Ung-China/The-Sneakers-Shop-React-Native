@@ -20,6 +20,7 @@ import {
   SeeMoreScreen,
   ShopLocation,
   LoginScreen,
+  OrderSuccessScreen,
 } from '../../screens';
 import {BottomTabNavigator} from '../BottomTabNavigator';
 import {useTheme} from '../../hooks';
@@ -177,8 +178,15 @@ export const StackNavigator = () => {
           title: t('shopLocation'),
         }}
       />
-
       <Stack.Screen name="SeeMoreScreen" component={SeeMoreScreen} />
+      <Stack.Screen
+        name="OrderSuccessScreen"
+        component={OrderSuccessScreen}
+        options={{
+          title: t('orderSuccess'),
+          headerLeft: () => null,
+        }}
+      />
     </Stack.Navigator>
   );
 };

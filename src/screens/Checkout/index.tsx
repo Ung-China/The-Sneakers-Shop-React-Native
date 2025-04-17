@@ -16,6 +16,7 @@ import {
   FlexibleLabel,
   Footer,
   ItemSeparatorHeight,
+  LoadingModal,
   PaymentMethodItem,
   Touchable,
 } from '../../components';
@@ -47,6 +48,7 @@ const CheckoutScreen: React.FC = () => {
     hasSelectedPaySlip,
     checkOut,
     paymentOptions,
+    isLoading,
   } = useCheckout({selectedOption, logistic, address, deliveryCost});
 
   const cartItem = ({item}: {item: CartItemProps['item']}) => {
@@ -269,6 +271,7 @@ const CheckoutScreen: React.FC = () => {
           onPress={checkOut}
         />
       </Footer>
+      <LoadingModal visible={isLoading} />
     </>
   );
 };
