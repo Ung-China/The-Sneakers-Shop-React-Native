@@ -5,6 +5,8 @@ export default class User {
   phoneNumber: string;
   image: string;
   token: string;
+  isGoogleLogin: boolean;
+
   constructor(
     id: string,
     name: string,
@@ -12,6 +14,7 @@ export default class User {
     phoneNumber: string,
     image: string,
     token: string,
+    isGoogleLogin: boolean = false,
   ) {
     this.id = id;
     this.name = name;
@@ -19,5 +22,6 @@ export default class User {
     this.phoneNumber = phoneNumber;
     this.image = image;
     this.token = token;
+    this.isGoogleLogin = isGoogleLogin;
   }
 }

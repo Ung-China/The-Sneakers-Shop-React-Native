@@ -12,6 +12,9 @@ import {API_ENDPOINTS, POST} from '../../api';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {StackParamList} from '../../types';
+import {useDispatch} from 'react-redux';
+import {AppDispatch} from '../../store';
+import {clearCart} from '../../store/actions';
 
 const useCheckout = ({
   selectedOption,
@@ -35,6 +38,7 @@ const useCheckout = ({
   const {cartItems} = useCart();
   const {user} = useUser();
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
+  const dispatch = useDispatch<AppDispatch>();
 
   const paymentOptions = useMemo(() => {
     return selectedOption === 'pickup'
@@ -156,6 +160,7 @@ const useCheckout = ({
         },
       );
 
+      dispatch(clearCart());
       navigation.navigate('OrderSuccessScreen');
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE CHECKOUT:', error);

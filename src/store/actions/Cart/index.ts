@@ -20,3 +20,7 @@ export const removeFromCart = (productId: number, variantId: number) => ({
   type: ActionTypes.REMOVE_FROM_CART,
   payload: {productId, variantId},
 });
+
+export const clearCart = () => ({
+  type: ActionTypes.CLEAR_CART,
+});

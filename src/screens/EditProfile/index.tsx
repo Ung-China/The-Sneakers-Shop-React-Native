@@ -59,68 +59,99 @@ const EditProfileScreen: React.FC = () => {
           />
         </View>
         <View style={styles.inputContainer}>
-          <FlexibleInput
-            label={t('fullName')}
-            placeholder="Ing China"
-            editable={true}
-            value={fullName}
-            onChangeText={setFullName}
-            error={errorFullName}
-            textInputStyle={[
-              styles.textInputStyle,
-              {backgroundColor: colors.secondary},
-            ]}
-          />
-          <FlexibleInput
-            label={t('phoneNumber')}
-            placeholder="069 78 66 77"
-            editable={true}
-            value={phoneNumber}
-            onChangeText={setPhoneNumber}
-            error={errorPhoneNumber}
-            textInputStyle={[
-              styles.textInputStyle,
-              {backgroundColor: colors.secondary},
-            ]}
-          />
-          <FlexibleInput
-            label={t('email')}
-            placeholder="ingchina2004@gmail.com"
-            editable={true}
-            value={email}
-            onChangeText={setEmail}
-            error={errorEmail}
-            textInputStyle={[
-              styles.textInputStyle,
-              {backgroundColor: colors.secondary},
-            ]}
-          />
-          <FlexibleInput
-            label={t('oldPassword')}
-            editable={true}
-            value={oldPassword}
-            onChangeText={setOldPassword}
-            error={errorOldPassword}
-            textInputStyle={[
-              styles.textInputStyle,
-              {backgroundColor: colors.secondary},
-            ]}
-          />
-          <FlexibleInput
-            label={t('newPassword')}
-            editable={true}
-            value={newPassword}
-            onChangeText={setNewPassword}
-            contentContainerStyle={[
-              styles.contentContainerStyle,
-              {backgroundColor: colors.secondary},
-            ]}
-            error={errorNewPassword}
-            textInputStyle={[
-              styles.textInputStyle,
-              {backgroundColor: colors.secondary},
-            ]}
-          />
+          {/* {user?.isGoogleLogin ? (
+            <>
+              <FlexibleInput
+                label={t('fullName')}
+                placeholder="Ing China"
+                editable={true}
+                value={fullName}
+                onChangeText={setFullName}
+                error={errorFullName}
+                textInputStyle={[
+                  styles.textInputStyle,
+                  {backgroundColor: colors.secondary},
+                ]}
+              />
+              <FlexibleInput
+                label={t('email')}
+                placeholder="ingchina2004@gmail.com"
+                editable={false}
+                value={email}
+                onChangeText={setEmail}
+                error={errorEmail}
+                textInputStyle={[
+                  styles.textInputStyle,
+                  {backgroundColor: colors.secondary},
+                ]}
+              />
+            </>
+          ) : ( */}
+          <>
+            <FlexibleInput
+              label={t('fullName')}
+              placeholder="Ing China"
+              editable={true}
+              value={fullName}
+              onChangeText={setFullName}
+              error={errorFullName}
+              textInputStyle={[
+                styles.textInputStyle,
+                {backgroundColor: colors.secondary},
+              ]}
+            />
+            <FlexibleInput
+              label={t('phoneNumber')}
+              placeholder="069 78 66 77"
+              editable={false}
+              value={phoneNumber}
+              onChangeText={setPhoneNumber}
+              error={errorPhoneNumber}
+              textInputStyle={[
+                styles.textInputStyle,
+                {backgroundColor: colors.secondary},
+              ]}
+            />
+            <FlexibleInput
+              label={t('email')}
+              placeholder="ingchina2004@gmail.com"
+              editable={false}
+              value={email}
+              onChangeText={setEmail}
+              error={errorEmail}
+              textInputStyle={[
+                styles.textInputStyle,
+                {backgroundColor: colors.secondary},
+              ]}
+            />
+            <FlexibleInput
+              label={t('oldPassword')}
+              editable={true}
+              value={oldPassword}
+              onChangeText={setOldPassword}
+              error={errorOldPassword}
+              textInputStyle={[
+                styles.textInputStyle,
+                {backgroundColor: colors.secondary},
+              ]}
+            />
+            <FlexibleInput
+              label={t('newPassword')}
+              editable={true}
+              value={newPassword}
+              onChangeText={setNewPassword}
+              contentContainerStyle={[
+                styles.contentContainerStyle,
+                {backgroundColor: colors.secondary},
+              ]}
+              error={errorNewPassword}
+              textInputStyle={[
+                styles.textInputStyle,
+                {backgroundColor: colors.secondary},
+              ]}
+            />
+          </>
+          {/* )} */}
         </View>
       </ScrollView>
 

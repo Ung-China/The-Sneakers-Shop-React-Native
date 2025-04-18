@@ -22,7 +22,6 @@ import {
   useShoesSlider,
   useSlider,
   useTheme,
-  useUser,
 } from '../../hooks';
 import {Icons, Padding, Radius, Spacing} from '../../constants';
 import {useTranslation} from 'react-i18next';
@@ -38,9 +37,6 @@ const HomeScreen: React.FC = () => {
   const {location} = useLocation();
   const {t} = useTranslation();
   const {notifications, fetchNotifications} = useNotification();
-
-  const {user} = useUser();
-  console.log('CEHCK USER', user?.token);
 
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
 

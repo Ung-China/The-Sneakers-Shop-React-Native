@@ -7,6 +7,7 @@ import {
   increaseQuantity,
   decreaseQuantity,
   removeFromCart,
+  clearCart,
 } from './Cart';
 import {addAddress, removeAddress} from './Address';
 export {
@@ -23,4 +24,5 @@ export {
   removeFromCart,
   addAddress,
   removeAddress,
+  clearCart,
 };

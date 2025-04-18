@@ -25,8 +25,13 @@ interface RemoveFromCartAction {
   payload: {productId: number; variantId: number};
 }
 
+interface ClearCartAction {
+  type: typeof ActionTypes.CLEAR_CART;
+}
+
 export type CartActionTypes =
   | AddToCartAction
   | IncreaseQuantityAction
   | DecreaseQuantityAction
-  | RemoveFromCartAction;
+  | RemoveFromCartAction
+  | ClearCartAction;
