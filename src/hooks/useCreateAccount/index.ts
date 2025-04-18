@@ -199,6 +199,7 @@ const useCreateAccount = () => {
         response.customer_info.phone,
         response.customer_info.image_url,
         response.customer_info.token,
+        response.customer_info.is_google_login,
       );
 
       dispatch(loginUserSuccess(user));

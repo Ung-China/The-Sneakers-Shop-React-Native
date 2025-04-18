@@ -41,8 +41,6 @@ const useEditProfile = () => {
 
   const clearErrors = useCallback(() => {
     setErrorFullName('');
-    setErrorPhoneNumber('');
-    setErrorEmail('');
   }, []);
 
   const validateFields = useCallback(() => {
@@ -106,6 +104,8 @@ const useEditProfile = () => {
         },
       );
 
+      console.log('CHECK REPOSE', response);
+
       const fetchedUser = new User(
         response.id,
         response.name,
@@ -113,6 +113,7 @@ const useEditProfile = () => {
         response.phone,
         response.image_url,
         response.token ?? user?.token,
+        response.is_google_login,
       );
 
       dispatch(loginUserSuccess(fetchedUser));

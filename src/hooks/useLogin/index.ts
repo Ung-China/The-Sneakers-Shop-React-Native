@@ -142,6 +142,7 @@ const useLogin = () => {
           response.customer.phone,
           response.customer.image_url,
           response.token,
+          true,
         );
 
         dispatch(loginUserSuccess(user));

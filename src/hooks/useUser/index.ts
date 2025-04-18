@@ -32,6 +32,7 @@ const useUser = () => {
         response.phone,
         response.image_url,
         response.token ?? user?.token,
+        response.is_google_login,
       );
 
       dispatch(loginUserSuccess(fetchedUser));

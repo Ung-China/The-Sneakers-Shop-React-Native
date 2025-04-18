@@ -14,7 +14,7 @@ export default class User {
     phoneNumber: string,
     image: string,
     token: string,
-    isGoogleLogin: boolean = false,
+    isGoogleLogin: boolean,
   ) {
     this.id = id;
     this.name = name;
