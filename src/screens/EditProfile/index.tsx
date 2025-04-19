@@ -17,8 +17,6 @@ const EditProfileScreen: React.FC = () => {
   const {colors} = useTheme();
   const {user} = useUser();
 
-  console.log('CHECK USER', user);
-
   const {
     isLoading,
     fullName,

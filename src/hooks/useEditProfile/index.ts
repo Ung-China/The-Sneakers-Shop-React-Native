@@ -90,7 +90,10 @@ const useEditProfile = () => {
       }
 
       formData.append('name', fullName);
-      formData.append('email', email);
+
+      if (!user?.isGoogleLogin) {
+        formData.append('email', email);
+      }
       formData.append('phone', numberWithCountryCode);
       formData.append('old_password', oldPassword);
       formData.append('new_password', newPassword);
@@ -103,8 +106,6 @@ const useEditProfile = () => {
           Authorization: `Bearer ${user?.token}`,
         },
       );
-
-      console.log('CHECK REPOSE', response);
 
       const fetchedUser = new User(
         response.id,

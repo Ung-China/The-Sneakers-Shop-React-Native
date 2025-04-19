@@ -84,6 +84,7 @@ const useLogin = () => {
         response.customer_info.phone,
         response.customer_info.image_url,
         response.customer_info.token,
+        response.is_google_login,
       );
 
       dispatch(loginUserSuccess(user));
@@ -142,7 +143,7 @@ const useLogin = () => {
           response.customer.phone,
           response.customer.image_url,
           response.token,
-          true,
+          response.is_google_login,
         );
 
         dispatch(loginUserSuccess(user));
