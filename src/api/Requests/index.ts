@@ -2,7 +2,7 @@ import axios from 'axios';
 import {ApiRequestProps} from '../../types';
 
 const apiInstance = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api',
+  baseURL: 'https://thesneakersshop.site/api',
   timeout: 5000,
 });
 
