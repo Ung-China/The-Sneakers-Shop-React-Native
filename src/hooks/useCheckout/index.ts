@@ -111,7 +111,11 @@ const useCheckout = ({
       formData.append('delivery_fee', deliveryCost);
       formData.append('payment_method', paymentMethod);
 
-      if (paySlip) {
+      if (
+        paySlip &&
+        paymentMethod !== 'pay_at_store' &&
+        paymentMethod !== 'cash_on_delivery'
+      ) {
         formData.append('pay_slip', {
           uri: paySlip.path,
           name: 'payslip.jpg',

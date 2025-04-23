@@ -38,7 +38,7 @@ const OrderItem: React.FC<OrderItemProps> = ({onPress, item}) => {
         <View style={styles.footerContentBlock}>
           <Text style={[styles.title, {color: colors.grey}]}>{t('price')}</Text>
           <Text style={[styles.value, {color: colors.text}]}>
-            ${currencyFormat(item.totalAmount)}
+            ${currencyFormat(item.total)}
           </Text>
         </View>
         <View style={styles.footerContentBlock}>

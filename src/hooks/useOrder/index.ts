@@ -36,7 +36,7 @@ const useOrder = () => {
             item.invoice_ref,
             item.created_at,
             item.order_status,
-            '100',
+            Number(item.total),
           ),
       );
 

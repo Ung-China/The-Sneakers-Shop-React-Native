@@ -5,6 +5,6 @@ export interface OrderItemProps {
     orderNumber: string;
     orderDate: string;
     status: string;
-    totalAmount: number;
+    total: number;
   };
 }
