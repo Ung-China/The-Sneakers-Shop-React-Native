@@ -299,7 +299,7 @@ const ProductDetailScreen: React.FC = () => {
                   <View style={styles.priceContaner}>
                     <PriceTag
                       finalPrice={finalPrice}
-                      defaultPrice={price}
+                      defaultPrice={hasProductPromotion ? price : null}
                       priceStyle={styles.priceStyle}
                       defaultPriceStyle={styles.defaultPriceStyle}
                     />
