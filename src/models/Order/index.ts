@@ -3,14 +3,14 @@ export default class Order {
   orderNumber: string;
   orderDate: string;
   status: string;
-  total: string;
+  total: number;
 
   constructor(
     id: number,
     orderNumber: string,
     orderDate: string,
     status: string,
-    total: string,
+    total: number,
   ) {
     this.id = id;
     this.orderNumber = orderNumber;
