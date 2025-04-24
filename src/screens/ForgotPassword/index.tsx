@@ -1,10 +1,4 @@
-import {
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import styles from './style';
 import {useForgotPassword, useTheme} from '../../hooks';
 import {useTranslation} from 'react-i18next';
