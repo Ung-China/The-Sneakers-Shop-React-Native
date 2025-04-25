@@ -4,10 +4,7 @@ import {useTheme} from '../../hooks';
 import {useTranslation} from 'react-i18next';
 import FlexibleTouchable from '../../components/FlexibleTouchable';
 import {useNavigation} from '@react-navigation/native';
-import {
-  BottomTabBarProps,
-  BottomTabNavigationProp,
-} from '@react-navigation/bottom-tabs';
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {BottomTabParamList} from '../../types';
 
 const OrderSuccessScreen: React.FC = () => {
@@ -24,8 +21,12 @@ const OrderSuccessScreen: React.FC = () => {
     <SafeAreaView
       style={[styles.safeContainer, {backgroundColor: colors.primary}]}>
       <View style={styles.container}>
-        <Text style={styles.title}>{t('orderSuccessTitle')}</Text>
-        <Text style={styles.description}>{t('orderSuccessDescription')}</Text>
+        <Text style={[styles.title, {color: colors.primaryReversed}]}>
+          {t('orderSuccessTitle')}
+        </Text>
+        <Text style={[styles.description, {color: colors.primaryReversed}]}>
+          {t('orderSuccessDescription')}
+        </Text>
 
         <FlexibleTouchable
           label={t('backToHome')}

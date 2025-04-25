@@ -1,19 +1,22 @@
 import {StyleSheet} from 'react-native';
-import {Fonts, FontSizes} from '../../constants';
+import {Padding} from '../../constants';
 
 export default StyleSheet.create({
+  orderItemContentContainer: {
+    padding: Padding.DEFAULT,
+  },
   container: {
     flex: 1,
   },
-  headerTitleStyle: {
-    fontFamily: Fonts.MEDIUM,
-    fontSize: FontSizes.extraLarge,
+  notFoundContainer: {
+    paddingVertical: Padding.DEFAULT,
   },
-  tabItemStyle: {
-    fontSize: FontSizes.large,
-    fontFamily: Fonts.REGULAR,
-  },
-  listContainer: {
-    flex: 1,
+  fetchMoreLoaderContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: Padding.DEFAULT,
+    paddingBottom: Padding.BOTTOM,
   },
 });

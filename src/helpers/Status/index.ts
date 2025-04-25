@@ -1,22 +1,26 @@
-import {useTranslation} from 'react-i18next';
+const getTranslatedStatus = (
+  status: string | null,
+  t: (key: string) => string,
+): string => {
+  if (status === null) return t('pickup');
 
-const {t} = useTranslation();
-const getTranslatedStatus = (status: string): string => {
   switch (status) {
     case 'pending':
       return t('pending');
-    case 'prepare':
-      return t('prepare');
-    case 'delivery':
-      return t('delivery');
+    case 'confirmed':
+      return t('confirmed');
+    case 'packaging':
+      return t('packed');
+    case 'out_for_delivery':
+      return t('shipped');
     case 'delivered':
-      return t('delivered');
+      return t('completed');
     case 'cancelled':
-      return t('cancelled');
-    case 'total':
-      return t('total');
+      return t('canceled');
+    case 'failed_to_deliver':
+      return t('failed_to_deliver');
     default:
-      return status;
+      return status || t('unknown');
   }
 };
 

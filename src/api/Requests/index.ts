@@ -3,7 +3,7 @@ import {ApiRequestProps} from '../../types';
 
 const apiInstance = axios.create({
   baseURL: 'https://thesneakersshop.site/api',
-  timeout: 5000,
+  timeout: 1000000,
 });
 
 const apiRequest = async ({

@@ -7,10 +7,13 @@ import {useTheme} from '../../hooks';
 import {dateFormat} from '../../helpers';
 import {useTranslation} from 'react-i18next';
 import currencyFormat from '../../helpers/CurrencyFormat';
+import getTranslatedStatus from '../../helpers/Status';
 
 const OrderItem: React.FC<OrderItemProps> = ({onPress, item}) => {
   const {colors} = useTheme();
   const {t} = useTranslation();
+
+  console.log('CHECKING ITEM', item);
 
   return (
     <Touchable
@@ -46,7 +49,7 @@ const OrderItem: React.FC<OrderItemProps> = ({onPress, item}) => {
             {t('status')}
           </Text>
           <Text style={[styles.value, {color: colors.text}]}>
-            {item.status}
+            {getTranslatedStatus(item.status, t)}
           </Text>
         </View>
       </View>

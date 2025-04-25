@@ -197,4 +197,10 @@ export const translateEN = {
   backToHome: 'Back to Home',
   orderSuccess: 'Order Successful',
   checkoutfail: 'Something went wrong during checkout. Please try again later.',
+  noOrdersHistory: 'No previous orders. Explore our products.',
+  canceled: 'Canceled',
+  packed: 'Packed',
+  shipped: 'Shipped',
+  pickup: 'Pickup',
+  unknown: 'Unknown',
 };

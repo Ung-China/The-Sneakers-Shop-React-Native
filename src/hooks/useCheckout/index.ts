@@ -174,6 +174,8 @@ const useCheckout = ({
         },
       );
 
+      console.log('CHECKOUT RESPONSE:', response);
+
       dispatch(clearCart());
       navigation.navigate('OrderSuccessScreen');
     } catch (error) {

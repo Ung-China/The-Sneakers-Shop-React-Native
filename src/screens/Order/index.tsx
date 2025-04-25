@@ -1,52 +1,103 @@
 import React from 'react';
-import {View} from 'react-native';
+import {FlatList, RefreshControl, View} from 'react-native';
 import styles from './style';
 import {useOrder, useTheme} from '../../hooks';
-import {Tab, TabView} from '@rneui/themed';
 import {useTranslation} from 'react-i18next';
-import {OrderHistoryList, OrderList} from './components';
 import {Radius} from '../../constants';
+import {OrderItemProps, StackParamList} from '../../types';
+import {
+  AnimatedDotLoader,
+  ItemSeparatorHeight,
+  NotFound,
+  OrderItem,
+  Skeleton,
+} from '../../components';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {dummyOrders} from '../../models/Order';
 
 const OrderScreen: React.FC = () => {
+  const navigation = useNavigation<StackNavigationProp<StackParamList>>();
+
   const {colors} = useTheme();
   const {t} = useTranslation();
-  const {activeTabIndex, setActiveTabIndex} = useOrder();
+
+  const {
+    isLoading,
+    orders,
+    isFetchingMoreOrders,
+    fetchOrders,
+    fetchMoreOrders,
+  } = useOrder();
+
+  const orderItem = ({item}: {item: OrderItemProps['item']}) => {
+    return <OrderItem onPress={handleOnPressOrder} item={item} />;
+  };
+
+  const orderSkeleton = () => {
+    return (
+      <Skeleton
+        containerStyle={{
+          borderRadius: Radius.DEFAULT,
+          height: 150,
+        }}
+      />
+    );
+  };
+
+  const handleOnPressOrder = () => {
+    return navigation.navigate('OrderHistoryDetail');
+  };
 
   return (
     <View style={[styles.container, {backgroundColor: colors.primary}]}>
-      <Tab
-        value={activeTabIndex}
-        onChange={setActiveTabIndex}
-        indicatorStyle={{
-          backgroundColor: colors.text,
-          height: 2,
-          borderRadius: Radius.DEFAULT,
-          width: '50%',
-        }}>
-        <Tab.Item
-          title={t('order')}
-          titleStyle={[styles.tabItemStyle, {color: colors.text}]}
+      {isLoading ? (
+        <FlatList
+          data={dummyOrders}
+          renderItem={orderSkeleton}
+          showsVerticalScrollIndicator={false}
+          ItemSeparatorComponent={ItemSeparatorHeight}
+          contentContainerStyle={styles.orderItemContentContainer}
+          keyExtractor={item => item.id.toString()}
+          onEndReached={fetchMoreOrders}
+          onEndReachedThreshold={0.5}
+          refreshControl={
+            <RefreshControl
+              style={{opacity: 0}}
+              refreshing={false}
+              onRefresh={fetchMoreOrders}
+            />
+          }
         />
-        <Tab.Item
-          title={t('history')}
-          titleStyle={[styles.tabItemStyle, {color: colors.text}]}
+      ) : orders.length === 0 && !isLoading ? (
+        <NotFound
+          isVisible={true}
+          description={t('noOrdersHistory')}
+          containerStyle={styles.notFoundContainer}
         />
-      </Tab>
-      <TabView
-        value={activeTabIndex}
-        onChange={setActiveTabIndex}
-        animationType="timing"
-        animationConfig={{
-          duration: 100,
-          useNativeDriver: true,
-        }}>
-        <TabView.Item style={styles.listContainer}>
-          <OrderList />
-        </TabView.Item>
-        <TabView.Item style={styles.listContainer}>
-          <OrderHistoryList />
-        </TabView.Item>
-      </TabView>
+      ) : (
+        <FlatList
+          data={orders}
+          renderItem={orderItem}
+          showsVerticalScrollIndicator={false}
+          ItemSeparatorComponent={ItemSeparatorHeight}
+          contentContainerStyle={styles.orderItemContentContainer}
+          keyExtractor={item => item.id.toString()}
+          onEndReached={fetchMoreOrders}
+          onEndReachedThreshold={0.5}
+          refreshControl={
+            <RefreshControl
+              style={{opacity: 0}}
+              refreshing={false}
+              onRefresh={fetchOrders}
+            />
+          }
+        />
+      )}
+      <AnimatedDotLoader
+        isLoading={isFetchingMoreOrders}
+        containerStyle={styles.fetchMoreLoaderContainer}
+      />
     </View>
   );
 };
