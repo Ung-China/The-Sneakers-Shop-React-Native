@@ -115,6 +115,12 @@ const useLogin = () => {
     GoogleSignin.configure();
     try {
       setIsLoading(true);
+
+      GoogleSignin.configure({
+        webClientId:
+          '305739579573-t4qrjh1db2kjskdh9epe32j8ehhifjkg.apps.googleusercontent.com',
+      });
+
       await GoogleSignin.hasPlayServices();
       const googleUser = await GoogleSignin.signIn();
 

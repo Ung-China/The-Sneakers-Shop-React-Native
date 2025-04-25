@@ -123,7 +123,17 @@ const useCheckout = ({
         });
       }
 
-      formData.append('address', address);
+      if (selectedOption === 'pickup') {
+        formData.append('pickup_location', []);
+      } else {
+        formData.append('address[id]', String(address?.id));
+        formData.append('address[label]', address?.label);
+        formData.append('address[note]', address?.note);
+        formData.append('address[phoneNumber]', address?.phoneNumber);
+        formData.append('address[province]', address?.province);
+        formData.append('address[streetLine1]', address?.streetLine1);
+        formData.append('address[streetLine2]', address?.streetLine2);
+      }
 
       cartItems.forEach((item, index) => {
         formData.append(`order_details[${index}][product_id]`, String(item.id));
