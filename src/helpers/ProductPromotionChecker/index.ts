@@ -17,7 +17,7 @@ const ProductPromotionChecker = ({
     );
     const isBrandPromo =
       promo.promotionType === 'brand' &&
-      promo.brands?.some(brand => brand.id === brandId);
+      promo.brands?.some(brand => Number(brand.id) === Number(brandId));
 
     return isProductPromo || isBrandPromo;
   });

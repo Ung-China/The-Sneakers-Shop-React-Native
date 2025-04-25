@@ -62,8 +62,6 @@ const ProductDetailScreen: React.FC = () => {
       brandId: brandId,
     });
 
-  console.log('CHECK hasProductPromotion', hasProductPromotion);
-
   const {products, isFetchingMoreProducts, fetchMoreProducts} =
     useRelatedProducts(brandId);
 
