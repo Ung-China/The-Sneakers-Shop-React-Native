@@ -12,8 +12,12 @@ import {
 import {CheckoutItemProps} from '../../types/CheckoutItem';
 import {cartItems} from '../../models/CartItem';
 import {formatCurrency} from '../../helpers';
+import {RouteProp, useRoute} from '@react-navigation/native';
+import {StackParamList} from '../../types';
 
 const OrderDetailScreen: React.FC = () => {
+  const route = useRoute<RouteProp<StackParamList, 'OrderHistoryDetail'>>();
+  const {id} = route.params;
   const {t} = useTranslation();
   const {colors} = useTheme();
   const {trackingSteps} = useOrderDetail();
@@ -22,6 +26,7 @@ const OrderDetailScreen: React.FC = () => {
     return <CheckoutItem item={item} />;
   };
 
+  console.log('CHECK ORDER ID:', id);
   return (
     <ScrollView
       style={[styles.container, {backgroundColor: colors.primary}]}

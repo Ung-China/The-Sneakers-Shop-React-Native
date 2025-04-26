@@ -31,7 +31,9 @@ const OrderScreen: React.FC = () => {
   } = useOrder();
 
   const orderItem = ({item}: {item: OrderItemProps['item']}) => {
-    return <OrderItem onPress={handleOnPressOrder} item={item} />;
+    return (
+      <OrderItem onPress={() => handleOnPressOrder(item.id)} item={item} />
+    );
   };
 
   const orderSkeleton = () => {
@@ -45,8 +47,8 @@ const OrderScreen: React.FC = () => {
     );
   };
 
-  const handleOnPressOrder = () => {
-    return navigation.navigate('OrderHistoryDetail');
+  const handleOnPressOrder = (id: number) => {
+    return navigation.navigate('OrderHistoryDetail', {id});
   };
 
   return (

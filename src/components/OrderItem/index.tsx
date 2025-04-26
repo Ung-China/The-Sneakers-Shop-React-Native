@@ -13,8 +13,6 @@ const OrderItem: React.FC<OrderItemProps> = ({onPress, item}) => {
   const {colors} = useTheme();
   const {t} = useTranslation();
 
-  console.log('CHECKING ITEM', item);
-
   return (
     <Touchable
       onPress={onPress}
@@ -36,7 +34,9 @@ const OrderItem: React.FC<OrderItemProps> = ({onPress, item}) => {
           <Text style={[styles.title, {color: colors.grey}]}>
             {t('products')}
           </Text>
-          <Text style={[styles.value, {color: colors.text}]}>1</Text>
+          <Text style={[styles.value, {color: colors.text}]}>
+            {item.productCount}
+          </Text>
         </View>
         <View style={styles.footerContentBlock}>
           <Text style={[styles.title, {color: colors.grey}]}>{t('price')}</Text>

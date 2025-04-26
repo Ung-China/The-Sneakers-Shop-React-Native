@@ -1,9 +1,14 @@
 import {useTranslation} from 'react-i18next';
 import {Icons} from '../../constants';
 import {TrackingStep} from '../../models';
+import useUser from '../useUser';
 
 const useOrderDetail = () => {
   const {t} = useTranslation();
+  const {user} = useUser();
+
+  console.log('[DEBUG] USER IN ORDER DETAIL:', user);
+
   const trackingSteps = [
     new TrackingStep(
       1,
@@ -41,6 +46,7 @@ const useOrderDetail = () => {
       t('orderCompleted'),
     ),
   ];
+
   return {trackingSteps};
 };
 export default useOrderDetail;

@@ -18,7 +18,7 @@ const getTranslatedStatus = (
     case 'cancelled':
       return t('canceled');
     case 'failed_to_deliver':
-      return t('failed_to_deliver');
+      return t('failedToDeliver');
     default:
       return status || t('unknown');
   }

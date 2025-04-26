@@ -19,7 +19,7 @@ export type StackParamList = {
   CurrentLocation: undefined;
   NotificationDetail: {item: NotificationProps['item']};
   Brand: {id?: number};
-  OrderHistoryDetail: undefined;
+  OrderHistoryDetail: {id?: number};
   ProductDetail: {id: number; brandId: number};
   EditProfile: undefined;
   Checkout: {selectedOption: string; logistic?: any; address?: Address};

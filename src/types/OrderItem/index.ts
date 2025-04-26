@@ -6,5 +6,6 @@ export interface OrderItemProps {
     orderDate: string;
     status: string;
     total: number;
+    productCount: number;
   };
 }

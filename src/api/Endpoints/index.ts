@@ -21,6 +21,7 @@ const API_ENDPOINTS = {
   LOGIN_WITH_GMAIL: '/google-login',
   CHECKOUT: '/orders',
   GET_ORDER_HISTORY: '/order/history',
+  GET_ORDER_HISTORY_DETAIL: '/order/detail',
 };
 
 export default API_ENDPOINTS;

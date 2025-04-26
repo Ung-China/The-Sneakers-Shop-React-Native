@@ -4,6 +4,7 @@ export default class Order {
   orderDate: string;
   status: string;
   total: number;
+  productCount: number;
 
   constructor(
     id: number,
@@ -11,12 +12,14 @@ export default class Order {
     orderDate: string,
     status: string,
     total: number,
+    productCount: number,
   ) {
     this.id = id;
     this.orderNumber = orderNumber;
     this.orderDate = orderDate;
     this.status = status;
     this.total = total;
+    this.productCount = productCount;
   }
 }
 

@@ -37,6 +37,7 @@ const useOrder = () => {
             item.created_at,
             item.order_status,
             Number(item.total),
+            item.product_count,
           ),
       );
 

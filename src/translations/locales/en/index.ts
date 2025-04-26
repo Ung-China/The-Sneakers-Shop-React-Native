@@ -203,4 +203,5 @@ export const translateEN = {
   shipped: 'Shipped',
   pickup: 'Pickup',
   unknown: 'Unknown',
+  failedToDeliver: 'Unable to Deliver',
 };
