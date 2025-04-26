@@ -12,6 +12,7 @@ import currencyFormat from '../../helpers/CurrencyFormat';
 const CheckoutItem: React.FC<CheckoutItemProps> = ({item}) => {
   const {t} = useTranslation();
   const {colors} = useTheme();
+
   return (
     <View style={[styles.container, {backgroundColor: colors.secondary}]}>
       <CachedImage

@@ -204,4 +204,7 @@ export const translateEN = {
   pickup: 'Pickup',
   unknown: 'Unknown',
   failedToDeliver: 'Unable to Deliver',
+  unPaid: 'Unpaid',
+  paid: 'Paid',
+  paymentStatus: 'Payment Status',
 };

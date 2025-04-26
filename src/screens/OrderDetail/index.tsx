@@ -11,22 +11,25 @@ import {
 } from '../../components';
 import {CheckoutItemProps} from '../../types/CheckoutItem';
 import {cartItems} from '../../models/CartItem';
-import {formatCurrency} from '../../helpers';
+import {dateFormat, formatCurrency} from '../../helpers';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {StackParamList} from '../../types';
+import getTranslatedStatus from '../../helpers/Status';
 
 const OrderDetailScreen: React.FC = () => {
   const route = useRoute<RouteProp<StackParamList, 'OrderHistoryDetail'>>();
   const {id} = route.params;
   const {t} = useTranslation();
   const {colors} = useTheme();
-  const {trackingSteps} = useOrderDetail();
+  const {trackingSteps, isLoading, fetchedOrderDetail, orderDetail} =
+    useOrderDetail(id);
+
+  console.log('CHECK ORDER DETAIL', orderDetail);
 
   const checkoutItem = ({item}: {item: CheckoutItemProps['item']}) => {
     return <CheckoutItem item={item} />;
   };
 
-  console.log('CHECK ORDER ID:', id);
   return (
     <ScrollView
       style={[styles.container, {backgroundColor: colors.primary}]}
@@ -35,21 +38,28 @@ const OrderDetailScreen: React.FC = () => {
         style={[styles.priceContainer, {backgroundColor: colors.secondary}]}>
         <FlexibleLabel
           label={t('yourOrderStatus')}
-          value={'Pending'}
+          value={getTranslatedStatus(orderDetail?.orderStatus ?? null, t)}
           labelStyle={[styles.priceLabel, {color: colors.text}]}
           valueStyle={[styles.priceValue, {color: colors.text}]}
           containerStyle={styles.priceContainerStyle}
         />
         <FlexibleLabel
           label={t('date')}
-          value={'24 August 2024 12:00 AM'}
+          value={dateFormat(orderDetail?.orderDate ?? '')}
           labelStyle={[styles.priceLabel, {color: colors.text}]}
           valueStyle={[styles.priceValue, {color: colors.text}]}
           containerStyle={styles.priceContainerStyle}
         />
         <FlexibleLabel
           label={t('orderNumber')}
-          value={'#00001'}
+          value={orderDetail?.orderNumber ?? ''}
+          labelStyle={[styles.priceLabel, {color: colors.text}]}
+          valueStyle={[styles.priceValue, {color: colors.text}]}
+          containerStyle={styles.priceContainerStyle}
+        />
+        <FlexibleLabel
+          label={t('paymentStatus')}
+          value={getTranslatedStatus(orderDetail?.paymentStatus ?? null, t)}
           labelStyle={[styles.priceLabel, {color: colors.text}]}
           valueStyle={[styles.priceValue, {color: colors.text}]}
           containerStyle={styles.priceContainerStyle}
@@ -58,7 +68,7 @@ const OrderDetailScreen: React.FC = () => {
 
       <Section title={t('orderItem')} titleStyle={styles.titleStyle}>
         <FlatList
-          data={cartItems.slice(0, 2)}
+          data={orderDetail?.details}
           renderItem={checkoutItem}
           scrollEnabled={false}
           showsVerticalScrollIndicator={false}
@@ -75,7 +85,7 @@ const OrderDetailScreen: React.FC = () => {
         ]}>
         <FlexibleLabel
           label={t('amount')}
-          value={formatCurrency(290)}
+          value={formatCurrency(orderDetail?.total ?? 0)}
           showDollar={true}
           labelStyle={[styles.priceLabel, {color: colors.text}]}
           valueStyle={[styles.priceValue, {color: colors.text}]}
@@ -84,8 +94,7 @@ const OrderDetailScreen: React.FC = () => {
 
         <FlexibleLabel
           label={t('deliveryType')}
-          value={formatCurrency(2)}
-          showDollar={true}
+          value={getTranslatedStatus(orderDetail?.deliveryType ?? null, t)}
           labelStyle={[styles.priceLabel, {color: colors.text}]}
           valueStyle={[styles.priceValue, {color: colors.text}]}
           containerStyle={styles.priceContainerStyle}
@@ -93,7 +102,7 @@ const OrderDetailScreen: React.FC = () => {
 
         <FlexibleLabel
           label={t('deliveryFee')}
-          value={formatCurrency(2)}
+          value={formatCurrency(orderDetail?.deliveryFee ?? 0)}
           showDollar={true}
           labelStyle={[styles.priceLabel, {color: colors.text}]}
           valueStyle={[styles.priceValue, {color: colors.text}]}
@@ -102,7 +111,7 @@ const OrderDetailScreen: React.FC = () => {
 
         <FlexibleLabel
           label={t('discount')}
-          value={formatCurrency(20)}
+          value={formatCurrency(orderDetail?.discount ?? 0)}
           showDollar={true}
           labelStyle={[styles.priceLabel, {color: colors.text}]}
           valueStyle={[styles.priceValue, {color: colors.text}]}
@@ -118,7 +127,7 @@ const OrderDetailScreen: React.FC = () => {
 
         <FlexibleLabel
           label={t('total')}
-          value={formatCurrency(300)}
+          value={formatCurrency(orderDetail?.finalTotal ?? 0)}
           showDollar={true}
           labelStyle={[styles.priceLabel, {color: colors.text}]}
           valueStyle={[styles.priceValue, {color: colors.text}]}

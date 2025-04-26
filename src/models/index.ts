@@ -14,6 +14,8 @@ import Promotion from './Promotion';
 import Province from './Province';
 import Address from './Address';
 import PaymentMethod from './PaymentMethod';
+import OrderDetail from './OrderDetail';
+import OrderDetailItem from './OrderDetailItem';
 export {
   ProfileMenu,
   Language,
@@ -31,4 +33,6 @@ export {
   Province,
   Address,
   PaymentMethod,
+  OrderDetail,
+  OrderDetailItem,
 };

@@ -26,9 +26,7 @@ const useNotificationDetail = (id?: number) => {
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE FETCHING NOTIFICATION DETAIL:', error);
     } finally {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 2000);
+      setIsLoading(false);
     }
   };
 

@@ -206,4 +206,7 @@ export const translateKH = {
   pickup: 'ទៅយកដោយផ្ទាល់',
   unknown: 'មិនស្គាល់',
   failedToDeliver: 'មិនអាចចដឹកជញ្ជូនបាន',
+  unPaid: 'មិនទាន់បង់ប្រាក់',
+  paid: 'បងប្រាក់រួចរាល់',
+  paymentStatus: 'ស្ថានភាពបង់ប្រាក់',
 };

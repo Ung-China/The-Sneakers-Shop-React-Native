@@ -1,6 +1,6 @@
 import {useTranslation} from 'react-i18next';
 import {Icons} from '../../constants';
-import {TrackingStep, OrderDetail} from '../../models';
+import {TrackingStep} from '../../models';
 import useUser from '../useUser';
 import {useEffect, useState} from 'react';
 import {API_ENDPOINTS, GET} from '../../api';
@@ -10,7 +10,6 @@ const useOrderDetail = (id?: number) => {
   const {user} = useUser();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [orderDetail, setOrderDetail] = useState<OrderDetail | null>(null);
 
   const trackingSteps = [
     new TrackingStep(
@@ -51,8 +50,6 @@ const useOrderDetail = (id?: number) => {
   ];
 
   const fetchedOrderDetail = async () => {
-    if (!id) return;
-
     setIsLoading(true);
     try {
       const response = await GET(
@@ -65,10 +62,7 @@ const useOrderDetail = (id?: number) => {
         },
       );
 
-      if (response.success && response.data) {
-        const order = new OrderDetail(response.data);
-        setOrderDetail(order);
-      }
+      console.log('CHECK ORDER DETAIL:', response);
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE FETCHING ORDER DETAIL:', error);
     } finally {
@@ -80,12 +74,6 @@ const useOrderDetail = (id?: number) => {
     fetchedOrderDetail();
   }, [id]);
 
-  return {
-    trackingSteps,
-    isLoading,
-    orderDetail,
-    fetchedOrderDetail,
-  };
+  return {trackingSteps, isLoading, fetchedOrderDetail};
 };
-
 export default useOrderDetail;

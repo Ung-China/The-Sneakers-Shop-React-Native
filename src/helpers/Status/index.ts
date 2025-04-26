@@ -2,7 +2,7 @@ const getTranslatedStatus = (
   status: string | null,
   t: (key: string) => string,
 ): string => {
-  if (status === null) return t('pickup');
+  if (status === null || status === 'pickup') return t('pickup');
 
   switch (status) {
     case 'pending':
@@ -19,6 +19,16 @@ const getTranslatedStatus = (
       return t('canceled');
     case 'failed_to_deliver':
       return t('failedToDeliver');
+    case 'unpaid':
+      return t('unPaid');
+    case 'paid':
+      return t('paid');
+    case 'VET Express':
+      return t('VET Express');
+    case 'J&T Express':
+      return t('J&T Express');
+    case 'Capitol Express':
+      return t('Capitol Express');
     default:
       return status || t('unknown');
   }
