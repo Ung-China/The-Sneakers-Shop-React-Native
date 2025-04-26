@@ -4,6 +4,7 @@ import dateFormat from './DateFormat';
 import Validator from './Validator';
 import ProductPromotionChecker from './ProductPromotionChecker';
 import normalizePhoneNumber from './NormalizePhoneNumber';
+import HistoryProductPromotionChecker from './HistoryProductPromotionChecker';
 export {
   formatCurrency,
   checkDiscount,
@@ -11,4 +12,5 @@ export {
   Validator,
   ProductPromotionChecker,
   normalizePhoneNumber,
+  HistoryProductPromotionChecker,
 };

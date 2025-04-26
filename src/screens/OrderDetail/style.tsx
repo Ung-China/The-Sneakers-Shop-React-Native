@@ -45,4 +45,8 @@ export default StyleSheet.create({
     marginBottom: Padding.DEFAULT * 2,
     paddingBottom: Padding.BOTTOM,
   },
+  skeletonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
 });

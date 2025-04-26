@@ -1,11 +1,15 @@
-import {Variant} from '../../models';
-
 export interface CheckoutItemProps {
   item: {
     id: number;
     name: string;
-    imageUrl: string;
+    orderId: number;
+    productId: number;
+    brandId: number;
+    quantity: number;
+    size: string;
     price: number;
-    variant?: Variant;
+    discount: number;
+    discountType: string;
+    imageUrl: string;
   };
 }
