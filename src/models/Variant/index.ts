@@ -3,6 +3,8 @@ export default class Variant {
   size: string;
   price: number;
   quantity: number;
+  product_qty: number;
+  product_size: any;
 
   constructor(id: number, size: string, price: number, quantity: number) {
     this.id = id;

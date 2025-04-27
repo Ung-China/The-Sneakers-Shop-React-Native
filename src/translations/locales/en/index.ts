@@ -207,4 +207,7 @@ export const translateEN = {
   unPaid: 'Unpaid',
   paid: 'Paid',
   paymentStatus: 'Payment Status',
+  pleaseLoginToAddToCart: 'Please log in to add items to your cart',
+  soldOut: 'Sold Out',
+  left: 'Left',
 };

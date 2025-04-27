@@ -8,6 +8,7 @@ import {
   useProductDetail,
   useRelatedProducts,
   useTheme,
+  useUser,
 } from '../../hooks';
 import {
   AnimatedDotLoader,
@@ -42,6 +43,7 @@ const ProductDetailScreen: React.FC = () => {
 
   const {notifications} = useNotification();
   const {addProductToCart} = useCart();
+  const {isLoggedIn} = useUser();
 
   const {
     isLoading,
@@ -78,6 +80,17 @@ const ProductDetailScreen: React.FC = () => {
   };
 
   const handleAddToCart = () => {
+    if (!isLoggedIn) {
+      Snackbar.show({
+        text: t('pleaseLoginToAddToCart'),
+        textColor: 'white',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: colors.warning,
+        fontFamily: Fonts.REGULAR,
+      });
+      navigation.navigate('LoginScreen');
+      return;
+    }
     if (productDetail) {
       const cartItem = {
         id: id,
@@ -105,6 +118,17 @@ const ProductDetailScreen: React.FC = () => {
   };
 
   const handleBuyNow = () => {
+    if (!isLoggedIn) {
+      Snackbar.show({
+        text: t('pleaseLoginToAddToCart'),
+        textColor: 'white',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: colors.warning,
+        fontFamily: Fonts.REGULAR,
+      });
+      navigation.navigate('LoginScreen');
+      return;
+    }
     if (productDetail) {
       const cartItem = {
         id: id,

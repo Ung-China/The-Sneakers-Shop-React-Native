@@ -15,6 +15,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
   },
+  scrollViewContainer: {},
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',

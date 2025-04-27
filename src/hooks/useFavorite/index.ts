@@ -16,7 +16,7 @@ const useFavorite = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -42,7 +42,7 @@ const useFavorite = () => {
     setTimeout(() => {
       setLimit(newLimit);
       setIsLoading(false);
-    }, 2000);
+    }, 1000);
   };
 
   const fetchMoreFavorites = () => {
@@ -56,7 +56,7 @@ const useFavorite = () => {
 
       setLimit(totalLoaded);
       setIsFetchingMoreFavorites(false);
-    }, 2000);
+    }, 1000);
   };
 
   return {

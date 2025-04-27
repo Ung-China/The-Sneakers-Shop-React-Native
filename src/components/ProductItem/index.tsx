@@ -1,17 +1,19 @@
-import {Alert, Text, View} from 'react-native';
-import {ProductItemProps} from '../../types';
+import {Text, View} from 'react-native';
+import {ProductItemProps, StackParamList} from '../../types';
 import styles from './style';
 import Touchable from '../Touchable';
 import {CachedImage} from '@georstat/react-native-image-cache';
 import LoadingImage from '../LoadingImage';
-import {Fonts, Icons, Radius, Spacing} from '../../constants';
-import {useCart, useFavorite, useNotification, useTheme} from '../../hooks';
+import {Fonts, Icons, Radius} from '../../constants';
+import {useCart, useFavorite, useTheme, useUser} from '../../hooks';
 import PriceTag from '../PriceTag';
 import IconButton from '../IconButton';
 import RatingTag from '../RatingTag';
 import {ProductPromotionChecker} from '../../helpers';
 import {useTranslation} from 'react-i18next';
 import Snackbar from 'react-native-snackbar';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 const ProductItem: React.FC<ProductItemProps> = ({
   item,
@@ -19,11 +21,15 @@ const ProductItem: React.FC<ProductItemProps> = ({
   onPress,
   notifications,
 }) => {
+  const navigation = useNavigation<StackNavigationProp<StackParamList>>();
+
   const {colors} = useTheme();
 
   const {isFavorite, toggleItemFavorite} = useFavorite();
-  const {addProductToCart} = useCart();
+  const {addProductToCart, cartItems} = useCart();
   const {t} = useTranslation();
+
+  console.log('CHECK CART ITEMS', cartItems);
 
   const {hasProductPromotion, finalPrice, discountType, discountValue} =
     ProductPromotionChecker({
@@ -33,7 +39,21 @@ const ProductItem: React.FC<ProductItemProps> = ({
       brandId: item.brandId,
     });
 
+  const {isLoggedIn} = useUser();
+
   const handleAddToCart = () => {
+    if (!isLoggedIn) {
+      Snackbar.show({
+        text: t('pleaseLoginToAddToCart'),
+        textColor: 'white',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: colors.warning,
+        fontFamily: Fonts.REGULAR,
+      });
+      navigation.navigate('LoginScreen');
+      return;
+    }
+
     if (item) {
       const cartItem = {
         id: item.id,
@@ -41,7 +61,7 @@ const ProductItem: React.FC<ProductItemProps> = ({
         name: item.name,
         image: item.image,
         price: item.price,
-        variantName: item.variants[0].product_size,
+        variantName: item.variants?.[0]?.product_size || '',
         variantId: 0,
         quantity: 1,
         discountType: discountType,
@@ -126,6 +146,22 @@ const ProductItem: React.FC<ProductItemProps> = ({
             />
           </View>
         </View>
+      </View>
+      <View
+        style={[
+          styles.leftContainer,
+          {
+            backgroundColor:
+              item.variants?.[0]?.product_qty == 0
+                ? colors.error
+                : colors.success,
+          },
+        ]}>
+        <Text style={styles.left}>
+          {item.variants?.[0]?.product_qty == 0
+            ? t('soldOut')
+            : `${item.variants?.[0]?.product_qty || ''} ${t('left')}`}
+        </Text>
       </View>
     </Touchable>
   );

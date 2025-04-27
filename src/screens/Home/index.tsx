@@ -1,5 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, FlatList, RefreshControl, SafeAreaView} from 'react-native';
+import {
+  ScrollView,
+  FlatList,
+  RefreshControl,
+  SafeAreaView,
+  View,
+} from 'react-native';
 import styles from './style';
 import {
   BrandItem,
@@ -187,6 +193,7 @@ const HomeScreen: React.FC = () => {
         },
       ]}>
       <ScrollView
+        style={styles.scrollViewContainer}
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl

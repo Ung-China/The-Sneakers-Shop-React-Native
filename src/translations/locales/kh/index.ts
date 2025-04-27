@@ -209,4 +209,8 @@ export const translateKH = {
   unPaid: 'មិនទាន់បង់ប្រាក់',
   paid: 'បងប្រាក់រួចរាល់',
   paymentStatus: 'ស្ថានភាពបង់ប្រាក់',
+  pleaseLoginToAddToCart:
+    'សូមចូលទៅកាន់គណនីរបស់អ្នក ដើម្បីបន្ថែមធាតុទៅក្នុងកាបូបរបស់អ្នក។',
+  soldOut: 'អស់ពីស្តុក',
+  left: 'នៅសល់',
 };
