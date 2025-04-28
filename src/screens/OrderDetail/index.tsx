@@ -13,10 +13,10 @@ import {
 } from '../../components';
 import {CheckoutItemProps} from '../../types/CheckoutItem';
 import {cartItems} from '../../models/CartItem';
-import {dateFormat, formatCurrency} from '../../helpers';
+import {dateFormat, formatCurrency, GetTranslatedStatus} from '../../helpers';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {StackParamList} from '../../types';
-import getTranslatedStatus from '../../helpers/Status';
+
 import {Padding, Radius, Spacing} from '../../constants';
 
 const OrderDetailScreen: React.FC = () => {
@@ -217,7 +217,7 @@ const OrderDetailScreen: React.FC = () => {
             ]}>
             <FlexibleLabel
               label={t('yourOrderStatus')}
-              value={getTranslatedStatus(orderDetail?.orderStatus ?? null, t)}
+              value={GetTranslatedStatus(orderDetail?.orderStatus ?? null, t)}
               labelStyle={[styles.priceLabel, {color: colors.text}]}
               valueStyle={[styles.priceValue, {color: colors.text}]}
               containerStyle={styles.priceContainerStyle}
@@ -238,7 +238,7 @@ const OrderDetailScreen: React.FC = () => {
             />
             <FlexibleLabel
               label={t('paymentStatus')}
-              value={getTranslatedStatus(orderDetail?.paymentStatus ?? null, t)}
+              value={GetTranslatedStatus(orderDetail?.paymentStatus ?? null, t)}
               labelStyle={[styles.priceLabel, {color: colors.text}]}
               valueStyle={[styles.priceValue, {color: colors.text}]}
               containerStyle={styles.priceContainerStyle}
@@ -273,7 +273,7 @@ const OrderDetailScreen: React.FC = () => {
 
             <FlexibleLabel
               label={t('deliveryType')}
-              value={getTranslatedStatus(orderDetail?.deliveryType ?? null, t)}
+              value={GetTranslatedStatus(orderDetail?.deliveryType ?? null, t)}
               labelStyle={[styles.priceLabel, {color: colors.text}]}
               valueStyle={[styles.priceValue, {color: colors.text}]}
               containerStyle={styles.priceContainerStyle}

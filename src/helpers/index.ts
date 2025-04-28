@@ -5,6 +5,8 @@ import Validator from './Validator';
 import ProductPromotionChecker from './ProductPromotionChecker';
 import normalizePhoneNumber from './NormalizePhoneNumber';
 import HistoryProductPromotionChecker from './HistoryProductPromotionChecker';
+import StockChecker from './StockChecker';
+import GetTranslatedStatus from './Status';
 export {
   formatCurrency,
   checkDiscount,
@@ -13,4 +15,5 @@ export {
   ProductPromotionChecker,
   normalizePhoneNumber,
   HistoryProductPromotionChecker,
+  GetTranslatedStatus,
 };

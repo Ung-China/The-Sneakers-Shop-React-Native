@@ -1,4 +1,4 @@
-const getTranslatedStatus = (
+const GetTranslatedStatus = (
   status: string | null,
   t: (key: string) => string,
 ): string => {
@@ -34,4 +34,4 @@ const getTranslatedStatus = (
   }
 };
 
-export default getTranslatedStatus;
+export default GetTranslatedStatus;
