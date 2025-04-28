@@ -210,4 +210,6 @@ export const translateEN = {
   pleaseLoginToAddToCart: 'Please log in to add items to your cart',
   soldOut: 'Sold Out',
   left: 'Left',
+  outOfStock: 'Sorry, this item is currently out of stock.',
+  notEnoughStock: 'Sorry, we do not have enough stock available for this item.',
 };

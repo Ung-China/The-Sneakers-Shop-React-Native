@@ -31,7 +31,7 @@ import RatingTag from '../../components/RatingTag';
 import React from 'react';
 import {dummyProducts} from '../../models/Product';
 import {variants} from '../../models/Variant';
-import {ProductPromotionChecker} from '../../helpers';
+import {ProductPromotionChecker, StockChecker} from '../../helpers';
 import Snackbar from 'react-native-snackbar';
 
 const ProductDetailScreen: React.FC = () => {
@@ -42,7 +42,7 @@ const ProductDetailScreen: React.FC = () => {
   const {colors} = useTheme();
 
   const {notifications} = useNotification();
-  const {addProductToCart} = useCart();
+  const {addProductToCart, cartItems} = useCart();
   const {isLoggedIn} = useUser();
 
   const {
@@ -80,6 +80,16 @@ const ProductDetailScreen: React.FC = () => {
   };
 
   const handleAddToCart = () => {
+    const {isOutOfStock, isCartExceedStock} = StockChecker({
+      cartItems,
+      productId: id,
+      variantId: activeVariantId ?? 0,
+      stock:
+        activeVariantId !== null
+          ? productDetail?.variants?.[activeVariantId]?.quantity ?? 0
+          : 0,
+    });
+
     if (!isLoggedIn) {
       Snackbar.show({
         text: t('pleaseLoginToAddToCart'),
@@ -91,6 +101,29 @@ const ProductDetailScreen: React.FC = () => {
       navigation.navigate('LoginScreen');
       return;
     }
+
+    if (isOutOfStock) {
+      Snackbar.show({
+        text: t('outOfStock'),
+        textColor: 'white',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: colors.error,
+        fontFamily: Fonts.REGULAR,
+      });
+      return;
+    }
+
+    if (isCartExceedStock) {
+      Snackbar.show({
+        text: t('notEnoughStock'),
+        textColor: 'white',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: colors.error,
+        fontFamily: Fonts.REGULAR,
+      });
+      return;
+    }
+
     if (productDetail) {
       const cartItem = {
         id: id,
@@ -118,6 +151,16 @@ const ProductDetailScreen: React.FC = () => {
   };
 
   const handleBuyNow = () => {
+    const {isOutOfStock, isCartExceedStock} = StockChecker({
+      cartItems,
+      productId: id,
+      variantId: activeVariantId ?? 0,
+      stock:
+        activeVariantId !== null
+          ? productDetail?.variants?.[activeVariantId]?.quantity ?? 0
+          : 0,
+    });
+
     if (!isLoggedIn) {
       Snackbar.show({
         text: t('pleaseLoginToAddToCart'),
@@ -129,6 +172,29 @@ const ProductDetailScreen: React.FC = () => {
       navigation.navigate('LoginScreen');
       return;
     }
+
+    if (isOutOfStock) {
+      Snackbar.show({
+        text: t('outOfStock'),
+        textColor: 'white',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: colors.error,
+        fontFamily: Fonts.REGULAR,
+      });
+      return;
+    }
+
+    if (isCartExceedStock) {
+      Snackbar.show({
+        text: t('notEnoughStock'),
+        textColor: 'white',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: colors.error,
+        fontFamily: Fonts.REGULAR,
+      });
+      return;
+    }
+
     if (productDetail) {
       const cartItem = {
         id: id,
@@ -414,7 +480,7 @@ const ProductDetailScreen: React.FC = () => {
                     <FlatList
                       data={variants}
                       renderItem={variantSkeleton}
-                      numColumns={3}
+                      numColumns={2}
                       scrollEnabled={false}
                       ItemSeparatorComponent={ItemSeparatorHeight}
                       keyExtractor={item => item.id.toString()}
@@ -428,7 +494,7 @@ const ProductDetailScreen: React.FC = () => {
                     <FlatList
                       data={productDetail.variants}
                       renderItem={variantItem}
-                      numColumns={3}
+                      numColumns={2}
                       scrollEnabled={false}
                       ItemSeparatorComponent={ItemSeparatorHeight}
                       keyExtractor={item => item.id.toString()}

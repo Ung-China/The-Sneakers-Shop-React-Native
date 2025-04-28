@@ -9,5 +9,6 @@ export interface VariantProps {
     id: number;
     size: string;
     price: number;
+    quantity: number;
   };
 }

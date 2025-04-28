@@ -13,7 +13,7 @@ export default StyleSheet.create({
     paddingHorizontal: Padding.DEFAULT,
     paddingVertical: Padding.EXTRA_SMALL,
     borderRadius: Radius.DEFAULT,
-    width: Screen_Dimensions.WIDTH / 3 - 15 - 5,
+    width: Screen_Dimensions.WIDTH / 2 - 15 - 5,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

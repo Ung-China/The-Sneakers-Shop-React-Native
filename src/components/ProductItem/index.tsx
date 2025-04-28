@@ -9,7 +9,7 @@ import {useCart, useFavorite, useTheme, useUser} from '../../hooks';
 import PriceTag from '../PriceTag';
 import IconButton from '../IconButton';
 import RatingTag from '../RatingTag';
-import {ProductPromotionChecker} from '../../helpers';
+import {ProductPromotionChecker, StockChecker} from '../../helpers';
 import {useTranslation} from 'react-i18next';
 import Snackbar from 'react-native-snackbar';
 import {useNavigation} from '@react-navigation/native';
@@ -29,8 +29,6 @@ const ProductItem: React.FC<ProductItemProps> = ({
   const {addProductToCart, cartItems} = useCart();
   const {t} = useTranslation();
 
-  console.log('CHECK CART ITEMS', cartItems);
-
   const {hasProductPromotion, finalPrice, discountType, discountValue} =
     ProductPromotionChecker({
       productId: item.id,
@@ -42,6 +40,13 @@ const ProductItem: React.FC<ProductItemProps> = ({
   const {isLoggedIn} = useUser();
 
   const handleAddToCart = () => {
+    const {isOutOfStock, isCartExceedStock} = StockChecker({
+      cartItems,
+      productId: item.id,
+      variantId: item.variants?.[0]?.id ?? 0,
+      stock: item.variants?.[0]?.product_qty ?? 0,
+    });
+
     if (!isLoggedIn) {
       Snackbar.show({
         text: t('pleaseLoginToAddToCart'),
@@ -54,6 +59,27 @@ const ProductItem: React.FC<ProductItemProps> = ({
       return;
     }
 
+    if (isOutOfStock) {
+      Snackbar.show({
+        text: t('outOfStock'),
+        textColor: 'white',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: colors.error,
+        fontFamily: Fonts.REGULAR,
+      });
+      return;
+    }
+
+    if (isCartExceedStock) {
+      Snackbar.show({
+        text: t('notEnoughStock'),
+        textColor: 'white',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: colors.error,
+        fontFamily: Fonts.REGULAR,
+      });
+      return;
+    }
     if (item) {
       const cartItem = {
         id: item.id,

@@ -16,4 +16,5 @@ export {
   normalizePhoneNumber,
   HistoryProductPromotionChecker,
   GetTranslatedStatus,
+  StockChecker,
 };
