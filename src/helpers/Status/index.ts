@@ -7,18 +7,18 @@ const GetTranslatedStatus = (
   switch (status) {
     case 'pending':
       return t('pending');
-    case 'confirmed':
-      return t('confirmed');
-    case 'packaging':
+    case 'preparing':
+      return t('preparing');
+    case 'packed':
       return t('packed');
-    case 'out_for_delivery':
+    case 'shipped':
       return t('shipped');
-    case 'delivered':
+    case 'shipped':
       return t('completed');
-    case 'cancelled':
+    case 'completed':
       return t('canceled');
-    case 'failed_to_deliver':
-      return t('failedToDeliver');
+    case 'ready_to_pickup':
+      return t('readyToPickup');
     case 'unpaid':
       return t('unPaid');
     case 'paid':

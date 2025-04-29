@@ -1,16 +1,14 @@
-import {SvgProps} from 'react-native-svg';
-
 export default class TrackingStep {
   id: number;
   date: number | null;
-  icon: React.FC<SvgProps>;
+  icon: any;
   title: string;
   description: string;
 
   constructor(
     id: number,
     date: number | null,
-    icon: React.FC<SvgProps>,
+    icon: any,
     title: string,
     description: string,
   ) {

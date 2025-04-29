@@ -1,4 +1,5 @@
 import OrderDetailItem from '../OrderDetailItem';
+import OrderStatus from '../OrderStatus';
 
 export default class OrderDetail {
   id: number;
@@ -12,6 +13,7 @@ export default class OrderDetail {
   deliveryFee: number;
   deliveryType: string;
   details: OrderDetailItem[];
+  ordersStatus: OrderStatus[];
 
   constructor(order: any) {
     this.id = Number(order.id);
@@ -26,5 +28,7 @@ export default class OrderDetail {
     this.deliveryType = order.delivery_type;
     this.details =
       order.details?.map((item: any) => new OrderDetailItem(item)) ?? [];
+    this.ordersStatus =
+      order.tracking?.map((item: any) => new OrderStatus(item)) ?? [];
   }
 }

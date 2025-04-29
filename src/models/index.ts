@@ -16,6 +16,7 @@ import Address from './Address';
 import PaymentMethod from './PaymentMethod';
 import OrderDetail from './OrderDetail';
 import OrderDetailItem from './OrderDetailItem';
+import OrderStatus from './OrderStatus';
 export {
   ProfileMenu,
   Language,
@@ -35,4 +36,5 @@ export {
   PaymentMethod,
   OrderDetail,
   OrderDetailItem,
+  OrderStatus,
 };
