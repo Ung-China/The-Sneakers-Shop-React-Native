@@ -27,7 +27,7 @@ const OrderDetailScreen: React.FC = () => {
   const {trackingSteps, isLoading, fetchedOrderDetail, orderDetail} =
     useOrderDetail(id);
 
-  console.log('CHECK ORDER DETAIL', orderDetail);
+  // console.log('CHECK ORDER DETAIL', orderDetail);
 
   const checkoutItem = ({item}: {item: CheckoutItemProps['item']}) => {
     return <CheckoutItem item={item} />;

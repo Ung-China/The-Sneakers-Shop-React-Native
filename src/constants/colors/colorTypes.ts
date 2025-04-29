@@ -18,6 +18,7 @@ export type Themes = {
   error: string;
   warning: string;
   info: string;
+  modalBackground: string;
 };
 
 const isDark = Appearance.getColorScheme() === 'dark';

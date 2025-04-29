@@ -9,6 +9,7 @@ export default class CartItem {
   quantity: number;
   discountType: string | null;
   discount: number;
+  stock: number;
 
   constructor(
     id: number,
@@ -21,6 +22,7 @@ export default class CartItem {
     quantity: number,
     discountType: string,
     discount: number,
+    stock: number,
   ) {
     this.id = id;
     this.brandId = brandId;
@@ -32,6 +34,7 @@ export default class CartItem {
     this.quantity = quantity;
     this.discountType = discountType;
     this.discount = discount;
+    this.stock = stock;
   }
 }
 

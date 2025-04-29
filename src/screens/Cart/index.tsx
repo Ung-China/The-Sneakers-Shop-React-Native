@@ -45,7 +45,9 @@ const CartScreen: React.FC = () => {
         item={item}
         onPress={() => handleOnPressToProductDetail(item.id, item.brandId)}
         onDelete={() => handleDeletePress(item.id, item.variantId)}
-        onIncrease={() => increaseProductQuantity(item.id, item.variantId)}
+        onIncrease={() =>
+          increaseProductQuantity(item.id, item.variantId, item.stock)
+        }
         onDecrease={() => decreaseProductQuantity(item.id, item.variantId)}
         notifications={notifications}
       />

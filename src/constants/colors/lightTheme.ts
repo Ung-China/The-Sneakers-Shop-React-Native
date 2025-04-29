@@ -16,6 +16,7 @@ const LightTheme: Themes = {
   error: '#FF4C4C',
   warning: '#FFA500',
   info: '#2196F3',
+  modalBackground: '#FFFFFF',
 };
 
 export default LightTheme;

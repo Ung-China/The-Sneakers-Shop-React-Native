@@ -1,17 +1,15 @@
-import {View} from 'react-native-reanimated/lib/typescript/Animated';
 import {Radius, Spacing} from '../../constants';
 import Skeleton from '../Skeleton';
 
-const ProductItemSkeleton: React.FC = () => {
+const OrderItemSkeleton: React.FC = () => {
   return (
     <Skeleton
       containerStyle={{
         borderRadius: Radius.DEFAULT,
-        height: 260,
-        width: 160,
+        height: 150,
       }}
     />
   );
 };
 
-export default ProductItemSkeleton;
+export default OrderItemSkeleton;

@@ -16,6 +16,7 @@ const DarkTheme: Themes = {
   error: '#FF4C4C',
   warning: '#FFA500',
   info: '#2196F3',
+  modalBackground: '#262626',
 };
 
 export default DarkTheme;

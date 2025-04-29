@@ -15,6 +15,7 @@ export interface CartItemProps {
     variantName: string;
     variantId: number | null;
     quantity: number;
+    stock: number;
   };
   notifications: Notification[];
 }

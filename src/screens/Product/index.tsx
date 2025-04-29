@@ -136,6 +136,7 @@ const ProductDetailScreen: React.FC = () => {
         quantity: 1,
         discountType: discountType,
         discount: discountValue,
+        stock: productDetail?.variants?.[activeVariantId]?.quantity ?? 0,
       };
 
       addProductToCart(cartItem);
@@ -207,6 +208,7 @@ const ProductDetailScreen: React.FC = () => {
         quantity: 1,
         discountType: discountType,
         discount: discountValue,
+        stock: productDetail?.variants?.[activeVariantId]?.quantity ?? 0,
       };
 
       addProductToCart(cartItem);

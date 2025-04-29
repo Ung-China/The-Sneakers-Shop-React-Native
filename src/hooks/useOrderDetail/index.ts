@@ -9,6 +9,9 @@ const useOrderDetail = (id?: number) => {
   const {t} = useTranslation();
   const {user} = useUser();
 
+  console.log('CHECK USER TOKEN', user?.token);
+  console.log('ORDER ID', id);
+
   const [isLoading, setIsLoading] = useState(false);
   const [orderDetail, setOrderDetail] = useState<OrderDetail | null>(null);
 
@@ -64,6 +67,8 @@ const useOrderDetail = (id?: number) => {
           Authorization: `Bearer ${user?.token}`,
         },
       );
+
+      console.log('CHECK RESPONSE', response.data.tracking);
 
       if (response.success && response.data) {
         const order = new OrderDetail(response.data);

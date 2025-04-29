@@ -3,14 +3,14 @@ import {FlatList, RefreshControl, View} from 'react-native';
 import styles from './style';
 import {useOrder, useTheme} from '../../hooks';
 import {useTranslation} from 'react-i18next';
-import {Radius} from '../../constants';
+
 import {OrderItemProps, StackParamList} from '../../types';
 import {
   AnimatedDotLoader,
   ItemSeparatorHeight,
   NotFound,
   OrderItem,
-  Skeleton,
+  OrderItemSkeleton,
 } from '../../components';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -37,14 +37,7 @@ const OrderScreen: React.FC = () => {
   };
 
   const orderSkeleton = () => {
-    return (
-      <Skeleton
-        containerStyle={{
-          borderRadius: Radius.DEFAULT,
-          height: 150,
-        }}
-      />
-    );
+    return <OrderItemSkeleton />;
   };
 
   const handleOnPressOrder = (id: number) => {
