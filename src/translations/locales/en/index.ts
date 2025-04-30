@@ -48,9 +48,9 @@ export const translateEN = {
   confirmed: 'Confirmed',
   orderHasBeenConfirmedByAdmin: 'Order has been confirmed by admin',
   orderIsPreparing: 'Order is preparing',
-  orderIsDelivering: 'Order is delivering',
+  orderIsShipped: 'Order is shipped',
   delivery: 'Delivery',
-  orderCompleted: 'Order completed',
+  orderCompleted: 'Order is completed',
   visions:
     'To be the go-to destination for premium sneakers, offering style, comfort, and innovation to sneaker enthusiasts everywhere.',
   missions:
@@ -202,7 +202,7 @@ export const translateEN = {
   shipped: 'Shipped',
   completed: 'Completed',
   readyToPickup: 'Ready to Pickup',
-  canceled: 'Canceled',
+  cancelled: 'Cancelled',
   unknown: 'Unknown',
   failedToDeliver: 'Unable to Deliver',
   unPaid: 'Unpaid',
@@ -213,4 +213,7 @@ export const translateEN = {
   left: 'Left',
   outOfStock: 'Sorry, this item is currently out of stock.',
   notEnoughStock: 'Sorry, we do not have enough stock available for this item.',
+  orderIsPacked: 'Order is packed',
+  orderCancelled: 'Order is cancelled',
+  orderIsReadyToPickup: 'Order is ready to pickup',
 };

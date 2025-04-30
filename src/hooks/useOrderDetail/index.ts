@@ -24,19 +24,19 @@ const useOrderDetail = (id?: number) => {
       key: 'preparing',
       icon: Icons.PREPARING,
       title: t('preparing'),
-      desc: t('orderHasBeenConfirmedByAdmin'),
+      desc: t('orderIsPreparing'),
     },
     {
       key: 'packed',
-      icon: Icons.PREPARING,
+      icon: Icons.PACKED,
       title: t('packed'),
-      desc: t('orderIsPreparing'),
+      desc: t('orderIsPacked'),
     },
     {
       key: 'shipped',
       icon: Icons.DELIVERY,
       title: t('shipped'),
-      desc: t('orderIsDelivering'),
+      desc: t('orderIsShipped'),
     },
     {
       key: 'completed',
@@ -46,9 +46,15 @@ const useOrderDetail = (id?: number) => {
     },
     {
       key: 'ready_to_pickup',
-      icon: Icons.COMPLETED,
+      icon: Icons.SHOP,
       title: t('readyToPickup'),
-      desc: t('orderCompleted'),
+      desc: t('orderIsReadyToPickup'),
+    },
+    {
+      key: 'cancelled',
+      icon: Icons.CANCELED,
+      title: t('cancelled'),
+      desc: t('orderCancelled'),
     },
   ];
 
@@ -70,8 +76,6 @@ const useOrderDetail = (id?: number) => {
         setOrderDetail(order);
 
         const trackingData = response.data.tracking ?? [];
-
-        console.log('CHECK TRACKING DATA:', trackingData);
 
         const mappedSteps = trackingData
           .map((trackItem: any, index: number) => {

@@ -40,7 +40,11 @@ const FlexibleInput: React.FC<FlexibleInputProps> = ({
           {prefixIcon && prefixIcon}
 
           <Touchable onPress={onPress} style={styles.textInput}>
-            <Text style={[styles.placeHolder, {color: colors.grey}]}>
+            <Text
+              style={[
+                styles.placeHolder,
+                {color: value ? colors.text : 'grey'},
+              ]}>
               {value ? value : placeholder}
             </Text>
           </Touchable>

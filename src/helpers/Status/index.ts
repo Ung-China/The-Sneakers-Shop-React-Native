@@ -13,10 +13,10 @@ const GetTranslatedStatus = (
       return t('packed');
     case 'shipped':
       return t('shipped');
-    case 'shipped':
-      return t('completed');
     case 'completed':
-      return t('canceled');
+      return t('completed');
+    case 'cancelled':
+      return t('cancelled');
     case 'ready_to_pickup':
       return t('readyToPickup');
     case 'unpaid':

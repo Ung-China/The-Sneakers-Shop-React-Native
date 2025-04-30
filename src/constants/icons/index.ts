@@ -58,6 +58,9 @@ import EmptyBox from '../../assets/icons/emptyBox.svg';
 import Guest from '../../assets/icons/guest.svg';
 import SuccessIcon from '../../assets/icons/successIcon.svg';
 import CashOnDelivery from '../../assets/icons/cashOnDelivery.svg';
+import Packed from '../../assets/icons/packed.svg';
+import Shop from '../../assets/icons/shop.svg';
+import Canceled from '../../assets/icons/canceled.svg';
 
 const Icons = {
   HOME: Home,
@@ -120,6 +123,9 @@ const Icons = {
   GUEST: Guest,
   SUCCESSICON: SuccessIcon,
   CASHONDELIVERY: CashOnDelivery,
+  PACKED: Packed,
+  SHOP: Shop,
+  CANCELED: Canceled,
 };
 
 export default Icons;

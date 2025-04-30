@@ -48,7 +48,7 @@ export const translateKH = {
   confirmed: 'បញ្ជាក់',
   orderHasBeenConfirmedByAdmin: 'ការបញ្ជាទិញត្រូវបានបញ្ជាក់ដោយអ្នកគ្រប់គ្រង',
   orderIsPreparing: 'ទំនិញកំពុងរៀបចំ',
-  orderIsDelivering: 'ទំនិញកំពុងដឹកជញ្ជូន',
+  orderIsShipped: 'ទំនិញកំពុងដឹកជញ្ជូន',
   delivery: 'ការដឹកជញ្ជូន',
   orderCompleted: 'ការបញ្ជាទិញបានបញ្ចប់',
   visions:
@@ -203,7 +203,7 @@ export const translateKH = {
   shipped: 'បានដឹកជញ្ជូន',
   completed: 'បានទទួលទំនិញ',
   readyToPickup: 'រួចរាល់សម្រាប់ការទទួល',
-  canceled: 'បានលុបចោល',
+  cancelled: 'បានលុបចោល',
   pickup: 'ទៅយកដោយផ្ទាល់',
   unknown: 'មិនស្គាល់',
   failedToDeliver: 'មិនអាចចដឹកជញ្ជូនបាន',

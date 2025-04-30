@@ -11,6 +11,8 @@ const FlexibleStepIndicatorItem: React.FC<FlexibleStepItem> = ({
   lastIndex,
 }) => {
   const {colors} = useTheme();
+
+  console.log('item', item);
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
@@ -24,8 +26,25 @@ const FlexibleStepIndicatorItem: React.FC<FlexibleStepItem> = ({
         </View>
 
         <View style={styles.iconContentContainer}>
-          <View style={styles.iconContainer}>
-            <item.icon width={45} height={45} />
+          <View
+            style={[
+              styles.iconContainer,
+              {
+                backgroundColor:
+                  item.title === 'Cancelled' || item.title === 'បានលុបចោល'
+                    ? 'red'
+                    : colors.primaryReversed,
+              },
+            ]}>
+            <item.icon
+              width={30}
+              height={30}
+              color={
+                item.title === 'Cancelled' || item.title === 'បានលុបចោល'
+                  ? colors.text
+                  : colors.textReversed
+              }
+            />
           </View>
 
           <View style={[styles.titleDescriptionContainer]}>
@@ -41,12 +60,24 @@ const FlexibleStepIndicatorItem: React.FC<FlexibleStepItem> = ({
       <View style={[styles.seperatorContainer]}>
         {!lastIndex && (
           <DotSeperator
-            length={5}
+            length={6}
             isActive={true}
             activeColor={colors.text}
             inactiveColor={colors.grey}
           />
         )}
+        {lastIndex &&
+          item.title !== 'Cancelled' &&
+          item.title !== 'បានលុបចោល' &&
+          item.title !== 'Completed' &&
+          item.title !== 'បានទទួលទំនិញ' && (
+            <DotSeperator
+              length={6}
+              isActive={true}
+              activeColor={colors.text}
+              inactiveColor={colors.grey}
+            />
+          )}
       </View>
     </View>
   );
