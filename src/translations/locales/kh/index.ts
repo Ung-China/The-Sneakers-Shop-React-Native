@@ -47,8 +47,8 @@ export const translateKH = {
   watingForAdminConfirmed: 'សូមរងចាំការបញ្ជាក់ពីអ្នកគ្រប់គ្រង',
   confirmed: 'បញ្ជាក់',
   orderHasBeenConfirmedByAdmin: 'ការបញ្ជាទិញត្រូវបានបញ្ជាក់ដោយអ្នកគ្រប់គ្រង',
-  orderIsPreparing: 'ទំនិញកំពុងរៀបចំ',
-  orderIsShipped: 'ទំនិញកំពុងដឹកជញ្ជូន',
+  orderIsPreparing: 'ការបញ្ជាកំពុងរៀបចំ',
+  orderIsShipped: 'ការបញ្ជាទិញត្រូវបានដឹកជញ្ជូន',
   delivery: 'ការដឹកជញ្ជូន',
   orderCompleted: 'ការបញ្ជាទិញបានបញ្ចប់',
   visions:
@@ -216,4 +216,7 @@ export const translateKH = {
   left: 'នៅសល់',
   outOfStock: 'សូមអភ័យទោស! ទំនិញនេះបានអស់ពីស្តុករួចហើយ។',
   notEnoughStock: 'សូមអភ័យទោស! បរិមាណស្តុកសម្រាប់ទំនិញនេះមិនគ្រប់គ្រាន់ទេ។',
+  orderIsPacked: 'ការបញ្ជាទិញត្រូវបានខ្ចប់រួចរាល់',
+  orderCancelled: 'ការបញ្ជាទិញត្រូវបានលុបចោល',
+  logoutFailed: 'ចាកចេញមិនបាន។ សូមព្យាយាមម្តងទៀត។',
 };

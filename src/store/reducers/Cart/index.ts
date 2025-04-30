@@ -22,7 +22,7 @@ const cartReducer = (state = initialState, action: any): CartState => {
                 ? {...item, quantity: item.quantity + 1}
                 : item,
             )
-          : [...state.cart, {...newItem, quantity: 1}],
+          : [{...newItem, quantity: 1}, ...state.cart],
       };
     }
 

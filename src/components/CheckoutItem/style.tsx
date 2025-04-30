@@ -53,7 +53,9 @@ export default StyleSheet.create({
     color: colors.white,
   },
   quantityContainer: {
-    flexDirection: 'row',
+    position: 'absolute',
+    right: 10,
+    bottom: 10,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: Radius.EXTRA_LARGE,

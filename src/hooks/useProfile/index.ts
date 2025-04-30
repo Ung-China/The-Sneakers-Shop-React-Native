@@ -4,7 +4,7 @@ import {useTranslation} from 'react-i18next';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {StackParamList} from '../../types';
-import {useCallback, useRef, useState} from 'react';
+import {useCallback, useState} from 'react';
 import {Alert} from 'react-native';
 import useTheme from '../useTheme';
 import useUser from '../useUser';

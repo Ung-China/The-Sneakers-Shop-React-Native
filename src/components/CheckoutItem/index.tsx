@@ -55,10 +55,10 @@ const CheckoutItem: React.FC<CheckoutItemProps> = ({item}) => {
               defaultPrice={hasProductPromotion ? item.price : null}
             />
           </Text>
-          <View style={[styles.quantityContainer]}>
-            <Text style={styles.quantity}>{item.quantity}</Text>
-          </View>
         </View>
+      </View>
+      <View style={[styles.quantityContainer]}>
+        <Text style={styles.quantity}>{item.quantity}</Text>
       </View>
     </View>
   );

@@ -29,17 +29,19 @@ const useOrder = () => {
         },
       );
 
-      const fetchedOrders = response.data.data.map(
-        (item: any) =>
-          new Order(
-            item.id,
-            item.invoice_ref,
-            item.created_at,
-            item.order_status,
-            Number(item.total),
-            item.product_count,
-          ),
-      );
+      const fetchedOrders = response.data.data
+        .reverse()
+        .map(
+          (item: any) =>
+            new Order(
+              item.id,
+              item.invoice_ref,
+              item.created_at,
+              item.order_status,
+              Number(item.total),
+              item.product_count,
+            ),
+        );
 
       setOrders(prevOrders =>
         page === 1 ? fetchedOrders : [...prevOrders, ...fetchedOrders],

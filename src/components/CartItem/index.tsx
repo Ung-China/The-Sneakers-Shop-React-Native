@@ -141,6 +141,7 @@ const CartItem: React.FC<CartItemProps> = ({
                     <Text style={[styles.quantity, {color: colors.text}]}>
                       {item.quantity}
                     </Text>
+
                     <IconButton onPress={onIncrease} icon={<Icons.PLUS />} />
                   </View>
                 </View>

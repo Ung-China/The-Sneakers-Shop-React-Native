@@ -216,4 +216,5 @@ export const translateEN = {
   orderIsPacked: 'Order is packed',
   orderCancelled: 'Order is cancelled',
   orderIsReadyToPickup: 'Order is ready to pickup',
+  logoutFailed: 'Logout failed. Please try again.',
 };

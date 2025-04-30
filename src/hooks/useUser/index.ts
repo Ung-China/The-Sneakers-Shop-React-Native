@@ -1,14 +1,20 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../store';
 import {useState} from 'react';
-import {API_ENDPOINTS, GET} from '../../api';
+import {API_ENDPOINTS, GET, POST} from '../../api';
 import {User} from '../../models';
-import {loginUserSuccess} from '../../store/actions';
+import {loginUserSuccess, logoutUserSuccess} from '../../store/actions';
+import Snackbar from 'react-native-snackbar';
+import {useTranslation} from 'react-i18next';
+import {colors} from '../../constants/colors/colorTypes';
+import {Fonts} from '../../constants';
 
 const useUser = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
+
+  const {t} = useTranslation();
 
   const user = useSelector((state: RootState) => state.user.user);
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
@@ -43,11 +49,50 @@ const useUser = () => {
     }
   };
 
+  const logout = async () => {
+    try {
+      setIsLoading(true);
+
+      const response = await POST(
+        API_ENDPOINTS.LOGOUT,
+        {},
+        {},
+        {
+          Authorization: `Bearer ${user?.token}`,
+        },
+      );
+
+      if (response?.success) {
+        dispatch(logoutUserSuccess());
+        Snackbar.show({
+          text: t('logoutSuccess'),
+          textColor: 'white',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: colors.success,
+          fontFamily: Fonts.REGULAR,
+        });
+      } else {
+        Snackbar.show({
+          text: t('logoutFailed'),
+          textColor: 'white',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: colors.error,
+          fontFamily: Fonts.REGULAR,
+        });
+      }
+    } catch (error) {
+      console.log('[DEBUG] ERROR WHILE LOGOUT', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return {
     user,
     isLoggedIn,
     isLoading,
     getUserInfo,
+    logout,
   };
 };
 

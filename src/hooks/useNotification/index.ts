@@ -21,21 +21,23 @@ const useNotification = () => {
         page: page,
       });
 
-      const fetchedNotifications = response.data.map(
-        (item: any) =>
-          new Notification(
-            item.id,
-            item.title,
-            item.description,
-            item.images,
-            Number(item.amount),
-            Number(item.percent),
-            item.promotion_type,
-            item.discount_type,
-            item.brands || [],
-            item.products || [],
-          ),
-      );
+      const fetchedNotifications = response.data
+        .reverse()
+        .map(
+          (item: any) =>
+            new Notification(
+              item.id,
+              item.title,
+              item.description,
+              item.images,
+              Number(item.amount),
+              Number(item.percent),
+              item.promotion_type,
+              item.discount_type,
+              item.brands || [],
+              item.products || [],
+            ),
+        );
 
       setNotifications(prevNotifications =>
         page === 1

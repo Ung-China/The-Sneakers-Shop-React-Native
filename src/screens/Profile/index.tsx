@@ -1,10 +1,10 @@
 import {FlatList, View} from 'react-native';
 import ProfileHeader from '../../components/ProfileHeader';
-import {useProfile, useTheme} from '../../hooks';
+import {useProfile, useTheme, useUser} from '../../hooks';
 import ProfileMenuItem from '../../components/ProfileMenuItem';
 import {ProfileMenu} from '../../models';
 import styles from './style';
-import {CustomAlert} from '../../components';
+import {CustomAlert, LoadingModal} from '../../components';
 import {useTranslation} from 'react-i18next';
 
 const ProfileScreen: React.FC = () => {
@@ -18,8 +18,9 @@ const ProfileScreen: React.FC = () => {
     handleMenuPress,
     logoutVisible,
     setLogoutVisible,
-    logout,
   } = useProfile();
+
+  const {isLoading, logout} = useUser();
 
   const renderHeader = () => (
     <ProfileHeader onPress={handleNavigateToEditProfile} />
@@ -53,11 +54,13 @@ const ProfileScreen: React.FC = () => {
         title={t('logout')}
         description={t('logoutDescription')}
         onClose={() => setLogoutVisible(false)}
-        onPress={() => {
-          logout();
+        onPress={async () => {
+          await logout();
           setLogoutVisible(false);
         }}
       />
+
+      <LoadingModal visible={isLoading} />
     </View>
   );
 };

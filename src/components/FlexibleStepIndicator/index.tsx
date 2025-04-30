@@ -1,6 +1,4 @@
-import {View} from 'react-native';
 import {TrackingStepProps} from '../../types';
-import styles from './style';
 import {FlexibleStepIndicatorItem} from './components';
 import React from 'react';
 

@@ -12,7 +12,6 @@ const FlexibleStepIndicatorItem: React.FC<FlexibleStepItem> = ({
 }) => {
   const {colors} = useTheme();
 
-  console.log('item', item);
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
@@ -41,7 +40,7 @@ const FlexibleStepIndicatorItem: React.FC<FlexibleStepItem> = ({
               height={30}
               color={
                 item.title === 'Cancelled' || item.title === 'បានលុបចោល'
-                  ? colors.text
+                  ? colors.white
                   : colors.textReversed
               }
             />

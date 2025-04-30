@@ -22,6 +22,7 @@ const API_ENDPOINTS = {
   CHECKOUT: '/orders',
   GET_ORDER_HISTORY: '/order/history',
   GET_ORDER_HISTORY_DETAIL: '/order/detail',
+  LOGOUT: '/logout',
 };
 
 export default API_ENDPOINTS;
