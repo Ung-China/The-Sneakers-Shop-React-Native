@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../store';
 import {useState} from 'react';
-import {API_ENDPOINTS, GET, POST} from '../../api';
+import {API_ENDPOINTS, DELETE, GET, POST} from '../../api';
 import {User} from '../../models';
 import {loginUserSuccess, logoutUserSuccess} from '../../store/actions';
 import Snackbar from 'react-native-snackbar';
@@ -87,12 +87,54 @@ const useUser = () => {
     }
   };
 
+  const deleteAccount = async () => {
+    try {
+      setIsLoading(true);
+
+      const response = await DELETE(
+        API_ENDPOINTS.DELETE_ACCOUNT,
+        {},
+        {},
+        {
+          Authorization: `Bearer ${user?.token}`,
+        },
+      );
+
+      if (response?.success === true) {
+        dispatch(logoutUserSuccess());
+
+        Snackbar.show({
+          text: t('deleteAccountSuccess'),
+          textColor: 'white',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: colors.success,
+          fontFamily: Fonts.REGULAR,
+        });
+      } else {
+        Snackbar.show({
+          text: t('deleteAccountFailed'),
+          textColor: 'white',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: colors.error,
+          fontFamily: Fonts.REGULAR,
+        });
+      }
+
+      console.log('CHECK RESPONSE', response);
+    } catch (error) {
+      console.log('[DEBUG] ERROR WHILE DELETE ACCOUNT', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return {
     user,
     isLoggedIn,
     isLoading,
     getUserInfo,
     logout,
+    deleteAccount,
   };
 };
 

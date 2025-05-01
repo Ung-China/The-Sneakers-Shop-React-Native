@@ -18,9 +18,11 @@ const ProfileScreen: React.FC = () => {
     handleMenuPress,
     logoutVisible,
     setLogoutVisible,
+    deleteAccountVisible,
+    setDeleteAccountVisible,
   } = useProfile();
 
-  const {isLoading, logout} = useUser();
+  const {isLoading, logout, deleteAccount} = useUser();
 
   const renderHeader = () => (
     <ProfileHeader onPress={handleNavigateToEditProfile} />
@@ -57,6 +59,17 @@ const ProfileScreen: React.FC = () => {
         onPress={async () => {
           await logout();
           setLogoutVisible(false);
+        }}
+      />
+
+      <CustomAlert
+        isVisible={deleteAccountVisible}
+        title={t('delete')}
+        description={t('deleteDescription')}
+        onClose={() => setDeleteAccountVisible(false)}
+        onPress={async () => {
+          await deleteAccount();
+          setDeleteAccountVisible(false);
         }}
       />
 

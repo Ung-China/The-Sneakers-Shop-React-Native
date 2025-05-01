@@ -21,6 +21,7 @@ const useProfile = () => {
 
   const [isDarkMode, setIsDarkMode] = useState(theme === 'dark');
   const [logoutVisible, setLogoutVisible] = useState(false);
+  const [deleteAccountVisible, setDeleteAccountVisible] = useState(false);
 
   const {isLoggedIn} = useUser();
   const dispatch = useDispatch<AppDispatch>();
@@ -132,7 +133,7 @@ const useProfile = () => {
       } else if (screenName === 'Logout') {
         setLogoutVisible(true);
       } else if (screenName === 'Delete') {
-        Alert.alert('Delete Account');
+        setDeleteAccountVisible(true);
       } else if (screenName === 'Appearance') {
         toggleTheme(!isDarkMode);
       } else {
@@ -154,6 +155,8 @@ const useProfile = () => {
     logoutVisible,
     setLogoutVisible,
     logout,
+    deleteAccountVisible,
+    setDeleteAccountVisible,
   };
 };
 

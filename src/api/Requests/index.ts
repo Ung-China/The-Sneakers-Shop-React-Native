@@ -54,7 +54,11 @@ const GET = (endpoint: string, params = {}, headers = {}) =>
 const UPDATE = (endpoint: string, data: object, params = {}) =>
   apiRequest({method: 'put', endpoint, data, params});
 
-const DELETE = (endpoint: string, params = {}) =>
-  apiRequest({method: 'delete', endpoint, params});
+const DELETE = (
+  endpoint: string,
+  data: object | FormData,
+  params = {},
+  headers = {},
+) => apiRequest({method: 'delete', endpoint, data, params, headers});
 
 export {POST, GET, UPDATE, DELETE};

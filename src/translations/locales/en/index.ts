@@ -217,4 +217,9 @@ export const translateEN = {
   orderCancelled: 'Order is cancelled',
   orderIsReadyToPickup: 'Order is ready to pickup',
   logoutFailed: 'Logout failed. Please try again.',
+  delete: 'Delete Account',
+  deleteDescription:
+    'Are you sure you want to delete your account? Once the deletion is processed, all your account data will be permanently removed and cannot be recovered.',
+  deleteAccountSuccess: 'Your account has been deleted successfully.',
+  deleteAccountFailed: 'Failed to delete your account. Please try again later.',
 };
