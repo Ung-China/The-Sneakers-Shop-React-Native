@@ -2,7 +2,7 @@ import {ScrollView, Text, View} from 'react-native';
 import styles from './style';
 import {useForgotPassword, useTheme} from '../../hooks';
 import {useTranslation} from 'react-i18next';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   FlexibleInput,
   Footer,
@@ -43,6 +43,7 @@ const ForgotPasswordScreen: React.FC = () => {
     toggleConfirmPasswordVisibility,
     confirmPasswordVisible,
   } = useForgotPassword();
+
   return (
     <>
       <View style={[styles.container, {backgroundColor: colors.primary}]}>
@@ -62,6 +63,7 @@ const ForgotPasswordScreen: React.FC = () => {
                 onPressRightAction={togglePasswordVisibility}
                 placeholder={t('newPassword')}
                 editable={true}
+                autoFocus={true}
                 value={password}
                 onChangeText={setPassword}
                 error={errorPassword}
@@ -108,6 +110,7 @@ const ForgotPasswordScreen: React.FC = () => {
                 prefixIcon={<Icons.PHONE color={colors.grey} />}
                 placeholder={t('phoneNumber')}
                 editable={true}
+                autoFocus={true}
                 value={phoneNumber}
                 onChangeText={setPhoneNumber}
                 error={errorPhoneNumber}

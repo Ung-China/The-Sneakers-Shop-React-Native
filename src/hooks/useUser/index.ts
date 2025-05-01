@@ -119,8 +119,6 @@ const useUser = () => {
           fontFamily: Fonts.REGULAR,
         });
       }
-
-      console.log('CHECK RESPONSE', response);
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE DELETE ACCOUNT', error);
     } finally {

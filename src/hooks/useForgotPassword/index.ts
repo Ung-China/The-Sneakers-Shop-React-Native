@@ -37,10 +37,10 @@ const useForgotPassword = () => {
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+
   const toggleConfirmPasswordVisibility = () => {
     setConfirmPasswordVisible(!confirmPasswordVisible);
   };
-
   const clearErrorPhoneNumber = useCallback(() => {
     setErrorPhoneNumber('');
   }, []);

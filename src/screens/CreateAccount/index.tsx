@@ -58,6 +58,7 @@ const CreateAccountScreen: React.FC = () => {
                 editable={true}
                 value={name}
                 onChangeText={setName}
+                autoFocus={true}
                 error={errorName}
                 textInputStyle={[styles.textInputStyle]}
                 contentContainerStyle={[
