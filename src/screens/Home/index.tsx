@@ -31,14 +31,22 @@ import {
 } from '../../hooks';
 import {Icons, Padding, Radius, Spacing} from '../../constants';
 import {useTranslation} from 'react-i18next';
-import {BrandProps, ProductItemProps, StackParamList} from '../../types';
-import {useNavigation} from '@react-navigation/native';
+import {
+  BottomTabParamList,
+  BrandProps,
+  ProductItemProps,
+  StackParamList,
+} from '../../types';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {API_ENDPOINTS} from '../../api';
 import {dummyProducts} from '../../models/Product';
 import {dummyBrands} from '../../models/Brand';
 
 const HomeScreen: React.FC = () => {
+  const route = useRoute<RouteProp<BottomTabParamList, 'Home'>>();
+  const {shouldRefetch = false} = route.params || {};
+
   const {colors} = useTheme();
   const {location} = useLocation();
   const {t} = useTranslation();
@@ -158,7 +166,7 @@ const HomeScreen: React.FC = () => {
     };
 
     fetchData();
-  }, []);
+  }, [shouldRefetch]);
 
   const productItem = ({item}: {item: ProductItemProps['item']}) => {
     return (

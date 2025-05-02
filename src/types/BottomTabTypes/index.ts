@@ -1,5 +1,5 @@
 export type BottomTabParamList = {
-  Home: undefined;
+  Home: {shouldRefetch?: boolean};
   Brand: undefined;
   Cart: undefined;
   OrderHistory: undefined;

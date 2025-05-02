@@ -222,4 +222,5 @@ export const translateEN = {
     'Are you sure you want to delete your account? Once the deletion is processed, all your account data will be permanently removed and cannot be recovered.',
   deleteAccountSuccess: 'Your account has been deleted successfully.',
   deleteAccountFailed: 'Failed to delete your account. Please try again later.',
+  NoFavoritesItemFound: 'No favorite items found.',
 };

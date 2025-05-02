@@ -7,7 +7,7 @@ const ProductItemSkeleton: React.FC = () => {
     <Skeleton
       containerStyle={{
         borderRadius: Radius.DEFAULT,
-        height: 260,
+        height: 250,
         width: 160,
       }}
     />

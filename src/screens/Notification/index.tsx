@@ -66,12 +66,12 @@ const NotificationScreen: React.FC = () => {
                 onRefresh={fetchNotifications}
               />
             }
-          />
-        ) : notifications.length === 0 && !isLoading ? (
-          <NotFound
-            isVisible={true}
-            description={t('NoNotificationFound')}
-            containerStyle={styles.notFoundContainer}
+            ListEmptyComponent={
+              <NotFound
+                isVisible={true}
+                description={t('NoNotificationFound')}
+              />
+            }
           />
         ) : (
           <FlatList
@@ -88,6 +88,12 @@ const NotificationScreen: React.FC = () => {
                 style={{opacity: 0}}
                 refreshing={false}
                 onRefresh={fetchNotifications}
+              />
+            }
+            ListEmptyComponent={
+              <NotFound
+                isVisible={true}
+                description={t('NoNotificationFound')}
               />
             }
           />

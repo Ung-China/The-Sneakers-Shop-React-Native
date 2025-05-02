@@ -63,12 +63,9 @@ const OrderScreen: React.FC = () => {
               onRefresh={fetchMoreOrders}
             />
           }
-        />
-      ) : orders.length === 0 && !isLoading ? (
-        <NotFound
-          isVisible={true}
-          description={t('noOrdersHistory')}
-          containerStyle={styles.notFoundContainer}
+          ListEmptyComponent={
+            <NotFound isVisible={true} description={t('noOrdersHistory')} />
+          }
         />
       ) : (
         <FlatList
@@ -86,6 +83,9 @@ const OrderScreen: React.FC = () => {
               refreshing={false}
               onRefresh={fetchOrders}
             />
+          }
+          ListEmptyComponent={
+            <NotFound isVisible={true} description={t('noOrdersHistory')} />
           }
         />
       )}

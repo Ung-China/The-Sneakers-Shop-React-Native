@@ -1,4 +1,4 @@
-import {SafeAreaView, Text, View} from 'react-native';
+import {BackHandler, SafeAreaView, Text, View} from 'react-native';
 import styles from './style';
 import {useTheme} from '../../hooks';
 import {useTranslation} from 'react-i18next';
@@ -6,6 +6,7 @@ import FlexibleTouchable from '../../components/FlexibleTouchable';
 import {useNavigation} from '@react-navigation/native';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {BottomTabParamList} from '../../types';
+import {useEffect} from 'react';
 
 const OrderSuccessScreen: React.FC = () => {
   const {colors} = useTheme();
@@ -14,8 +15,28 @@ const OrderSuccessScreen: React.FC = () => {
     useNavigation<BottomTabNavigationProp<BottomTabParamList>>();
 
   const handleBackToHome = () => {
-    navigation.navigate('Home');
+    navigation.navigate('Home', {shouldRefetch: true});
   };
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('beforeRemove', e => {
+      e.preventDefault();
+      navigation.navigate('Home', {shouldRefetch: true});
+    });
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        navigation.navigate('Home', {shouldRefetch: true});
+        return true;
+      },
+    );
+
+    return () => {
+      unsubscribe();
+      backHandler.remove();
+    };
+  }, [navigation]);
 
   return (
     <SafeAreaView

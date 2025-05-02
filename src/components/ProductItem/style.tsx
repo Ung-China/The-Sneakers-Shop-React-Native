@@ -12,13 +12,13 @@ export default StyleSheet.create({
     padding: Padding.EXTRA_SMALL,
   },
   imageStyle: {
-    height: 140,
+    height: 130,
     width: null,
     borderRadius: Radius.DEFAULT,
   },
   loadingImagestyle: {
     backgroundColor: colors.white,
-    height: 140,
+    height: 130,
   },
   name: {
     fontSize: FontSizes.large,
@@ -71,16 +71,17 @@ export default StyleSheet.create({
     lineHeight: 10,
   },
   leftContainer: {
+    flex: 1,
     height: 28,
-    width: '100%',
     borderBottomLeftRadius: Radius.DEFAULT,
     borderBottomRightRadius: Radius.DEFAULT,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   left: {
-    fontSize: FontSizes.large,
+    fontSize: FontSizes.default,
     fontFamily: Fonts.REGULAR,
     color: colors.white,
-    textAlign: 'center',
-    paddingVertical: Padding.EXTRA_SMALL,
+    paddingVertical: 4,
   },
 });

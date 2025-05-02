@@ -63,12 +63,12 @@ const FavoriteScreen: React.FC = () => {
               onRefresh={refreshFavorites}
             />
           }
-        />
-      ) : favorites.length === 0 && !isLoading ? (
-        <NotFound
-          isVisible={true}
-          description={t('NoNotificationsFound')}
-          containerStyle={styles.notFoundContainer}
+          ListEmptyComponent={
+            <NotFound
+              isVisible={true}
+              description={t('NoFavoritesItemFound')}
+            />
+          }
         />
       ) : (
         <FlatList
@@ -85,6 +85,12 @@ const FavoriteScreen: React.FC = () => {
               style={{opacity: 0}}
               refreshing={false}
               onRefresh={refreshFavorites}
+            />
+          }
+          ListEmptyComponent={
+            <NotFound
+              isVisible={true}
+              description={t('NoFavoritesItemFound')}
             />
           }
         />
