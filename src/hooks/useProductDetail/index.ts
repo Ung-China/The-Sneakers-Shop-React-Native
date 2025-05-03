@@ -47,7 +47,9 @@ const useProductDetail = (id?: number) => {
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE FETCHING PRODUCT DETAIL:', error);
     } finally {
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
     }
   };
 

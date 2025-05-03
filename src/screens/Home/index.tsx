@@ -295,7 +295,6 @@ const HomeScreen: React.FC = () => {
             />
           </Section>
         )}
-
         {isInitialLoading || isLoading ? (
           <Section
             title={t('shopByBrand')}

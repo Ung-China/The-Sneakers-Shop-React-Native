@@ -50,9 +50,7 @@ const useNotification = () => {
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE FETCHING NOTIFICATIONS:', error);
     } finally {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 2000);
+      setIsLoading(false);
       setIsFetchingMoreNotifications(false);
     }
   };

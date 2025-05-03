@@ -6,7 +6,6 @@ import useSlider from './useSlider';
 import useShoesSlider from './useShoesSlider';
 import useOrder from './useOrder';
 import useOrderDetail from './useOrderDetail';
-import useProduct from './useProduct';
 import useEditProfile from './useEditProfile';
 import useDelivery from './useDelivery';
 import useShopLocation from './useShopLocation';
@@ -35,7 +34,6 @@ export {
   useSlider,
   useOrder,
   useOrderDetail,
-  useProduct,
   useEditProfile,
   useDelivery,
   useShopLocation,

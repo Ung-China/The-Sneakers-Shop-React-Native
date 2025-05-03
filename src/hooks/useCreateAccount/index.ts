@@ -167,11 +167,11 @@ const useCreateAccount = () => {
 
       setErrorOTP('');
       setIsModalVisible(false);
+      setIsVerified(true);
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE VERIFY OTP', error);
     } finally {
       setIsLoading(false);
-      setIsVerified(true);
     }
   };
 
