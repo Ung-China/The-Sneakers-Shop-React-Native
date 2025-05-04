@@ -75,7 +75,7 @@ export const StackNavigator = () => {
       <Stack.Screen
         name="AboutUs"
         component={AboutUsScreen}
-        options={{title: 'About Us'}}
+        options={{title: t('aboutUs')}}
       />
       <Stack.Screen
         name="Language"
