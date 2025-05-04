@@ -6,12 +6,14 @@ import {setThemeActions} from '../../store/actions';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../../store';
 import useUser from '../useUser';
+import useConfig from '../useConfig';
 
 const useStartUp = () => {
   const {i18n} = useTranslation();
   const {languageCode} = useLanguage();
   const {theme} = useTheme();
   const {getUserInfo} = useUser();
+  const {getConfig} = useConfig();
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -29,6 +31,7 @@ const useStartUp = () => {
     await initializeLanguage();
     await initializeTheme();
     await getUserInfo();
+    await getConfig();
 
     setIsInitialized(true);
   };

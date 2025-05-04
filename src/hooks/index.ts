@@ -25,6 +25,7 @@ import useAddress from './useAddress';
 import useCheckout from './useCheckout';
 import useUser from './useUser';
 import useLogin from './useLogin';
+import useConfig from './useConfig';
 
 export {
   useLanguage,
@@ -54,4 +55,5 @@ export {
   useCheckout,
   useUser,
   useLogin,
+  useConfig,
 };

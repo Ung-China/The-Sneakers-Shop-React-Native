@@ -24,6 +24,7 @@ const API_ENDPOINTS = {
   GET_ORDER_HISTORY_DETAIL: '/order/detail',
   LOGOUT: '/logout',
   DELETE_ACCOUNT: '/delete-account',
+  GET_CONFIG: '/get_config',
 };
 
 export default API_ENDPOINTS;
