@@ -1,5 +1,5 @@
 export interface locationItemProps {
-  onPress: (latitude: number, longitude: number, shopLocation: string) => void;
+  onPress: (latitude: number, longitude: number, address: string) => void;
   item: {
     name: string;
     latitude: number;
@@ -7,6 +7,6 @@ export interface locationItemProps {
     image: string;
     open: string;
     close: string;
-    shopLocation: string;
+    address: string;
   };
 }

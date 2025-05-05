@@ -50,4 +50,7 @@ export default StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  locationContentContainer: {
+    paddingHorizontal: Padding.DEFAULT,
+  },
 });

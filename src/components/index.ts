@@ -44,6 +44,7 @@ import FavoriteItemSkeleton from './FavoriteItemSkeleton';
 import CustomAlert from './CustomAlert';
 import PaymentMethodItem from './PaymentMethodItem';
 import OrderItemSkeleton from './OrderItemSkeleton';
+import ContactItem from './ContactItem';
 export {
   HeaderComponent,
   HeaderTitleComponent,
@@ -91,4 +92,5 @@ export {
   CustomAlert,
   PaymentMethodItem,
   OrderItemSkeleton,
+  ContactItem,
 };

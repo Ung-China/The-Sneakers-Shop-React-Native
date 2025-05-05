@@ -26,4 +26,8 @@ export default StyleSheet.create({
     fontSize: FontSizes.large,
     paddingVertical: Padding.DEFAULT,
   },
+  footerContainer: {},
+  contactContainerStyle: {
+    gap: Gap.DEFAULT,
+  },
 });

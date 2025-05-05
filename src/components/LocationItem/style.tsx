@@ -1,14 +1,22 @@
 import {StyleSheet} from 'react-native';
-import {Fonts, FontSizes, Gap, Padding, Radius, Spacing} from '../../constants';
+import {
+  Fonts,
+  FontSizes,
+  Gap,
+  Padding,
+  Radius,
+  Screen_Dimensions,
+  Spacing,
+} from '../../constants';
 import {colors} from '../../constants/colors/colorTypes';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: Spacing.DEFAULT,
     borderRadius: Radius.DEFAULT,
     flexDirection: 'row',
     backgroundColor: 'white',
+    width: Screen_Dimensions.WIDTH - 30,
   },
   loadingImagestyle: {
     backgroundColor: colors.white,
@@ -27,7 +35,7 @@ export default StyleSheet.create({
   },
   name: {
     fontFamily: Fonts.MEDIUM,
-    fontSize: FontSizes.extraLarge,
+    fontSize: FontSizes.large,
     color: 'black',
   },
   mapContainer: {
@@ -36,14 +44,14 @@ export default StyleSheet.create({
   },
   shopLocation: {
     fontFamily: Fonts.REGULAR,
-    fontSize: FontSizes.large,
+    fontSize: FontSizes.default,
     lineHeight: Spacing.EXTRA_LARGE,
     flex: 1,
     color: colors.grey,
   },
   time: {
     fontFamily: Fonts.REGULAR,
-    fontSize: FontSizes.large,
+    fontSize: FontSizes.default,
     color: colors.grey,
   },
   openMapContainer: {

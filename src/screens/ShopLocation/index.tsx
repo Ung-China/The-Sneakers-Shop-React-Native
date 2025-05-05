@@ -1,23 +1,22 @@
-import React, {useRef, useState} from 'react';
-import {View, Text, FlatList, Animated, Platform} from 'react-native';
+import React, {useRef} from 'react';
+import {View, Text, FlatList, Platform} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {locationItemProps, StackParamList} from '../../types';
 import {useNavigation} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {useShopLocation, useTheme} from '../../hooks';
+import {useConfig, useShopLocation, useTheme} from '../../hooks';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {Icons, Screen_Dimensions} from '../../constants';
+import {Icons, Radius, Screen_Dimensions} from '../../constants';
 import IconButton from '../../components/IconButton';
 import styles from './style';
-import {locations} from '../../models/Location';
-import {BottomSheet, LocationItem} from '../../components';
-import Carousel from 'react-native-reanimated-carousel';
+import {BottomSheet, LocationItem, Skeleton} from '../../components';
 import {OpenMapModal} from './components';
+import {locations} from '../../models/Location';
 
 const ShopLocation: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
-  const {t} = useTranslation();
   const {colors, mapColors} = useTheme();
+  const {isLoading, configs} = useConfig();
 
   const {
     bottomSheetOpenMapModalRef,
@@ -32,41 +31,21 @@ const ShopLocation: React.FC = () => {
   const navigateBack = () => navigation.goBack();
 
   const mapRef = useRef<MapView | null>(null);
-  const flatListRef = useRef<FlatList | null>(null);
-  const [selectedLocation, setSelectedLocation] = useState<number | null>(null);
-
-  const scaleAnimations = useRef(
-    locations.map(() => new Animated.Value(1)),
-  ).current;
-
-  const onCardPress = (index: number) => {
-    setSelectedLocation(index);
-
-    scaleAnimations.forEach((animation, i) => {
-      Animated.timing(animation, {
-        toValue: i === index ? 1.5 : 1,
-        duration: 100,
-        useNativeDriver: true,
-      }).start();
-    });
-
-    const location = locations[index];
-
-    mapRef.current?.animateToRegion(
-      {
-        latitude: location.latitude,
-        longitude: location.longitude,
-        latitudeDelta: 0.02,
-        longitudeDelta: 0.02,
-      },
-      350,
-    );
-
-    flatListRef.current?.scrollToIndex({index, animated: true});
-  };
 
   const locationItem = ({item}: {item: locationItemProps['item']}) => {
     return <LocationItem item={item} onPress={handleOpenMapModalSheet} />;
+  };
+
+  const locationItemSkeleton = () => {
+    return (
+      <Skeleton
+        containerStyle={{
+          borderRadius: Radius.DEFAULT,
+          height: 150,
+          width: Screen_Dimensions.WIDTH - 30,
+        }}
+      />
+    );
   };
 
   return (
@@ -74,7 +53,7 @@ const ShopLocation: React.FC = () => {
       <MapView
         ref={mapRef}
         style={styles.mapViewContainer}
-        // provider={PROVIDER_GOOGLE}
+        provider={PROVIDER_GOOGLE}
         customMapStyle={mapColors}
         showsUserLocation
         showsMyLocationButton
@@ -85,20 +64,18 @@ const ShopLocation: React.FC = () => {
           left: 0,
         }}
         initialRegion={{
-          latitude: locations[0].latitude,
-          longitude: locations[0].longitude,
+          latitude: configs?.shopAddress[0].latitude,
+          longitude: configs?.shopAddress[0].longitude,
           latitudeDelta: 0.02,
           longitudeDelta: 0.02,
         }}>
-        {locations.map((location, index) => (
+        {configs?.shopAddress.map((location, index) => (
           <Marker
             key={location.id}
             coordinate={{
               latitude: location.latitude,
               longitude: location.longitude,
-            }}
-            // onPress={() => onCardPress(index)}
-          >
+            }}>
             <View style={[styles.markerContainer]}>
               <View style={styles.marker}>
                 <Text style={styles.markerText}>{location.name}</Text>
@@ -110,21 +87,25 @@ const ShopLocation: React.FC = () => {
       </MapView>
 
       <View style={styles.locationContainer}>
-        <Carousel
-          pagingEnabled
-          loop={false}
-          width={Screen_Dimensions.WIDTH}
-          height={Screen_Dimensions.WIDTH / 2.6}
-          data={locations}
-          mode="parallax"
-          modeConfig={{
-            parallaxScrollingScale: 0.9,
-            parallaxScrollingOffset: 45,
-          }}
-          scrollAnimationDuration={200}
-          onSnapToItem={index => onCardPress(index)}
-          renderItem={locationItem}
-        />
+        {isLoading ? (
+          <FlatList
+            data={locations}
+            horizontal
+            pagingEnabled
+            renderItem={locationItemSkeleton}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.locationContentContainer}
+          />
+        ) : (
+          <FlatList
+            data={configs?.shopAddress}
+            horizontal
+            pagingEnabled
+            renderItem={locationItem}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.locationContentContainer}
+          />
+        )}
       </View>
       <IconButton
         onPress={navigateBack}

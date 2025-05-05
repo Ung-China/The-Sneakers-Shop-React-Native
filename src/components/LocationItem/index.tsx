@@ -37,7 +37,7 @@ const LocationItem: React.FC<locationItemProps> = ({item, onPress}) => {
         <View style={styles.mapContainer}>
           <Icons.SMALLMAP width={20} height={25} color={colors.grey} />
           <Text numberOfLines={2} style={styles.shopLocation}>
-            {item.shopLocation}
+            {item.address}
           </Text>
         </View>
         <View style={styles.mapContainer}>
