@@ -1,5 +1,12 @@
-import {StyleSheet} from 'react-native';
-import {Fonts, FontSizes, Gap, Padding, Radius} from '../../constants';
+import {Platform, StyleSheet} from 'react-native';
+import {
+  Fonts,
+  FontSizes,
+  Gap,
+  Padding,
+  Radius,
+  Screen_Dimensions,
+} from '../../constants';
 
 export default StyleSheet.create({
   container: {
@@ -26,8 +33,18 @@ export default StyleSheet.create({
     fontSize: FontSizes.large,
     paddingVertical: Padding.DEFAULT,
   },
-  footerContainer: {},
+
+  footerContainer: {
+    flex: 1,
+    position: 'absolute',
+    bottom: 0,
+    padding: Padding.DEFAULT,
+    marginBottom: Platform.OS === 'ios' ? 30 : 0,
+    width: Screen_Dimensions.WIDTH - 15,
+    alignItems: 'center',
+  },
   contactContainerStyle: {
     gap: Gap.DEFAULT,
+    justifyContent: 'center',
   },
 });

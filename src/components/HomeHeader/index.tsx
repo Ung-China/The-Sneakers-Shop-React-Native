@@ -1,6 +1,6 @@
 import {Text, View} from 'react-native';
 import styles from './style';
-import {useCart, useTheme} from '../../hooks';
+import {useCart, useConfig, useTheme} from '../../hooks';
 import FlexibleTouchable from '../FlexibleTouchable';
 import IconButton from '../IconButton';
 import {Icons} from '../../constants';
@@ -10,7 +10,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import Touchable from '../Touchable';
 
 const HomeHeader: React.FC<HomeHeaderProps> = ({
-  item,
+  address,
   handlePressToShopLocation,
 }) => {
   const {colors} = useTheme();
@@ -30,7 +30,7 @@ const HomeHeader: React.FC<HomeHeaderProps> = ({
       <View style={styles.leadingContainer}>
         <FlexibleTouchable
           onPress={handlePressToShopLocation}
-          label={item.currentLocation}
+          label={address}
           labelStyle={{color: colors.text}}
         />
       </View>

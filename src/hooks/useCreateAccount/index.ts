@@ -140,13 +140,15 @@ const useCreateAccount = () => {
       setIsModalVisible(true);
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE SEND OTP', error);
-      Snackbar.show({
-        text: t('phoneNumberAlreadyUsed'),
-        textColor: 'white',
-        duration: Snackbar.LENGTH_SHORT,
-        backgroundColor: colors.error,
-        fontFamily: Fonts.REGULAR,
-      });
+      setTimeout(() => {
+        Snackbar.show({
+          text: t('phoneNumberAlreadyUsed'),
+          textColor: 'white',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: colors.error,
+          fontFamily: Fonts.REGULAR,
+        });
+      }, 100);
     } finally {
       setIsLoading(false);
     }
@@ -205,22 +207,26 @@ const useCreateAccount = () => {
 
       dispatch(loginUserSuccess(user));
       navigation.navigate('Profile');
-      Snackbar.show({
-        text: t('accountCreated'),
-        textColor: 'white',
-        duration: Snackbar.LENGTH_SHORT,
-        backgroundColor: colors.success,
-        fontFamily: Fonts.REGULAR,
-      });
+      setTimeout(() => {
+        Snackbar.show({
+          text: t('accountCreated'),
+          textColor: 'white',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: colors.success,
+          fontFamily: Fonts.REGULAR,
+        });
+      }, 100);
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE SEND OTP', error);
-      Snackbar.show({
-        text: t('accountCreationFailed'),
-        textColor: 'white',
-        duration: Snackbar.LENGTH_SHORT,
-        backgroundColor: colors.error,
-        fontFamily: Fonts.REGULAR,
-      });
+      setTimeout(() => {
+        Snackbar.show({
+          text: t('accountCreationFailed'),
+          textColor: 'white',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: colors.error,
+          fontFamily: Fonts.REGULAR,
+        });
+      }, 100);
     } finally {
       setIsLoading(false);
     }

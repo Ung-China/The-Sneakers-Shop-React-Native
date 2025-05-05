@@ -108,13 +108,15 @@ const useForgotPassword = () => {
       setIsModalVisible(true);
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE SEND OTP', error);
-      Snackbar.show({
-        text: t('userNotFound'),
-        textColor: 'white',
-        duration: Snackbar.LENGTH_SHORT,
-        backgroundColor: colors.error,
-        fontFamily: Fonts.REGULAR,
-      });
+      setTimeout(() => {
+        Snackbar.show({
+          text: t('userNotFound'),
+          textColor: 'white',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: colors.error,
+          fontFamily: Fonts.REGULAR,
+        });
+      }, 100);
     } finally {
       setIsLoading(false);
     }
@@ -180,22 +182,26 @@ const useForgotPassword = () => {
       });
 
       navigation.navigate('Profile');
-      Snackbar.show({
-        text: t('passwordChanged'),
-        textColor: 'white',
-        duration: Snackbar.LENGTH_SHORT,
-        backgroundColor: colors.success,
-        fontFamily: Fonts.REGULAR,
-      });
+      setTimeout(() => {
+        Snackbar.show({
+          text: t('passwordChanged'),
+          textColor: 'white',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: colors.success,
+          fontFamily: Fonts.REGULAR,
+        });
+      }, 100);
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE CHANGE PASSWORD', error);
-      Snackbar.show({
-        text: t('passwordChangeFailed'),
-        textColor: 'white',
-        duration: Snackbar.LENGTH_SHORT,
-        backgroundColor: colors.error,
-        fontFamily: Fonts.REGULAR,
-      });
+      setTimeout(() => {
+        Snackbar.show({
+          text: t('passwordChangeFailed'),
+          textColor: 'white',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: colors.error,
+          fontFamily: Fonts.REGULAR,
+        });
+      }, 100);
     } finally {
       setIsLoading(false);
     }

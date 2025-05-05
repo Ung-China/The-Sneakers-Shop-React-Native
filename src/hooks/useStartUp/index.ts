@@ -13,7 +13,6 @@ const useStartUp = () => {
   const {languageCode} = useLanguage();
   const {theme} = useTheme();
   const {getUserInfo} = useUser();
-  const {getConfig} = useConfig();
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -31,7 +30,6 @@ const useStartUp = () => {
     await initializeLanguage();
     await initializeTheme();
     await getUserInfo();
-    await getConfig();
 
     setIsInitialized(true);
   };

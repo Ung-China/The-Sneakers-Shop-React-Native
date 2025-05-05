@@ -1,6 +1,4 @@
 export interface HomeHeaderProps {
-  item: {
-    currentLocation?: string;
-  };
+  address?: string;
   handlePressToShopLocation: () => void;
 }

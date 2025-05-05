@@ -5,7 +5,7 @@ export default StyleSheet.create({
     flex: 1,
   },
   imageStyle: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
   },
 });

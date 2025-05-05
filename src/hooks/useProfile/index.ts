@@ -1,18 +1,14 @@
 import {ProfileMenu} from '../../models';
-import {Fonts, Icons} from '../../constants';
+import {Icons} from '../../constants';
 import {useTranslation} from 'react-i18next';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {StackParamList} from '../../types';
 import {useCallback, useState} from 'react';
-import {Alert} from 'react-native';
 import useTheme from '../useTheme';
 import useUser from '../useUser';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../../store';
-import {logoutUserSuccess} from '../../store/actions';
-import Snackbar from 'react-native-snackbar';
-import {colors} from '../../constants/colors/colorTypes';
 
 const useProfile = () => {
   const {t} = useTranslation();
@@ -24,7 +20,6 @@ const useProfile = () => {
   const [deleteAccountVisible, setDeleteAccountVisible] = useState(false);
 
   const {isLoggedIn} = useUser();
-  const dispatch = useDispatch<AppDispatch>();
 
   const menuItems = [
     new ProfileMenu(9, 'Cart', Icons.CART, t('cart'), Icons.ARROWRIGHT, false),
@@ -80,26 +75,19 @@ const useProfile = () => {
     isLoggedIn
       ? new ProfileMenu(7, 'Logout', undefined, t('logout'), undefined, false)
       : new ProfileMenu(7, 'Login', undefined, t('login'), undefined, false),
-    new ProfileMenu(
-      8,
-      'Delete',
-      undefined,
-      t('deleteMyAccount'),
-      undefined,
-      true,
-    ),
+    ...(isLoggedIn
+      ? [
+          new ProfileMenu(
+            8,
+            'Delete',
+            undefined,
+            t('deleteMyAccount'),
+            undefined,
+            true,
+          ),
+        ]
+      : []),
   ];
-
-  const logout = useCallback(() => {
-    dispatch(logoutUserSuccess());
-    Snackbar.show({
-      text: t('logoutSuccess'),
-      textColor: 'white',
-      duration: Snackbar.LENGTH_SHORT,
-      backgroundColor: colors.success,
-      fontFamily: Fonts.REGULAR,
-    });
-  }, [dispatch]);
 
   const toggleTheme = (value: boolean) => {
     setIsDarkMode(value);
@@ -154,7 +142,6 @@ const useProfile = () => {
     handleNavigateToForgotPassword,
     logoutVisible,
     setLogoutVisible,
-    logout,
     deleteAccountVisible,
     setDeleteAccountVisible,
   };

@@ -2,21 +2,22 @@ import React, {useRef} from 'react';
 import {View, Text, FlatList, Platform} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {locationItemProps, StackParamList} from '../../types';
-import {useNavigation} from '@react-navigation/native';
-import {useTranslation} from 'react-i18next';
-import {useConfig, useShopLocation, useTheme} from '../../hooks';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {useShopLocation, useTheme} from '../../hooks';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {Icons, Radius, Screen_Dimensions} from '../../constants';
+import {Icons} from '../../constants';
 import IconButton from '../../components/IconButton';
 import styles from './style';
 import {BottomSheet, LocationItem, Skeleton} from '../../components';
 import {OpenMapModal} from './components';
-import {locations} from '../../models/Location';
 
 const ShopLocation: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
+  const route = useRoute<RouteProp<StackParamList, 'ShopLocation'>>();
+
+  const {shopAddress} = route.params;
+
   const {colors, mapColors} = useTheme();
-  const {isLoading, configs} = useConfig();
 
   const {
     bottomSheetOpenMapModalRef,
@@ -36,18 +37,6 @@ const ShopLocation: React.FC = () => {
     return <LocationItem item={item} onPress={handleOpenMapModalSheet} />;
   };
 
-  const locationItemSkeleton = () => {
-    return (
-      <Skeleton
-        containerStyle={{
-          borderRadius: Radius.DEFAULT,
-          height: 150,
-          width: Screen_Dimensions.WIDTH - 30,
-        }}
-      />
-    );
-  };
-
   return (
     <View style={styles.container}>
       <MapView
@@ -55,8 +44,7 @@ const ShopLocation: React.FC = () => {
         style={styles.mapViewContainer}
         provider={PROVIDER_GOOGLE}
         customMapStyle={mapColors}
-        showsUserLocation
-        showsMyLocationButton
+        loadingEnabled
         mapPadding={{
           top: 0,
           right: 0,
@@ -64,48 +52,35 @@ const ShopLocation: React.FC = () => {
           left: 0,
         }}
         initialRegion={{
-          latitude: configs?.shopAddress[0].latitude,
-          longitude: configs?.shopAddress[0].longitude,
+          latitude: shopAddress[0].latitude,
+          longitude: shopAddress[0].longitude,
           latitudeDelta: 0.02,
           longitudeDelta: 0.02,
         }}>
-        {configs?.shopAddress.map((location, index) => (
-          <Marker
-            key={location.id}
-            coordinate={{
-              latitude: location.latitude,
-              longitude: location.longitude,
-            }}>
-            <View style={[styles.markerContainer]}>
-              <View style={styles.marker}>
-                <Text style={styles.markerText}>{location.name}</Text>
-              </View>
-              <Icons.LOGO width={50} height={50} />
+        <Marker
+          key={shopAddress.id}
+          coordinate={{
+            latitude: shopAddress[0].latitude,
+            longitude: shopAddress[0].longitude,
+          }}>
+          <View style={[styles.markerContainer]}>
+            <View style={styles.marker}>
+              <Text style={styles.markerText}>{shopAddress[0].name}</Text>
             </View>
-          </Marker>
-        ))}
+            <Icons.LOGO width={50} height={50} />
+          </View>
+        </Marker>
       </MapView>
 
       <View style={styles.locationContainer}>
-        {isLoading ? (
-          <FlatList
-            data={locations}
-            horizontal
-            pagingEnabled
-            renderItem={locationItemSkeleton}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.locationContentContainer}
-          />
-        ) : (
-          <FlatList
-            data={configs?.shopAddress}
-            horizontal
-            pagingEnabled
-            renderItem={locationItem}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.locationContentContainer}
-          />
-        )}
+        <FlatList
+          data={shopAddress}
+          horizontal
+          pagingEnabled
+          renderItem={locationItem}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.locationContentContainer}
+        />
       </View>
       <IconButton
         onPress={navigateBack}

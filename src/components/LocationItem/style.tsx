@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {
   Fonts,
   FontSizes,
@@ -17,6 +17,8 @@ export default StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'white',
     width: Screen_Dimensions.WIDTH - 30,
+    height: 130,
+    marginBottom: Platform.OS === 'ios' ? 15 : 0,
   },
   loadingImagestyle: {
     backgroundColor: colors.white,
@@ -26,7 +28,6 @@ export default StyleSheet.create({
     flex: 1,
     padding: Padding.DEFAULT,
     justifyContent: 'center',
-    gap: Gap.EXTRA_SMALL,
   },
   imageStyle: {
     width: 150,

@@ -4,8 +4,8 @@ export default class ShopAddress {
   address: string;
   open: string;
   close: string;
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
   image: string;
 
   constructor(data: {
@@ -14,8 +14,8 @@ export default class ShopAddress {
     address: string;
     open: string;
     close: string;
-    latitude: string;
-    longitude: string;
+    latitude: number;
+    longitude: number;
     image: string;
   }) {
     this.id = data.id;
@@ -23,8 +23,8 @@ export default class ShopAddress {
     this.address = data.address;
     this.open = data.open;
     this.close = data.close;
-    this.latitude = data.latitude;
-    this.longitude = data.longitude;
+    this.latitude = Number(data.latitude);
+    this.longitude = Number(data.longitude);
     this.image = data.image;
   }
 }

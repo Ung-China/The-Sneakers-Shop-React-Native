@@ -90,22 +90,27 @@ const useLogin = () => {
       dispatch(loginUserSuccess(user));
       navigation.navigate('Profile');
 
-      Snackbar.show({
-        text: t('loginSuccess'),
-        textColor: 'white',
-        duration: Snackbar.LENGTH_SHORT,
-        backgroundColor: colors.success,
-        fontFamily: Fonts.REGULAR,
-      });
+      setTimeout(() => {
+        Snackbar.show({
+          text: t('loginSuccess'),
+          textColor: 'white',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: colors.success,
+          fontFamily: Fonts.REGULAR,
+        });
+      }, 100);
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE CHANGE PASSWORD', error);
-      Snackbar.show({
-        text: t('loginFailed'),
-        textColor: 'white',
-        duration: Snackbar.LENGTH_SHORT,
-        backgroundColor: colors.error,
-        fontFamily: Fonts.REGULAR,
-      });
+
+      setTimeout(() => {
+        Snackbar.show({
+          text: t('loginFailed'),
+          textColor: 'white',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: colors.error,
+          fontFamily: Fonts.REGULAR,
+        });
+      }, 100);
     } finally {
       setIsLoading(false);
     }
@@ -154,13 +159,15 @@ const useLogin = () => {
 
         dispatch(loginUserSuccess(user));
         navigation.navigate('Profile');
-        Snackbar.show({
-          text: t('loginSuccess'),
-          textColor: 'white',
-          duration: Snackbar.LENGTH_SHORT,
-          backgroundColor: colors.success,
-          fontFamily: Fonts.REGULAR,
-        });
+        setTimeout(() => {
+          Snackbar.show({
+            text: t('loginSuccess'),
+            textColor: 'white',
+            duration: Snackbar.LENGTH_SHORT,
+            backgroundColor: colors.success,
+            fontFamily: Fonts.REGULAR,
+          });
+        }, 100);
       } else {
         console.log('ID Token is missing');
       }

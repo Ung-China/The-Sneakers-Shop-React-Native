@@ -1,4 +1,5 @@
-import {Address} from '../../models';
+import {Address, ShopAddress} from '../../models';
+import {locationItemProps} from '../LocationItem';
 import {NotificationProps} from '../Notification';
 import {SeeMoreProps} from '../SeeMore';
 
@@ -29,7 +30,7 @@ export type StackParamList = {
   Appearance: undefined;
   CreateAccount: undefined;
   ForgotPassword: undefined;
-  ShopLocation: undefined;
+  ShopLocation: {shopAddress: any};
   SeeMoreScreen: SeeMoreProps;
   LoginScreen: undefined;
   OrderSuccessScreen: undefined;

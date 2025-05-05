@@ -1,11 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  ScrollView,
-  FlatList,
-  RefreshControl,
-  SafeAreaView,
-  View,
-} from 'react-native';
+import {ScrollView, FlatList, RefreshControl, SafeAreaView} from 'react-native';
 import styles from './style';
 import {
   BrandItem,
@@ -22,7 +16,7 @@ import {
 } from '../../components';
 import {
   useBrand,
-  useLocation,
+  useConfig,
   useNotification,
   useSeeMore,
   useShoesSlider,
@@ -48,9 +42,10 @@ const HomeScreen: React.FC = () => {
   const {shouldRefetch = false} = route.params || {};
 
   const {colors} = useTheme();
-  const {location} = useLocation();
   const {t} = useTranslation();
   const {notifications, fetchNotifications} = useNotification();
+  const {getConfig, configs} = useConfig();
+  const {sliders, fetchSliders, isLoading: isLoadingSliders} = useSlider();
 
   const navigation = useNavigation<StackNavigationProp<StackParamList>>();
 
@@ -61,8 +56,8 @@ const HomeScreen: React.FC = () => {
     navigation.navigate('Search');
   };
 
-  const handlePressToShopLocation = () => {
-    navigation.navigate('ShopLocation');
+  const handlePressToShopLocation = (shopAddress: any) => {
+    navigation.navigate('ShopLocation', {shopAddress});
   };
 
   const navigateToBrands = () => {
@@ -77,7 +72,6 @@ const HomeScreen: React.FC = () => {
     navigation.navigate('ProductDetail', {id, brandId});
   };
 
-  const {sliders, fetchSliders, isLoading: isLoadingSliders} = useSlider();
   const {
     shoesSliders,
     fetchShoesSliders,
@@ -90,17 +84,20 @@ const HomeScreen: React.FC = () => {
     fetchMoreProducts: fetchMoreAllProducts,
     fetchProducts: fetchAllProducts,
   } = useSeeMore(API_ENDPOINTS.GET_PRODUCTS);
+
   const {
     products: newArrivalProducts,
     fetchMoreProducts: fetchMoreNewArrivalProducts,
     fetchProducts: fetchNewArrivalProducts,
     isLoading: isLoadingNewArrivalProducts,
   } = useSeeMore(API_ENDPOINTS.GET_NEW_ARRIVAL_PRODUCTS);
+
   const {
     products: recommendedProducts,
     fetchMoreProducts: fetchMoreRecommendedProducts,
     fetchProducts: fetchNewRecommendedProducts,
   } = useSeeMore(API_ENDPOINTS.GET_RECOMMENDED_PRODUCTS);
+
   const {
     products: popularProducts,
     fetchMoreProducts: fetchMorePopularProducts,
@@ -145,6 +142,7 @@ const HomeScreen: React.FC = () => {
       await fetchNewRecommendedProducts();
       await fetchPopularProducts();
       await fetchNotifications();
+      await getConfig();
     } finally {
       setIsLoading(false);
     }
@@ -160,6 +158,7 @@ const HomeScreen: React.FC = () => {
         await fetchNewRecommendedProducts();
         await fetchPopularProducts();
         await fetchNotifications();
+        await getConfig();
       } finally {
         setIsInitialLoading(false);
       }
@@ -211,8 +210,10 @@ const HomeScreen: React.FC = () => {
           />
         }>
         <HomeHeader
-          item={location}
-          handlePressToShopLocation={handlePressToShopLocation}
+          address={configs?.shopAddress[0].address}
+          handlePressToShopLocation={() =>
+            handlePressToShopLocation(configs?.shopAddress)
+          }
         />
 
         <FlexibleInput

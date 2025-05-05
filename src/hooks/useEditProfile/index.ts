@@ -11,11 +11,17 @@ import {User} from '../../models';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../../store';
 import {loginUserSuccess} from '../../store/actions';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {BottomTabParamList, StackParamList} from '../../types';
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 
 const useEditProfile = () => {
   const {t} = useTranslation();
   const {user, isLoggedIn} = useUser();
   const dispatch = useDispatch<AppDispatch>();
+  const navigation =
+    useNavigation<BottomTabNavigationProp<BottomTabParamList>>();
 
   const [isLoading, setIsLoading] = useState(false);
   const [fullName, setFullName] = useState<string>('');
@@ -94,6 +100,7 @@ const useEditProfile = () => {
       if (!user?.isGoogleLogin) {
         formData.append('email', email);
       }
+
       formData.append('phone', numberWithCountryCode);
       formData.append('old_password', oldPassword);
       formData.append('new_password', newPassword);
@@ -119,13 +126,17 @@ const useEditProfile = () => {
 
       dispatch(loginUserSuccess(fetchedUser));
 
-      Snackbar.show({
-        text: t('accountUpdated'),
-        textColor: 'white',
-        duration: Snackbar.LENGTH_SHORT,
-        backgroundColor: colors.success,
-        fontFamily: Fonts.REGULAR,
-      });
+      navigation.navigate('Profile');
+
+      setTimeout(() => {
+        Snackbar.show({
+          text: t('accountUpdated'),
+          textColor: 'white',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: colors.success,
+          fontFamily: Fonts.REGULAR,
+        });
+      }, 100);
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE UPDATE USER PROFILE', error);
       Snackbar.show({
