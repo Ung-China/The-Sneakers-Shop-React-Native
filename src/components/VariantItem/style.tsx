@@ -6,6 +6,7 @@ import {
   Padding,
   Radius,
   Screen_Dimensions,
+  Spacing,
 } from '../../constants';
 
 export default StyleSheet.create({
@@ -13,7 +14,8 @@ export default StyleSheet.create({
     paddingHorizontal: Padding.DEFAULT,
     paddingVertical: Padding.EXTRA_SMALL,
     borderRadius: Radius.DEFAULT,
-    width: Screen_Dimensions.WIDTH / 2 - 15 - 5,
+    width:
+      Screen_Dimensions.WIDTH / 2 - (Spacing.DEFAULT + Spacing.DEFAULT / 2),
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

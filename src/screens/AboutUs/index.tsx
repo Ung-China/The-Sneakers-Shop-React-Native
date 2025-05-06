@@ -37,7 +37,6 @@ const AboutUsScreen: React.FC = () => {
           showsHorizontalScrollIndicator={false}
           renderItem={contactItem}
           contentContainerStyle={styles.contactContainerStyle}
-          style={{alignSelf: 'center'}}
         />
       </View>
     </View>

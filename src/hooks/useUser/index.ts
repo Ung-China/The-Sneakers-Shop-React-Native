@@ -3,7 +3,11 @@ import {AppDispatch, RootState} from '../../store';
 import {useState} from 'react';
 import {API_ENDPOINTS, DELETE, GET, POST} from '../../api';
 import {User} from '../../models';
-import {loginUserSuccess, logoutUserSuccess} from '../../store/actions';
+import {
+  clearCart,
+  loginUserSuccess,
+  logoutUserSuccess,
+} from '../../store/actions';
 import Snackbar from 'react-native-snackbar';
 import {useTranslation} from 'react-i18next';
 import {colors} from '../../constants/colors/colorTypes';
@@ -64,6 +68,7 @@ const useUser = () => {
 
       if (response?.success) {
         dispatch(logoutUserSuccess());
+        dispatch(clearCart());
 
         setTimeout(() => {
           Snackbar.show({
@@ -107,6 +112,8 @@ const useUser = () => {
 
       if (response?.success === true) {
         dispatch(logoutUserSuccess());
+        dispatch(clearCart());
+
         setTimeout(() => {
           Snackbar.show({
             text: t('deleteAccountSuccess'),

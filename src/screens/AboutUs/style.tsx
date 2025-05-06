@@ -40,7 +40,7 @@ export default StyleSheet.create({
     bottom: 0,
     padding: Padding.DEFAULT,
     marginBottom: Platform.OS === 'ios' ? 30 : 0,
-    width: Screen_Dimensions.WIDTH - 15,
+    width: Screen_Dimensions.WIDTH,
     alignItems: 'center',
   },
   contactContainerStyle: {
