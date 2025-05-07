@@ -7,9 +7,8 @@ import ItemSeparatorHeight from '../ItemSeparatorHeight';
 import Footer from '../Footer';
 import Touchable from '../Touchable';
 import styles from './style';
-import {colors} from '../../constants/colors/colorTypes';
 import {useTranslation} from 'react-i18next';
-import {useCart} from '../../hooks';
+import {useCart, useTheme} from '../../hooks';
 
 const VariantBottomTab: React.FC<VariantProps> = ({
   item,
@@ -22,6 +21,7 @@ const VariantBottomTab: React.FC<VariantProps> = ({
   activeVariantId,
 }) => {
   const {t} = useTranslation();
+  const {colors} = useTheme();
 
   const variantItem = ({
     item,
@@ -48,7 +48,7 @@ const VariantBottomTab: React.FC<VariantProps> = ({
   return (
     <>
       <View style={styles.header}>
-        <Text style={[styles.headerLabel, {color: colors.textReversed}]}>
+        <Text style={[styles.headerLabel, {color: colors.text}]}>
           {t('selectOption')}
         </Text>
         <View style={[styles.separator, {backgroundColor: colors.grey}]} />
