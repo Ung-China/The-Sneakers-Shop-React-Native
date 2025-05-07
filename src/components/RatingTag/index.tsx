@@ -25,7 +25,7 @@ const RatingTag: React.FC<RatingTagProps> = ({
       </Text>
       <Text
         style={[styles.totalRating, totalRatingStyle, {color: colors.text}]}>
-        ({totalRating && totalRating})
+        {/* ({totalRating && totalRating}) */}(5)
       </Text>
     </View>
   );

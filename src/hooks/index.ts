@@ -26,6 +26,7 @@ import useCheckout from './useCheckout';
 import useUser from './useUser';
 import useLogin from './useLogin';
 import useConfig from './useConfig';
+import useLocationPermission from './useLocationPermission';
 
 export {
   useLanguage,
@@ -56,4 +57,5 @@ export {
   useUser,
   useLogin,
   useConfig,
+  useLocationPermission,
 };

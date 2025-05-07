@@ -5,6 +5,7 @@ import {useTheme} from '../../hooks';
 
 const LoadingModal: React.FC<LoadingModalProps> = ({visible}) => {
   const {colors} = useTheme();
+
   return (
     <Modal visible={visible} animationType="fade" transparent={true}>
       <View style={styles.container}>

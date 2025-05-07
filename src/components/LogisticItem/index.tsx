@@ -18,7 +18,7 @@ const LogisticItem: React.FC<LogisticProps> = ({
         style={[
           styles.container,
           containerStyle,
-          {backgroundColor: isActive ? colors.text : colors.secondary},
+          {backgroundColor: isActive ? colors.primaryReversed : colors.primary},
         ]}>
         <Text
           style={[

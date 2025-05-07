@@ -56,13 +56,19 @@ const ProductDetailScreen: React.FC = () => {
     setPrice,
   } = useProductDetail(id);
 
-  const {hasProductPromotion, finalPrice, discountType, discountValue} =
-    ProductPromotionChecker({
-      productId: id,
-      defaultPrice: price,
-      promotions: notifications,
-      brandId: brandId,
-    });
+  const {
+    hasProductPromotion,
+    finalPrice,
+    discountType,
+    discountValue,
+    variantsAfterCheckPromotion,
+  } = ProductPromotionChecker({
+    productId: id,
+    defaultPrice: price,
+    promotions: notifications,
+    brandId: brandId,
+    variants: productDetail?.variants,
+  });
 
   const {products, isFetchingMoreProducts, fetchMoreProducts} =
     useRelatedProducts(brandId);
@@ -397,12 +403,8 @@ const ProductDetailScreen: React.FC = () => {
                     />
 
                     {hasProductPromotion && (
-                      <View
-                        style={[
-                          styles.discountContainer,
-                          {backgroundColor: colors.primary},
-                        ]}>
-                        <Text style={[styles.discount, {color: colors.text}]}>
+                      <View style={[styles.discountContainer]}>
+                        <Text style={[styles.discount]}>
                           {discountValue}
                           {discountType === 'percent' ? '%' : '$'} OFF
                         </Text>
@@ -494,7 +496,7 @@ const ProductDetailScreen: React.FC = () => {
                       {t('selectOption')}
                     </Text>
                     <FlatList
-                      data={productDetail.variants}
+                      data={variantsAfterCheckPromotion}
                       renderItem={variantItem}
                       numColumns={2}
                       scrollEnabled={false}

@@ -14,6 +14,9 @@ import {useTranslation} from 'react-i18next';
 import Snackbar from 'react-native-snackbar';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import BottomSheet from '../BottomSheet';
+import VariantBottomTab from '../VariantBottomTab';
+import {useState} from 'react';
 
 const ProductItem: React.FC<ProductItemProps> = ({
   item,
@@ -25,17 +28,36 @@ const ProductItem: React.FC<ProductItemProps> = ({
 
   const {colors} = useTheme();
 
+  const [size, setSize] = useState(item.variants[0].size);
+  const [price, setPrice] = useState(item.variants[0].price);
+  const [activeVariantId, setActiveVariantId] = useState<number | null>(0);
+  const [quantity, setQuantity] = useState(item.variants[0].quantity);
+
   const {isFavorite, toggleItemFavorite} = useFavorite();
-  const {addProductToCart, cartItems} = useCart();
+
+  const {
+    addProductToCart,
+    cartItems,
+    bottomSheetVariantModalRef,
+    toggleVariantSheet,
+    toggleCloseVariantSheet,
+    handleVariantSheetChanges,
+  } = useCart();
   const {t} = useTranslation();
 
-  const {hasProductPromotion, finalPrice, discountType, discountValue} =
-    ProductPromotionChecker({
-      productId: item.id,
-      defaultPrice: item.price,
-      promotions: notifications,
-      brandId: item.brandId,
-    });
+  const {
+    hasProductPromotion,
+    finalPrice,
+    discountType,
+    discountValue,
+    variantsAfterCheckPromotion,
+  } = ProductPromotionChecker({
+    productId: item.id,
+    defaultPrice: price,
+    promotions: notifications,
+    brandId: item.brandId,
+    variants: item.variants,
+  });
 
   const {isLoggedIn} = useUser();
 
@@ -43,11 +65,12 @@ const ProductItem: React.FC<ProductItemProps> = ({
     const {isOutOfStock, isCartExceedStock} = StockChecker({
       cartItems,
       productId: item.id,
-      variantId: item.variants?.[0]?.id ?? 0,
-      stock: item.variants?.[0]?.product_qty ?? 0,
+      variantId: activeVariantId,
+      stock: quantity,
     });
 
     if (!isLoggedIn) {
+      toggleCloseVariantSheet();
       Snackbar.show({
         text: t('pleaseLoginToAddToCart'),
         textColor: 'white',
@@ -58,7 +81,6 @@ const ProductItem: React.FC<ProductItemProps> = ({
       navigation.navigate('LoginScreen');
       return;
     }
-
     if (isOutOfStock) {
       Snackbar.show({
         text: t('outOfStock'),
@@ -69,7 +91,6 @@ const ProductItem: React.FC<ProductItemProps> = ({
       });
       return;
     }
-
     if (isCartExceedStock) {
       Snackbar.show({
         text: t('notEnoughStock'),
@@ -86,13 +107,13 @@ const ProductItem: React.FC<ProductItemProps> = ({
         brandId: item.brandId,
         name: item.name,
         image: item.image,
-        price: item.price,
-        variantName: item.variants?.[0]?.product_size || '',
-        variantId: 0,
+        price: price,
+        variantName: size,
+        variantId: activeVariantId,
         quantity: 1,
         discountType: discountType,
         discount: discountValue,
-        stock: item.variants?.[0]?.product_qty ?? 0,
+        stock: quantity,
       };
       addProductToCart(cartItem);
       Snackbar.show({
@@ -106,91 +127,115 @@ const ProductItem: React.FC<ProductItemProps> = ({
   };
 
   return (
-    <Touchable
-      onPress={onPress}
-      style={[
-        styles.wrapper,
-        wrapperStyle,
-        {backgroundColor: colors.secondary},
-      ]}>
-      <View style={[styles.container]}>
-        <CachedImage
-          source={item.image}
-          style={[styles.imageStyle, {backgroundColor: colors.white}]}
-          imageStyle={{borderRadius: Radius.DEFAULT}}
-          loadingImageComponent={() => (
-            <LoadingImage
-              iconSize={100}
-              imageStyle={styles.loadingImagestyle}
-            />
-          )}
-        />
-
-        {hasProductPromotion && (
-          <View style={styles.promotionContainer}>
-            <Icons.DISCOUNTTAG width={40} height={40} color={'red'} />
-            <View style={styles.promotionWrapper}>
-              <Text style={styles.value}>
-                {discountValue}
-                {discountType === 'percent' ? '%' : '$'}
-              </Text>
-              <Text style={styles.discountText}>OFF</Text>
-            </View>
-          </View>
-        )}
-
-        <IconButton
-          style={[styles.heartButton, {backgroundColor: colors.lightGrey}]}
-          icon={
-            <Icons.HEART
-              color={isFavorite(item.id) ? 'none' : colors.black}
-              fill={isFavorite(item.id) ? colors.black : 'none'}
-              width={20}
-              height={20}
-            />
-          }
-          onPress={() => toggleItemFavorite(item)}
-        />
-
-        <View style={styles.hero}>
-          <Text style={[styles.name, {color: colors.text}]} numberOfLines={1}>
-            {item.name}
-          </Text>
-          <PriceTag
-            finalPrice={finalPrice}
-            defaultPrice={hasProductPromotion ? item.price : null}
+    <>
+      <Touchable
+        onPress={onPress}
+        style={[
+          styles.wrapper,
+          wrapperStyle,
+          {backgroundColor: colors.secondary},
+        ]}>
+        <View style={[styles.container]}>
+          <CachedImage
+            source={item.image}
+            style={[styles.imageStyle, {backgroundColor: colors.white}]}
+            imageStyle={{borderRadius: Radius.DEFAULT}}
+            loadingImageComponent={() => (
+              <LoadingImage
+                iconSize={100}
+                imageStyle={styles.loadingImagestyle}
+              />
+            )}
           />
 
-          <View style={styles.heroFooter}>
-            <RatingTag averageRating={item.rating} totalRating={item.rating} />
-            <IconButton
-              icon={<Icons.ADD color={colors.secondary} />}
-              style={[
-                styles.addToCart,
-                {backgroundColor: colors.secondaryReversed},
-              ]}
-              onPress={handleAddToCart}
+          {hasProductPromotion && (
+            <View style={styles.promotionContainer}>
+              <Icons.DISCOUNTTAG width={40} height={40} color={'red'} />
+              <View style={styles.promotionWrapper}>
+                <Text style={styles.value}>
+                  {discountValue}
+                  {discountType === 'percent' ? '%' : '$'}
+                </Text>
+                <Text style={styles.discountText}>OFF</Text>
+              </View>
+            </View>
+          )}
+
+          <IconButton
+            style={[styles.heartButton, {backgroundColor: colors.lightGrey}]}
+            icon={
+              <Icons.HEART
+                color={isFavorite(item.id) ? 'none' : colors.black}
+                fill={isFavorite(item.id) ? colors.black : 'none'}
+                width={20}
+                height={20}
+              />
+            }
+            onPress={() => toggleItemFavorite(item)}
+          />
+
+          <View style={styles.hero}>
+            <Text style={[styles.name, {color: colors.text}]} numberOfLines={1}>
+              {item.name}
+            </Text>
+            <PriceTag
+              finalPrice={finalPrice}
+              defaultPrice={hasProductPromotion ? item.price : null}
             />
+
+            <View style={styles.heroFooter}>
+              <RatingTag
+                averageRating={item.rating}
+                totalRating={item.rating}
+              />
+              <IconButton
+                icon={<Icons.ADD color={colors.secondary} />}
+                style={[
+                  styles.addToCart,
+                  {backgroundColor: colors.secondaryReversed},
+                ]}
+                onPress={toggleVariantSheet}
+              />
+            </View>
           </View>
         </View>
-      </View>
-      <View
-        style={[
-          styles.leftContainer,
-          {
-            backgroundColor:
-              item.variants?.[0]?.product_qty == 0
-                ? colors.error
-                : colors.success,
-          },
-        ]}>
-        <Text style={styles.left}>
-          {item.variants?.[0]?.product_qty == 0
-            ? t('soldOut')
-            : `${item.variants?.[0]?.product_qty || ''} ${t('left')}`}
-        </Text>
-      </View>
-    </Touchable>
+        {/* <View
+          style={[
+            styles.leftContainer,
+            {
+              backgroundColor:
+                item.variants?.[0]?.quantity == 0
+                  ? colors.error
+                  : colors.success,
+            },
+          ]}>
+          <Text style={styles.left}>
+            {item.variants?.[0]?.quantity == 0
+              ? t('soldOut')
+              : `${item.variants?.[0]?.quantity || ''} ${t('left')}`}
+          </Text>
+        </View> */}
+      </Touchable>
+
+      <BottomSheet
+        bottomSheetModalRef={bottomSheetVariantModalRef}
+        onSheetChanges={handleVariantSheetChanges}
+        handleSheetDismiss={() => {}}
+        enableDynamicSizing={true}
+        content={
+          <VariantBottomTab
+            item={variantsAfterCheckPromotion}
+            onPressCancel={toggleCloseVariantSheet}
+            onPressApply={handleAddToCart}
+            setActiveVariantId={setActiveVariantId}
+            setSize={setSize}
+            setPrice={setPrice}
+            setQuantity={setQuantity}
+            activeVariantId={activeVariantId}
+          />
+        }
+      />
+    </>
   );
 };
 

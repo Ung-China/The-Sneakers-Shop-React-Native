@@ -1,5 +1,5 @@
-import React, {useRef} from 'react';
-import {View, Text, FlatList, Platform} from 'react-native';
+import React, {useRef, useState} from 'react';
+import {View, Text, FlatList, Platform, Button} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {locationItemProps, StackParamList} from '../../types';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';

@@ -1,9 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, FlatList, RefreshControl, SafeAreaView} from 'react-native';
+import {
+  ScrollView,
+  FlatList,
+  RefreshControl,
+  SafeAreaView,
+  Linking,
+} from 'react-native';
 import styles from './style';
 import {
   BrandItem,
   BrandItemSkeleton,
+  CustomAlert,
   FlatButton,
   FlexibleInput,
   FlexibleSwiper,
@@ -17,6 +24,7 @@ import {
 import {
   useBrand,
   useConfig,
+  useLocationPermission,
   useNotification,
   useSeeMore,
   useShoesSlider,
@@ -51,13 +59,28 @@ const HomeScreen: React.FC = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
 
   const handlePressToSearch = () => {
     navigation.navigate('Search');
   };
 
-  const handlePressToShopLocation = (shopAddress: any) => {
+  const hasLocationPermission = useLocationPermission();
+
+  const handlePressToShopLocation = async (shopAddress: any) => {
+    if (!hasLocationPermission) {
+      setShowAlert(true);
+      return;
+    }
+
     navigation.navigate('ShopLocation', {shopAddress});
+  };
+
+  const handleOpenSettings = () => {
+    setShowAlert(false);
+    Linking.openSettings().catch(() => {
+      console.warn('Unable to open settings');
+    });
   };
 
   const navigateToBrands = () => {
@@ -296,6 +319,7 @@ const HomeScreen: React.FC = () => {
             />
           </Section>
         )}
+
         {isInitialLoading || isLoading ? (
           <Section
             title={t('shopByBrand')}
@@ -542,6 +566,15 @@ const HomeScreen: React.FC = () => {
           </Section>
         )}
       </ScrollView>
+      <CustomAlert
+        isVisible={showAlert}
+        title={t('locationPermissionTitle')}
+        description={t('locationPermissionDescription')}
+        onClose={() => setShowAlert(false)}
+        onPress={handleOpenSettings}
+        onCloseTitle={t('cancel')}
+        onPressTitle={t('openSettings')}
+      />
     </SafeAreaView>
   );
 };

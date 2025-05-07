@@ -29,4 +29,8 @@ export default StyleSheet.create({
     fontFamily: Fonts.REGULAR,
     fontSize: FontSizes.large,
   },
+  hasPromotionContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
 });

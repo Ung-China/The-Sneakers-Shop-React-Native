@@ -66,32 +66,29 @@ const useUser = () => {
         },
       );
 
-      if (response?.success) {
-        dispatch(logoutUserSuccess());
-        dispatch(clearCart());
+      dispatch(logoutUserSuccess());
+      dispatch(clearCart());
 
-        setTimeout(() => {
-          Snackbar.show({
-            text: t('logoutSuccess'),
-            textColor: 'white',
-            duration: Snackbar.LENGTH_SHORT,
-            backgroundColor: colors.success,
-            fontFamily: Fonts.REGULAR,
-          });
-        }, 100);
-      } else {
-        setTimeout(() => {
-          Snackbar.show({
-            text: t('logoutFailed'),
-            textColor: 'white',
-            duration: Snackbar.LENGTH_SHORT,
-            backgroundColor: colors.error,
-            fontFamily: Fonts.REGULAR,
-          });
-        }, 100);
-      }
+      setTimeout(() => {
+        Snackbar.show({
+          text: t('logoutSuccess'),
+          textColor: 'white',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: colors.success,
+          fontFamily: Fonts.REGULAR,
+        });
+      }, 100);
     } catch (error) {
       console.log('[DEBUG] ERROR WHILE LOGOUT', error);
+      setTimeout(() => {
+        Snackbar.show({
+          text: t('logoutFailed'),
+          textColor: 'white',
+          duration: Snackbar.LENGTH_SHORT,
+          backgroundColor: colors.error,
+          fontFamily: Fonts.REGULAR,
+        });
+      }, 100);
     } finally {
       setIsLoading(false);
     }

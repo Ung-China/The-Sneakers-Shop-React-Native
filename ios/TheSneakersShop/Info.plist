@@ -51,9 +51,9 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need your location to show nearby shops and locations.</string>
+	<string>We need your location to show it on the map.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We need your location to show nearby shops and locations, even when the app is in the background.</string>
+	<string>We use your location to show your position on the map.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need access to your photo library to upload and share images.</string>
 	<key>UIAppFonts</key>

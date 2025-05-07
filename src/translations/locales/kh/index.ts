@@ -225,4 +225,8 @@ export const translateKH = {
   deleteAccountSuccess: 'គណនីរបស់អ្នកត្រូវបានលុបដោយជោគជ័យ។',
   deleteAccountFailed: 'ការលុបគណនីបានបរាជ័យ។ សូមព្យាយាមម្តងទៀត។',
   NoFavoritesItemFound: 'មិនមានទំនិញដែលបានជ្រើសចូលចិត្តទេ។',
+  locationPermissionTitle: 'តម្រូវឱ្យមានសិទ្ធិទីតាំង',
+  locationPermissionDescription:
+    'យើងត្រូវការសិទ្ធិចូលប្រើទីតាំងរបស់អ្នក ដើម្បីបង្ហាញហាងនៅជិតៗ។',
+  openSettings: 'បើកការកំណត់',
 };

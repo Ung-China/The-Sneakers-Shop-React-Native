@@ -17,9 +17,7 @@ const ProvinceItem: React.FC<ProvinceItemProps> = ({
       style={[
         styles.container,
         {
-          backgroundColor: isActive
-            ? colors.secondaryReversed
-            : colors.secondary,
+          backgroundColor: isActive ? colors.primaryReversed : colors.primary,
         },
       ]}>
       <Text

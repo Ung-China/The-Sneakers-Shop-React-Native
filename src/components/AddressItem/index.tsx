@@ -23,18 +23,45 @@ const AddressItem: React.FC<DeliveryProps> = ({item, onPress, isActive}) => {
     <Swipeable renderRightActions={rightAction}>
       <Touchable
         onPress={onPress}
-        style={[styles.container, {backgroundColor: colors.secondary}]}>
+        style={[
+          styles.container,
+          {
+            backgroundColor: isActive ? colors.primaryReversed : colors.primary,
+          },
+        ]}>
         {isActive ? (
-          <Icons.RadioFill width={20} height={20} color={colors.text} />
+          <Icons.RadioFill
+            width={20}
+            height={20}
+            color={isActive ? colors.textReversed : colors.text}
+          />
         ) : (
-          <Icons.RADIO width={20} height={20} color={colors.text} />
+          <Icons.RADIO
+            width={20}
+            height={20}
+            color={isActive ? colors.textReversed : colors.text}
+          />
         )}
         <View style={styles.body}>
-          <Text style={[styles.label, {color: colors.text}]}>{item.label}</Text>
-          <Text style={[styles.streetLine, {color: colors.grey}]}>
+          <Text
+            style={[
+              styles.label,
+              {color: isActive ? colors.textReversed : colors.text},
+            ]}>
+            {item.label}
+          </Text>
+          <Text
+            style={[
+              styles.streetLine,
+              {color: isActive ? colors.textReversed : colors.text},
+            ]}>
             {item.streetLine1}
           </Text>
-          <Text style={[styles.streetLine, {color: colors.grey}]}>
+          <Text
+            style={[
+              styles.streetLine,
+              {color: isActive ? colors.textReversed : colors.text},
+            ]}>
             {item.streetLine2} - {item.phoneNumber}
           </Text>
         </View>

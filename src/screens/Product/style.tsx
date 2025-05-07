@@ -8,6 +8,7 @@ import {
   Screen_Dimensions,
   Spacing,
 } from '../../constants';
+import {colors} from '../../constants/colors/colorTypes';
 
 export default StyleSheet.create({
   container: {
@@ -79,12 +80,16 @@ export default StyleSheet.create({
   },
   discountContainer: {
     paddingHorizontal: Padding.DEFAULT,
-    paddingVertical: Padding.SMALL - 2,
+    paddingVertical: Padding.EXTRA_SMALL,
     borderRadius: Radius.DEFAULT,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'red',
   },
   discount: {
     fontFamily: Fonts.REGULAR,
     fontSize: FontSizes.large,
+    color: colors.white,
   },
   averageRatingStyle: {
     fontSize: FontSizes.extraLarge,

@@ -7,12 +7,13 @@ import {
   increaseQuantity,
   removeFromCart,
 } from '../../store/actions';
-import {useState} from 'react';
+import {useCallback, useRef, useState} from 'react';
 import {StockChecker} from '../../helpers';
 import Snackbar from 'react-native-snackbar';
 import {useTranslation} from 'react-i18next';
 import {colors} from '../../constants/colors/colorTypes';
 import {Fonts} from '../../constants';
+import {BottomSheetModal} from '@gorhom/bottom-sheet';
 
 const useCart = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -23,6 +24,20 @@ const useCart = () => {
     id: number;
     variantId: number;
   } | null>(null);
+
+  const bottomSheetVariantModalRef = useRef<BottomSheetModal>(null);
+
+  const toggleVariantSheet = useCallback(() => {
+    bottomSheetVariantModalRef.current?.present();
+  }, []);
+
+  const toggleCloseVariantSheet = useCallback(() => {
+    bottomSheetVariantModalRef.current?.close();
+  }, []);
+
+  const handleVariantSheetChanges = useCallback((index: number) => {
+    console.log('Logistic Sheet changed to index', index);
+  }, []);
 
   const addProductToCart = (product: CartItem) => {
     dispatch(addToCart(product));
@@ -99,6 +114,10 @@ const useCart = () => {
     isAlertVisible,
     setAlertVisible,
     cartItemsCount,
+    bottomSheetVariantModalRef,
+    toggleVariantSheet,
+    toggleCloseVariantSheet,
+    handleVariantSheetChanges,
   };
 };
 

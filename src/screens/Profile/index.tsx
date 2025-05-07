@@ -40,41 +40,42 @@ const ProfileScreen: React.FC = () => {
   const itemSeparator = () => <View style={{height: 10}} />;
 
   return (
-    <View style={[styles.container, {backgroundColor: colors.primary}]}>
-      <FlatList
-        ListHeaderComponent={renderHeader}
-        data={menuItems}
-        renderItem={renderProfileItem}
-        keyExtractor={item => item.id.toString()}
-        contentContainerStyle={styles.containerStyle}
-        ItemSeparatorComponent={itemSeparator}
-        showsVerticalScrollIndicator={false}
-      />
+    <>
+      <View style={[styles.container, {backgroundColor: colors.primary}]}>
+        <FlatList
+          ListHeaderComponent={renderHeader}
+          data={menuItems}
+          renderItem={renderProfileItem}
+          keyExtractor={item => item.id.toString()}
+          contentContainerStyle={styles.containerStyle}
+          ItemSeparatorComponent={itemSeparator}
+          showsVerticalScrollIndicator={false}
+        />
 
-      <CustomAlert
-        isVisible={logoutVisible}
-        title={t('logout')}
-        description={t('logoutDescription')}
-        onClose={() => setLogoutVisible(false)}
-        onPress={async () => {
-          await logout();
-          setLogoutVisible(false);
-        }}
-      />
+        <CustomAlert
+          isVisible={logoutVisible}
+          title={t('logout')}
+          description={t('logoutDescription')}
+          onClose={() => setLogoutVisible(false)}
+          onPress={() => {
+            logout();
+            setLogoutVisible(false);
+          }}
+        />
 
-      <CustomAlert
-        isVisible={deleteAccountVisible}
-        title={t('delete')}
-        description={t('deleteDescription')}
-        onClose={() => setDeleteAccountVisible(false)}
-        onPress={async () => {
-          await deleteAccount();
-          setDeleteAccountVisible(false);
-        }}
-      />
-
+        <CustomAlert
+          isVisible={deleteAccountVisible}
+          title={t('delete')}
+          description={t('deleteDescription')}
+          onClose={() => setDeleteAccountVisible(false)}
+          onPress={() => {
+            deleteAccount();
+            setDeleteAccountVisible(false);
+          }}
+        />
+      </View>
       <LoadingModal visible={isLoading} />
-    </View>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {API_ENDPOINTS, GET} from '../../api';
-import {Brand, Product} from '../../models';
+import {Brand, Product, Variant} from '../../models';
 
 const useBrand = (initialBrandId?: number) => {
   const [brands, setBrands] = useState<Brand[]>([]);
@@ -65,20 +65,45 @@ const useBrand = (initialBrandId?: number) => {
         page: page,
       });
 
-      const fetchedProducts = response.data.map(
-        (item: any) =>
-          new Product(
-            item.id,
-            item.name,
-            Number(item.price),
-            item.rating,
-            item.image,
-            '',
-            [],
-            item.brand_id,
-            item.product_info,
-          ),
-      );
+      // const fetchedProducts = response.data.map(
+      //   (item: any) =>
+      //     new Product(
+      //       item.id,
+      //       item.name,
+      //       Number(item.price),
+      //       item.rating,
+      //       item.image,
+      //       '',
+      //       [],
+      //       item.brand_id,
+      //       item.product_info,
+      //     ),
+      // );
+
+      const fetchedProducts = response.data.map((item: any) => {
+        const variants =
+          item.product_info?.map(
+            (variantItem: any, index: number) =>
+              new Variant(
+                index + 1,
+                variantItem.product_size,
+                Number(variantItem.product_price),
+                Number(variantItem.product_qty),
+              ),
+          ) || [];
+
+        return new Product(
+          item.id,
+          item.name,
+          Number(item.price),
+          item.rating,
+          item.image,
+          '',
+          [],
+          item.brand_id,
+          variants,
+        );
+      });
 
       setProducts(prevProducts =>
         page === 1 ? fetchedProducts : [...prevProducts, ...fetchedProducts],

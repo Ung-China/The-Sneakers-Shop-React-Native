@@ -39,12 +39,12 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
       enablePanDownToClose={true}
       onDismiss={handleSheetDismiss}
       handleIndicatorStyle={{backgroundColor: colors.text}}
-      backgroundStyle={{backgroundColor: colors.primary}}>
+      backgroundStyle={{backgroundColor: colors.secondary}}>
       <BottomSheetView
         style={[
           styles.container,
           contentContainer,
-          {backgroundColor: colors.primary},
+          {backgroundColor: colors.secondary},
         ]}>
         {content}
       </BottomSheetView>

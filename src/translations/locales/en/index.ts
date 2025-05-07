@@ -223,4 +223,7 @@ export const translateEN = {
   deleteAccountSuccess: 'Your account has been deleted successfully.',
   deleteAccountFailed: 'Failed to delete your account. Please try again later.',
   NoFavoritesItemFound: 'No favorite items found.',
+  locationPermissionTitle: 'Permission Required',
+  locationPermissionDescription: 'We need your location to show nearby shops.',
+  openSettings: 'Open Settings',
 };

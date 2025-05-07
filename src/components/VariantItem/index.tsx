@@ -12,6 +12,7 @@ const VariantItem: React.FC<VariantProps> = ({
   containerStyle,
 }) => {
   const {t} = useTranslation();
+
   return (
     <Touchable onPress={onPress}>
       <View
@@ -20,11 +21,37 @@ const VariantItem: React.FC<VariantProps> = ({
           containerStyle,
           {backgroundColor: isActive ? 'black' : 'white'},
         ]}>
-        <Text style={[styles.size, {color: isActive ? 'white' : 'black'}]}>
-          {item.size} | ${currencyFormat(item.price)}
-        </Text>
+        {item.hasVariantPromotion ? (
+          <View style={styles.hasPromotionContainer}>
+            <Text
+              style={[
+                styles.size,
+                {
+                  color: isActive ? 'white' : 'black',
+                },
+              ]}>
+              ${currencyFormat(item.finalPrice)}{' '}
+            </Text>
+            <Text
+              style={[
+                styles.size,
+                {
+                  color: isActive ? 'gray' : 'gray',
+                  textDecorationLine: 'line-through',
+                  opacity: 2,
+                },
+              ]}>
+              ${currencyFormat(item.price)}
+            </Text>
+          </View>
+        ) : (
+          <Text style={[styles.size, {color: isActive ? 'white' : 'black'}]}>
+            ${currencyFormat(item.price)}
+          </Text>
+        )}
 
         <Text style={[styles.price, {color: isActive ? 'white' : 'black'}]}>
+          {item.size} |{' '}
           {item.quantity === 0 ? t('soldOut') : `${item.quantity} ${t('left')}`}
         </Text>
       </View>
