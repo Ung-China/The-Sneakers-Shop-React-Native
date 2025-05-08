@@ -182,10 +182,28 @@ const useLogin = () => {
             break;
           default:
             console.log('An error occurred: ', error.message);
+            setTimeout(() => {
+              Snackbar.show({
+                text: t('loginFailed'),
+                textColor: 'white',
+                duration: Snackbar.LENGTH_SHORT,
+                backgroundColor: colors.error,
+                fontFamily: Fonts.REGULAR,
+              });
+            }, 100);
             break;
         }
       } else {
         console.log('An unknown error occurred');
+        setTimeout(() => {
+          Snackbar.show({
+            text: t('loginFailed'),
+            textColor: 'white',
+            duration: Snackbar.LENGTH_SHORT,
+            backgroundColor: colors.error,
+            fontFamily: Fonts.REGULAR,
+          });
+        }, 100);
       }
     } finally {
       setIsLoading(false);
