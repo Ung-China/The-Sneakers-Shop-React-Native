@@ -44,14 +44,14 @@ const OpenMapModal: React.FC<OpenMapModalProps> = ({
       <View style={styles.buttonContainer}>
         {Platform.OS === 'ios' && (
           <Touchable
-            style={[styles.mapContainer, {backgroundColor: colors.secondary}]}
+            style={[styles.mapContainer, {backgroundColor: colors.primary}]}
             onPress={() => openMap('apple')}>
             <Icons.APPLEMAP width={45} height={45} />
             <Text style={[styles.map, {color: colors.text}]}>Apple Maps</Text>
           </Touchable>
         )}
         <Touchable
-          style={[styles.mapContainer, {backgroundColor: colors.secondary}]}
+          style={[styles.mapContainer, {backgroundColor: colors.primary}]}
           onPress={() => openMap('google')}>
           <Icons.GOOGLEMAP width={45} height={45} />
           <Text style={[styles.map, {color: colors.text}]}>Google Maps</Text>
